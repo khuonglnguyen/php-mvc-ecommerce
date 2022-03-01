@@ -20,6 +20,7 @@
           if (isset($_SESSION['user_id'])) { ?>
             <li><a href="<?= URL_ROOT . "/user/logout" ?>">Đăng xuất</a></li>
             <?php  } else { ?>
+            <li><a href="<?= URL_ROOT . "/user/register" ?>">Đăng ký</a></li>
             <li><a href="<?= URL_ROOT . "/user/login" ?>">Đăng nhập</a></li>
               <?php  }
         ?>
