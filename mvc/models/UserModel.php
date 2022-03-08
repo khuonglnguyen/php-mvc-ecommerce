@@ -4,12 +4,30 @@ include_once(APP_ROOT . '/libs/Exception.php');
 include_once(APP_ROOT . '/libs/SMTP.php');
 use PHPMailer\PHPMailer\PHPMailer;
 
-class UserModel extends DB
+class UserModel
 {
+    private static $instance = null;
+
+    private function __construct()
+    {
+        
+    }
+
+    public static function getInstance()
+    {
+      if(!self::$instance)
+      {
+        self::$instance = new UserModel();
+      }
+     
+      return self::$instance;
+    }
+
     public function checkLogin($email, $password)
     {
+        $db = DB::getInstance();
         $sql = "SELECT * FROM Users WHERE email='$email' AND password='$password' AND isConfirmed=1";
-        $result = mysqli_query($this->con, $sql);
+        $result = mysqli_query($db->con, $sql);
         $num_rows = mysqli_num_rows($result);
         if ($num_rows > 0) {
             return $result;
@@ -18,13 +36,41 @@ class UserModel extends DB
         }
     }
 
+    public function checkEmail($email)
+    {
+        $db = DB::getInstance();
+        $sql = "SELECT * FROM Users WHERE email='$email' AND isConfirmed=1";
+        $result = mysqli_query($db->con, $sql);
+        $num_rows = mysqli_num_rows($result);
+        if ($num_rows > 0) {
+            return false;
+        }else {
+            return true;
+        }
+    }
+
+    public function checkPhone($phone)
+    {
+        $db = DB::getInstance();
+        $sql = "SELECT * FROM Users WHERE phone='$phone' AND isConfirmed=1";
+        $result = mysqli_query($db->con, $sql);
+        $num_rows = mysqli_num_rows($result);
+        if ($num_rows > 0) {
+            return false;
+        }else {
+            return true;
+        }
+    }
+
     public function insert($fullName,$email, $dob, $address, $password)
     {
+        $db = DB::getInstance();
+
         // Genarate captcha
 		$captcha = rand(10000, 99999);
 
         $sql = "INSERT INTO Users(`id`, `fullName`, `email`, `dob`, `address`, `password`, `roleId`, `status`,`captcha`, `isConfirmed`) VALUES (NULL,'$fullName','$email','$dob','$address','$password',1,1,'$captcha',0)";
-        $result = mysqli_query($this->con, $sql);
+        $result = mysqli_query($db->con, $sql);
         if ($result) {
             
                 // Send email
@@ -56,13 +102,15 @@ class UserModel extends DB
 
     public function confirm($email, $captcha)
     {
+        $db = DB::getInstance();
+        
         $sql = "SELECT * FROM Users WHERE email='$email' AND captcha='$captcha'";
-        $result = mysqli_query($this->con, $sql);
+        $result = mysqli_query($db->con, $sql);
         $num_rows = mysqli_num_rows($result);
         if ($num_rows > 0) {
             // Update user is confirmed
             $sql = "UPDATE Users SET isConfirmed=1 WHERE email='$email'";
-            $re = mysqli_query($this->con, $sql);
+            $re = mysqli_query($db->con, $sql);
             if ($re) {
                 return true;
             }else {

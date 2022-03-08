@@ -6,7 +6,7 @@ class User extends ControllerBase{
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $email = $_POST['email'];
             $password = $_POST['password'];
-
+            
             $user = $this->model("UserModel");
             $result = $user->checkLogin($email,$password);
             if ($result) {
@@ -39,8 +39,36 @@ class User extends ControllerBase{
             $dob = $_POST['dob'];
             $address = $_POST['address'];
             $password = $_POST['password'];
+            $phone = $_POST['phone'];
             
             $user = $this->model("UserModel");
+            $checkEmail = $user->checkEmail($email);
+            if (!$checkEmail) {
+                $checkPhone = $user->checkPhone($phone);
+                if (!$checkPhone) {
+                    $this->view("register", [
+                        "headTitle"=>"Đăng ký",
+                        "messageEmail"=>"Email đã tồn tại",
+                        "messagePhone"=>"Số điện thoại đã tồn tại",
+                    ]);
+                }else {
+                    $this->view("register", [
+                        "headTitle"=>"Đăng ký",
+                        "messageEmail"=>"Email đã tồn tại"
+                    ]);
+                }
+                return;
+            }else {
+                $checkPhone = $user->checkPhone($phone);
+                if (!$checkPhone) {
+                    $this->view("register", [
+                        "headTitle"=>"Đăng ký",
+                        "messagePhone"=>"Số điện thoại đã tồn tại",
+                    ]);
+                }
+                return;
+            }
+
             $result = $user->insert($fullName, $email, $dob, $address, $password);
             if($result) {
                 $this->redirect("User","confirm",["email"=>$email]);

@@ -3,7 +3,8 @@ class ControllerBase{
 
     public function model($model){
         require_once "./mvc/models/".$model.".php";
-        return new $model;
+        $instance = $model::getInstance();
+        return $instance;
     }
 
     public function view($view, $data=[]){
