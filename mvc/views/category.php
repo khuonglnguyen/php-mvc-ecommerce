@@ -6,13 +6,7 @@
         <h1>SHOPPING ONLINE</h1>
         <p>Đặt hàng bất kì nơi đâu;)</p>
     </div>
-    <div class="title">Sản phẩm nổi bật</div>
-    <div class="search-container">
-        <form action="<?= URL_ROOT ?>/product/search" method="post">
-            <input type="text" class="search" placeholder="Tìm kiếm.." name="keyword">
-            <button type="submit"><i class="fa fa-search"></i></button>
-        </form>
-    </div>
+    <div class="title"><?= $data['title'] ?></div>
     <div class="content">
         <?php
         if (count($data['productList']) > 0) {
