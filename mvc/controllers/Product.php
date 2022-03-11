@@ -28,21 +28,22 @@ class Product extends ControllerBase
         ]);
     }
 
-    public function category($CateId){
-        $product = $this->model("ProductModel");
+    public function category($CateId)
+    {
+        $product = $this->model('ProductModel');
         $result = $product->getByCateId($CateId);
-        
-        $category = $this->model("CategoryModel");
-        $cates = ($category->getById($CateId))->fetch_assoc();
-        $cateMenu = $category->getAllClient();
+
+        $category = $this->model('CategoryModel');
+        $cate = ($category->getById($CateId))->fetch_assoc();
+        $cates = $category->getAllClient();
 
         // Fetch
         $productList = $result->fetch_all(MYSQLI_ASSOC);
-        $this->view("products", [
-            "headTitle" => "Danh mục ".$cates['name'],
-            "title"=>"Danh mục ".$cates['name'],
+        $this->view('category', [
+            "headTitle" => "Danh mục " . $cate['name'],
+            "title" => "Danh mục " . $cate['name'],
             "productList" => $productList,
-            "cates"=>$cateMenu
+            "cates" => $cates
         ]);
     }
 }

@@ -18,7 +18,7 @@
         if (count($data['productList']) > 0) {
             foreach ($data['productList'] as $key) { ?>
                 <div class="card">
-                    <a href="<?= URL_ROOT . '/product/single/' . $key['id'] ?>"><img src="<?= URL_ROOT ?>/public/images/R.jpg" class="product-image" alt=""></a>
+                    <a href="<?= URL_ROOT . '/product/single/' . $key['id'] ?>"><img src="<?= URL_ROOT ?>/public/images/<?= $key['image'] ?>" class="product-image" alt=""></a>
                     <a href="<?= URL_ROOT . '/product/single/' . $key['id'] ?>">
                         <h1><?= $key['name'] ?></h1>
                     </a>
