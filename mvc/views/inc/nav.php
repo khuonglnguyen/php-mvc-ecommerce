@@ -18,13 +18,23 @@
       <li><a href="#">Giới thiệu</a></li>
       <?php
       if (isset($_SESSION['user_id'])) { ?>
-        <li><a href="<?= URL_ROOT . "/user/logout" ?>">Đăng xuất</a></li>
+        <li class="cate">
+          <a href="#">Tài khoản</a>
+          <ul class="sub-menu">
+            <li><a href="<?= URL_ROOT . "/user/checkout" ?>">Đơn hàng của tôi</a></li>
+            <li><a href="<?= URL_ROOT . "/user/logout" ?>">Đăng xuất</a></li>
+          </ul>
+        </li>
       <?php  } else { ?>
         <li><a href="<?= URL_ROOT . "/user/register" ?>">Đăng ký</a></li>
         <li><a href="<?= URL_ROOT . "/user/login" ?>">Đăng nhập</a></li>
       <?php  }
       ?>
-      <li><a href="#"><i class="fa fa-shopping-bag"></i></a></li>
+      <?php
+      $order = new Order();
+      $total = $order->getTotalQuantityCart();
+      ?>
+      <li><a href="<?= URL_ROOT . "/order/checkout" ?>"><i class="fa fa-shopping-bag"></i> (<?= $total ?>)</a></li>
     </div>
   </ul>
 </nav>

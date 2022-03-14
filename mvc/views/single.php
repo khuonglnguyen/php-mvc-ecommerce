@@ -18,7 +18,7 @@
       </div>
       <div class="product-price">
         <span><?= $data['product']['promotionPrice'] ?>VND</span>
-        <a href="#" class="cart-btn">Thêm vào giỏ</a>
+        <a href="<?= URL_ROOT . '/order/addItemCart/' .  $data['product']['id']  ?>" class="cart-btn">Thêm vào giỏ</a>
       </div>
     </div>
   </main>

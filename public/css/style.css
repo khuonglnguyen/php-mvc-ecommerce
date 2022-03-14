@@ -531,3 +531,40 @@ footer{
   border: solid 1px gray;
   cursor: pointer;
 }
+
+/*START TABLE*/
+#table {
+  border-collapse: collapse;
+  width: 97%;
+  margin: 20px 20px;
+}
+
+#table td, #table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+#table tr:nth-child(even){background-color: #f2f2f2;}
+
+#table tr:hover {background-color: #ddd;}
+
+#table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #04AA6D;
+  color: white;
+}
+.img-table{
+  height: 200px;
+}
+.rm-item-cart{
+  font-size: 25px;
+  color: red;
+}
+.qty{
+  width: 40px;
+  font-size: 20px;
+}
+/*END TABLE*/
