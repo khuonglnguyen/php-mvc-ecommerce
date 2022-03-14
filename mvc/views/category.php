@@ -12,12 +12,12 @@
         if (count($data['productList']) > 0) {
             foreach ($data['productList'] as $key) { ?>
                 <div class="card">
-                    <a href="<?= URL_ROOT . '/product/single/' . $key['id'] ?>"><img src="<?= URL_ROOT ?>/public/images/R.jpg" class="product-image" alt=""></a>
+                    <a href="<?= URL_ROOT . '/product/single/' . $key['id'] ?>"><img src="<?= URL_ROOT ?>/public/images/<?= $key['image'] ?>" class="product-image" alt=""></a>
                     <a href="<?= URL_ROOT . '/product/single/' . $key['id'] ?>">
                         <h1><?= $key['name'] ?></h1>
                     </a>
                     <p class="price"><?= number_format($key['promotionPrice'], 0, '', ',') ?>VND</p>
-                    <p><a href="<?= URL_ROOT . '/order/addItemCart/' . $key['id'] ?>"><button>Thêm vào giỏ</button></a></p>
+                    <p><a href="<?= URL_ROOT . '/cart/addItemCart/' . $key['id'] ?>"><button>Thêm vào giỏ</button></a></p>
                 </div>
             <?php }
         } else { ?>

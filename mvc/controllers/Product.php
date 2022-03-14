@@ -35,15 +35,13 @@ class Product extends ControllerBase
 
         $category = $this->model('CategoryModel');
         $cate = ($category->getById($CateId))->fetch_assoc();
-        $cates = $category->getAllClient();
 
         // Fetch
         $productList = $result->fetch_all(MYSQLI_ASSOC);
         $this->view('category', [
             "headTitle" => "Danh mục " . $cate['name'],
             "title" => "Danh mục " . $cate['name'],
-            "productList" => $productList,
-            "cates" => $cates
+            "productList" => $productList
         ]);
     }
 }

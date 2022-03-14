@@ -12,7 +12,7 @@
         <?php
         $count = 0;
         $total = 0;
-        if (count($_SESSION['cart']) > 0) { ?>
+        if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) { ?>
             <tr>
                 <th>STT</th>
                 <th>Tên sản phẩm</th>
@@ -28,9 +28,9 @@
                     <td><?= ++$count ?></td>
                     <td><?= $value['productName'] ?></td>
                     <td><img class="img-table" src="<?= URL_ROOT . '/public/images/' . $value['productImage'] ?>" alt=""></td>
-                    <td><input type="number" class="qty" name="" id="" value="<?= $value['quantity'] ?>"></td>
+                    <td><input type="number" class="qty" name="" id="<?= $value['productId'] ?>" value="<?= $value['quantity'] ?>" onchange="update(this)"></td>
                     <td><?= number_format($value['price'], 0, '', ',') ?>VND</td>
-                    <td><a href="<?= URL_ROOT . '/order/removeItemCart/' . $value['productId'] ?>" class="rm-item-cart"><i class="fa fa-trash"></i></a></td>
+                    <td><a href="<?= URL_ROOT . '/cart/removeItemCart/' . $value['productId'] ?>" class="rm-item-cart"><i class="fa fa-trash"></i></a></td>
                 </tr>
             <?php }
             ?>
@@ -49,6 +49,34 @@
 
     </table>
     <?php require APP_ROOT . '/views/inc/footer.php'; ?>
+    <script>
+        function update(e) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "http://localhost/luanvan/cart/updateItemCart/"+e.id+"/"+e.value, true);
+            xhr.onload = function() {
+                if (xhr.readyState === 4) {
+                    if (xhr.readyState === 4) {
+                    var status = xhr.status;
+                    if (status === 200) {
+                        setTimeout(function() {window.location.reload();}, 1000);
+                        
+                    } else if (status === 501) {
+                        alert('Số lượng sản phẩm không đủ để thêm vào giỏ hàng!');
+                        // e.value = parseInt(e.value) - 1;
+                        window.location.reload();
+                    } else {
+                        alert('Cập nhật giỏ hàng thất bại!');
+                        window.location.reload();
+                    }
+                }
+                }
+            };
+            xhr.onerror = function(e) {
+                console.error(xhr.statusText);
+            };
+            xhr.send(null);
+        }
+    </script>
 </body>
 
 </html>

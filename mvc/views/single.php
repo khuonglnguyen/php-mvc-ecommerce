@@ -17,8 +17,8 @@
         <p><?= $data['product']['des'] ?></p>
       </div>
       <div class="product-price">
-        <span><?= $data['product']['promotionPrice'] ?>VND</span>
-        <a href="<?= URL_ROOT . '/order/addItemCart/' .  $data['product']['id']  ?>" class="cart-btn">Thêm vào giỏ</a>
+        <span><?= number_format($data['product']['promotionPrice'], 0, '', ',')  ?>VND</span>
+        <a href="<?= URL_ROOT . '/cart/addItemCart/' .  $data['product']['id']  ?>" class="cart-btn">Thêm vào giỏ</a>
       </div>
     </div>
   </main>
