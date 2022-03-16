@@ -45,30 +45,46 @@
         <?php } else {  ?>
             <h3>Giỏ hàng hiện đang trống...</h3>
         <?php }  ?>
-
-
     </table>
+    <div class="payment">
+        <form action="<?= URL_ROOT . '/order/add/' ?>" method="post">
+            <select name="payment">
+                <option value="cod">COD</option>
+                <option value="paypal">Paypal</option>
+                <option value="momo">Momo</option>
+            </select>
+            <?php
+            if (isset($_SESSION['user_id'])) { ?>
+                <input class="btn-order" type="submit" value="Tiến hành đặt hàng">
+            <?php } else { ?>
+                <a class="btn-order" href="<?= URL_ROOT . '/user/login/' ?>">Đăng nhập để mua hàng</a>
+            <?php }
+            ?>
+        </form>
+    </div>
     <?php require APP_ROOT . '/views/inc/footer.php'; ?>
     <script>
         function update(e) {
             var xhr = new XMLHttpRequest();
-            xhr.open("GET", "http://localhost/luanvan/cart/updateItemCart/"+e.id+"/"+e.value, true);
+            xhr.open("GET", "http://localhost/luanvan/cart/updateItemCart/" + e.id + "/" + e.value, true);
             xhr.onload = function() {
                 if (xhr.readyState === 4) {
                     if (xhr.readyState === 4) {
-                    var status = xhr.status;
-                    if (status === 200) {
-                        setTimeout(function() {window.location.reload();}, 1000);
-                        
-                    } else if (status === 501) {
-                        alert('Số lượng sản phẩm không đủ để thêm vào giỏ hàng!');
-                        // e.value = parseInt(e.value) - 1;
-                        window.location.reload();
-                    } else {
-                        alert('Cập nhật giỏ hàng thất bại!');
-                        window.location.reload();
+                        var status = xhr.status;
+                        if (status === 200) {
+                            setTimeout(function() {
+                                window.location.reload();
+                            }, 1000);
+
+                        } else if (status === 501) {
+                            alert('Số lượng sản phẩm không đủ để thêm vào giỏ hàng!');
+                            // e.value = parseInt(e.value) - 1;
+                            window.location.reload();
+                        } else {
+                            alert('Cập nhật giỏ hàng thất bại!');
+                            window.location.reload();
+                        }
                     }
-                }
                 }
             };
             xhr.onerror = function(e) {

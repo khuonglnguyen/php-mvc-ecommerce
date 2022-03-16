@@ -59,4 +59,12 @@ class ProductModel
         }
         return true;
     }
+
+    public function updateQuantity($Id, $qty)
+    {
+        $db = DB::getInstance();
+        $sql = "UPDATE products SET qty = qty - $qty WHERE id = $Id";
+        $result = mysqli_query($db->con, $sql);
+        return $result;
+    }
 }

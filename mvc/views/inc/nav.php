@@ -29,7 +29,7 @@
               <li class="cate">
                 <a href="#">Tài khoản</a>
                 <ul class="sub-menu">
-                  <li><a href="<?= URL_ROOT . "/user/checkout" ?>">Đơn hàng của tôi</a></li>
+                  <li><a href="<?= URL_ROOT . "/order/checkout" ?>">Đơn hàng của tôi</a></li>
                   <li><a href="<?= URL_ROOT . "/user/logout" ?>">Đăng xuất</a></li>
                 </ul>
               </li>

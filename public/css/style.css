@@ -569,3 +569,8 @@ footer{
   font-size: 20px;
 }
 /*END TABLE*/
+.btn-order{
+  border-radius: 5px;
+  background-color: #04AA6D;
+  color: white;
+}
