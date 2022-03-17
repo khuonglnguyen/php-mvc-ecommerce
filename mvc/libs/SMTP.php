@@ -556,7 +556,7 @@ class SMTP
                     //Format from https://tools.ietf.org/html/rfc4616#section-2
                     //We skip the first field (it's forgery), so the string starts with a null byte
                     !$this->sendCommand(
-                        'User & Password',
+                        'user & Password',
                         base64_encode("\0" . $username . "\0" . $password),
                         235
                     )
@@ -569,7 +569,7 @@ class SMTP
                 if (!$this->sendCommand('AUTH', 'AUTH LOGIN', 334)) {
                     return false;
                 }
-                if (!$this->sendCommand('Username', base64_encode($username), 334)) {
+                if (!$this->sendCommand('username', base64_encode($username), 334)) {
                     return false;
                 }
                 if (!$this->sendCommand('Password', base64_encode($password), 235)) {
@@ -588,7 +588,7 @@ class SMTP
                 $response = $username . ' ' . $this->hmac($challenge, $password);
 
                 //send encoded credentials
-                return $this->sendCommand('Username', base64_encode($response), 235);
+                return $this->sendCommand('username', base64_encode($response), 235);
             case 'XOAUTH2':
                 //The OAuth instance must be set up prior to requesting auth.
                 if (null === $OAuth) {
@@ -1114,7 +1114,7 @@ class SMTP
         //it can leak credentials, so hide credentials in all but lowest level
         if (
             self::DEBUG_LOWLEVEL > $this->do_debug &&
-            in_array($command, ['User & Password', 'Username', 'Password'], true)
+            in_array($command, ['user & Password', 'username', 'Password'], true)
         ) {
             $this->edebug('CLIENT -> SERVER: [credentials hidden]', self::DEBUG_CLIENT);
         } else {

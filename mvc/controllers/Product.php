@@ -1,15 +1,15 @@
 <?php
 
-class Product extends ControllerBase
+class product extends ControllerBase
 {
     public function search()
     {
         $keyword = $_POST['keyword'];
-        $product = $this->model("ProductModel");
+        $product = $this->model("productModel");
         $result = $product->search($keyword);
         // Fetch
         $productList = $result->fetch_all(MYSQLI_ASSOC);
-        $this->view("products", [
+        $this->view("client/products", [
             "headTitle" => "Tìm kiếm",
             "title" => "Tìm kiếm với từ khóa: " . $keyword,
             "productList" => $productList
@@ -18,11 +18,11 @@ class Product extends ControllerBase
 
     public function single($Id)
     {
-        $product = $this->model("ProductModel");
+        $product = $this->model("productModel");
         $result = $product->getById($Id);
         // Fetch
         $p = $result->fetch_assoc();
-        $this->view("single", [
+        $this->view("client/single", [
             "headTitle" => $p['name'],
             "product" => $p
         ]);
@@ -30,7 +30,7 @@ class Product extends ControllerBase
 
     public function category($CateId)
     {
-        $product = $this->model('ProductModel');
+        $product = $this->model('productModel');
         $result = $product->getByCateId($CateId);
 
         $category = $this->model('CategoryModel');
@@ -38,7 +38,7 @@ class Product extends ControllerBase
 
         // Fetch
         $productList = $result->fetch_all(MYSQLI_ASSOC);
-        $this->view('category', [
+        $this->view('client/category', [
             "headTitle" => "Danh mục " . $cate['name'],
             "title" => "Danh mục " . $cate['name'],
             "productList" => $productList

@@ -1,7 +1,7 @@
 <?php
 class App{
 
-    protected $controller="Home";
+    protected $controller="home";
     protected $action="Index";
     protected $params=[];
 
@@ -10,11 +10,11 @@ class App{
         $arr = $this->UrlProcess();
         
         if (!$arr) {
-            $arr[0] = "Home";
+            $arr[0] = "home";
             $arr[1] = "Index";
         }
 
-        // Controller Home/Index
+        // Controller home/Index
         if( file_exists("./mvc/controllers/".$arr[0].".php") ){
             $this->controller = $arr[0];
             unset($arr[0]);

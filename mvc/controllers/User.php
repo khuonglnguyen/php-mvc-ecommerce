@@ -1,26 +1,26 @@
 <?php
 
-class User extends ControllerBase{
+class user extends ControllerBase{
     public function login()
     {
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $email = $_POST['email'];
             $password = $_POST['password'];
             
-            $user = $this->model("UserModel");
+            $user = $this->model("userModel");
             $result = $user->checkLogin($email,$password);
             if ($result) {
                 // Get user
                 $u = $result->fetch_assoc();
                 // Set session
                 $_SESSION['user_id'] = $u['id'];
-                $this->redirect("Home");
+                $this->redirect("home");
             }else {
-                $this->view("login",[
+                $this->view("client/login",[
                     "headTitle"=>"Đăng nhập","message"=>"Tài khoản hoặc mật khẩu không đúng!"]);
             }
         }else{
-            $this->view("login", [
+            $this->view("client/login", [
                 "headTitle"=>"Đăng nhập"
             ]);
         }
@@ -29,7 +29,7 @@ class User extends ControllerBase{
     public function logout()
     {
         unset($_SESSION['user_id']);
-        $this->redirect("User","login");
+        $this->redirect("user","login");
     }
     
     public function register(){
@@ -41,18 +41,18 @@ class User extends ControllerBase{
             $password = $_POST['password'];
             $phone = $_POST['phone'];
             
-            $user = $this->model("UserModel");
+            $user = $this->model("userModel");
             $checkEmail = $user->checkEmail($email);
             if (!$checkEmail) {
                 $checkPhone = $user->checkPhone($phone);
                 if (!$checkPhone) {
-                    $this->view("register", [
+                    $this->view("client/register", [
                         "headTitle"=>"Đăng ký",
                         "messageEmail"=>"Email đã tồn tại",
                         "messagePhone"=>"Số điện thoại đã tồn tại",
                     ]);
                 }else {
-                    $this->view("register", [
+                    $this->view("client/register", [
                         "headTitle"=>"Đăng ký",
                         "messageEmail"=>"Email đã tồn tại"
                     ]);
@@ -61,7 +61,7 @@ class User extends ControllerBase{
             }else {
                 $checkPhone = $user->checkPhone($phone);
                 if (!$checkPhone) {
-                    $this->view("register", [
+                    $this->view("client/register", [
                         "headTitle"=>"Đăng ký",
                         "messagePhone"=>"Số điện thoại đã tồn tại",
                     ]);
@@ -71,16 +71,16 @@ class User extends ControllerBase{
 
             $result = $user->insert($fullName, $email, $dob, $address, $password);
             if($result) {
-                $this->redirect("User","confirm",["email"=>$email]);
+                $this->redirect("user","confirm",["email"=>$email]);
             }else {
-                $this->view("register", [
+                $this->view("client/register", [
                     "headTitle"=>"Đăng ký",
                     "cssClass"=>"error",
                     "message"=>"Đăng ký thất bại",
                 ]);
             }
         }else {
-            $this->view("register",[
+            $this->view("client/register",[
                 "headTitle"=>"Đăng ký"
             ]);
         }
@@ -90,17 +90,17 @@ class User extends ControllerBase{
         if($_SERVER['REQUEST_METHOD']=='POST') {
             $captcha = $_POST['captcha'];
             
-            $user = $this->model("UserModel");
+            $user = $this->model("userModel");
             $result = $user->confirm($email, $captcha);
             if($result) {
-                $this->view("confirm", [
+                $this->view("client/confirm", [
                     "headTitle"=>"Xác minh tài khoản",
                     "cssClass"=>"success",
                     "email"=>$email,
                     "message"=>"Xác minh tài khoản thành công!",
                 ]);
             }else {
-                $this->view("confirm", [
+                $this->view("client/confirm", [
                     "headTitle"=>"Xác minh tài khoản",
                     "cssClass"=>"error",
                     "email"=>$email,
@@ -108,7 +108,7 @@ class User extends ControllerBase{
                 ]);
             }
         }else {
-            $this->view("confirm",[
+            $this->view("client/confirm",[
                 "headTitle"=>"Xác minh tài khoản",
                 "email"=>$email
             ]);

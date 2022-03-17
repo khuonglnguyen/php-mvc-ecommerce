@@ -1,10 +1,9 @@
-<?php require APP_ROOT . '/views/inc/head.php'; ?>
+<?php require APP_ROOT . '/views/client/inc/head.php'; ?>
 
 <body>
-    <?php require APP_ROOT . '/views/inc/nav.php'; ?>
+    <?php require APP_ROOT . '/views/client/inc/nav.php'; ?>
     <div class="banner">
-        <h1>SHOPPING ONLINE</h1>
-        <p>Đặt hàng bất kì nơi đâu;)</p>
+
     </div>
     <div class="title">Giỏ hàng của tôi</div>
     <table id="table">
@@ -30,7 +29,7 @@
                     <td><img class="img-table" src="<?= URL_ROOT . '/public/images/' . $value['productImage'] ?>" alt=""></td>
                     <td><input type="number" class="qty" name="" id="<?= $value['productId'] ?>" value="<?= $value['quantity'] ?>" onchange="update(this)"></td>
                     <td><?= number_format($value['price'], 0, '', ',') ?>VND</td>
-                    <td><a href="<?= URL_ROOT . '/cart/removeItemCart/' . $value['productId'] ?>" class="rm-item-cart"><i class="fa fa-trash"></i></a></td>
+                    <td><a href="<?= URL_ROOT . '/cart/removeItemcart/' . $value['productId'] ?>" class="rm-item-cart"><i class="fa fa-trash"></i></a></td>
                 </tr>
             <?php }
             ?>
@@ -47,26 +46,19 @@
         <?php }  ?>
     </table>
     <div class="payment">
-        <form action="<?= URL_ROOT . '/order/add/' ?>" method="post">
-            <select name="payment">
-                <option value="cod">COD</option>
-                <option value="paypal">Paypal</option>
-                <option value="momo">Momo</option>
-            </select>
-            <?php
-            if (isset($_SESSION['user_id'])) { ?>
-                <input class="btn-order" type="submit" value="Tiến hành đặt hàng">
-            <?php } else { ?>
-                <a class="btn-order" href="<?= URL_ROOT . '/user/login/' ?>">Đăng nhập để mua hàng</a>
-            <?php }
-            ?>
-        </form>
+        <?php
+        if (isset($_SESSION['user_id'])) { ?>
+            <a class="btn-order" href="<?= URL_ROOT . '/order/add/' . $total ?>">Đặt hàng</a>
+        <?php } else { ?>
+            <a class="btn-order" href="<?= URL_ROOT . '/user/login/' ?>">Đăng nhập để mua hàng</a>
+        <?php }
+        ?>
     </div>
-    <?php require APP_ROOT . '/views/inc/footer.php'; ?>
+    <?php require APP_ROOT . '/views/client/inc/footer.php'; ?>
     <script>
         function update(e) {
             var xhr = new XMLHttpRequest();
-            xhr.open("GET", "http://localhost/luanvan/cart/updateItemCart/" + e.id + "/" + e.value, true);
+            xhr.open("GET", "http://localhost/luanvan/cart/updateItemcart/" + e.id + "/" + e.value, true);
             xhr.onload = function() {
                 if (xhr.readyState === 4) {
                     if (xhr.readyState === 4) {

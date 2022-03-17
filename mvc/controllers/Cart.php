@@ -1,10 +1,10 @@
 <?php
 
-class Cart extends ControllerBase
+class cart extends ControllerBase
 {
-    public function addItemCart($productId)
+    public function addItemcart($productId)
     {
-        $product = $this->model("ProductModel");
+        $product = $this->model("productModel");
 
         if (isset($_SESSION['cart'][$productId])) {
             $check = $product->checkQuantity($productId, $_SESSION['cart'][$productId]['quantity']);
@@ -29,9 +29,9 @@ class Cart extends ControllerBase
         echo '<script>alert("Thêm sản phẩm vào giỏ hàng thành công!");window.history.back();</script>';
     }
 
-    public function updateItemCart($productId, $qty)
+    public function updateItemcart($productId, $qty)
     {
-        $product = $this->model("ProductModel");
+        $product = $this->model("productModel");
         $check = $product->checkQuantity($productId, $qty);
         if ($check) {
             $_SESSION['cart'][$productId]['quantity'] = $qty;
@@ -41,7 +41,7 @@ class Cart extends ControllerBase
         }
     }
 
-    public function removeItemCart($productId)
+    public function removeItemcart($productId)
     {
         unset($_SESSION['cart'][$productId]);
         if (!isset($_SESSION['cart'][$productId])) {
@@ -49,7 +49,7 @@ class Cart extends ControllerBase
         }
     }
 
-    public function getTotalPriceCart()
+    public function getTotalPricecart()
     {
         if (isset($_SESSION['cart'])) {
 
@@ -61,7 +61,7 @@ class Cart extends ControllerBase
         }
     }
 
-    public function getTotalQuantityCart()
+    public function getTotalQuantitycart()
     {
         if (isset($_SESSION['cart'])) {
 
@@ -75,12 +75,7 @@ class Cart extends ControllerBase
 
     public function checkout()
     {
-        // $order = $this->model("OrderModel");
-        // $result = $order->getByUserId($_SESSION['user_id']);
-        // // Fetch
-        // $listOrder = $result->fetch_all(MYSQLI_ASSOC);
-
-        $this->view("checkout", [
+        $this->view("client/checkout", [
             "headTitle" => "Đơn hàng của tôi"
         ]);
     }

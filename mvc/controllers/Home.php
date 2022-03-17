@@ -1,11 +1,11 @@
 <?php
-class Home extends ControllerBase{
+class home extends ControllerBase{
     public function Index(){
-        $product = $this->model("ProductModel");
-        $result = $product->getFeaturedProducts();
+        $product = $this->model("productModel");
+        $result = $product->getFeaturedproducts();
         // Fetch
         $productList = $result->fetch_all(MYSQLI_ASSOC);
-        $this->view("index", [
+        $this->view("client/index", [
             "headTitle" => "Trang chủ",
             "productList" => $productList
         ]);

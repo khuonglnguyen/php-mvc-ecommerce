@@ -1,13 +1,13 @@
       <?php
-      $cart = new Cart();
-      $total = $cart->getTotalQuantityCart();
+      $cart = new cart();
+      $total = $cart->getTotalQuantitycart();
       
       $category = $this->model("CategoryModel");
       $result = $category->getAllClient();
       $listCategory = $result->fetch_all(MYSQLI_ASSOC);
       ?>
       <nav class="navbar">
-        <div class="logo">HUYPHAM STORE</div>
+        <div class="logo">KHUONGCUTE STORE</div>
         <ul class="nav-links">
           <input type="checkbox" id="checkbox_toggle" />
           <label for="checkbox_toggle" class="hamburger">&#9776;</label>

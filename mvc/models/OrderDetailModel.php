@@ -1,5 +1,5 @@
 <?php
-class OrderDetailModel
+class orderDetailModel
 {
     private static $instance = null;
 
@@ -10,13 +10,13 @@ class OrderDetailModel
     public static function getInstance()
     {
         if (!self::$instance) {
-            self::$instance = new OrderDetailModel();
+            self::$instance = new orderDetailModel();
         }
 
         return self::$instance;
     }
 
-    public function getByOrderId($orderId)
+    public function getByorderId($orderId)
     {
         $db = DB::getInstance();
         $sql = "SELECT * FROM order_details WHERE orderId='$orderId'";

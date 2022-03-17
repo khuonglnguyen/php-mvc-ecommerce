@@ -1,10 +1,9 @@
-<?php require APP_ROOT . '/views/inc/head.php';?>
+<?php require APP_ROOT . '/views/client/inc/head.php';?>
 
 <body>
-    <?php require APP_ROOT . '/views/inc/nav.php'; ?>
+    <?php require APP_ROOT . '/views/client/inc/nav.php'; ?>
     <div class="banner">
-        <h1>SHOPPING ONLINE</h1>
-        <p>Đặt hàng bất kì nơi đâu;)</p>
+       
     </div>
     <div class="title">Sản phẩm</div>
     <main class="container">
@@ -18,10 +17,10 @@
       </div>
       <div class="product-price">
         <span><?= number_format($data['product']['promotionPrice'], 0, '', ',')  ?>VND</span>
-        <a href="<?= URL_ROOT . '/cart/addItemCart/' .  $data['product']['id']  ?>" class="cart-btn">Thêm vào giỏ</a>
+        <a href="<?= URL_ROOT . '/cart/addItemcart/' .  $data['product']['id']  ?>" class="cart-btn">Thêm vào giỏ</a>
       </div>
     </div>
   </main>
-        <?php require APP_ROOT . '/views/inc/footer.php'; ?>
+        <?php require APP_ROOT . '/views/client/inc/footer.php'; ?>
 </body>
 </html>

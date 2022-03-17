@@ -319,9 +319,9 @@ class PHPMailer
 
     /**
      * Whether to use SMTP authentication.
-     * Uses the Username and Password properties.
+     * Uses the username and Password properties.
      *
-     * @see PHPMailer::$Username
+     * @see PHPMailer::$username
      * @see PHPMailer::$Password
      *
      * @var bool
@@ -340,7 +340,7 @@ class PHPMailer
      *
      * @var string
      */
-    public $Username = '';
+    public $username = '';
 
     /**
      * SMTP password.
@@ -1528,7 +1528,7 @@ class PHPMailer
             && ini_get('mail.add_x_header') === '1'
             && stripos(PHP_OS, 'WIN') === 0
         ) {
-            trigger_error($this->lang('buggy_php'), E_USER_WARNING);
+            trigger_error($this->lang('buggy_php'), E_user_WARNING);
         }
 
         try {
@@ -2161,7 +2161,7 @@ class PHPMailer
                     }
                     if (
                         $this->SMTPAuth && !$this->smtp->authenticate(
-                            $this->Username,
+                            $this->username,
                             $this->Password,
                             $this->AuthType,
                             $this->oauth
@@ -2352,7 +2352,7 @@ class PHPMailer
      * @param array  $addr An array of recipients,
      *                     where each recipient is a 2-element indexed array with element 0 containing an address
      *                     and element 1 containing a name, like:
-     *                     [['joe@example.com', 'Joe User'], ['zoe@example.com', 'Zoe User']]
+     *                     [['joe@example.com', 'Joe user'], ['zoe@example.com', 'Zoe user']]
      *
      * @return string
      */
@@ -2370,7 +2370,7 @@ class PHPMailer
      * Format an address for use in a message header.
      *
      * @param array $addr A 2-element indexed array, element 0 containing an address, element 1 containing a name like
-     *                    ['joe@example.com', 'Joe User']
+     *                    ['joe@example.com', 'Joe user']
      *
      * @return string
      */

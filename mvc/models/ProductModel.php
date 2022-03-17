@@ -1,5 +1,5 @@
 <?php
-class ProductModel
+class productModel
 {
     private static $instance = null;
 
@@ -10,7 +10,7 @@ class ProductModel
     public static function getInstance()
     {
         if (!self::$instance) {
-            self::$instance = new ProductModel();
+            self::$instance = new productModel();
         }
 
         return self::$instance;
@@ -19,7 +19,7 @@ class ProductModel
     public function search($keyword)
     {
         $db = DB::getInstance();
-        $sql = "SELECT * FROM Products WHERE MATCH(name,des) AGAINST ('$keyword') AND status=1";
+        $sql = "SELECT * FROM products WHERE MATCH(name,des) AGAINST ('$keyword') AND status=1";
         $result = mysqli_query($db->con, $sql);
         return $result;
     }
@@ -27,7 +27,7 @@ class ProductModel
     public function getById($Id)
     {
         $db = DB::getInstance();
-        $sql = "SELECT * FROM Products WHERE Id='$Id' AND status=1";
+        $sql = "SELECT * FROM products WHERE Id='$Id' AND status=1";
         $result = mysqli_query($db->con, $sql);
         return $result;
     }
@@ -35,15 +35,15 @@ class ProductModel
     public function getByCateId($CateId)
     {
         $db = DB::getInstance();
-        $sql = "SELECT * FROM Products WHERE cateId='$CateId' AND status=1";
+        $sql = "SELECT * FROM products WHERE cateId='$CateId' AND status=1";
         $result = mysqli_query($db->con, $sql);
         return $result;
     }
 
-    public function getFeaturedProducts()
+    public function getFeaturedproducts()
     {
         $db = DB::getInstance();
-        $sql = "SELECT * FROM Products WHERE status=1 ORDER BY soldCount DESC";
+        $sql = "SELECT * FROM products WHERE status=1 order BY soldCount DESC";
         $result = mysqli_query($db->con, $sql);
         return $result;
     }
@@ -51,7 +51,7 @@ class ProductModel
     public function checkQuantity($Id, $qty)
     {
         $db = DB::getInstance();
-        $sql = "SELECT qty FROM Products WHERE status=1 AND Id='$Id'";
+        $sql = "SELECT qty FROM products WHERE status=1 AND Id='$Id'";
         $result = mysqli_query($db->con, $sql);
         $product = $result->fetch_assoc();
         if (intval($qty) > intval($product['qty'])) {

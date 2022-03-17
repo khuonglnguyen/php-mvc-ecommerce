@@ -19,7 +19,7 @@ class CategoryModel
     public function getAllClient()
     {
         $db = DB::getInstance();
-        $sql = "SELECT * FROM Categories WHERE status=1";
+        $sql = "SELECT * FROM categories WHERE status=1";
         $result = mysqli_query($db->con, $sql);
         return $result;
     }
@@ -27,7 +27,7 @@ class CategoryModel
     public function getById($Id)
     {
         $db = DB::getInstance();
-        $sql = "SELECT * FROM Categories WHERE Id='$Id' AND status=1";
+        $sql = "SELECT * FROM categories WHERE Id='$Id' AND status=1";
         $result = mysqli_query($db->con, $sql);
         return $result;
     }
