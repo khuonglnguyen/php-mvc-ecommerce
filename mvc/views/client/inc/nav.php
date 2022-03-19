@@ -2,7 +2,7 @@
       $cart = new cart();
       $total = $cart->getTotalQuantitycart();
       
-      $category = $this->model("CategoryModel");
+      $category = $this->model("categoryModel");
       $result = $category->getAllClient();
       $listCategory = $result->fetch_all(MYSQLI_ASSOC);
       ?>

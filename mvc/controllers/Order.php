@@ -193,7 +193,7 @@ class order extends ControllerBase
             header('Location: ' . $vnp_Url);
         } else {
             $this->view("client/payment", [
-                "headTitle" => "Thanht toán",
+                "headTitle" => "Thanh toán",
                 "order" => $o
             ]);
         }

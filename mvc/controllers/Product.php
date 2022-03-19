@@ -33,7 +33,7 @@ class product extends ControllerBase
         $product = $this->model('productModel');
         $result = $product->getByCateId($CateId);
 
-        $category = $this->model('CategoryModel');
+        $category = $this->model('categoryModel');
         $cate = ($category->getById($CateId))->fetch_assoc();
 
         // Fetch

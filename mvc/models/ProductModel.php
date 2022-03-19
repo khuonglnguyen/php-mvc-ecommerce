@@ -19,7 +19,7 @@ class productModel
     public function search($keyword)
     {
         $db = DB::getInstance();
-        $sql = "SELECT * FROM products WHERE MATCH(name,des) AGAINST ('$keyword') AND status=1";
+        $sql = "SELECT * FROM products p JOIN categories c ON p.cateId = c.id WHERE MATCH(p.name,p.des) AGAINST ('$keyword') AND p.status=1 AND c.status=1";
         $result = mysqli_query($db->con, $sql);
         return $result;
     }
@@ -43,7 +43,7 @@ class productModel
     public function getFeaturedproducts()
     {
         $db = DB::getInstance();
-        $sql = "SELECT * FROM products WHERE status=1 order BY soldCount DESC";
+        $sql = "SELECT * FROM products p JOIN categories c ON p.cateId = c.id WHERE p.status=1 AND c.status = 1 order BY soldCount DESC";
         $result = mysqli_query($db->con, $sql);
         return $result;
     }

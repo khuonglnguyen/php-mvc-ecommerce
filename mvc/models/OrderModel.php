@@ -106,4 +106,20 @@ class orderModel
         $result = mysqli_query($db->con, $sql);
         return $result;
     }
+
+    public function getTotalRevenue()
+    {
+        $db = DB::getInstance();
+        $sql = "SELECT SUM(total) AS total FROM orders";
+        $result = mysqli_query($db->con, $sql);
+        return $result;
+    }
+
+    public function getTotalOrderCompleted()
+    {
+        $db = DB::getInstance();
+        $sql = "SELECT COUNT(*) AS total FROM orders WHERE status = 1";
+        $result = mysqli_query($db->con, $sql);
+        return $result;
+    }
 }

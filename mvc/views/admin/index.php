@@ -28,7 +28,7 @@
                         <span class="ti-briefcase"></span>
                         <div>
                             <h5>TỎNG DOANH THU</h5>
-                            <h4>$30,659.45</h4>
+                            <h4><?= number_format($data['totalRevenue']['total'], 0, '', ',') ?> VND</h4>
                         </div>
                     </div>
                 </div>
@@ -38,7 +38,7 @@
                         <span class="ti-user"></span>
                         <div>
                             <h5>KHÁCH HÀNG</h5>
-                            <h4>120</h4>
+                            <h4><?= number_format($data['totalClient']['total'], 0, '', ',') ?></h4>
                         </div>
                     </div>
                 </div>
@@ -47,8 +47,8 @@
                     <div class="card-body">
                         <span class="ti-check-box"></span>
                         <div>
-                            <h5>ĐƠN HÀNG</h5>
-                            <h4>200</h4>
+                            <h5>ĐƠN HÀNG HOÀN THÀNH</h5>
+                            <h4><?= $data['totalOrderCompleted']['total'] ?></h4>
                         </div>
                     </div>
                 </div>

@@ -12,7 +12,7 @@ class Admin extends ControllerBase
             if ($r['roleId'] != "1") {
                 $this->redirect("home");
             }
-        }else {
+        } else {
             $this->redirect("home");
         }
 
@@ -21,9 +21,16 @@ class Admin extends ControllerBase
         // Fetch
         $orderList = $result->fetch_all(MYSQLI_ASSOC);
 
+        $totalRevenue = $order->getTotalRevenue();
+        $totalOrderCompleted = $order->getTotalOrderCompleted();
+        $totalClient = $user->getTotalClient();
+
         $this->view("admin/index", [
             "headTitle" => "Trang quản trị",
-            "orderList" => $orderList
+            "orderList" => $orderList,
+            "totalRevenue" => $totalRevenue->fetch_assoc(),
+            "totalClient" => $totalClient->fetch_assoc(),
+            "totalOrderCompleted" => $totalOrderCompleted->fetch_assoc()
         ]);
     }
 }

@@ -2,6 +2,7 @@
 include_once(APP_ROOT . '/libs/PHPMailer.php');
 include_once(APP_ROOT . '/libs/Exception.php');
 include_once(APP_ROOT . '/libs/SMTP.php');
+
 use PHPMailer\PHPMailer\PHPMailer;
 
 class userModel
@@ -10,17 +11,15 @@ class userModel
 
     private function __construct()
     {
-        
     }
 
     public static function getInstance()
     {
-      if(!self::$instance)
-      {
-        self::$instance = new userModel();
-      }
-     
-      return self::$instance;
+        if (!self::$instance) {
+            self::$instance = new userModel();
+        }
+
+        return self::$instance;
     }
 
     public function checkLogin($email, $password)
@@ -31,7 +30,7 @@ class userModel
         $num_rows = mysqli_num_rows($result);
         if ($num_rows > 0) {
             return $result;
-        }else {
+        } else {
             return false;
         }
     }
@@ -44,7 +43,7 @@ class userModel
         $num_rows = mysqli_num_rows($result);
         if ($num_rows > 0) {
             return false;
-        }else {
+        } else {
             return true;
         }
     }
@@ -57,45 +56,45 @@ class userModel
         $num_rows = mysqli_num_rows($result);
         if ($num_rows > 0) {
             return false;
-        }else {
+        } else {
             return true;
         }
     }
 
-    public function insert($fullName,$email, $dob, $address, $password)
+    public function insert($fullName, $email, $dob, $address, $password)
     {
         $db = DB::getInstance();
 
         // Genarate captcha
-		$captcha = rand(10000, 99999);
+        $captcha = rand(10000, 99999);
 
         $sql = "INSERT INTO users(`id`, `fullName`, `email`, `dob`, `address`, `password`, `roleId`, `status`,`captcha`, `isConfirmed`) VALUES (NULL,'$fullName','$email','$dob','$address','$password',1,1,'$captcha',0)";
         $result = mysqli_query($db->con, $sql);
         if ($result) {
-            
-                // Send email
-                $mail = new PHPMailer();
-				$mail->IsSMTP();
-				$mail->Mailer = "smtp";
 
-				$mail->SMTPDebug  = 0;
-				$mail->SMTPAuth   = TRUE;
-				$mail->SMTPSecure = "tls";
-				$mail->Port       = 587;
-				$mail->Host       = "smtp.gmail.com";
-				$mail->username   = "khuongip564gb@gmail.com";
-				$mail->Password   = "khuongip564gb";
+            // Send email
+            $mail = new PHPMailer();
+            $mail->IsSMTP();
+            $mail->Mailer = "smtp";
 
-				$mail->IsHTML(true);
-				$mail->CharSet = 'UTF-8';
-				$mail->AddAddress($email, "recipient-name");
-				$mail->SetFrom("khuongip564gb@gmail.com", "KHUONGCUTE STORE");
-				$mail->Subject = "Xác nhận email tài khoản - KHUONGCUTE STORE";
-				$mail->Body = "<h3>Cảm ơn bạn đã đăng ký tài khoản tại website KHUONGCUTE STORE</h3></br>Đây là mã xác minh tài khoản của bạn: " . $captcha . "";
+            $mail->SMTPDebug  = 0;
+            $mail->SMTPAuth   = TRUE;
+            $mail->SMTPSecure = "tls";
+            $mail->Port       = 587;
+            $mail->Host       = "smtp.gmail.com";
+            $mail->username   = "khuongip564gb@gmail.com";
+            $mail->Password   = "khuongip564gb";
 
-				$mail->Send();
+            $mail->IsHTML(true);
+            $mail->CharSet = 'UTF-8';
+            $mail->AddAddress($email, "recipient-name");
+            $mail->SetFrom("khuongip564gb@gmail.com", "KHUONGCUTE STORE");
+            $mail->Subject = "Xác nhận email tài khoản - KHUONGCUTE STORE";
+            $mail->Body = "<h3>Cảm ơn bạn đã đăng ký tài khoản tại website KHUONGCUTE STORE</h3></br>Đây là mã xác minh tài khoản của bạn: " . $captcha . "";
 
-                return true;
+            $mail->Send();
+
+            return true;
         }
         return false;
     }
@@ -103,7 +102,7 @@ class userModel
     public function confirm($email, $captcha)
     {
         $db = DB::getInstance();
-        
+
         $sql = "SELECT * FROM users WHERE email='$email' AND captcha='$captcha'";
         $result = mysqli_query($db->con, $sql);
         $num_rows = mysqli_num_rows($result);
@@ -113,10 +112,10 @@ class userModel
             $re = mysqli_query($db->con, $sql);
             if ($re) {
                 return true;
-            }else {
+            } else {
                 return false;
             }
-        }else {
+        } else {
             return false;
         }
     }
@@ -125,6 +124,14 @@ class userModel
     {
         $db = DB::getInstance();
         $sql = "SELECT roleId FROM users WHERE id='$userId'";
+        $result = mysqli_query($db->con, $sql);
+        return $result;
+    }
+
+    public function getTotalClient()
+    {
+        $db = DB::getInstance();
+        $sql = "SELECT COUNT(*) AS total FROM users WHERE roleId != 1";
         $result = mysqli_query($db->con, $sql);
         return $result;
     }
