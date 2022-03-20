@@ -128,6 +128,14 @@ class userModel
         return $result;
     }
 
+    public function getById($userId)
+    {
+        $db = DB::getInstance();
+        $sql = "SELECT * FROM users WHERE id='$userId'";
+        $result = mysqli_query($db->con, $sql);
+        return $result;
+    }
+
     public function getTotalClient()
     {
         $db = DB::getInstance();

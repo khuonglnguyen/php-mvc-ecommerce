@@ -8,33 +8,33 @@ require_once APP_ROOT . '/core/Config.php';
 
     </div>
     <div class="title">Thanh toán</div>
-    <div class="table-responsive">
-        <form action="<?= URL_ROOT ?>/order/payment/<?= $data['order']['id'] ?>" id="create_form" method="post">
-
-            <div class="form-group">
-                <label for="language">Loại hàng hóa </label>
+    <div class="table-responsive login">
+        <form class="login-container" action="<?= URL_ROOT ?>/order/payment/<?= $data['order']['id'] ?>" id="create_form" method="post">
+            <h3>Tạo mới đơn hàng</h3>
+            <p>
+                <label for="order_type">Loại hàng hóa </label>
                 <select name="order_type" id="order_type" class="form-control">
                     <option value="topup">Nạp tiền điện thoại</option>
                     <option value="billpayment">Thanh toán hóa đơn</option>
                     <option value="fashion">Thời trang</option>
                     <option value="other">Khác - Xem thêm tại VNPAY</option>
                 </select>
-            </div>
-            <div class="form-group">
+            </p>
+            <p>
                 <label for="order_id">Mã hóa đơn</label>
-                <input class="form-control" id="order_id" name="order_id" type="text" value="<?php echo date("YmdHis") ?>" />
-            </div>
-            <div class="form-group">
+                <input type="text" id="order_id" name="order_id" placeholder="Mã hóa đơn" readonly value="<?php echo date("YmdHis") ?>" required>
+            </p>
+            <p>
                 <label for="amount">Số tiền</label>
-                <input class="form-control" id="amount" name="amount" type="number"  value="<?= $data['order']['total'] ?>" />
-            </div>
-            <div class="form-group">
+                <input type="number" id="amount" name="amount" placeholder="Số tiền" readonly value="<?= $data['order']['total'] ?>" required>
+            </p>
+            <p>
                 <label for="order_desc">Nội dung thanh toán</label>
-                <textarea class="form-control" cols="20" id="order_desc" name="order_desc" rows="2">Noi dung thanh toan</textarea>
-            </div>
-            <div class="form-group">
+                <textarea cols="20" id="order_desc" name="order_desc" rows="2">Noi dung thanh toan</textarea>
+            </p>
+            <p>
                 <label for="bank_code">Ngân hàng</label>
-                <select name="bank_code" id="bank_code" class="form-control">
+                <select name="bank_code" id="bank_code">
                     <option value="">Không chọn</option>
                     <option value="NCB"> Ngan hang NCB</option>
                     <option value="AGRIBANK"> Ngan hang Agribank</option>
@@ -59,124 +59,120 @@ require_once APP_ROOT . '/core/Config.php';
                     <option value="IVB"> Ngan hang IVB</option>
                     <option value="VISA"> Thanh toan qua VISA/MASTER</option>
                 </select>
-            </div>
-            <div class="form-group">
+            </p>
+            <p>
                 <label for="language">Ngôn ngữ</label>
-                <select name="language" id="language" class="form-control">
+                <select name="language" id="language">
                     <option value="vn">Tiếng Việt</option>
                     <option value="en">English</option>
                 </select>
-            </div>
-            <div class="form-group">
-                <label>Thời hạn thanh toán</label>
-                <input class="form-control" id="txtexpire" name="txtexpire" type="text" value="<?php echo date('YmdHis', strtotime('+15 minutes', strtotime(date("YmdHis")))); ?>" />
-            </div>
-            <div class="form-group">
-                <h3>Thông tin hóa đơn (Billing)</h3>
-            </div>
-            <div class="form-group">
-                <label>Họ tên (*)</label>
-                <input class="form-control" id="txt_billing_fullname" name="txt_billing_fullname" type="text" value="NGUYEN VAN XO" />
-            </div>
-            <div class="form-group">
-                <label>Email (*)</label>
-                <input class="form-control" id="txt_billing_email" name="txt_billing_email" type="text" value="xonv@vnpay.vn" />
-            </div>
-            <div class="form-group">
-                <label>Số điện thoại (*)</label>
-                <input class="form-control" id="txt_billing_mobile" name="txt_billing_mobile" type="text" value="0934998386" />
-            </div>
-            <div class="form-group">
-                <label>Địa chỉ (*)</label>
-                <input class="form-control" id="txt_billing_addr1" name="txt_billing_addr1" type="text" value="22 Lang Ha" />
-            </div>
-            <div class="form-group">
-                <label>Mã bưu điện (*)</label>
-                <input class="form-control" id="txt_postalcode" name="txt_postalcode" type="text" value="100000" />
-            </div>
-            <div class="form-group">
-                <label>Tỉnh/TP (*)</label>
-                <input class="form-control" id="txt_bill_city" name="txt_bill_city" type="text" value="Hà Nội" />
-            </div>
-            <div class="form-group">
-                <label>Bang (Áp dụng cho US,CA)</label>
-                <input class="form-control" id="txt_bill_state" name="txt_bill_state" type="text" value="" />
-            </div>
-            <div class="form-group">
-                <label>Quốc gia (*)</label>
-                <input class="form-control" id="txt_bill_country" name="txt_bill_country" type="text" value="VN" />
-            </div>
-            <div class="form-group">
-                <h3>Thông tin giao hàng (Shipping)</h3>
-            </div>
-            <div class="form-group">
-                <label>Họ tên (*)</label>
-                <input class="form-control" id="txt_ship_fullname" name="txt_ship_fullname" type="text" value="Nguyễn Thế Vinh" />
-            </div>
-            <div class="form-group">
-                <label>Email (*)</label>
-                <input class="form-control" id="txt_ship_email" name="txt_ship_email" type="text" value="vinhnt@vnpay.vn" />
-            </div>
-            <div class="form-group">
-                <label>Số điện thoại (*)</label>
-                <input class="form-control" id="txt_ship_mobile" name="txt_ship_mobile" type="text" value="0123456789" />
-            </div>
-            <div class="form-group">
-                <label>Địa chỉ (*)</label>
-                <input class="form-control" id="txt_ship_addr1" name="txt_ship_addr1" type="text" value="Phòng 315, Công ty VNPAY, Tòa nhà TĐL, 22 Láng Hạ, Đống Đa, Hà Nội" />
-            </div>
-            <div class="form-group">
-                <label>Mã bưu điện (*)</label>
-                <input class="form-control" id="txt_ship_postalcode" name="txt_ship_postalcode" type="text" value="1000000" />
-            </div>
-            <div class="form-group">
-                <label>Tỉnh/TP (*)</label>
-                <input class="form-control" id="txt_ship_city" name="txt_ship_city" type="text" value="Hà Nội" />
-            </div>
-            <div class="form-group">
-                <label>Bang (Áp dụng cho US,CA)</label>
-                <input class="form-control" id="txt_ship_state" name="txt_ship_state" type="text" value="" />
-            </div>
-            <div class="form-group">
-                <label>Quốc gia (*)</label>
-                <input class="form-control" id="txt_ship_country" name="txt_ship_country" type="text" value="VN" />
-            </div>
-            <div class="form-group">
-                <h3>Thông tin gửi Hóa đơn điện tử (Invoice)</h3>
-            </div>
-            <div class="form-group">
-                <label>Tên khách hàng</label>
-                <input class="form-control" id="txt_inv_customer" name="txt_inv_customer" type="text" value="Lê Văn Phổ" />
-            </div>
-            <div class="form-group">
-                <label>Công ty</label>
-                <input class="form-control" id="txt_inv_company" name="txt_inv_company" type="text" value="Công ty Cổ phần giải pháp Thanh toán Việt Nam" />
-            </div>
-            <div class="form-group">
-                <label>Địa chỉ</label>
-                <input class="form-control" id="txt_inv_addr1" name="txt_inv_addr1" type="text" value="22 Láng Hạ, Phường Láng Hạ, Quận Đống Đa, TP Hà Nội" />
-            </div>
-            <div class="form-group">
-                <label>Mã số thuế</label>
-                <input class="form-control" id="txt_inv_taxcode" name="txt_inv_taxcode" type="text" value="0102182292" />
-            </div>
-            <div class="form-group">
+            </p>
+            <p>
+                <label for="txtexpire">Thời hạn thanh toán</label>
+                <input type="text" id="txtexpire" name="txtexpire" placeholder="Thời hạn thanh toán" readonly value="<?php echo date('YmdHis', strtotime('+15 minutes', strtotime(date("YmdHis")))); ?>" required>
+            </p>
+            <h3>Thông tin hóa đơn (Billing)</h3>
+            <p>
+                <label for="txt_billing_fullname">Họ tên (*)</label>
+                <input type="text" id="txt_billing_fullname" name="txt_billing_fullname" placeholder="Họ tên" readonly value="<?= $data['user']['fullName'] ?>" required>
+            </p>
+            <p>
+                <label for="txt_billing_email">Email (*)</label>
+                <input type="text" id="txt_billing_email" name="txt_billing_email" placeholder="Email" readonly value="<?= $data['user']['email'] ?>" required>
+            </p>
+            <p>
+                <label for="txt_billing_addr1">Địa chỉ (*)</label>
+                <input type="text" id="txt_billing_addr1" name="txt_billing_addr1" placeholder="Địa chỉ" readonly value="<?= $data['user']['address'] ?>" required>
+            </p>
+            <p>
+                <label for="txt_billing_mobile">Số điện thoại (*)</label>
+                <input type="text" id="txt_billing_mobile" name="txt_billing_mobile" placeholder="Số điện thoại" readonly value="<?= $data['user']['phone'] ?>" required>
+            </p>
+            <p>
+                <label for="txt_postalcode">Mã bưu điện (*)</label>
+                <input type="text" id="txt_postalcode" name="txt_postalcode" placeholder="Mã bưu điện" readonly value="100000" required>
+            </p>
+            <p>
+                <label for="txt_bill_city">Tỉnh/TP (*)</label>
+                <input type="text" id="txt_bill_city" name="txt_bill_city" placeholder="Tỉnh/TP" readonly value="Cần Thơ" required>
+            </p>
+            <p>
+                <label for="txt_bill_state">Bang (Áp dụng cho US,CA)</label>
+                <input type="text" id="txt_bill_state" name="txt_bill_state" placeholder="Bang (Áp dụng cho US,CA)">
+            </p>
+            <p>
+                <label for="txt_bill_country">Quốc gia (*)</label>
+                <input type="text" id="txt_bill_country" name="txt_bill_country" placeholder="Quốc gia" value="VN" required>
+            </p>
+            <h3>Thông tin giao hàng (Shipping)</h3>
+            <p>
+                <label for="txt_ship_fullname">Họ tên (*)</label>
+                <input type="text" id="txt_ship_fullname" name="txt_ship_fullname" placeholder="Họ tên" value="Nguyễn Thế Vinh" required>
+            </p>
+            <p>
+                <label for="txt_ship_email">Email (*)</label>
+                <input type="text" id="txt_ship_email" name="txt_ship_email" placeholder="Email" value="vinhnt@vnpay.vn" required>
+            </p>
+            <p>
+                <label for="txt_ship_mobile">Số điện thoại (*)</label>
+                <input type="text" id="txt_ship_mobile" name="txt_ship_mobile" placeholder="Số điện thoại" value="0123456789" required>
+            </p>
+            <p>
+                <label for="txt_ship_addr1">Địa chỉ (*)</label>
+                <input type="text" id="txt_ship_addr1" name="txt_ship_addr1" placeholder="Địa chỉ" value="Phòng 315, Công ty VNPAY, Tòa nhà TĐL, 22 Láng Hạ, Đống Đa, Hà Nội" required>
+            </p>
+            <p>
+                <label for="txt_ship_postalcode">Mã bưu điện (*)</label>
+                <input type="text" id="txt_ship_postalcode" name="txt_ship_postalcode" placeholder="Mã bưu điện" value="1000000" required>
+            </p>
+            <p>
+                <label for="txt_ship_city">Tỉnh/TP (*)</label>
+                <input type="text" id="txt_ship_city" name="txt_ship_city" placeholder="Tỉnh/TP" value="Hà Nội" required>
+            </p>
+            <p>
+                <label for="txt_ship_state">Bang (Áp dụng cho US,CA)</label>
+                <input type="text" id="txt_ship_state" name="txt_ship_state" placeholder="Bang (Áp dụng cho US,CA)" value="Hà Nội">
+            </p>
+            <p>
+                <label for="txt_ship_country">Quốc gia</label>
+                <input type="text" id="txt_ship_country" name="txt_ship_country" placeholder="Quốc gia" value="VN" required>
+            </p>
+            <h3>Thông tin gửi Hóa đơn điện tử (Invoice)</h3>
+            <p>
+                <label for="txt_inv_customer">Tên khách hàng</label>
+                <input type="text" id="txt_inv_customer" name="txt_inv_customer" placeholder="Tên khách hàng" value="Lê Văn Phổ" required>
+            </p>
+            <p>
+                <label for="txt_inv_company">Công ty</label>
+                <input type="text" id="txt_inv_company" name="txt_inv_company" placeholder="Công ty" value="Công ty Cổ phần giải pháp Thanh toán Việt Nam" required>
+            </p>
+            <p>
+                <label for="txt_inv_addr1">Địa chỉ</label>
+                <input type="text" id="txt_inv_addr1" name="txt_inv_addr1" placeholder="Địa chỉ" value="22 Láng Hạ, Phường Láng Hạ, Quận Đống Đa, TP Hà Nội" required>
+            </p>
+            <p>
+                <label for="txt_inv_taxcode">Mã số thuế</label>
+                <input type="text" id="txt_inv_taxcode" name="txt_inv_taxcode" placeholder="Mã số thuế" value="0102182292" required>
+            </p>
+            <p>
                 <label>Loại hóa đơn</label>
-                <select name="cbo_inv_type" id="cbo_inv_type" class="form-control">
+                <select name="cbo_inv_type" id="cbo_inv_type">
                     <option value="I">Cá Nhân</option>
                     <option value="O">Công ty/Tổ chức</option>
                 </select>
-            </div>
-            <div class="form-group">
-                <label>Email</label>
-                <input class="form-control" id="txt_inv_email" name="txt_inv_email" type="text" value="pholv@vnpay.vn" />
-            </div>
-            <div class="form-group">
-                <label>Điện thoại</label>
-                <input class="form-control" id="txt_inv_mobile" name="txt_inv_mobile" type="text" value="02437764668" />
-            </div>
-            <button type="submit" class="btn btn-primary" id="btnPopup">Thanh toán Post</button>
-            <button type="submit" name="redirect" id="redirect" class="btn btn-default">Thanh toán Redirect</button>
+            </p>
+            <p>
+                <label for="txt_inv_email">Email</label>
+                <input type="text" id="txt_inv_email" name="txt_inv_email" placeholder="Email" value="pholv@vnpay.vn" required>
+            </p>
+            <p>
+                <label for="txt_inv_mobile">Điện thoại</label>
+                <input type="text" id="txt_inv_mobile" name="txt_inv_mobile" placeholder="Điện thoại" value="02437764668" required>
+            </p>
+            <p>
+                <input type="submit" id="btnPopup" value="Thanh toán" />
+            </p>
+            <!-- <button type="submit" name="redirect" id="redirect" class="btn btn-default">Thanh toán Redirect</button> -->
 
         </form>
     </div>

@@ -55,7 +55,7 @@ class cart extends ControllerBase
 
             $total = 0;
             foreach ($_SESSION['cart'] as $key => $value) {
-                $total += $value['price'];
+                $total += $value['price'] * $value['quantity'];
             }
             return $total;
         }

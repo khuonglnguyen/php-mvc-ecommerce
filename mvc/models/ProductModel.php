@@ -51,7 +51,7 @@ class productModel
     public function getFeaturedproducts()
     {
         $db = DB::getInstance();
-        $sql = "SELECT * FROM products p JOIN categories c ON p.cateId = c.id WHERE p.status=1 AND c.status = 1 order BY soldCount DESC";
+        $sql = "SELECT p.id, p.name, p.image, p.promotionPrice FROM products p JOIN categories c ON p.cateId = c.id WHERE p.status=1 AND c.status = 1 order BY soldCount DESC";
         $result = mysqli_query($db->con, $sql);
         return $result;
     }

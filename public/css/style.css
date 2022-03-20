@@ -248,7 +248,7 @@ footer{
     padding: 12px;
   }
   
-  .login input {
+  .login input, select, textarea {
     box-sizing: border-box;
     display: block;
     width: 100%;

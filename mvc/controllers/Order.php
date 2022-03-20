@@ -67,7 +67,11 @@ class order extends ControllerBase
         $order = $this->model("orderModel");
         $result = $order->getById($orderId);
         $o = $result->fetch_assoc();
-        // var_dump($o['total']);die();
+
+        $user = $this->model("userModel");
+        $r = $user->getById($_SESSION['user_id']);
+        $u = $r->fetch_assoc();
+
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -194,7 +198,8 @@ class order extends ControllerBase
         } else {
             $this->view("client/payment", [
                 "headTitle" => "Thanh toán",
-                "order" => $o
+                "order" => $o,
+                "user" => $u
             ]);
         }
     }
