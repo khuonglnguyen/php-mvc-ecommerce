@@ -43,21 +43,21 @@
                                             <td><?= $value['name'] ?></td>
                                             <?php
                                             if ($value['status']) { ?>
-                                                <td>Kích hoạt</td>
+                                                <td><span class="active">Kích hoạt</span></td>
                                             <?php } else { ?>
-                                                <td>Khóa</td>
+                                                <td><span class="block">Khóa</span></td>
                                             <?php }
                                             ?>
                                             <td>
-                                                <a href="<?= URL_ROOT . '/categoryManage/changeStatus/' . $value['id'] ?>">
-                                                    <?php
-                                                    if (!$value['status']) {
-                                                        echo 'Kích hoạt';
-                                                    } else {
-                                                        echo 'Khóa';
-                                                    }
-                                                    ?>
+                                                <?php
+                                                if ($value['status']) { ?>
+                                                    <a class="button-red" href="<?= URL_ROOT . '/categoryManage/changeStatus/' . $value['id'] ?>">Khóa</a>
+                                                <?php } else { ?>
+                                                    <a class="button-green" href="<?= URL_ROOT . '/categoryManage/changeStatus/' . $value['id'] ?>">Mở</a>
+                                                <?php }
+                                                ?>
                                                 </a>
+                                                <a class="button-normal" href="<?= URL_ROOT . '/categoryManage/edit/' . $value['id'] ?>">Chi tiết/Sửa</a>
                                             </td>
                                         </tr>
                                     <?php }

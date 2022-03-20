@@ -227,10 +227,10 @@ th, td {
     font-size: .9rem;
     padding: 1rem 1rem;
     color: var(--color-dark);
+    text-align: center;
 }
 
 td {
-    text-align: center;
     font-size: .8rem;
 }
 
@@ -526,4 +526,17 @@ input, textarea, select {
     border: 1px solid rgb(116, 4, 4);
     padding: 5px;
     border-radius: 20px;
+}
+.back{
+    float: right;
+    height: 48px;
+    width: 10%;
+    background-color: #ffffff;
+    color: rgb(64, 119, 0);
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: 1px solid;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
 }

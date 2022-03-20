@@ -40,6 +40,14 @@ class categoryModel
         return $result;
     }
 
+    public function getByIdAdmin($Id)
+    {
+        $db = DB::getInstance();
+        $sql = "SELECT * FROM categories WHERE Id='$Id'";
+        $result = mysqli_query($db->con, $sql);
+        return $result;
+    }
+
     public function changeStatus($Id)
     {
         $db = DB::getInstance();
@@ -52,6 +60,14 @@ class categoryModel
     {
         $db = DB::getInstance();
         $sql = "INSERT INTO categories VALUES (NULL, '$name',1)";
+        $result = mysqli_query($db->con, $sql);
+        return $result;
+    }
+
+    public function update($id, $name)
+    {
+        $db = DB::getInstance();
+        $sql = "UPDATE categories SET name = '" . $name . "' WHERE id=" . $id;
         $result = mysqli_query($db->con, $sql);
         return $result;
     }
