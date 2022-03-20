@@ -230,6 +230,7 @@ th, td {
 }
 
 td {
+    text-align: center;
     font-size: .8rem;
 }
 
@@ -343,6 +344,34 @@ tbody tr:nth-child(even) {
     border: 1px solid var(--main-color);
     border-radius: 4px;
     padding: .4rem 1rem;
+    margin: 2px 2px;
+}
+
+.button-red {
+    background: rgb(212, 22, 22); 
+    color: #fff;
+    border: 1px solid rgb(116, 4, 4);
+    border-radius: 4px;
+    padding: .4rem 1rem;
+    margin: 2px 2px;
+}
+
+.button-green {
+    background: rgb(22, 212, 38); 
+    color: #fff;
+    border: 1px solid rgb(23, 116, 4);
+    border-radius: 4px;
+    padding: .4rem 1rem;
+    margin: 2px 2px;
+}
+
+.button-normal {
+    background: white;
+    color: var(--main-color);
+    border: 1px solid var(--main-color);
+    border-radius: 4px;
+    padding: .4rem 1rem;
+    margin: 2px 2px;
 }
 
 .table-responsive {
@@ -439,4 +468,62 @@ tbody tr:nth-child(even) {
 
 .right{
     float: right;
+}
+
+/*FORM START*/
+input, textarea, select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  input[type=submit] {
+      float: right;
+    width: 10%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  input[type=submit]:hover {
+    background-color: #45a049;
+  }
+  
+  .form {
+    border-radius: 5px;
+    background-color: white;
+    padding: 20px;
+  }
+/*FORM  END*/
+
+.error{
+    color: red;
+  }
+  .success{
+    color: green;
+  }
+  .img{
+      height: 200px;
+  }
+  .active{
+    background: rgb(22, 212, 38); 
+    color: #fff;
+    border: 1px solid rgb(23, 116, 4);
+      padding: 5px;
+      border-radius: 20px;
+  }
+  .block{
+    background: rgb(212, 22, 22); 
+    color: #fff;
+    border: 1px solid rgb(116, 4, 4);
+    padding: 5px;
+    border-radius: 20px;
 }

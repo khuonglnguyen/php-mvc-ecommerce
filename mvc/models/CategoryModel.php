@@ -47,4 +47,12 @@ class categoryModel
         $result = mysqli_query($db->con, $sql);
         return $result;
     }
+
+    public function insert($name)
+    {
+        $db = DB::getInstance();
+        $sql = "INSERT INTO categories VALUES (NULL, '$name',1)";
+        $result = mysqli_query($db->con, $sql);
+        return $result;
+    }
 }
