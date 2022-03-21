@@ -47,19 +47,15 @@ class order extends ControllerBase
         ]);
     }
 
-    public function message($message)
+    public function returnPayment()
     {
-        if ($message == 'success') {
-            $this->view("client/message", [
-                "headTitle" => "Thông báo",
-                "message" => "Thanh toán thành công"
-            ]);
-        } else {
-            $this->view("client/message", [
-                "headTitle" => "Thông báo",
-                "message" => "Lỗi thanh toán"
-            ]);
+        if ($_GET['vnp_TransactionStatus'] == "00") {
+            $order = orderModel::getInstance();
+            $result = $order->payment($_GET['orderId']);
         }
+        $this->view("client/returnPayment", [
+            "headTitle" => "Thông báo",
+        ]);
     }
 
     public function payment($orderId = "")
@@ -78,7 +74,7 @@ class order extends ControllerBase
             $vnp_TmnCode = "92CYC38S"; //Website ID in VNPAY System
             $vnp_HashSecret = "KNKLFACPFSTUTFQQVEHVXIZSKDWYBCLV"; //Secret key
             $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-            $vnp_Returnurl = "http://localhost/luanvan/vnpay_return.php?orderId=".$o['id']."&&";
+            $vnp_Returnurl = URL_ROOT . "/order/returnPayment/?orderId=" . $o['id'] . "&&";
             $vnp_apiUrl = "http://sandbox.vnpayment.vn/merchant_webapi/merchant.html";
             //Config input format
             //Expire
@@ -209,7 +205,7 @@ class order extends ControllerBase
         $order = $this->model("orderModel");
         $result = $order->received($orderId);
         if ($result) {
-            $this->redirect("order","checkout");
+            $this->redirect("order", "checkout");
         }
     }
 }

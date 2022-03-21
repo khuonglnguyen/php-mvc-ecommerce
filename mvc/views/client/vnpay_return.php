@@ -1,29 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>VNPAY RESPONSE</title>
-    <!-- Bootstrap core CSS -->
-    <link href="/vnpay_php/assets/bootstrap.min.css" rel="stylesheet" />
-    <!-- Custom styles for this template -->
-    <link href="/vnpay_php/assets/jumbotron-narrow.css" rel="stylesheet">
-    <script src="/vnpay_php/assets/jquery-1.11.3.min.js"></script>
-</head>
+<?php require APP_ROOT . '/views/client/inc/head.php'; ?>
 
 <body>
+    <?php require APP_ROOT . '/views/client/inc/nav.php'; ?>
+    <div class="banner">
+       
+    </div>
+    <div class="title">Thông báo</div>
+    <h2><?= $data['message'] ?></h2>
     <?php
-    require_once './mvc/core/Config.php';
-    require_once './mvc/core/DB.php';
-    require_once "./mvc/models/orderModel.php";
-    // Update payment
-    $order = orderModel::getInstance();
-    $result = $order->payment($_GET['orderId']);
 
     $vnp_SecureHash = $_GET['vnp_SecureHash'];
     $inputData = array();
@@ -109,6 +93,7 @@
             <p>&copy; VNPAY <?php echo date('Y') ?></p>
         </footer>
     </div>
+    <?php require APP_ROOT . '/views/client/inc/footer.php'; ?>
 </body>
 
 </html>
