@@ -42,8 +42,12 @@
                         <td>Đang giao
                             <a href="<?= URL_ROOT . '/order/received/' . $value['id'] ?>">(Click vào nếu đã nhận được hàng)</a>
                         </td>
+                    <?php } else if ($value['status'] == "processing") { ?>
+                        <td>Chưa xác nhận</td>
+                    <?php } else if ($value['status'] == "processed") { ?>
+                        <td>Đã xác nhận</td>
                     <?php } else { ?>
-                        <td><?= $value['status'] ?></td>
+                        <td>Hoàn thành</td>
                     <?php }
                     ?>
                     <td><?= $value['paymentMethod'] ?></td>

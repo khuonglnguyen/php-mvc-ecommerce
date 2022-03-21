@@ -514,14 +514,36 @@ input, textarea, select {
       height: 200px;
   }
   .active{
-    background: rgb(22, 212, 38); 
+    background: rgb(9, 136, 20); 
     color: #fff;
     border: 1px solid rgb(23, 116, 4);
       padding: 5px;
       border-radius: 20px;
   }
+  
+  .gray{
+    background: gray; 
+    color: #fff;
+    border: 1px solid rgb(56, 56, 56); 
+    padding: 5px;
+    border-radius: 20px;
+  }
+  .blue{
+    background: #027581; 
+    color: #fff;
+    border: 1px solid #003136; 
+    padding: 5px;
+    border-radius: 20px;
+  }
+  .yellow{
+    background: rgb(190, 190, 0); 
+    color: #fff;
+    border: 1px solid rgb(95, 95, 0); 
+    padding: 5px;
+    border-radius: 20px;
+  }
   .block{
-    background: rgb(212, 22, 22); 
+    background: rgb(156, 15, 15); 
     color: #fff;
     border: 1px solid rgb(116, 4, 4);
     padding: 5px;

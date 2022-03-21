@@ -44,13 +44,23 @@
                                             <td><?= ++$count ?></td>
                                             <td><?= $value['id'] ?></td>
                                             <td><?= $value['createdDate'] ?></td>
-                                            <td><?= $value['status'] ?></td>
+                                            <?php
+                                            if ($value['status'] == "processing") { ?>
+                                                <td><span class="gray">Chưa xác nhận</span></td>
+                                            <?php  } else if ($value['status'] == "processed") { ?>
+                                                <td><span class="blue">Đã xác nhận</span></td>
+                                            <?php } else if ($value['status'] == "delivery") { ?>
+                                                <td><span class="yellow">Đang giao hàng</span></td>
+                                            <?php }else{ ?>
+                                                <td><span class="active">Hoàn thành</span></td>
+                                            <?php }
+                                            ?>
                                             <td><?= $value['paymentMethod'] ?></td>
                                             <?php
                                             if ($value['paymentStatus']) { ?>
-                                                <td>Đã thanh toán</td>
+                                                <td><span class="active">Đã thanh toán</span></td>
                                             <?php } else { ?>
-                                                <td>Chưa thanh toán</td>
+                                                <td><span class="gray">Chưa thanh toán</span></td>
                                             <?php }
                                             ?>
                                             <td><a href="<?= URL_ROOT . '/orderManage/detail/' . $value['id'] ?>">Chi tiết</a></td>

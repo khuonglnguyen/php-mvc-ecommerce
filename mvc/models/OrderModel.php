@@ -92,7 +92,7 @@ class orderModel
             $listOrderDetail = $resultOrderDetail->fetch_all(MYSQLI_ASSOC);
 
             foreach ($listOrderDetail as $key => $value) {
-                $sqlUpdateSold = "UPDATE products SET soldCount = soldCount + ".$value['qty']." WHERE productId = ".$value['productId']."";
+                $sqlUpdateSold = "UPDATE products SET soldCount = soldCount + " . $value['qty'] . " WHERE productId = " . $value['productId'] . "";
                 $resultUpdateSold = mysqli_query($db->con, $sql);
             }
         }
@@ -118,7 +118,7 @@ class orderModel
     public function getTotalOrderCompleted()
     {
         $db = DB::getInstance();
-        $sql = "SELECT COUNT(*) AS total FROM orders WHERE status = 1";
+        $sql = "SELECT COUNT(*) AS total FROM orders WHERE status = 'received'";
         $result = mysqli_query($db->con, $sql);
         return $result;
     }
