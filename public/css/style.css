@@ -242,6 +242,11 @@ footer{
     background: #ebebeb;
     padding: 12px;
   }
+
+  .message-container{
+    text-align: center;
+    padding: 20px 50px;
+  }
   
   /* Every row inside .login-container is defined with p tags */
   .login p {

@@ -8,14 +8,12 @@ class order extends ControllerBase
         $result = $order->add($_SESSION['user_id'], $total);
 
         if ($result) {
-            $this->view("client/message", [
-                "headTitle" => "Thông báo",
-                "message" => "Đặt hàng thành công!"
+            $this->redirect("order", "message", [
+                "message" => "success"
             ]);
         } else {
-            $this->view("client/message", [
-                "headTitle" => "Thông báo",
-                "message" => "Đặt hàng thất bại!"
+            $this->redirect("order", "message", [
+                "message" => "fail"
             ]);
         }
     }
@@ -45,6 +43,22 @@ class order extends ControllerBase
             "orderId" => $orderId,
             "orderDetailList" => $orderDetailList
         ]);
+    }
+
+    public function message($message)
+    {
+        if ($message == "success") {
+            $this->view("client/message", [
+                "headTitle" => "Thông báo",
+                "message" => "Đặt hàng thành công!",
+                "thanks" => "Cuộc sống có nhiều lựa chọn, cảm ơn vì bạn đã chọn và tin tưởng KHUONGCUTE STORE!"
+            ]);
+        } else {
+            $this->view("client/message", [
+                "headTitle" => "Thông báo",
+                "message" => "Đặt hàng thất bại!"
+            ]);
+        }
     }
 
     public function returnPayment()

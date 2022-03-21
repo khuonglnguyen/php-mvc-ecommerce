@@ -50,7 +50,7 @@
         if (isset($_SESSION['user_id'])) { ?>
                 <a href="<?= URL_ROOT . '/order/add/' . $total ?>" class="cart-btn">Đặt hàng</a>
         <?php } else { ?>
-            <a class="btn-order" href="<?= URL_ROOT . '/user/login/' ?>">Đăng nhập để mua hàng</a>
+            <a class="cart-btn" href="<?= URL_ROOT . '/user/login/' ?>">Đăng nhập để mua hàng</a>
         <?php }
         ?>
     </div>
