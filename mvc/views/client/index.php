@@ -7,7 +7,7 @@
     </div>
     <div class="title">Sản phẩm nổi bật</div>
     <div class="search-container">
-        <form action="<?= URL_ROOT ?>/product/search" method="post">
+        <form action="<?= URL_ROOT ?>/product/search" method="get">
             <input type="text" class="search" placeholder="Tìm kiếm.." name="keyword">
             <button type="submit"><i class="fa fa-search"></i></button>
         </form>

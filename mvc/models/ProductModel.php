@@ -19,7 +19,12 @@ class productModel
     public function search($keyword)
     {
         $db = DB::getInstance();
-        $sql = "SELECT * FROM products p JOIN categories c ON p.cateId = c.id WHERE MATCH(p.name,p.des) AGAINST ('$keyword') AND p.status=1 AND c.status=1";
+        $sql = "";
+        if (count(explode(" ", $keyword)) > 1) {
+            $sql = "SELECT p.id, p.name, p.image, p.promotionPrice FROM products p JOIN categories c ON p.cateId = c.id WHERE MATCH(p.name,p.des) AGAINST ('$keyword') AND p.status=1 AND c.status=1";
+        } else {
+            $sql = "SELECT p.id, p.name, p.image, p.promotionPrice FROM products p JOIN categories c ON p.cateId = c.id WHERE p.name LIKE '%" . $keyword . "%' OR c.name LIKE '%" . $keyword . "%' AND p.status=1 AND c.status=1";
+        }
         $result = mysqli_query($db->con, $sql);
         return $result;
     }
@@ -127,11 +132,11 @@ class productModel
 
             move_uploaded_file($file_temp, $uploaded_image);
 
-            $sql = "UPDATE `products` SET name = '".$_POST['name']."', `originalPrice` = ".$_POST['originalPrice'].", `promotionPrice` = ".$_POST['promotionPrice'].", `image` = '".$unique_image."', `cateId` = ".$_POST['cateId'].", `des` = '".$_POST['des']."' WHERE id = ".$_POST['id']."";
+            $sql = "UPDATE `products` SET name = '" . $_POST['name'] . "', `originalPrice` = " . $_POST['originalPrice'] . ", `promotionPrice` = " . $_POST['promotionPrice'] . ", `image` = '" . $unique_image . "', `cateId` = " . $_POST['cateId'] . ", `des` = '" . $_POST['des'] . "' WHERE id = " . $_POST['id'] . "";
             $result = mysqli_query($db->con, $sql);
             return $result;
         } else {
-            $sql = "UPDATE `products` SET name = '".$_POST['name']."', `originalPrice` = ".$_POST['originalPrice'].", `promotionPrice` = ".$_POST['promotionPrice'].", `cateId` = ".$_POST['cateId'].", `des` = '".$_POST['des']."' WHERE id = ".$_POST['id']."";
+            $sql = "UPDATE `products` SET name = '" . $_POST['name'] . "', `originalPrice` = " . $_POST['originalPrice'] . ", `promotionPrice` = " . $_POST['promotionPrice'] . ", `cateId` = " . $_POST['cateId'] . ", `des` = '" . $_POST['des'] . "' WHERE id = " . $_POST['id'] . "";
             $result = mysqli_query($db->con, $sql);
             return $result;
         }

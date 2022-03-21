@@ -4,14 +4,16 @@ class product extends ControllerBase
 {
     public function search()
     {
-        $keyword = $_POST['keyword'];
         $product = $this->model("productModel");
-        $result = $product->search($keyword);
-        // Fetch
-        $productList = $result->fetch_all(MYSQLI_ASSOC);
+        $result = $product->search($_GET['keyword']);
+        $productList = [];
+        if ($result) {
+            // Fetch
+            $productList = $result->fetch_all(MYSQLI_ASSOC);
+        }
         $this->view("client/products", [
             "headTitle" => "Tìm kiếm",
-            "title" => "Tìm kiếm với từ khóa: " . $keyword,
+            "title" => "Tìm kiếm với từ khóa: " . $_GET['keyword'],
             "productList" => $productList
         ]);
     }
