@@ -25,7 +25,24 @@ class userModel
     public function checkLogin($email, $password)
     {
         $db = DB::getInstance();
-        $sql = "SELECT * FROM users WHERE email='$email' AND password='$password' AND isConfirmed=1";
+        // Mã hóa password
+        $md5Password = md5($password);
+        $sql = "SELECT * FROM users WHERE email='$email' AND password='$md5Password' AND isConfirmed=1";
+        $result = mysqli_query($db->con, $sql);
+        $num_rows = mysqli_num_rows($result);
+        if ($num_rows > 0) {
+            return $result;
+        } else {
+            return false;
+        }
+    }
+
+    public function checkCurrentPassword($userId, $password)
+    {
+        $db = DB::getInstance();
+        // Mã hóa password
+        $md5Password = md5($password);
+        $sql = "SELECT * FROM users WHERE id='$userId' AND password='$md5Password' AND isConfirmed=1";
         $result = mysqli_query($db->con, $sql);
         $num_rows = mysqli_num_rows($result);
         if ($num_rows > 0) {
@@ -68,7 +85,10 @@ class userModel
         // Genarate captcha
         $captcha = rand(10000, 99999);
 
-        $sql = "INSERT INTO users(`id`, `fullName`, `email`, `dob`, `address`, `password`, `roleId`, `status`,`captcha`, `isConfirmed`) VALUES (NULL,'$fullName','$email','$dob','$address','$password',1,1,'$captcha',0)";
+        // Mã hóa password
+        $md5Password = md5($password);
+
+        $sql = "INSERT INTO users(`id`, `fullName`, `email`, `dob`, `address`, `password`, `roleId`, `status`,`captcha`, `isConfirmed`) VALUES (NULL,'$fullName','$email','$dob','$address','$md5Password',1,1,'$captcha',0)";
         $result = mysqli_query($db->con, $sql);
         if ($result) {
 
@@ -88,9 +108,9 @@ class userModel
             $mail->IsHTML(true);
             $mail->CharSet = 'UTF-8';
             $mail->AddAddress($email, "recipient-name");
-            $mail->SetFrom("khuongip564gb@gmail.com", "KHUONGCUTE STORE");
-            $mail->Subject = "Xác nhận email tài khoản - KHUONGCUTE STORE";
-            $mail->Body = "<h3>Cảm ơn bạn đã đăng ký tài khoản tại website KHUONGCUTE STORE</h3></br>Đây là mã xác minh tài khoản của bạn: " . $captcha . "";
+            $mail->SetFrom("khuongip564gb@gmail.com", "HUYPHAM STORE");
+            $mail->Subject = "Xác nhận email tài khoản - HUYPHAM STORE";
+            $mail->Body = "<h3>Cảm ơn bạn đã đăng ký tài khoản tại website HUYPHAM STORE</h3></br>Đây là mã xác minh tài khoản của bạn: " . $captcha . "";
 
             $mail->Send();
 
@@ -140,6 +160,37 @@ class userModel
     {
         $db = DB::getInstance();
         $sql = "SELECT COUNT(*) AS total FROM users WHERE roleId != 1";
+        $result = mysqli_query($db->con, $sql);
+        return $result;
+    }
+
+    public function checkPhoneUpdate($phone)
+    {
+        $db = DB::getInstance();
+        $sql = "SELECT * FROM users WHERE phone='$phone' AND isConfirmed=1 AND id!=" . $_SESSION['user_id'];
+        $result = mysqli_query($db->con, $sql);
+        $num_rows = mysqli_num_rows($result);
+        if ($num_rows > 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public function update($user)
+    {
+        $db = DB::getInstance();
+        $sql = "UPDATE `users` SET `fullName`='" . $user['fullName'] . "',`dob`='" . $user['dob'] . "',`address`='" . $user['address'] . "',`phone`='" . $user['phone'] . "' WHERE id=" . $_SESSION['user_id'];
+        $result = mysqli_query($db->con, $sql);
+        return $result;
+    }
+
+    public function updatePassword($userId, $password)
+    {
+        $db = DB::getInstance();
+        // Mã hóa password
+        $md5Password = md5($password);
+        $sql = "UPDATE `users` SET `password`='" . $md5Password . "' WHERE id=" . $userId;
         $result = mysqli_query($db->con, $sql);
         return $result;
     }

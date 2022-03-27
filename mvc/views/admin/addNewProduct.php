@@ -45,6 +45,7 @@
                                 <label for="des">Mô tả</label>
                                 <textarea name="des" id="des" cols="30" rows="10"></textarea>
                                 <input type="submit" value="Lưu">
+                                <a href="<?= URL_ROOT . '/productManage' ?>" class="back">Trở về</a>
                             </form>
                         </div>
                     </div>

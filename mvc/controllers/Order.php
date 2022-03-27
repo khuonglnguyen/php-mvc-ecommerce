@@ -51,7 +51,7 @@ class order extends ControllerBase
             $this->view("client/message", [
                 "headTitle" => "Thông báo",
                 "message" => "Đặt hàng thành công!",
-                "thanks" => "Cuộc sống có nhiều lựa chọn, cảm ơn vì bạn đã chọn và tin tưởng KHUONGCUTE STORE!"
+                "thanks" => "Cuộc sống có nhiều lựa chọn, cảm ơn vì bạn đã chọn và tin tưởng HUYPHAM STORE!"
             ]);
         } else {
             $this->view("client/message", [
@@ -85,8 +85,8 @@ class order extends ControllerBase
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            $vnp_TmnCode = "92CYC38S"; //Website ID in VNPAY System
-            $vnp_HashSecret = "KNKLFACPFSTUTFQQVEHVXIZSKDWYBCLV"; //Secret key
+            $vnp_TmnCode = "3304R5EJ"; //Website ID in VNPAY System
+            $vnp_HashSecret = "OOSMDHRGUXTNDDQGJTPWOLYDPFXHQMYE"; //Secret key
             $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
             $vnp_Returnurl = URL_ROOT . "/order/returnPayment/?orderId=" . $o['id'] . "&&";
             $vnp_apiUrl = "http://sandbox.vnpayment.vn/merchant_webapi/merchant.html";
@@ -166,6 +166,7 @@ class order extends ControllerBase
                 "vnp_Inv_Taxcode" => $vnp_Inv_Taxcode,
                 "vnp_Inv_Type" => $vnp_Inv_Type
             );
+            
 
             if (isset($vnp_BankCode) && $vnp_BankCode != "") {
                 $inputData['vnp_BankCode'] = $vnp_BankCode;
@@ -200,10 +201,7 @@ class order extends ControllerBase
             if (isset($_POST['redirect'])) {
                 header('Location: ' . $vnp_Url);
                 die();
-            } else {
-                echo json_encode($returnData);
             }
-
             header('Location: ' . $vnp_Url);
         } else {
             $this->view("client/payment", [

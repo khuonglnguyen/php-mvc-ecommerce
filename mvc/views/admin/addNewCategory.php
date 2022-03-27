@@ -28,6 +28,7 @@
                                 <label for="name">Tên danh mục</label>
                                 <input type="text" id="name" name="name" required>
                                 <input type="submit" value="Lưu">
+                                <a href="<?= URL_ROOT . '/categoryManage' ?>" class="back">Trở về</a>
                             </form>
                         </div>
                     </div>

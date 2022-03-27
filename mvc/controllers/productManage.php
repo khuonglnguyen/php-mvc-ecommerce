@@ -4,8 +4,11 @@ class productManage extends ControllerBase
 {
     public function index()
     {
+        // khởi tạo model
         $product = $this->model("productModel");
+        // Gọi hàm addAllAdmin
         $result = $product->getAllAdmin();
+        // Fetch
         $productList = $result->fetch_all(MYSQLI_ASSOC);
 
         $this->view("admin/product", [
@@ -26,14 +29,14 @@ class productManage extends ControllerBase
             $result = $product->insert($_POST);
             if ($result) {
                 $this->view("admin/addNewProduct", [
-                    "headTitle" => "Quản lý danh mục",
+                    "headTitle" => "Quản lý sản phẩm",
                     "cssClass" => "success",
                     "message" => "Thêm mới thành công!",
                     "name" => $_POST['name']
                 ]);
             } else {
                 $this->view("admin/addNewProduct", [
-                    "headTitle" => "Quản lý danh mục",
+                    "headTitle" => "Quản lý sản phẩm",
                     "cssClass" => "error",
                     "message" => "Lỗi, vui lòng thử lại sau!",
                     "name" => $_POST['name']
@@ -41,7 +44,7 @@ class productManage extends ControllerBase
             }
         } else {
             $this->view("admin/addNewProduct", [
-                "headTitle" => "Thêm mới danh mục",
+                "headTitle" => "Thêm mới sản phẩm",
                 "cssClass" => "none",
                 "categoryList" => $categoryList
             ]);
@@ -62,7 +65,7 @@ class productManage extends ControllerBase
             $new = $product->getByIdAdmin($_POST['id']);
             if ($r) {
                 $this->view("admin/editProduct", [
-                    "headTitle" => "Xem/Cập nhật danh mục",
+                    "headTitle" => "Xem/Cập nhật sản phẩm",
                     "cssClass" => "success",
                     "message" => "Cập nhật thành công!",
                     "categoryList" => $categoryList,
@@ -70,7 +73,7 @@ class productManage extends ControllerBase
                 ]);
             } else {
                 $this->view("admin/editProduct", [
-                    "headTitle" => "Xem/Cập nhật danh mục",
+                    "headTitle" => "Xem/Cập nhật sản phẩm",
                     "cssClass" => "error",
                     "message" => "Lỗi, vui lòng thử lại sau!",
                     "categoryList" => $categoryList,
@@ -79,7 +82,7 @@ class productManage extends ControllerBase
             }
         } else {
             $this->view("admin/editProduct", [
-                "headTitle" => "Xem/Cập nhật danh mục",
+                "headTitle" => "Xem/Cập nhật sản phẩm",
                 "cssClass" => "none",
                 "categoryList" => $categoryList,
                 "product" => $p->fetch_assoc()

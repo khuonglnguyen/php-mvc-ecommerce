@@ -4,8 +4,11 @@ class categoryManage extends ControllerBase
 {
     public function index()
     {
+        // Khởi tạo model
         $category = $this->model("categoryModel");
+        // Gọi hàm getByIdAdmin
         $result = $category->getAllAdmin();
+        // Fetch
         $categoryList = $result->fetch_all(MYSQLI_ASSOC);
 
         $this->view("admin/category", [
@@ -17,8 +20,9 @@ class categoryManage extends ControllerBase
     public function add()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
+            // Khởi tạo model
             $category = $this->model("categoryModel");
+            // Gọi hàm insert để thêm mới vào csdl
             $result = $category->insert($_POST['name']);
             if ($result) {
                 $this->view("admin/addNewCategory", [
@@ -45,12 +49,16 @@ class categoryManage extends ControllerBase
 
     public function edit($id = "")
     {
+        // Khởi tạo models
         $category = $this->model("categoryModel");
+        // Gọi hàm getByIdAdmin
         $c = $category->getByIdAdmin($id);
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
+            // Gọi hàm update
             $r = $category->update($_POST['id'], $_POST['name']);
+            
+            // Gọi hàm getByIdAdmin
             $new = $category->getByIdAdmin($_POST['id']);
             if ($r) {
                 $this->view("admin/editCategory", [

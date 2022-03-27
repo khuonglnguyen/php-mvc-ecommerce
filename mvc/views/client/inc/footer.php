@@ -1,6 +1,6 @@
 <footer>
     <div class="footer-content">
-      <p>Design & Develop by KHUONGCUTE</p>
+      <p>Design & Develop by HUYPHAM</p>
     </div>
     <ul class="socials">
       <li><a href="#"><i class="fa fa-facebook"></i></a></li>

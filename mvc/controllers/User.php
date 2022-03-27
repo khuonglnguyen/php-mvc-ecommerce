@@ -1,27 +1,29 @@
 <?php
 
-class user extends ControllerBase{
+class user extends ControllerBase
+{
     public function login()
     {
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $email = $_POST['email'];
             $password = $_POST['password'];
-            
+
             $user = $this->model("userModel");
-            $result = $user->checkLogin($email,$password);
+            $result = $user->checkLogin($email, $password);
             if ($result) {
                 // Get user
                 $u = $result->fetch_assoc();
                 // Set session
                 $_SESSION['user_id'] = $u['id'];
-                $this->redirect("home");
-            }else {
-                $this->view("client/login",[
-                    "headTitle"=>"Đăng nhập","message"=>"Tài khoản hoặc mật khẩu không đúng!"]);
+                echo '<script>history.go(-2);</script>';
+            } else {
+                $this->view("client/login", [
+                    "headTitle" => "Đăng nhập", "message" => "Tài khoản hoặc mật khẩu không đúng!"
+                ]);
             }
-        }else{
+        } else {
             $this->view("client/login", [
-                "headTitle"=>"Đăng nhập"
+                "headTitle" => "Đăng nhập"
             ]);
         }
     }
@@ -29,90 +31,168 @@ class user extends ControllerBase{
     public function logout()
     {
         unset($_SESSION['user_id']);
-        $this->redirect("user","login");
+        $this->redirect("user", "login");
     }
-    
-    public function register(){
-        if($_SERVER['REQUEST_METHOD']=='POST') {
+
+    public function register()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $fullName = $_POST['fullName'];
             $email = $_POST['email'];
             $dob = $_POST['dob'];
             $address = $_POST['address'];
             $password = $_POST['password'];
             $phone = $_POST['phone'];
-            
+
             $user = $this->model("userModel");
             $checkEmail = $user->checkEmail($email);
             if (!$checkEmail) {
                 $checkPhone = $user->checkPhone($phone);
                 if (!$checkPhone) {
                     $this->view("client/register", [
-                        "headTitle"=>"Đăng ký",
-                        "messageEmail"=>"Email đã tồn tại",
-                        "messagePhone"=>"Số điện thoại đã tồn tại",
+                        "headTitle" => "Đăng ký",
+                        "messageEmail" => "Email đã tồn tại",
+                        "messagePhone" => "Số điện thoại đã tồn tại",
                     ]);
-                }else {
+                } else {
                     $this->view("client/register", [
-                        "headTitle"=>"Đăng ký",
-                        "messageEmail"=>"Email đã tồn tại"
+                        "headTitle" => "Đăng ký",
+                        "messageEmail" => "Email đã tồn tại"
                     ]);
                 }
                 return;
-            }else {
+            } else {
                 $checkPhone = $user->checkPhone($phone);
                 if (!$checkPhone) {
                     $this->view("client/register", [
-                        "headTitle"=>"Đăng ký",
-                        "messagePhone"=>"Số điện thoại đã tồn tại",
+                        "headTitle" => "Đăng ký",
+                        "messagePhone" => "Số điện thoại đã tồn tại",
                     ]);
                 }
                 return;
             }
 
             $result = $user->insert($fullName, $email, $dob, $address, $password);
-            if($result) {
-                $this->redirect("user","confirm",["email"=>$email]);
-            }else {
+            if ($result) {
+                $this->redirect("user", "confirm", ["email" => $email]);
+            } else {
                 $this->view("client/register", [
-                    "headTitle"=>"Đăng ký",
-                    "cssClass"=>"error",
-                    "message"=>"Đăng ký thất bại",
+                    "headTitle" => "Đăng ký",
+                    "cssClass" => "error",
+                    "message" => "Đăng ký thất bại",
                 ]);
             }
-        }else {
-            $this->view("client/register",[
-                "headTitle"=>"Đăng ký"
+        } else {
+            $this->view("client/register", [
+                "headTitle" => "Đăng ký"
             ]);
         }
-     }
+    }
 
-     public function confirm($email){
-        if($_SERVER['REQUEST_METHOD']=='POST') {
+    public function confirm($email)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $captcha = $_POST['captcha'];
-            
+
             $user = $this->model("userModel");
             $result = $user->confirm($email, $captcha);
-            if($result) {
+            if ($result) {
                 $this->view("client/confirm", [
-                    "headTitle"=>"Xác minh tài khoản",
-                    "cssClass"=>"success",
-                    "email"=>$email,
-                    "message"=>"Xác minh tài khoản thành công!",
+                    "headTitle" => "Xác minh tài khoản",
+                    "cssClass" => "success",
+                    "email" => $email,
+                    "message" => "Xác minh tài khoản thành công!",
                 ]);
-            }else {
+            } else {
                 $this->view("client/confirm", [
-                    "headTitle"=>"Xác minh tài khoản",
-                    "cssClass"=>"error",
-                    "email"=>$email,
-                    "message"=>"Mã xác minh không đúng",
+                    "headTitle" => "Xác minh tài khoản",
+                    "cssClass" => "error",
+                    "email" => $email,
+                    "message" => "Mã xác minh không đúng",
                 ]);
             }
-        }else {
-            $this->view("client/confirm",[
-                "headTitle"=>"Xác minh tài khoản",
-                "email"=>$email
+        } else {
+            $this->view("client/confirm", [
+                "headTitle" => "Xác minh tài khoản",
+                "email" => $email
             ]);
         }
-     }
+    }
+
+    public function info($message = "")
+    {
+        // Khởi tạo model
+        $user = $this->model('userModel');
+        $result = $user->getById($_SESSION['user_id']);
+        $u = $result->fetch_assoc();
+        $this->view('client/info', [
+            "headTitle" => "Thông tin tài khoản",
+            "user" => $u,
+            "message" => $message
+        ]);
+    }
+
+    public function edit()
+    {
+        // Khởi tạo model
+        $user = $this->model('userModel');
+        $result = $user->getById($_SESSION['user_id']);
+        $u = $result->fetch_assoc();
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $checkPhone = $user->checkPhoneUpdate($_POST['phone']);
+            if (!$checkPhone) {
+                $this->view("client/edit", [
+                    "headTitle" => "Chỉnh sửa thông tin tài khoản",
+                    "messagePhone" => "Số điện thoại đã tồn tại",
+                    "user" => $u
+                ]);
+            } else {
+                $r = $user->update($_POST);
+                if ($r) {
+                    $this->redirect("user", "info", [
+                        "message" => "Cập nhật thành công!"
+                    ]);
+                } else {
+                    $this->redirect("user", "info", [
+                        "message" => "Lỗi!"
+                    ]);
+                }
+            }
+        } else {
+            $this->view('client/edit', [
+                "headTitle" => "Chỉnh sửa thông tin tài khoản",
+                "user" => $u
+            ]);
+        }
+    }
+
+    public function resetPassword()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // Khởi tạo model
+            $user = $this->model('userModel');
+            $result = $user->checkCurrentPassword($_SESSION['user_id'], $_POST['password']);
+            if ($result) {
+                $r = $user->updatePassword($_SESSION['user_id'], $_POST['password']);
+                if ($r) {
+                    $this->redirect("user", "info", [
+                        "message" => "Cập nhật thành công!"
+                    ]);
+                } else {
+                    $this->redirect("user", "info", [
+                        "message" => "Lỗi!"
+                    ]);
+                }
+            } else {
+                $this->view('client/resetPassword', [
+                    "headTitle" => "Đổi mật khẩu",
+                    "messagePassword" => "Mật khẩu hiện tại không đúng!"
+                ]);
+            }
+        } else {
+            $this->view('client/resetPassword', [
+                "headTitle" => "Đổi mật khẩu"
+            ]);
+        }
+    }
 }
-?>

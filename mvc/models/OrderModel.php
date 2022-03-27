@@ -93,7 +93,7 @@ class orderModel
 
             foreach ($listOrderDetail as $key => $value) {
                 $sqlUpdateSold = "UPDATE products SET soldCount = soldCount + " . $value['qty'] . " WHERE productId = " . $value['productId'] . "";
-                $resultUpdateSold = mysqli_query($db->con, $sql);
+                $resultUpdateSold = mysqli_query($db->con, $sqlUpdateSold);
             }
         }
         return $resultUpdateSold;

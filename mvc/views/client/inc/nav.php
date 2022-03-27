@@ -7,7 +7,7 @@
       $listCategory = $result->fetch_all(MYSQLI_ASSOC);
       ?>
       <nav class="navbar">
-        <div class="logo">KHUONGCUTE STORE</div>
+        <div class="logo">HUYPHAM STORE</div>
         <ul class="nav-links">
           <input type="checkbox" id="checkbox_toggle" />
           <label for="checkbox_toggle" class="hamburger">&#9776;</label>
@@ -29,6 +29,7 @@
               <li class="cate">
                 <a href="#">Tài khoản</a>
                 <ul class="sub-menu">
+                  <li><a href="<?= URL_ROOT . "/user/info" ?>">Thông tin tài khoản</a></li>
                   <li><a href="<?= URL_ROOT . "/order/checkout" ?>">Đơn hàng của tôi</a></li>
                   <li><a href="<?= URL_ROOT . "/user/logout" ?>">Đăng xuất</a></li>
                 </ul>
