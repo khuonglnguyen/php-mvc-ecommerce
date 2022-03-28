@@ -16,27 +16,54 @@ $data = $chat->getData();
             </button>
         </div>
         <div class="chatbox__body" id="chat-body">
-        </div>
-        <div class="panel-footer">
-            <div class="input-group">
-                <input id="btn-input" type="text" required class="form-control input-sm chat_set_height" placeholder="Soạn tin nhắn..." tabindex="0" dir="ltr" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" contenteditable="true" />
-                <span class="input-group-btn">
-                    <button class="btn bt_bg btn-sm" id="btn-chat" onclick="send()">
-                        Gửi
-                    </button>
-                </span>
+            <div class="chatbox__body__message chatbox__body__message--left">
+                <img src="<?= URL_ROOT ?>/public/images/user.png" alt="Picture">
+                <div class="clearfix"></div>
+                <div class="ul_section_full">
+                    <ul class="ul_msg">
+                        <li><strong>Admin</strong></li>
+                        <?php
+                        if (!isset($_SESSION['user_id'])) { ?>
+                            <li>Vui lòng <a href="<?= URL_ROOT ?>/user/login">ĐĂNG NHẬP</a> để chat!</li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
             </div>
         </div>
+    <?php } else { ?>
+        <li>Chào bạn!</li>
+        </ul>
+        <div class="clearfix"></div>
     </div>
 </div>
-<script>
-    loadData();
-    window.setInterval(function() {
-        loadData();
-    }, 5000);
+</div>
+<div class="panel-footer">
+    <div class="input-group">
+        <input id="btn-input" type="text" required class="form-control input-sm chat_set_height" placeholder="Soạn tin nhắn..." tabindex="0" dir="ltr" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" contenteditable="true" />
+        <span class="input-group-btn">
+            <button class="btn bt_bg btn-sm" id="btn-chat" onclick="send()">
+                Gửi
+            </button>
+        </span>
+    </div>
+</div>
+<?php }
+?>
 
-    var myDiv = document.getElementById('chat-body');
-    myDiv.scrollTop = 10000000;
+</div>
+</div>
+<script>
+    var userId = "<?= isset($_SESSION['user_id']) ? $_SESSION['user_id'] : "" ?>";
+    if (userId) {
+        loadData();
+        window.setInterval(function() {
+            loadData();
+        }, 5000);
+
+        var myDiv = document.getElementById('chat-body');
+        myDiv.scrollTop = 10000000;
+    }
+
 
     function box() {
         document.getElementById('box').classList.toggle("chatbox--tray");
@@ -116,7 +143,6 @@ $data = $chat->getData();
                 if (status === 200) {
                     var res = JSON.parse(this.responseText);
                     if (res.length > 0) {
-                        var userId = "<?= $_SESSION['user_id'] ?>";
                         for (let index = 0; index < res.length; index++) {
                             if (res[index].fromUserId == userId) {
                                 document.getElementById('chat-body').innerHTML += '<div class="chatbox__body__message chatbox__body__message--right">' +

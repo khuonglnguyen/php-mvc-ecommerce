@@ -17,6 +17,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="<?= URL_ROOT . '/chat/chatList' ?>">
+                        <span class="ti-email"></span>
+                        <span>Chat với khách hàng</span>
+                    </a>
+                </li>
+                <li>
                     <a href="<?= URL_ROOT . '/productManage' ?>">
                         <span class="ti-archive"></span>
                         <span>Quản lý sản phẩm</span>
