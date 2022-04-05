@@ -42,7 +42,7 @@
                 <td><?= number_format($total, 0, '', ',') ?>VND</td>
             </tr>
         <?php } else {  ?>
-            <h3>Giỏ hàng hiện đang trống...</h3>
+            <h3 style="text-align: center;">Giỏ hàng hiện đang trống...</h3>
         <?php }  ?>
     </table>
     <div class="payment">

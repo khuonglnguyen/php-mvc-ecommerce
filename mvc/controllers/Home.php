@@ -1,6 +1,8 @@
 <?php
-class home extends ControllerBase{
-    public function Index(){
+class home extends ControllerBase
+{
+    public function Index()
+    {
         $product = $this->model("productModel");
         $result = $product->getFeaturedproducts();
         // Fetch
@@ -11,4 +13,3 @@ class home extends ControllerBase{
         ]);
     }
 }
-?>

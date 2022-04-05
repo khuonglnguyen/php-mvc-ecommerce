@@ -39,7 +39,7 @@
                                         <tr>
                                             <td><?= ++$count ?></td>
                                             <td><?= $value['fullName'] ?></td>
-                                            <td><button id="send-btn" onclick="box(this)" data-id="<?= $value['id'] ?>">Chat ngay</button></td>
+                                            <td><button id="send-btn" onclick="box(this)" data-id="<?= $value['id'] ?>" data-userName="<?= $value['fullName'] ?>">Chat ngay</button></td>
                                         </tr>
                                     <?php }
                                     ?>

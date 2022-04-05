@@ -39,7 +39,7 @@
               <li><a href="<?= URL_ROOT . "/user/login" ?>">Đăng nhập</a></li>
             <?php  }
             ?>
-            <li><a href="<?= URL_ROOT . "/cart/checkout" ?>"><i class="fa fa-shopping-bag"></i> (<?= $total ?>)</a></li>
+            <li><a href="<?= URL_ROOT . "/cart/checkout" ?>" id="bag"><i class="fa fa-shopping-bag"></i> (<?= $total ?>)</a></li>
           </div>
         </ul>
       </nav>

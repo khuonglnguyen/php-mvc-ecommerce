@@ -5,7 +5,7 @@
 <div class="row">
     <div id="box" class="chatbox chatbox22 chatbox--tray">
         <div class="chatbox__title">
-            <h5><a href="javascript:void()" onclick="boxchat(this)">CHAT</a></h5>
+            <h5><a href="javascript:void()" onclick="boxchat(this)" id="title-chat">CHAT</a></h5>
             <button class="chatbox__title__close">
                 <span>
                     <svg viewBox="0 0 12 12" width="12px" height="12px">
@@ -31,12 +31,18 @@
         </div>
     </div>
     <script>
+        document.getElementById('box').classList.toggle("chatbox--closed");
+
         var userId = "<?= isset($_SESSION['user_id']) ? $_SESSION['user_id'] : "" ?>";
         var myDiv = document.getElementById('chat-body');
+        var userName = "";
         var id = 0;
 
         function box(e) {
+            document.getElementById('box').classList.toggle("chatbox--closed");
             id = e.getAttribute('data-id');
+            userName = e.getAttribute('data-userName');
+            document.getElementById('title-chat').innerHTML = userName;
             document.getElementById('box').classList.toggle("chatbox--tray");
 
             loadData(e.getAttribute('data-id'));
@@ -64,7 +70,7 @@
                 ' <div class="ul_section_full">' +
                 ' <ul class="ul_msg">' +
                 '<li><strong>Bạn</strong></li>' +
-                '<li>'+queries+'</li>' +
+                '<li>' + queries + '</li>' +
                 '</ul>' +
                 '<div class="clearfix"></div>' +
                 '</div>' +
@@ -131,7 +137,7 @@
                                         '<div class="clearfix"></div>' +
                                         ' <div class="ul_section_full">' +
                                         ' <ul class="ul_msg">' +
-                                        '<li><strong>Khách hàng</strong></li>' +
+                                        '<li><strong>' + userName + '</strong></li>' +
                                         '<li>' + res[index].content + '</li>' +
                                         '</ul>' +
                                         '<div class="clearfix"></div>' +

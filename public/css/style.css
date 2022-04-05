@@ -1,9 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&family=Pacifico&family=Pangolin&family=Sansita+Swashed:wght@300&family=Sriracha&display=swap');
+
 *{
     margin: 0;
     padding: 0;
 }
 body{
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family: 'Pangolin', cursive;
 }
 a{
     text-decoration: none;
@@ -17,11 +19,13 @@ li{
     align-items: center;
     justify-content: space-between;
     padding: 20px;
-    background-color: deeppink;
-    color: white;
+    background-color: rgb(255, 209, 204);
+    color: rgb(184, 56, 67);
+    border-bottom: rgb(184, 56, 67) solid 1px;
+    border-top: rgb(184, 56, 67) solid 1px;
 }
 .nav-links a{
-    color: white;
+    color: rgb(184, 56, 67);
 }
 .logo{
     font-size: 32px;
@@ -30,9 +34,14 @@ li{
     display: flex;
 }
 .menu li:hover{
-    background-color: rgb(255, 122, 193);
+    background-color: rgb(184, 56, 67);
+    color: rgb(255, 209, 204);
     border-radius: 5px;
-    transition: 0.4s;
+    transition: 0.3s;
+}
+.menu li:hover a{
+  color: rgb(255, 209, 204);
+  transition: 0.3s;
 }
 .menu li{
     padding: 5px 14px;
@@ -42,7 +51,7 @@ li{
 }
 .sub-menu{
     width: 200px;
-    background-color: rgb(224, 0, 120);
+    background-color: rgb(255, 209, 204);
     padding: 7px 0;
     position: absolute;
     display: none;
@@ -51,6 +60,13 @@ li{
 .sub-menu li{
     text-align: center;
     width: auto;
+}
+.sub-menu li a{
+  color: rgb(184, 56, 67) !important;
+}
+.sub-menu li:hover a{
+  color: rgb(255, 209, 204) !important;
+  transition: 0.3s;
 }
 .cate:hover .sub-menu{
     display: block;
@@ -71,7 +87,7 @@ input[type=checkbox]{
         left: 0;
         text-align: center;
         padding: 16px 0;
-        background-color: rgb(224, 0, 120);
+        background-color: rgb(255, 209, 204);
         top: 88px;
     }
     .menu li:hover{
@@ -109,12 +125,14 @@ input[type=checkbox]{
 
 .title{
     text-align: center;
-    background-color: deeppink;
-    color: white;
+    background-color: rgb(255, 209, 204);
+    color: rgb(184, 56, 67);
     height: 70px;
     line-height: 70px;
     font-size: 28px;
     margin-bottom: 20px;
+    border-bottom: rgb(184, 56, 67) solid 1px;
+    border-top: rgb(184, 56, 67) solid 1px;
 }
 
 /*product CARD START*/
@@ -137,9 +155,11 @@ input[type=checkbox]{
     margin: 20px auto;
     overflow: hidden;
     background-color: rgb(245, 222, 222);
+    border: rgb(184, 56, 67) solid 1px;
 }
 .card-img{
   overflow: hidden;
+  border-bottom: rgb(184, 56, 67) solid 1px;
 }
 .card a h1{
   font-size: 20px;
@@ -148,8 +168,8 @@ input[type=checkbox]{
 .price{
   position: absolute;
   bottom: 50px;
-  right: 0;
-    color: rgb(177, 0, 0);
+  right: 10px;
+    color: rgb(182, 0, 0);
     font-size: 22px;
     font-weight: bold;
     text-align: center;
@@ -161,7 +181,7 @@ input[type=checkbox]{
     outline: 0;
     padding: 12px;
     color: white;
-    background-color: deeppink;
+    background-color: rgb(184, 56, 67);
     text-align: center;
     cursor: pointer;
     width: 100%;
@@ -170,7 +190,7 @@ input[type=checkbox]{
 }
 .card button:hover{
   color: #323232;
-  background-color: rgb(245, 230, 30);
+  background-color: rgb(224, 210, 9);
     transition: 0.2s;
 }
 .product-image:hover{
@@ -184,8 +204,10 @@ footer{
     position: absolute;
     left: 0;
     right: 0;
-    background-color: rgb(213, 200, 218);
+    background-color: rgb(255, 209, 204);
     color: rgb(27, 26, 26);
+    border-bottom: rgb(184, 56, 67) solid 1px;
+    border-top: rgb(184, 56, 67) solid 1px;
 }
 .footer-content{
     display: flex;
@@ -241,11 +263,11 @@ footer{
     margin-right: auto;
     margin-left: auto;
     border: 12px solid transparent;
-    border-bottom-color: deeppink;
+    border-bottom-color: rgb(184, 56, 67);
   }
   
   .login-header {
-    background: deeppink;
+    background: rgb(184, 56, 67);
     padding: 20px;
     font-size: 1.4em;
     font-weight: normal;
@@ -295,19 +317,19 @@ footer{
   }
   
   .login input[type="submit"] {
-    background: deeppink;
+    background: rgb(184, 56, 67);
     border-color: transparent;
     color: #fff;
     cursor: pointer;
   }
   
   .login input[type="submit"]:hover {
-    background: deeppink;
+    background: rgb(184, 56, 67);
   }
   
   /* Buttons' focus effect */
   .login input[type="submit"]:focus {
-    border-color: deeppink;
+    border-color: rgb(184, 56, 67);
   }
 /*FORM LOGIN/REGISTER END*/
 
@@ -487,7 +509,7 @@ footer{
   
   .cart-btn {
     display: inline-block;
-    background-color: deeppink;
+    background-color: rgb(184, 56, 67);
     font-size: 16px;
     color: #FFFFFF;
     text-decoration: none;

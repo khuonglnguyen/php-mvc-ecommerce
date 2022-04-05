@@ -24,7 +24,7 @@
                         <h1><?= $key['name'] ?></h1>
                     </a>
                     <p class="price"><?= number_format($key['promotionPrice'], 0, '', ',') ?>VND</p>
-                    <p><a href="<?= URL_ROOT . '/cart/addItemcart/' . $key['id'] ?>"><button>Thêm vào giỏ</button></a></p>
+                    <p><button data-id="<?= $key['id'] ?>" onclick="addItem(this)">Thêm vào giỏ</button></p>
                 </div>
             <?php }
         } else { ?>

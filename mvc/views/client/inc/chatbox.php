@@ -1,6 +1,6 @@
 <?php
-$chat = new chat();
-$data = $chat->getData();
+// $chat = new chat();
+// $data = $chat->getData();
 ?>
 <div class="row">
     <div id="box" class="chatbox chatbox22 chatbox--tray">
@@ -54,13 +54,14 @@ $data = $chat->getData();
 </div>
 <script>
     var userId = "<?= isset($_SESSION['user_id']) ? $_SESSION['user_id'] : "" ?>";
+    var myDiv = document.getElementById('chat-body');
+    var refreshIntervalId = 0;
     if (userId) {
         loadData();
-        window.setInterval(function() {
+        refreshIntervalId = window.setInterval(function() {
             loadData();
         }, 5000);
 
-        var myDiv = document.getElementById('chat-body');
         myDiv.scrollTop = 10000000;
     }
 
@@ -90,6 +91,7 @@ $data = $chat->getData();
             '</div>' +
             '</div>';
         document.getElementById('btn-input').value = "";
+        myDiv.scrollTop = 10000000;
 
         var xhr = new XMLHttpRequest();
         xhr.open("GET", "http://localhost/luanvan/chat/send/" + queries, true);
@@ -98,6 +100,7 @@ $data = $chat->getData();
                 var status = xhr.status;
                 if (status === 200) {
                     var res = JSON.parse(this.responseText);
+                    console.log(res);
                     document.getElementById('chat-body').innerHTML += '<div class="chatbox__body__message chatbox__body__message--left">' +
                         '<img src="' + window.location + 'public/images/admin.png" alt="Picture">' +
                         '<div class="clearfix"></div>' +
@@ -122,6 +125,11 @@ $data = $chat->getData();
                         '<div class="clearfix"></div>' +
                         '</div>' +
                         '</div>';
+                    clearInterval(refreshIntervalId);
+                    sleep(2000);
+                    refreshIntervalId = window.setInterval(function() {
+                        loadData();
+                    }, 5000);
                 }
                 myDiv.scrollTop = 10000000;
             }
@@ -191,5 +199,11 @@ $data = $chat->getData();
             console.error(xhr.statusText);
         };
         xhr.send(null);
+    }
+
+    function sleep(ms) {
+        return new Promise((resolve) => {
+            setTimeout(resolve, ms);
+        });
     }
 </script>
