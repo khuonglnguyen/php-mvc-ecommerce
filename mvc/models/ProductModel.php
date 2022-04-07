@@ -45,10 +45,14 @@ class productModel
         return $result;
     }
 
-    public function getByCateId($CateId)
+    public function getByCateId($page = 1, $total = 8, $CateId)
     {
+        if ($page <= 0) {
+            $page = 1;
+        }
+        $tmp = ($page - 1) * $total;
         $db = DB::getInstance();
-        $sql = "SELECT * FROM products WHERE cateId='$CateId' AND status=1";
+        $sql = "SELECT * FROM products WHERE cateId='$CateId' AND status=1 LIMIT $tmp,$total";
         $result = mysqli_query($db->con, $sql);
         return $result;
     }
@@ -56,15 +60,19 @@ class productModel
     public function getFeaturedproducts()
     {
         $db = DB::getInstance();
-        $sql = "SELECT p.id, p.name, p.image, p.promotionPrice FROM products p JOIN categories c ON p.cateId = c.id WHERE p.status=1 AND c.status = 1 order BY soldCount DESC";
+        $sql = "SELECT p.id, p.name, p.image, p.promotionPrice, p.qty as qty, p.soldCount as soldCount FROM products p JOIN categories c ON p.cateId = c.id WHERE p.status=1 AND c.status = 1 order BY soldCount DESC";
         $result = mysqli_query($db->con, $sql);
         return $result;
     }
 
-    public function getAllAdmin()
+    public function getAllAdmin($page = 1, $total = 8)
     {
+        if ($page <= 0) {
+            $page = 1;
+        }
+        $tmp = ($page - 1) * $total;
         $db = DB::getInstance();
-        $sql = "SELECT * FROM products";
+        $sql = "SELECT * FROM products LIMIT $tmp,$total";
         $result = mysqli_query($db->con, $sql);
         return $result;
     }
@@ -140,5 +148,29 @@ class productModel
             $result = mysqli_query($db->con, $sql);
             return $result;
         }
+    }
+
+    public function getCountPaging($row = 8)
+    {
+        $db = DB::getInstance();
+        $sql = "SELECT COUNT(*) FROM products";
+        $result = mysqli_query($db->con, $sql);
+        if ($result) {
+            $totalrow = intval((mysqli_fetch_all($result, MYSQLI_ASSOC)[0])['COUNT(*)']);
+            return ceil($totalrow / $row);
+        }
+        return false;
+    }
+
+    public function getCountPagingByClient($cateId, $row = 8)
+    {
+        $db = DB::getInstance();
+        $sql = "SELECT COUNT(*) FROM products WHERE cateId = $cateId AND status=1";
+        $result = mysqli_query($db->con, $sql);
+        if ($result) {
+            $totalrow = intval((mysqli_fetch_all($result, MYSQLI_ASSOC)[0])['COUNT(*)']);
+            return ceil($totalrow / $row);
+        }
+        return false;
     }
 }

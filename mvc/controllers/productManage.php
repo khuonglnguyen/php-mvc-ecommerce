@@ -2,18 +2,18 @@
 
 class productManage extends ControllerBase
 {
-    public function index()
+    public function index($page = 1)
     {
         // khởi tạo model
         $product = $this->model("productModel");
         // Gọi hàm addAllAdmin
-        $result = $product->getAllAdmin();
-        // Fetch
-        $productList = $result->fetch_all(MYSQLI_ASSOC);
+        $productList = ($product->getAllAdmin($page['page']))->fetch_all(MYSQLI_ASSOC);
+        $countPaging = $product->getCountPaging(8);
 
         $this->view("admin/product", [
             "headTitle" => "Quản lý sản phẩm",
-            "productList" => $productList
+            "productList" => $productList,
+            "countPaging" => $countPaging
         ]);
     }
 
@@ -32,7 +32,8 @@ class productManage extends ControllerBase
                     "headTitle" => "Quản lý sản phẩm",
                     "cssClass" => "success",
                     "message" => "Thêm mới thành công!",
-                    "name" => $_POST['name']
+                    "name" => $_POST['name'],
+                    "categoryList" => $categoryList
                 ]);
             } else {
                 $this->view("admin/addNewProduct", [

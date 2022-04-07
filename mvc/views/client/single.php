@@ -16,7 +16,7 @@
         <p><?= $data['product']['des'] ?></p>
       </div>
       <div class="product-price">
-        <span><?= number_format($data['product']['promotionPrice'], 0, '', ',')  ?>VND</span>
+        <span><?= number_format($data['product']['promotionPrice'], 0, '', ',')  ?>₫</span>
         <a href="<?= URL_ROOT . '/cart/addItemcart/' .  $data['product']['id']  ?>" class="cart-btn">Thêm vào giỏ</a>
       </div>
     </div>

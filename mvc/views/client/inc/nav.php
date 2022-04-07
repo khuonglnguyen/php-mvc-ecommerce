@@ -18,7 +18,7 @@
               <ul class="sub-menu">
                 <?php
                 foreach ($listCategory as $key) { ?>
-                  <li><a href="<?= URL_ROOT . '/product/category/' . $key['id'] ?>"><?= $key['name'] ?></a></li>
+                  <li><a href="<?= URL_ROOT . '/product/category/' . $key['id'] ?>?page=1"><?= $key['name'] ?></a></li>
                 <?php }
                 ?>
               </ul>

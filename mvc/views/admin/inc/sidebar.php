@@ -23,13 +23,13 @@
                     </a>
                 </li>
                 <li>
-                    <a href="<?= URL_ROOT . '/productManage' ?>">
+                    <a href="<?= URL_ROOT . '/productManage?page=1' ?>">
                         <span class="ti-archive"></span>
                         <span>Quản lý sản phẩm</span>
                     </a>
                 </li>
                 <li>
-                    <a href="<?= URL_ROOT . '/categoryManage' ?>">
+                    <a href="<?= URL_ROOT . '/categoryManage?page=1' ?>">
                         <span class="ti-package"></span>
                         <span>Quản lý danh mục</span>
                     </a>

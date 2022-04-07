@@ -43,7 +43,7 @@
                                             <td><?= $value['productName'] ?></td>
                                             <td><img class="img-table" src="<?= URL_ROOT . '/public/images/' . $value['productImage'] ?>" alt=""></td>
                                             <td><?= $value['qty'] ?></td>
-                                            <td><?= number_format($value['productPrice'], 0, '', ',') ?>VND</td>
+                                            <td><?= number_format($value['productPrice'], 0, '', ',') ?>₫</td>
                                         </tr>
                                     <?php }
                                     ?>

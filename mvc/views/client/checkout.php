@@ -28,7 +28,7 @@
                     <td><?= $value['productName'] ?></td>
                     <td><img class="img-table" src="<?= URL_ROOT . '/public/images/' . $value['productImage'] ?>" alt=""></td>
                     <td><input type="number" class="qty" name="" id="<?= $value['productId'] ?>" value="<?= $value['quantity'] ?>" onchange="update(this)"></td>
-                    <td><?= number_format($value['price'], 0, '', ',') ?>VND</td>
+                    <td><?= number_format($value['price'], 0, '', ',') ?>₫</td>
                     <td><a href="<?= URL_ROOT . '/cart/removeItemcart/' . $value['productId'] ?>" class="rm-item-cart"><i class="fa fa-trash"></i></a></td>
                 </tr>
             <?php }
@@ -39,7 +39,7 @@
                 <td></td>
                 <td></td>
                 <td>Tổng tiền</td>
-                <td><?= number_format($total, 0, '', ',') ?>VND</td>
+                <td><?= number_format($total, 0, '', ',') ?>₫</td>
             </tr>
         <?php } else {  ?>
             <h3 style="text-align: center;">Giỏ hàng hiện đang trống...</h3>

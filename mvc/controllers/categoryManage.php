@@ -2,18 +2,17 @@
 
 class categoryManage extends ControllerBase
 {
-    public function index()
+    public function index($page = 1)
     {
         // Khởi tạo model
         $category = $this->model("categoryModel");
-        // Gọi hàm getByIdAdmin
-        $result = $category->getAllAdmin();
-        // Fetch
-        $categoryList = $result->fetch_all(MYSQLI_ASSOC);
+        $categoryList = ($category->getAllAdmin($page['page']))->fetch_all(MYSQLI_ASSOC);
+        $countPaging = $category->getCountPaging(8);
 
         $this->view("admin/category", [
             "headTitle" => "Quản lý danh mục",
-            "categoryList" => $categoryList
+            "categoryList" => $categoryList,
+            'countPaging'=>$countPaging
         ]);
     }
 
@@ -57,7 +56,7 @@ class categoryManage extends ControllerBase
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Gọi hàm update
             $r = $category->update($_POST['id'], $_POST['name']);
-            
+
             // Gọi hàm getByIdAdmin
             $new = $category->getByIdAdmin($_POST['id']);
             if ($r) {

@@ -21,7 +21,7 @@
                     <a href="<?= URL_ROOT . '/product/single/' . $key['id'] ?>">
                         <h1><?= $key['name'] ?></h1>
                     </a>
-                    <p class="price"><?= number_format($key['promotionPrice'], 0, '', ',') ?>VND</p>
+                    <p class="price"><?= number_format($key['promotionPrice'], 0, '', ',') ?>₫</p>
                     <p><a href="<?= URL_ROOT . '/cart/addItemcart/' . $key['id'] ?>"><button>Thêm vào giỏ</button></a></p>
                 </div>
             <?php }

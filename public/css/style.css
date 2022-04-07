@@ -138,10 +138,11 @@ input[type=checkbox]{
 /*product CARD START*/
 .content{
     max-width: 1200px;
+    margin-bottom: 50px;
     margin: 0 auto;
     display: grid;
     grid-gap: 1rem;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 }
 .product-image{
     width: 100%;
@@ -155,11 +156,14 @@ input[type=checkbox]{
     margin: 20px auto;
     overflow: hidden;
     background-color: rgb(245, 222, 222);
+}
+.card:hover{
     border: rgb(184, 56, 67) solid 1px;
+		-moz-box-sizing: border-box;
+		-webkit-box-sizing: border-box;
 }
 .card-img{
   overflow: hidden;
-  border-bottom: rgb(184, 56, 67) solid 1px;
 }
 .card a h1{
   font-size: 20px;
@@ -170,9 +174,23 @@ input[type=checkbox]{
   bottom: 50px;
   right: 10px;
     color: rgb(182, 0, 0);
-    font-size: 22px;
+    font-size: 18px;
     font-weight: bold;
     text-align: center;
+}
+.qty-card{
+  position: absolute;
+  bottom: 50px;
+  left: 10px;
+    color: rgb(75, 0, 62);
+    font-size: 14px;
+}
+.sold-count{
+  position: absolute;
+  bottom: 65px;
+  left: 10px;
+    color: rgb(75, 0, 62);
+    font-size: 14px;
 }
 .card button{
   position: absolute;
@@ -598,7 +616,7 @@ footer{
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: center;
-  background-color: rgb(167, 13, 95);
+  background-color: rgb(184, 56, 67);
   color: white;
 }
 .img-table{
@@ -606,7 +624,7 @@ footer{
 }
 .rm-item-cart{
   font-size: 25px;
-  color: red;
+  color: rgb(155, 0, 0);
 }
 .qty{
   width: 40px;
@@ -1041,3 +1059,30 @@ footer{
 }
 
 /*END CHATBOX*/
+
+/*START PAGINGNATION*/
+.page{
+  height: 50px;
+}
+.pagination {
+  float: right;
+}
+
+.pagination a {
+color: black;
+float: left;
+padding: 8px 16px;
+text-decoration: none;
+}
+
+.pagination a.active {
+background-color: #4CAF50;
+color: white;
+border-radius: 5px;
+}
+
+.pagination a:hover:not(.active) {
+background-color: #ddd;
+border-radius: 5px;
+}
+/*END PAGINGNATION*/

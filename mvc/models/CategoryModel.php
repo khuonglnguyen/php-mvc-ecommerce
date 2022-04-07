@@ -24,10 +24,14 @@ class categoryModel
         return $result;
     }
 
-    public function getAllAdmin()
+    public function getAllAdmin($page = 1, $total = 8)
     {
+        if ($page <= 0) {
+            $page = 1;
+        }
+        $tmp = ($page - 1) * $total;
         $db = DB::getInstance();
-        $sql = "SELECT * FROM categories";
+        $sql = "SELECT * FROM categories LIMIT $tmp,$total";
         $result = mysqli_query($db->con, $sql);
         return $result;
     }
@@ -70,5 +74,17 @@ class categoryModel
         $sql = "UPDATE categories SET name = '" . $name . "' WHERE id=" . $id;
         $result = mysqli_query($db->con, $sql);
         return $result;
+    }
+
+    public function getCountPaging($row = 8)
+    {
+        $db = DB::getInstance();
+        $sql = "SELECT COUNT(*) FROM categories";
+        $result = mysqli_query($db->con, $sql);
+        if ($result) {
+            $totalrow = intval((mysqli_fetch_all($result, MYSQLI_ASSOC)[0])['COUNT(*)']);
+            return ceil($totalrow / $row);
+        }
+        return false;
     }
 }
