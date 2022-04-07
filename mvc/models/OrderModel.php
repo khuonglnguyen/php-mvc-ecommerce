@@ -53,6 +53,8 @@ class orderModel
             return false;
         }
 
+        $sqlDeleteCart = "DELETE FROM `cart` WHERE userId='" . $_SESSION['user_id'] . "'";
+        mysqli_query($db->con, $sqlDeleteCart);
         unset($_SESSION['cart']);
         return true;
     }

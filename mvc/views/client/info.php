@@ -5,7 +5,7 @@
     <div class="banner">
 
     </div>
-    <div class="title">Thông báo</div>
+    <div class="title">Thông tin tài khoản</div>
     <!--Begin display -->
     <div class="login login-container">
         <?php
