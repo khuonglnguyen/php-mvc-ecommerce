@@ -17,15 +17,27 @@
         if (count($data['productList']) > 0) {
             foreach ($data['productList'] as $key) { ?>
                 <div class="card">
+                    <?php
+                    if ($key['promotionPrice'] < $key['originalPrice']) { ?>
+                        <div class="discount">
+                            -<?= ceil((($key['originalPrice']/$key['promotionPrice'])*100)-100) ?>%
+                        </div>
+                    <?php }
+                    ?>
                     <div class="card-img">
                         <a href="<?= URL_ROOT . '/product/single/' . $key['id'] ?>"><img src="<?= URL_ROOT ?>/public/images/<?= $key['image'] ?>" class="product-image" alt=""></a>
                     </div>
                     <a href="<?= URL_ROOT . '/product/single/' . $key['id'] ?>">
                         <h1><?= $key['name'] ?></h1>
                     </a>
-                    <p class="price"><?= number_format($key['promotionPrice'], 0, '', ',') ?>₫</p>
-                    <p class="qty-card">Kho: <?= $key['qty']?></p>
-                    <p class="sold-count">Đã bán: <?= $key['soldCount']?></p>
+                    <?php
+                    if ($key['promotionPrice'] < $key['originalPrice']) { ?>
+                        <p class="promotion-price"><del><?= number_format($key['originalPrice'], 0, '', ',') ?>₫</del></p>
+                    <?php }
+                    ?>
+                    <p class="original-price"><?= number_format($key['promotionPrice'], 0, '', ',') ?>₫</p>
+                    <p class="qty-card">Kho: <?= $key['qty'] ?></p>
+                    <p class="sold-count">Đã bán: <?= $key['soldCount'] ?></p>
                     <p><a href="<?= URL_ROOT . '/cart/addItemcart/' . $key['id'] ?>"><button>Thêm vào giỏ</button></a></p>
                 </div>
             <?php }

@@ -1,6 +1,6 @@
       <?php
       $cart = new cart();
-      $total = $cart->getTotalQuantitycart()['total'];
+      $total = (isset($cart->getTotalQuantitycart()['total']) ? $cart->getTotalQuantitycart()['total'] : 0);
       
       $category = $this->model("categoryModel");
       $result = $category->getAllClient();

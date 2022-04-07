@@ -24,9 +24,12 @@ class product extends ControllerBase
         $result = $product->getById($Id);
         // Fetch
         $p = $result->fetch_assoc();
+        $c = $product->getByCateIdSinglePage($p['cateId']);
+        $list = $c->fetch_all(MYSQLI_ASSOC);
         $this->view("client/single", [
             "headTitle" => $p['name'],
-            "product" => $p
+            "product" => $p,
+            "productByCate"=>$list
         ]);
     }
 

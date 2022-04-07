@@ -4,6 +4,10 @@ class cart extends ControllerBase
 {
     public function addItemcart($productId)
     {
+        if (!isset($_SESSION['user_id'])) {
+            echo '<script>alert("Vui lòng đăng nhập để mua hàng!");
+            window.location.href = "'.URL_ROOT.'/user/login";</script>';
+        }
         $product = $this->model("productModel");
         $cart = $this->model("cartModel");
         $cartUser = ($cart->getByUserId($_SESSION['user_id']))->fetch_all(MYSQLI_ASSOC)[0];
@@ -63,17 +67,26 @@ class cart extends ControllerBase
 
     public function getTotalQuantitycart()
     {
-        $cart = $this->model("cartModel");
-        return ($cart->getTotalQuantitycart($_SESSION['user_id']))->fetch_assoc();
+        if (isset($_SESSION['user_id'])) {
+            $cart = $this->model("cartModel");
+            return ($cart->getTotalQuantitycart($_SESSION['user_id']))->fetch_assoc();
+        }
+        return 0;
     }
 
     public function checkout()
     {
+        if (isset($_SESSION['user_id'])) {
         $cart = $this->model("cartModel");
         $result = ($cart->getByUserId($_SESSION['user_id']))->fetch_all(MYSQLI_ASSOC);
         $this->view("client/checkout", [
             "headTitle" => "Đơn hàng của tôi",
             'cart' => $result
         ]);
+        }else {
+            $this->view("client/checkout", [
+                "headTitle" => "Đơn hàng của tôi"
+            ]);
+        }
     }
 }

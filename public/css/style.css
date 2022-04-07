@@ -135,6 +135,16 @@ input[type=checkbox]{
     border-top: rgb(184, 56, 67) solid 1px;
 }
 
+.title2{
+  text-align: center;
+  color: rgb(184, 56, 67);
+  height: 70px;
+  line-height: 70px;
+  font-size: 28px;
+  margin-bottom: 20px;
+  border-bottom: rgb(184, 56, 67) solid 1px;
+  border-top: rgb(184, 56, 67) solid 1px;
+}
 /*product CARD START*/
 .content{
     max-width: 1200px;
@@ -169,12 +179,34 @@ input[type=checkbox]{
   font-size: 20px;
   text-align: center;
 }
-.price{
+.discount{
+  height: 34px;
+  width: 34px;
+  position: absolute;
+  top: 2px;
+  right: 2px;
+    color: yellow;
+    font-size: 16px;
+    background-color: rgb(240, 3, 3);
+    border-radius: 50%;
+    text-align: center;
+    line-height: 34px;
+}
+.original-price{
   position: absolute;
   bottom: 50px;
   right: 10px;
     color: rgb(182, 0, 0);
     font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+.promotion-price{
+  position: absolute;
+  bottom: 70px;
+  right: 10px;
+    color: rgb(83, 83, 83);
+    font-size: 14px;
     font-weight: bold;
     text-align: center;
 }
@@ -210,9 +242,6 @@ input[type=checkbox]{
   color: #323232;
   background-color: rgb(224, 210, 9);
     transition: 0.2s;
-}
-.product-image:hover{
-    transform: scale(1.05);
 }
 
 /*product CARD END*/
