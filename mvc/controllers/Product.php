@@ -18,6 +18,26 @@ class product extends ControllerBase
         ]);
     }
 
+    function bubble_sort($arr)
+    {
+        $size = count($arr) - 1;
+        for ($i = 0; $i < $size; $i++) {
+            for ($j = 0; $j < $size - $i; $j++) {
+                $k = $j + 1;
+                if ($arr[$k]['date'] > $arr[$j]['date']) {
+                    list($arr[$j], $arr[$k]) = array($arr[$k], $arr[$j]);
+                }
+            }
+        }
+        return $arr;
+    }
+
+    public function removeViewed()
+    {
+        unset($_SESSION['viewed']);
+        $this->redirect('product', 'viewed');
+    }
+
     public function single($Id)
     {
         $product = $this->model("productModel");
@@ -26,10 +46,52 @@ class product extends ControllerBase
         $p = $result->fetch_assoc();
         $c = $product->getByCateIdSinglePage($p['cateId']);
         $list = $c->fetch_all(MYSQLI_ASSOC);
+
+        if (!isset($_SESSION['viewed'])) {
+            $_SESSION['viewed'] = [];
+        }
+        $index = 0;
+        $s = false;
+        foreach ($_SESSION['viewed'] as $key => $value) {
+            if ($value['id'] == $Id) {
+                $s = true;
+                $_SESSION['viewed'][$index] = [
+                    'id' => $Id,
+                    'date' => date("d/m/Y h:i:sa")
+                ];
+                break;
+            }
+            $index++;
+        }
+        if (!$s) {
+            $_SESSION['viewed'][count($_SESSION['viewed'])] = [
+                'id' => $Id,
+                'date' => date("d/m/Y h:i:sa")
+            ];
+        }
+        $_SESSION['viewed'] = $this->bubble_sort($_SESSION['viewed']);
+
         $this->view("client/single", [
             "headTitle" => $p['name'],
             "product" => $p,
-            "productByCate"=>$list
+            "productByCate" => $list
+        ]);
+    }
+
+    public function viewed()
+    {
+        $arr = [];
+        if (isset($_SESSION['viewed'])) {
+            $product = $this->model('productModel');
+            foreach ($_SESSION['viewed'] as $key => $value) {
+                $result = ($product->getById($value['id']))->fetch_assoc();
+                array_push($arr, $result);
+            }
+        }
+
+        $this->view('client/viewed', [
+            "headTitle" => "Sản phẩm đã xem",
+            "productList" => $arr
         ]);
     }
 

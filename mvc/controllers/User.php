@@ -15,6 +15,7 @@ class user extends ControllerBase
                 $u = $result->fetch_assoc();
                 // Set session
                 $_SESSION['user_id'] = $u['id'];
+                $_SESSION['user_name'] = $u['fullName'];
                 echo '<script>history.go(-2);</script>';
             } else {
                 $this->view("client/login", [

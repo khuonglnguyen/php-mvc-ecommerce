@@ -16,7 +16,7 @@
           <label for="checkbox_toggle" class="hamburger">&#9776;</label>
           <div class="menu">
             <li><a href="<?= URL_ROOT ?>">Trang chủ <i class="fa fa-home"></i></a></li>
-            <li class="cate menu-active">
+            <li class="cate">
               <a href="#">Danh mục <i class="fa fa-list-ul"></i></a>
               <ul class="sub-menu">
                 <?php
@@ -40,68 +40,58 @@
             <?php  } else { ?>
               <li><a href="<?= URL_ROOT . "/user/register" ?>">Đăng ký <i class="fa fa-pencil-square"></i></a></li>
               <li><a href="<?= URL_ROOT . "/user/login" ?>">Đăng nhập <i class="fa fa-sign-in"></i></a></li>
-              <li><a href="<?= URL_ROOT . "/product/viewed" ?>">Đã xem <i class="fa fa-history"></i></a></li>
+              <li class="menu-active"><a href="<?= URL_ROOT . "/product/viewed" ?>">Đã xem <i class="fa fa-history"></i></a></li>
             <?php  }
             ?>
             <li><a href="<?= URL_ROOT . "/cart/checkout" ?>" id="bag">Giỏ hàng <i class="fa fa-shopping-bag"></i> (<?= is_null($total) ? 0 : $total ?>)</a></li>
           </div>
         </ul>
       </nav>
-  <div class="banner">
+    <div class="banner">
 
-  </div>
-  <div class="title">Sản phẩm</div>
-  <main class="container">
-    <div class="left-column">
-      <img src="<?= URL_ROOT ?>/public/images/<?= $data['product']['image'] ?>" alt="">
     </div>
-    <div class="right-column">
-      <div class="product-description">
-        <h1><?= $data['product']['name'] ?></h1>
-        <p><?= $data['product']['des'] ?></p>
-      </div>
-      <div class="product-price">
-        <span><?= number_format($data['product']['promotionPrice'], 0, '', ',')  ?>₫</span>
-        <a href="<?= URL_ROOT . '/cart/addItemcart/' .  $data['product']['id']  ?>" class="cart-btn">Thêm vào giỏ</a>
-      </div>
+    <div class="title">Sản phẩm đã xem</div>
+    <div class="content">
+        <?php
+        if (count($data['productList']) > 0) {
+            foreach ($data['productList'] as $key) { ?>
+                <div class="card">
+                    <?php
+                    if ($key['promotionPrice'] < $key['originalPrice']) { ?>
+                        <div class="discount">
+                            -<?= ceil((($key['originalPrice'] / $key['promotionPrice']) * 100) - 100) ?>%
+                        </div>
+                    <?php }
+                    ?>
+                    <div class="card-img">
+                        <a href="<?= URL_ROOT . '/product/single/' . $key['id'] ?>"><img src="<?= URL_ROOT ?>/public/images/<?= $key['image'] ?>" class="product-image" alt=""></a>
+                    </div>
+                    <a href="<?= URL_ROOT . '/product/single/' . $key['id'] ?>">
+                        <h1><?= $key['name'] ?></h1>
+                    </a>
+                    <?php
+                    if ($key['promotionPrice'] < $key['originalPrice']) { ?>
+                        <p class="promotion-price"><del><?= number_format($key['originalPrice'], 0, '', ',') ?>₫</del></p>
+                    <?php }
+                    ?>
+                    <p class="original-price"><?= number_format($key['promotionPrice'], 0, '', ',') ?>₫</p>
+                    <p class="qty-card">Kho: <?= $key['qty'] ?></p>
+                    <p class="sold-count">Đã bán: <?= $key['soldCount'] ?></p>
+                    <p><a href="<?= URL_ROOT . '/cart/addItemcart/' . $key['id'] ?>"><button>Thêm vào giỏ</button></a></p>
+                </div>
+            <?php }
+        } else { ?>
+            <h3>Không tìm thấy sản phẩm...</h3>
+        <?php }
+        ?>
     </div>
-  </main>
-  <div class="title2">Sản phẩm cùng loại</div>
-  <div class="content">
     <?php
-    if (count($data['productByCate']) > 0) {
-      foreach ($data['productByCate'] as $key) { ?>
-        <div class="card">
-          <?php
-          if ($key['promotionPrice'] < $key['originalPrice']) { ?>
-            <div class="discount">
-              -<?= ceil((($key['originalPrice'] / $key['promotionPrice']) * 100) - 100) ?>%
-            </div>
-          <?php }
-          ?>
-          <div class="card-img">
-            <a href="<?= URL_ROOT . '/product/single/' . $key['id'] ?>"><img src="<?= URL_ROOT ?>/public/images/<?= $key['image'] ?>" class="product-image" alt=""></a>
-          </div>
-          <a href="<?= URL_ROOT . '/product/single/' . $key['id'] ?>">
-            <h1><?= $key['name'] ?></h1>
-          </a>
-          <?php
-          if ($key['promotionPrice'] < $key['originalPrice']) { ?>
-            <p class="promotion-price"><del><?= number_format($key['originalPrice'], 0, '', ',') ?>₫</del></p>
-          <?php }
-          ?>
-          <p class="original-price"><?= number_format($key['promotionPrice'], 0, '', ',') ?>₫</p>
-          <p class="qty-card">Kho: <?= $key['qty'] ?></p>
-          <p class="sold-count">Đã bán: <?= $key['soldCount'] ?></p>
-          <p><a href="<?= URL_ROOT . '/cart/addItemcart/' . $key['id'] ?>"><button>Thêm vào giỏ</button></a></p>
-        </div>
-      <?php }
-    } else { ?>
-      <h3>Không tìm thấy sản phẩm...</h3>
+    if (count($data['productList']) > 0) { ?>
+        <a href="<?= URL_ROOT ?>/product/removeViewed">Xóa lịch sử</a>
     <?php }
     ?>
-  </div>
-  <?php require APP_ROOT . '/views/client/inc/footer.php'; ?>
+    <?php require APP_ROOT . '/views/client/inc/chatbox.php'; ?>
+    <?php require APP_ROOT . '/views/client/inc/footer.php'; ?>
 </body>
 
 </html>
