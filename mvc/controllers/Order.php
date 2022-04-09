@@ -5,7 +5,11 @@ class order extends ControllerBase
     public function add($total)
     {
         $order = $this->model("orderModel");
-        $result = $order->add($_SESSION['user_id'], $total);
+        if (isset($_SESSION['voucher'])) {
+            $result = $order->add($_SESSION['user_id'], $total,$_SESSION['voucher']['percentDiscount']);
+        }else {
+            $result = $order->add($_SESSION['user_id'], $total);
+        }
 
         if ($result) {
             $this->redirect("order", "message", [
@@ -166,7 +170,7 @@ class order extends ControllerBase
                 "vnp_Inv_Taxcode" => $vnp_Inv_Taxcode,
                 "vnp_Inv_Type" => $vnp_Inv_Type
             );
-            
+
 
             if (isset($vnp_BankCode) && $vnp_BankCode != "") {
                 $inputData['vnp_BankCode'] = $vnp_BankCode;

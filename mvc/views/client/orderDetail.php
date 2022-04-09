@@ -68,19 +68,12 @@
                 <tr>
                     <td><?= ++$count ?></td>
                     <td><?= $value['productName'] ?></td>
-                    <td><img class="img-table" src="<?= URL_ROOT . '/public/images/' . $value['productImage'] ?>" alt=""></td>
+                    <td><img class="img-table" src="<?= URL_ROOT . '/public/images/' . $value['image'] ?>" alt=""></td>
                     <td><?= $value['qty'] ?></td>
                     <td><?= number_format($value['productPrice'], 0, '', ',') ?>₫</td>
                 </tr>
             <?php }
             ?>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>Tổng tiền</td>
-                <td><?= number_format($total, 0, '', ',') ?>₫</td>
-            </tr>
         <?php } else {  ?>
             <h3>Chưa có đơn đặt hàng...</h3>
         <?php }  ?>

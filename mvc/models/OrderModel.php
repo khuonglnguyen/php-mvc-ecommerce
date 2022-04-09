@@ -32,10 +32,10 @@ class orderModel
         return $result;
     }
 
-    public function add($userId, $total)
+    public function add($userId, $total, $percentDiscount = 0)
     {
         $db = DB::getInstance();
-        $sql = "INSERT INTO `orders` (`id`, `userId`, `createdDate`, `receivedDate`, `status`, `paymentMethod`, `paymentStatus`, `payDate`, `total`) VALUES (NULL, '$userId', '" . date('d/m/y') . "', NULL, 'processing', 'COD',0,NULL,'$total')";
+        $sql = "INSERT INTO `orders` (`id`, `userId`, `createdDate`, `receivedDate`, `status`, `paymentMethod`, `paymentStatus`, `payDate`, `total`,`discount`) VALUES (NULL, '$userId', '" . date('d/m/y') . "', NULL, 'processing', 'COD',0,NULL,'$total',$percentDiscount)";
         $result = mysqli_query($db->con, $sql);
 
         if ($result) {
@@ -57,6 +57,7 @@ class orderModel
         $sqlDeleteCart = "DELETE FROM `cart` WHERE userId='" . $_SESSION['user_id'] . "'";
         mysqli_query($db->con, $sqlDeleteCart);
         unset($_SESSION['cart']);
+        unset($_SESSION['voucher']);
         return true;
     }
 

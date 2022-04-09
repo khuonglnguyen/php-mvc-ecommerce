@@ -60,6 +60,8 @@
                 <th>Mã HD</th>
                 <th>Ngày đặt</th>
                 <th>Ngày giao</th>
+                <th>Giảm giá</th>
+                <th>Tổng</th>
                 <th>Tình trạng</th>
                 <th>Phương thức thanh toán</th>
                 <th>Trạng thái</th>
@@ -82,6 +84,8 @@
                         <td>3 ngày sau khi đơn hàng được xác nhận</td>
                     <?php }
                     ?>
+                    <td>-<?= $value['discount'] ?>%</td>
+                    <td><?= number_format($value['total'], 0, '', ',') ?>₫</td>
                     <?php
                     if ($value['status'] == "delivery") { ?>
                         <td>Đang giao

@@ -40,6 +40,12 @@
                         <span>Quản lý đơn đặt hàng</span>
                     </a>
                 </li>
+                <li>
+                    <a href="<?= URL_ROOT . '/voucherManage' ?>">
+                        <span class="ti-ticket"></span>
+                        <span>Quản lý voucher</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

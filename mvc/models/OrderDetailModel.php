@@ -19,7 +19,7 @@ class orderDetailModel
     public function getByorderId($orderId)
     {
         $db = DB::getInstance();
-        $sql = "SELECT * FROM order_details WHERE orderId='$orderId'";
+        $sql = "SELECT o.id, o.productId, o.qty, o.productPrice, o.productName, p.image FROM order_details o JOIN products p ON o.productId = p.id WHERE o.orderId='$orderId'";
         $result = mysqli_query($db->con, $sql);
         return $result;
     }
