@@ -6,8 +6,15 @@ class order extends ControllerBase
     {
         $order = $this->model("orderModel");
         if (isset($_SESSION['voucher'])) {
-            $result = $order->add($_SESSION['user_id'], $total,$_SESSION['voucher']['percentDiscount']);
-        }else {
+            $voucher = $this->model("voucherModel");
+            $check = $voucher->used($_SESSION['voucher']['code']);
+            if ($check) {
+                $result = $order->add($_SESSION['user_id'], $total, $_SESSION['voucher']['percentDiscount']);
+            } else {
+                echo '<script>alert("Mã giảm giá không đúng hoặc số lượng đã hết!");window.history.back();</script>';
+                die();
+            }
+        } else {
             $result = $order->add($_SESSION['user_id'], $total);
         }
 

@@ -97,9 +97,9 @@
     <?php }  ?>
   </table>
   <?php
-  if (isset($_SESSION['cart']) && !isset($_SESSION['voucher'])) { ?>
+  if (isset($data['cart']) && !isset($_SESSION['voucher'])) { ?>
     <div class="login">
-      <form action="<?= URL_ROOT ?>/cart/voucher" class="login-container" method="post">
+      <form action="<?= URL_ROOT ?>/cart/check" class="login-container" method="post">
         <p><input type="text" placeholder="Mã giảm giá" name="code" required></p>
         <p class="<?= isset($data['cssClass']) ? $data['cssClass'] : "" ?>"><?= isset($data['message']) ? $data['message'] : "" ?></p>
         <p><input type="submit" value="Áp dụng"></p>

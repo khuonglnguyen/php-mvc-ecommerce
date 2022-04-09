@@ -56,6 +56,16 @@ class voucherModel
         return $result;
     }
 
+    public function check($code)
+    {
+        $voucher = $this->getByCode($code)->fetch_assoc();
+        if (intval($voucher['usedCount']) == intval($voucher['quantity'])) {
+            return false;
+        } else {
+            return $voucher;
+        }
+    }
+
     public function used($code)
     {
         $voucher = $this->getByCode($code)->fetch_assoc();

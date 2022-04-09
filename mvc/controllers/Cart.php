@@ -89,6 +89,20 @@ class cart extends ControllerBase
             ]);
         }
     }
+
+    public function check()
+    {
+        $voucher = $this->model("voucherModel");
+        $result = $voucher->check($_POST['code']);
+        if ($result) {
+            $_SESSION['voucher']['percentDiscount'] = $result['percentDiscount'];
+            $_SESSION['voucher']['code'] = $result['code'];
+        }else {
+            echo '<script>alert("Mã giảm giá không đúng hoặc số lượng đã hết!");window.history.back();</script>';
+            die();
+        }
+        $this->redirect("cart", "checkout");
+    }
     
     public function voucher()
     {
