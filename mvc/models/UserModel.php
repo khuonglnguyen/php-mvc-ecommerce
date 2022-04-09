@@ -27,7 +27,7 @@ class userModel
         $db = DB::getInstance();
         // Mã hóa password
         $md5Password = md5($password);
-        $sql = "SELECT * FROM users WHERE email='$email' AND password='$md5Password' AND isConfirmed=1";
+        $sql = "SELECT u.id, u.fullName, r.name AS RoleName FROM users u JOIN role r ON u.roleId = r.id WHERE email='$email' AND password='$md5Password' AND isConfirmed=1";
         $result = mysqli_query($db->con, $sql);
         $num_rows = mysqli_num_rows($result);
         if ($num_rows > 0) {

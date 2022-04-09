@@ -4,6 +4,10 @@ class orderManage extends ControllerBase
 {
     public function Index()
     {
+        if (isset($_SESSION['role']) && $_SESSION['role'] != 'Admin') {
+            $this->redirect("home");
+        }
+
         $order = $this->model("orderModel");
         $result = $order->getAll();
         $orderList = $result->fetch_all(MYSQLI_ASSOC);
@@ -16,6 +20,10 @@ class orderManage extends ControllerBase
 
     public function detail($orderId)
     {
+        if (isset($_SESSION['role']) && $_SESSION['role'] != 'Admin') {
+            $this->redirect("home");
+        }
+        
         $orderDetail = $this->model("orderDetailModel");
         $result = $orderDetail->getByorderId($orderId);
         // Fetch

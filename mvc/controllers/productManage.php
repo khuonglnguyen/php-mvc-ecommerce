@@ -4,6 +4,10 @@ class productManage extends ControllerBase
 {
     public function index($page = 1)
     {
+        if (isset($_SESSION['role']) && $_SESSION['role'] != 'Admin') {
+            $this->redirect("home");
+        }
+
         // khởi tạo model
         $product = $this->model("productModel");
         // Gọi hàm addAllAdmin
@@ -19,6 +23,10 @@ class productManage extends ControllerBase
 
     public function add()
     {
+        if (isset($_SESSION['role']) && $_SESSION['role'] != 'Admin') {
+            $this->redirect("home");
+        }
+
         $category = $this->model("categoryModel");
         $result = $category->getAllAdmin();
         $categoryList = $result->fetch_all(MYSQLI_ASSOC);
@@ -54,6 +62,10 @@ class productManage extends ControllerBase
 
     public function edit($id = "")
     {
+        if (isset($_SESSION['role']) && $_SESSION['role'] != 'Admin') {
+            $this->redirect("home");
+        }
+        
         $category = $this->model("categoryModel");
         $result = $category->getAllAdmin();
         $categoryList = $result->fetch_all(MYSQLI_ASSOC);

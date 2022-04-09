@@ -4,6 +4,9 @@ class categoryManage extends ControllerBase
 {
     public function index($page = 1)
     {
+        if (isset($_SESSION['role']) && $_SESSION['role'] != 'Admin') {
+            $this->redirect("home");
+        }
         // Khởi tạo model
         $category = $this->model("categoryModel");
         $categoryList = ($category->getAllAdmin($page['page']))->fetch_all(MYSQLI_ASSOC);
@@ -18,6 +21,10 @@ class categoryManage extends ControllerBase
 
     public function add()
     {
+        if (isset($_SESSION['role']) && $_SESSION['role'] != 'Admin') {
+            $this->redirect("home");
+        }
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Khởi tạo model
             $category = $this->model("categoryModel");
@@ -48,6 +55,10 @@ class categoryManage extends ControllerBase
 
     public function edit($id = "")
     {
+        if (isset($_SESSION['role']) && $_SESSION['role'] != 'Admin') {
+            $this->redirect("home");
+        }
+        
         // Khởi tạo models
         $category = $this->model("categoryModel");
         // Gọi hàm getByIdAdmin

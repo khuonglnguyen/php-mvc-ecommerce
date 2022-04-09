@@ -4,6 +4,10 @@ class voucherManage extends ControllerBase
 {
     public function index()
     {
+        if (isset($_SESSION['role']) && $_SESSION['role'] != 'Admin') {
+            $this->redirect("home");
+        }
+
         // Khởi tạo model
         $voucher = $this->model("voucherModel");
         $voucherList = ($voucher->getAll())->fetch_all(MYSQLI_ASSOC);
@@ -16,6 +20,10 @@ class voucherManage extends ControllerBase
 
     public function add()
     {
+        if (isset($_SESSION['role']) && $_SESSION['role'] != 'Admin') {
+            $this->redirect("home");
+        }
+        
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Khởi tạo model
             $voucher = $this->model("voucherModel");

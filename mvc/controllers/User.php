@@ -16,6 +16,7 @@ class user extends ControllerBase
                 // Set session
                 $_SESSION['user_id'] = $u['id'];
                 $_SESSION['user_name'] = $u['fullName'];
+                $_SESSION['role'] = $u['RoleName'];
                 echo '<script>history.go(-2);</script>';
             } else {
                 $this->view("client/login", [
