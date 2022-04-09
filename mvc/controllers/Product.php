@@ -44,7 +44,7 @@ class product extends ControllerBase
         $result = $product->getById($Id);
         // Fetch
         $p = $result->fetch_assoc();
-        $c = $product->getByCateIdSinglePage($p['cateId']);
+        $c = $product->getByCateIdSinglePage($p['cateId'],$Id);
         $list = $c->fetch_all(MYSQLI_ASSOC);
 
         if (!isset($_SESSION['viewed'])) {

@@ -40,9 +40,10 @@ class orderModel
 
         if ($result) {
             $last_id = $db->con->insert_id;
-
-            foreach ($_SESSION['cart'] as $key => $value) {
-                $s = "INSERT INTO `order_details` (`id`, `orderId`, `productId`, `qty`, `productPrice`, `productName`, `productImage`) VALUES (NULL," . $last_id . ", '" . $value['productId'] . "', '" . $value['quantity'] . "', " . $value['price'] . ", '" . $value['productName'] . "', '" . $value['productImage'] . "')";
+            $sqlCart = "SELECT * FROM cart WHERE userId=$userId";
+            $resultCart = (mysqli_query($db->con, $sqlCart))->fetch_all(MYSQLI_ASSOC);
+            foreach ($resultCart as $key => $value) {
+                $s = "INSERT INTO `order_details` (`id`, `orderId`, `productId`, `qty`, `productPrice`, `productName`) VALUES (NULL," . $last_id . ", '" . $value['productId'] . "', '" . $value['quantity'] . "', " . $value['productPrice'] . ", '" . $value['productName'] . "')";
                 $result = mysqli_query($db->con, $s);
 
                 // Update qty

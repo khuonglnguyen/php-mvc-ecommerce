@@ -57,10 +57,10 @@ class productModel
         return $result;
     }
 
-    public function getByCateIdSinglePage($CateId)
+    public function getByCateIdSinglePage($CateId,$Id)
     {
         $db = DB::getInstance();
-        $sql = "SELECT * FROM products WHERE cateId='$CateId' AND status=1 ORDER BY soldCount DESC LIMIT 4";
+        $sql = "SELECT * FROM products WHERE cateId='$CateId' AND status=1 AND id != $Id ORDER BY soldCount DESC LIMIT 4";
         $result = mysqli_query($db->con, $sql);
         return $result;
     }
