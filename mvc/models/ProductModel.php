@@ -57,7 +57,7 @@ class productModel
         return $result;
     }
 
-    public function getByCateIdSinglePage($CateId,$Id)
+    public function getByCateIdSinglePage($CateId, $Id)
     {
         $db = DB::getInstance();
         $sql = "SELECT * FROM products WHERE cateId='$CateId' AND status=1 AND id != $Id ORDER BY soldCount DESC LIMIT 4";
@@ -127,7 +127,7 @@ class productModel
 
         move_uploaded_file($file_temp, $uploaded_image);
 
-        $sql = "INSERT INTO `products` (`id`, `name`, `originalPrice`, `promotionPrice`, `image`, `createdBy`, `createdDate`, `cateId`, `qty`, `des`, `status`, `soldCount`) VALUES (NULL, '" . $product['name'] . "', " . $product['originalPrice'] . ", " . $product['promotionPrice'] . ", '" . $unique_image . "', " . $_SESSION['user_id'] . ", '" . Date('d/m/y') . "', " . $product['cateId'] . ", " . $product['qty'] . ", '" . $product['des'] . "', 1, 0)";
+        $sql = "INSERT INTO `products` (`id`, `name`, `originalPrice`, `promotionPrice`, `image`, `createdBy`, `createdDate`, `cateId`, `qty`, `des`, `status`, `soldCount`,`weight`) VALUES (NULL, '" . $product['name'] . "', " . $product['originalPrice'] . ", " . $product['promotionPrice'] . ", '" . $unique_image . "', " . $_SESSION['user_id'] . ", '" . Date('d/m/y') . "', " . $product['cateId'] . ", " . $product['qty'] . ", '" . $product['des'] . "', 1, 0, " . $product['weight'] . ")";
         $result = mysqli_query($db->con, $sql);
         return $result;
     }
@@ -148,11 +148,11 @@ class productModel
 
             move_uploaded_file($file_temp, $uploaded_image);
 
-            $sql = "UPDATE `products` SET name = '" . $_POST['name'] . "', `originalPrice` = " . $_POST['originalPrice'] . ", `promotionPrice` = " . $_POST['promotionPrice'] . ", `image` = '" . $unique_image . "', `cateId` = " . $_POST['cateId'] . ", `des` = '" . $_POST['des'] . "' WHERE id = " . $_POST['id'] . "";
+            $sql = "UPDATE `products` SET name = '" . $_POST['name'] . "', `originalPrice` = " . $_POST['originalPrice'] . ", `promotionPrice` = " . $_POST['promotionPrice'] . ", `image` = '" . $unique_image . "', `cateId` = " . $_POST['cateId'] . ", `des` = '" . $_POST['des'] . "', `weight` = " . $_POST['weight'] . " WHERE id = " . $_POST['id'] . "";
             $result = mysqli_query($db->con, $sql);
             return $result;
         } else {
-            $sql = "UPDATE `products` SET name = '" . $_POST['name'] . "', `originalPrice` = " . $_POST['originalPrice'] . ", `promotionPrice` = " . $_POST['promotionPrice'] . ", `cateId` = " . $_POST['cateId'] . ", `des` = '" . $_POST['des'] . "' WHERE id = " . $_POST['id'] . "";
+            $sql = "UPDATE `products` SET name = '" . $_POST['name'] . "', `originalPrice` = " . $_POST['originalPrice'] . ", `promotionPrice` = " . $_POST['promotionPrice'] . ", `cateId` = " . $_POST['cateId'] . ", `des` = '" . $_POST['des'] . "', `weight` = " . $_POST['weight'] . " WHERE id = " . $_POST['id'] . "";
             $result = mysqli_query($db->con, $sql);
             return $result;
         }

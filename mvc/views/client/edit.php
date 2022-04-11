@@ -40,9 +40,9 @@
             <?php  } else { ?>
               <li><a href="<?= URL_ROOT . "/user/register" ?>">Đăng ký <i class="fa fa-pencil-square"></i></a></li>
               <li><a href="<?= URL_ROOT . "/user/login" ?>">Đăng nhập <i class="fa fa-sign-in"></i></a></li>
-              <li><a href="<?= URL_ROOT . "/product/viewed" ?>">Đã xem <i class="fa fa-history"></i></a></li>
             <?php  }
             ?>
+            <li><a href="<?= URL_ROOT . "/product/viewed" ?>">Đã xem <i class="fa fa-history"></i></a></li>
             <li><a href="<?= URL_ROOT . "/cart/checkout" ?>" id="bag">Giỏ hàng <i class="fa fa-shopping-bag"></i> (<?= is_null($total) ? 0 : $total ?>)</a></li>
           </div>
         </ul>
@@ -60,11 +60,22 @@
       <p><input type="text" placeholder="Số điện thoại" name="phone" required value="<?= $data['user']['phone'] ?>"></p>
       <p class="error"><?= isset($data['messagePhone']) ? $data['messagePhone'] : "" ?></p>
       <p><input type="date" name="dob" required value="<?= $data['user']['dob'] ?>"></p>
+      <p><select name="ls_province" required></select></p>
+      <p><select name="ls_district" required></select></p>
+      <p><select name="ls_ward" required></select></p>
       <p><input type="text" placeholder="Địa chỉ" name="address" required value="<?= $data['user']['address'] ?>"></p>
       <p><input type="submit" value="Lưu"></p>            
     </form>
   </div>
   <?php require APP_ROOT . '/views/client/inc/footer.php'; ?>
+  <script src="<?= URL_ROOT ?>/public/js/vietnamlocalselector.js"></script>
+  <script>
+    var localpicker = new LocalPicker({
+      province: "ls_province",
+      district: "ls_district",
+      ward: "ls_ward"
+    });
+  </script>
 </body>
 
 </html>

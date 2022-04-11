@@ -42,6 +42,8 @@
                                 <input type="number" id="promotionPrice" name="promotionPrice" required>
                                 <label for="qty">Số lượng</label>
                                 <input type="number" id="qty" name="qty" required>
+                                <label for="weight">Trọng lượng (g):</label>
+                                <input type="number" id="weight" name="weight" required>
                                 <label for="des">Mô tả</label>
                                 <textarea name="des" id="des" cols="30" rows="10"></textarea>
                                 <input type="submit" value="Lưu">

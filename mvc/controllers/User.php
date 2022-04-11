@@ -45,6 +45,9 @@ class user extends ControllerBase
             $address = $_POST['address'];
             $password = $_POST['password'];
             $phone = $_POST['phone'];
+            $provinceId = $_POST['ls_province'];
+            $districtId = $_POST['ls_district'];
+            $wardId = $_POST['ls_ward'];
 
             $user = $this->model("userModel");
             $checkEmail = $user->checkEmail($email);
@@ -59,7 +62,7 @@ class user extends ControllerBase
                 } else {
                     $this->view("client/register", [
                         "headTitle" => "Đăng ký",
-                        "messageEmail" => "Email đã tồn tại"
+                        "messageEmail" => "Email đã tồn tại",
                     ]);
                 }
                 return;
@@ -70,11 +73,10 @@ class user extends ControllerBase
                         "headTitle" => "Đăng ký",
                         "messagePhone" => "Số điện thoại đã tồn tại",
                     ]);
+                    return;
                 }
-                return;
             }
-
-            $result = $user->insert($fullName, $email, $dob, $address, $password);
+            $result = $user->insert($fullName, $email, $dob, $address, $password, $provinceId, $districtId, $wardId);
             if ($result) {
                 $this->redirect("user", "confirm", ["email" => $email]);
             } else {
@@ -86,7 +88,7 @@ class user extends ControllerBase
             }
         } else {
             $this->view("client/register", [
-                "headTitle" => "Đăng ký"
+                "headTitle" => "Đăng ký",
             ]);
         }
     }
