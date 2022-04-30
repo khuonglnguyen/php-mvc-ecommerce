@@ -23,7 +23,7 @@ class orderManage extends ControllerBase
         if (isset($_SESSION['role']) && $_SESSION['role'] != 'Admin') {
             $this->redirect("home");
         }
-        
+
         $orderDetail = $this->model("orderDetailModel");
         $result = $orderDetail->getByorderId($orderId);
         // Fetch

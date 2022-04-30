@@ -115,7 +115,7 @@
       <?php } else if (isset($_SESSION['cart'])) { ?>
         <a href="<?= URL_ROOT . '/order/add/' . $total ?>" class="cart-btn">Đặt hàng</a>
       <?php } else { ?>
-        <a class="cart-btn" href="<?= URL_ROOT . '/user/login/' ?>">Đăng nhập để mua hàng</a>
+        <a href="<?= URL_ROOT . '/order/add/' . $total ?>" class="cart-btn">Đặt hàng</a>
       <?php } ?>
     <?php } else { ?>
       <a class="cart-btn" href="<?= URL_ROOT . '/user/login/' ?>">Đăng nhập để mua hàng</a>

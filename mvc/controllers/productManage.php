@@ -27,12 +27,12 @@ class productManage extends ControllerBase
             $this->redirect("home");
         }
 
+
         $category = $this->model("categoryModel");
         $result = $category->getAllAdmin();
         $categoryList = $result->fetch_all(MYSQLI_ASSOC);
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
             $product = $this->model("productModel");
             $result = $product->insert($_POST);
             if ($result) {

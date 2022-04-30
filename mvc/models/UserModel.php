@@ -105,7 +105,7 @@ class userModel
             $mail->Port       = 587;
             $mail->Host       = "smtp.gmail.com";
             $mail->username   = "khuongip564gb@gmail.com";
-            $mail->Password   = "khuongip564gb";
+            $mail->Password   = "khuongidwgb";
 
             $mail->IsHTML(true);
             $mail->CharSet = 'UTF-8';

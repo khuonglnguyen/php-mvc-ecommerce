@@ -55,15 +55,18 @@ class voucherModel
         $result = mysqli_query($db->con, $sql);
         return $result;
     }
-
-    public function check($code)
+	
+	public function check($code)
     {
         $voucher = $this->getByCode($code)->fetch_assoc();
-        if (intval($voucher['usedCount']) == intval($voucher['quantity'])) {
-            return false;
-        } else {
-            return $voucher;
+        if ($voucher) {
+            if (intval($voucher['usedCount']) == intval($voucher['quantity'])) {
+                return false;
+            } else {
+                return $voucher;
+            }
         }
+        return false;
     }
 
     public function used($code)

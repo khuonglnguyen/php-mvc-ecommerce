@@ -21,9 +21,9 @@ class productModel
         $db = DB::getInstance();
         $sql = "";
         if (count(explode(" ", $keyword)) > 1) {
-            $sql = "SELECT p.id, p.name, p.image, p.promotionPrice FROM products p JOIN categories c ON p.cateId = c.id WHERE MATCH(p.name,p.des) AGAINST ('$keyword' IN NATURAL LANGUAGE MODE) AND p.status=1 AND c.status=1";
+            $sql = "SELECT p.id, p.name, p.image, p.qty, p.soldCount, p.originalPrice, p.promotionPrice FROM products p JOIN categories c ON p.cateId = c.id WHERE MATCH(p.name,p.des) AGAINST ('$keyword' WITH QUERY EXPANSION) AND p.status=1 AND c.status=1";
         } else {
-            $sql = "SELECT p.id, p.name, p.image, p.promotionPrice FROM products p JOIN categories c ON p.cateId = c.id WHERE p.name LIKE '%" . $keyword . "%' OR c.name LIKE '%" . $keyword . "%' AND p.status=1 AND c.status=1";
+            $sql = "SELECT p.id, p.name, p.image, p.qty, p.soldCount, p.originalPrice, p.promotionPrice FROM products p JOIN categories c ON p.cateId = c.id WHERE p.name LIKE '%" . $keyword . "%' OR c.name LIKE '%" . $keyword . "%' AND p.status=1 AND c.status=1";
         }
         $result = mysqli_query($db->con, $sql);
         return $result;

@@ -53,7 +53,7 @@
     <div class="title"><?= $data['title'] ?></div>
     <div class="search-container">
         <form action="<?= URL_ROOT ?>/product/search" method="get">
-            <input type="text" class="search" placeholder="Tìm kiếm.." name="keyword">
+            <input type="text" class="search" placeholder="Tìm kiếm.." name="keyword" value="<?= isset($_GET['keyword']) ? $_GET['keyword'] : "" ?>">
             <button type="submit"><i class="fa fa-search"></i></button>
         </form>
     </div>
