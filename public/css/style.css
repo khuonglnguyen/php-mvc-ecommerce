@@ -699,25 +699,30 @@ footer{
 }
 
 .search-container {
+  width: 500px;
   text-align: center;
 }
 .search{
-  width: 60%;
-  padding: 6px;
-  margin-top: 8px;
+  width: 70%;
+  padding: 12px;
   font-size: 17px;
-  border: solid 1px gray;
+  border: solid 1px rgb(184, 56, 67);
+  background-color: rgb(255, 209, 204);
+  color: rgb(184, 56, 67);
+  border-radius: 10px;
 }
 
 .search-container button {
   text-align: center;
-  padding: 6px 10px;
+  padding: 12px 16px;
   margin-top: 8px;
   margin-right: 16px;
-  background: #ddd;
+  background: rgb(184, 56, 67);
   font-size: 17px;
-  border: solid 1px gray;
+  border: solid 1px rgb(184, 56, 67);
   cursor: pointer;
+  color: rgb(255, 209, 204);
+  border-radius: 10px;
 }
 
 /*START TABLE*/
