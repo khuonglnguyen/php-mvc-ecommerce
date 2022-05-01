@@ -22,7 +22,7 @@ class user extends ControllerBase
 
                 $cart = $this->model("cartModel");
                 $listCart = ($cart->getByUserId($_SESSION['user_id']))->fetch_all(MYSQLI_ASSOC);
-                if ($listCart) {
+                if (count($listCart) > 0) {
                     $_SESSION['cart'] = $listCart;
                 }
 
@@ -42,6 +42,7 @@ class user extends ControllerBase
     public function logout()
     {
         unset($_SESSION['user_id']);
+        unset($_SESSION['cart']);
         $this->redirect("user", "login");
     }
 

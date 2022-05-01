@@ -2,30 +2,38 @@
 
 class order extends ControllerBase
 {
-    public function add($total)
+    public function add()
     {
-        $order = $this->model("orderModel");
-        if (isset($_SESSION['voucher'])) {
-            $voucher = $this->model("voucherModel");
-            $check = $voucher->used($_SESSION['voucher']['code']);
-            if ($check) {
-                $result = $order->add($_SESSION['user_id'], $total, $_SESSION['voucher']['percentDiscount']);
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $order = $this->model("orderModel");
+            if (isset($_SESSION['voucher'])) {
+                $voucher = $this->model("voucherModel");
+                $check = $voucher->used($_SESSION['voucher']['code']);
+                if ($check) {
+                    $result = $order->add($_SESSION['user_id'], $_POST['total'], $_SESSION['voucher']['percentDiscount']);
+                } else {
+                    echo '<script>alert("Mã giảm giá không đúng hoặc số lượng đã hết!");window.history.back();</script>';
+                    die();
+                }
             } else {
-                echo '<script>alert("Mã giảm giá không đúng hoặc số lượng đã hết!");window.history.back();</script>';
-                die();
+                $result = $order->add($_SESSION['user_id'], $_POST['total']);
             }
-        } else {
-            $result = $order->add($_SESSION['user_id'], $total);
-        }
 
-        if ($result) {
-            $this->redirect("order", "message", [
-                "message" => "success"
-            ]);
-        } else {
-            $this->redirect("order", "message", [
-                "message" => "fail"
-            ]);
+            if ($result) {
+                if ($_POST['paymentMethod'] == "vnpay") {
+                    $this->redirect("order", "payment", [
+                        "orderId" => $result
+                    ]);
+                } else {
+                    $this->redirect("order", "message", [
+                        "message" => "success"
+                    ]);
+                }
+            } else {
+                $this->redirect("order", "message", [
+                    "message" => "fail"
+                ]);
+            }
         }
     }
 

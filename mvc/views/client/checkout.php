@@ -93,7 +93,8 @@
         <td></td>
         <td></td>
         <td></td>
-        <td></td>
+        <td>
+        </td>
         <td>Tổng tiền</td>
         <?php
         if (isset($_SESSION['voucher'])) { ?>
@@ -108,7 +109,7 @@
     <?php }  ?>
   </table>
   <?php
-  if (count($data['cart']) > 0 && !isset($_SESSION['voucher'])) { ?>
+  if (!isset($_SESSION['voucher']) && count($data['cart']) > 0) { ?>
     <div class="login">
       <form action="<?= URL_ROOT ?>/cart/check" class="login-container" method="post">
         <p><input type="text" placeholder="Mã giảm giá" name="code" required></p>
@@ -124,7 +125,17 @@
       if (isset($_SESSION['voucher'])) { ?>
         <a href="<?= URL_ROOT . '/order/add/' . ($total - ($total / 100 * $_SESSION['voucher']['percentDiscount'])) ?>" class="cart-btn">Đặt hàng</a>
       <?php } else if (isset($_SESSION['cart'])) { ?>
-        <a href="<?= URL_ROOT . '/order/add/' . $total ?>" class="cart-btn">Đặt hàng</a>
+        <div class="login">
+          Chọn hình thức thanh toán
+          <form action="<?= URL_ROOT ?>/order/add" method="post">
+          <input type="hidden" name="total" value="<?= $total ?>">
+            <select name="paymentMethod">
+              <option value="cod">COD</option>
+              <option value="vnpay">VNPay</option>
+            </select>
+            <button type="submit" class="cart-btn">Đặt hàng</button>
+          </form>
+        </div>
       <?php } else { ?>
         <a href="<?= URL_ROOT . '/order/add/' . $total ?>" class="cart-btn">Đặt hàng</a>
       <?php } ?>

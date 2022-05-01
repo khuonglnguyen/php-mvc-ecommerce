@@ -2,8 +2,12 @@
 
 <body>
     <?php
-    $cart = new cart();
-    $total = (isset($cart->getTotalQuantitycart()['total']) ? $cart->getTotalQuantitycart()['total'] : 0);
+      $cart = new cart();
+      if (!isset($_SESSION['cart'])) {
+        $total = (isset($cart->getTotalQuantitycart()['total']) ? $cart->getTotalQuantitycart()['total'] : 0);
+      } else {
+        $total = $cart->getTotal();
+      }
 
     $category = $this->model("categoryModel");
     $result = $category->getAllClient();

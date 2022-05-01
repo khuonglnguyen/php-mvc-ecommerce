@@ -79,11 +79,11 @@ class cart extends ControllerBase
             } else {
                 http_response_code(501);
             }
-        }else {
+        } else {
             if ($check) {
                 $_SESSION['cart'][$productId]['quantity'] = $qty;
                 http_response_code(200);
-            }else {
+            } else {
                 http_response_code(501);
             }
         }
@@ -124,10 +124,18 @@ class cart extends ControllerBase
         if (isset($_SESSION['user_id'])) {
             $cart = $this->model("cartModel");
             $result = ($cart->getByUserId($_SESSION['user_id']))->fetch_all(MYSQLI_ASSOC);
-            $this->view("client/checkout", [
-                "headTitle" => "Đơn hàng của tôi",
-                'cart' => $result
-            ]);
+            if (count($result) > 0) {
+                $_SESSION['cart'] = $result;
+                $this->view("client/checkout", [
+                    "headTitle" => "Đơn hàng của tôi",
+                    'cart' => $result
+                ]);
+            }else {
+                $this->view("client/checkout", [
+                    "headTitle" => "Đơn hàng của tôi",
+                    'cart' => isset($_SESSION['cart']) ? $_SESSION['cart'] : []
+                ]);
+            }
         } else {
             $this->view("client/checkout", [
                 "headTitle" => "Đơn hàng của tôi",

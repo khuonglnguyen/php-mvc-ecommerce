@@ -58,7 +58,7 @@ class orderModel
         mysqli_query($db->con, $sqlDeleteCart);
         unset($_SESSION['cart']);
         unset($_SESSION['voucher']);
-        return true;
+        return $last_id;
     }
 
     public function getAll()
