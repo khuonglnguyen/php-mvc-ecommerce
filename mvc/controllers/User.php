@@ -17,7 +17,16 @@ class user extends ControllerBase
                 $_SESSION['user_id'] = $u['id'];
                 $_SESSION['user_name'] = $u['fullName'];
                 $_SESSION['role'] = $u['RoleName'];
-                echo '<script>history.go(-2);</script>';
+
+                // cart
+
+                $cart = $this->model("cartModel");
+                $listCart = ($cart->getByUserId($_SESSION['user_id']))->fetch_all(MYSQLI_ASSOC);
+                if ($listCart) {
+                    $_SESSION['cart'] = $listCart;
+                }
+
+                $this->redirect("home");
             } else {
                 $this->view("client/login", [
                     "headTitle" => "Đăng nhập", "message" => "Tài khoản hoặc mật khẩu không đúng!"

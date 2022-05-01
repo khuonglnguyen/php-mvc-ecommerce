@@ -44,7 +44,7 @@ class product extends ControllerBase
         $result = $product->getById($Id);
         // Fetch
         $p = $result->fetch_assoc();
-        $c = $product->getByCateIdSinglePage($p['cateId'],$Id);
+        $c = $product->getByCateIdSinglePage($p['cateId'], $Id);
         $list = $c->fetch_all(MYSQLI_ASSOC);
 
         if (!isset($_SESSION['viewed'])) {
@@ -71,10 +71,19 @@ class product extends ControllerBase
         }
         $_SESSION['viewed'] = $this->bubble_sort($_SESSION['viewed']);
 
+        //productfavorite
+        $productFavorite = $this->model('productFavoriteModel');
+        $checkByUserId = $productFavorite->checkByUserId($Id);
+        $loved = false;
+        if ($checkByUserId) {
+            $loved = true;
+        }
+
         $this->view("client/single", [
             "headTitle" => $p['name'],
             "product" => $p,
-            "productByCate" => $list
+            "productByCate" => $list,
+            "loved" => $loved
         ]);
     }
 
@@ -92,6 +101,18 @@ class product extends ControllerBase
         $this->view('client/viewed', [
             "headTitle" => "Sản phẩm đã xem",
             "productList" => $arr
+        ]);
+    }
+
+    public function favorite()
+    {
+        $productFavorite = $this->model('productFavoriteModel');
+        $result = $productFavorite->getByUserId($_SESSION['user_id']);
+        $list = $result->fetch_all(MYSQLI_ASSOC);
+
+        $this->view('client/favorite', [
+            "headTitle" => "Sản phẩm yêu thích",
+            "productList" => $list
         ]);
     }
 
@@ -113,5 +134,20 @@ class product extends ControllerBase
             'countPaging' => $countPaging,
             'CateId' => $CateId
         ]);
+    }
+
+    public function addFavorite($productId)
+    {
+        if (isset($_SESSION['user_id'])) {
+            $productFavorite = $this->model('productFavoriteModel');
+            $result = $productFavorite->add($productId);
+            if ($result) {
+                $this->redirect("product", "single", [
+                    "Id" => $productId
+                ]);
+            }
+        } else {
+            $this->redirect("user", "login");
+        }
     }
 }

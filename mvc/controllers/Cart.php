@@ -4,20 +4,38 @@ class cart extends ControllerBase
 {
     public function addItemcart($productId)
     {
-        if (!isset($_SESSION['user_id'])) {
-            echo '<script>alert("Vui lòng đăng nhập để mua hàng!");
-            window.location.href = "'.URL_ROOT.'/user/login";</script>';
-        }
         $product = $this->model("productModel");
-        $cart = $this->model("cartModel");
-        $cartUser = ($cart->getByUserId($_SESSION['user_id']))->fetch_all(MYSQLI_ASSOC)[0];
-        if ($cart->check($_SESSION['user_id'], $productId)) {
-            $check = $product->checkQuantity($productId, $cartUser['quantity']);
-            if ($check) {
-                if (!$cart->updateQuanity($_SESSION['user_id'], $cartUser)) {
+
+        // Save in DB
+        if (isset($_SESSION['user_id'])) {
+            $cart = $this->model("cartModel");
+            $cartUser = ($cart->getByUserId($_SESSION['user_id']))->fetch_all(MYSQLI_ASSOC)[0];
+            if ($cart->check($_SESSION['user_id'], $productId)) {
+                $check = $product->checkQuantity($productId, $cartUser['quantity']);
+                if ($check) {
+                    if (!$cart->updateQuanity($_SESSION['user_id'], $cartUser)) {
+                        echo 'lỗi';
+                        die();
+                    }
+                } else {
+                    echo '<script>alert("Số lượng sản phẩm đã hết!");window.history.back();</script>';
+                }
+            } else {
+                $result = $product->getById($productId);
+                // Fetch
+                $p = $result->fetch_assoc();
+                if (!$cart->add($_SESSION['user_id'], $p)) {
                     echo 'lỗi';
                     die();
                 }
+            }
+        }
+
+        // Save in SESSION
+        if (isset($_SESSION['cart'][$productId])) {
+            $check = $product->checkQuantity($productId, $_SESSION['cart'][$productId]['quantity']);
+            if ($check) {
+                $_SESSION['cart'][$productId]['quantity']++;
             } else {
                 echo '<script>alert("Số lượng sản phẩm đã hết!");window.history.back();</script>';
             }
@@ -25,38 +43,65 @@ class cart extends ControllerBase
             $result = $product->getById($productId);
             // Fetch
             $p = $result->fetch_assoc();
-            if (!$cart->add($_SESSION['user_id'], $p)) {
-                echo 'lỗi';
-                die();
-            }
+
+            $_SESSION['cart'][$p['id']] = array(
+                "productId" => $p['id'],
+                "productName" => $p['name'],
+                "image" => $p['image'],
+                "quantity" => 1,
+                "productPrice" => $p['promotionPrice']
+            );
         }
-        echo '<script>alert("Thêm sản phẩm vào giỏ hàng thành công!");window.history.back();</script>';
+        echo '<script>window.history.back();</script>';
+    }
+
+    public function getTotal()
+    {
+        $total = 0;
+        foreach ($_SESSION['cart'] as $key => $value) {
+            $total += $value['quantity'];
+        }
+        return $total;
     }
 
     public function updateItemcart($productId, $qty)
     {
         $product = $this->model("productModel");
-        $cart = $this->model("cartModel");
         $check = $product->checkQuantity($productId, $qty);
-        if ($check) {
-            if (!$cart->editQuanity($_SESSION['user_id'], $productId, $qty)) {
+        if (isset($_SESSION['user_id'])) {
+            $cart = $this->model("cartModel");
+            if ($check) {
+                if (!$cart->editQuanity($_SESSION['user_id'], $productId, $qty)) {
+                    http_response_code(501);
+                }
+                $_SESSION['cart'][$productId]['quantity'] = $qty;
+                http_response_code(200);
+            } else {
                 http_response_code(501);
             }
-            http_response_code(200);
-        } else {
-            http_response_code(501);
+        }else {
+            if ($check) {
+                $_SESSION['cart'][$productId]['quantity'] = $qty;
+                http_response_code(200);
+            }else {
+                http_response_code(501);
+            }
         }
     }
 
     public function removeItemcart($productId)
     {
-        $cart = $this->model("cartModel");
-        if ($cart->remove($_SESSION['user_id'], $productId)) {
-            echo '<script>alert("Xóa sản phẩm thành công!");window.history.back();</script>';
-        } else {
-            echo 'lỗi';
-            die();
+        unset($_SESSION['cart'][$productId]);
+        if (isset($_SESSION['user_id'])) {
+            $cart = $this->model("cartModel");
+            if ($cart->remove($_SESSION['user_id'], $productId)) {
+                // 
+            } else {
+                echo 'lỗi';
+                die();
+            }
         }
+        echo '<script>window.history.back();</script>';
     }
 
     public function getTotalPricecart()
@@ -77,15 +122,16 @@ class cart extends ControllerBase
     public function checkout()
     {
         if (isset($_SESSION['user_id'])) {
-        $cart = $this->model("cartModel");
-        $result = ($cart->getByUserId($_SESSION['user_id']))->fetch_all(MYSQLI_ASSOC);
-        $this->view("client/checkout", [
-            "headTitle" => "Đơn hàng của tôi",
-            'cart' => $result
-        ]);
-        }else {
+            $cart = $this->model("cartModel");
+            $result = ($cart->getByUserId($_SESSION['user_id']))->fetch_all(MYSQLI_ASSOC);
             $this->view("client/checkout", [
-                "headTitle" => "Đơn hàng của tôi"
+                "headTitle" => "Đơn hàng của tôi",
+                'cart' => $result
+            ]);
+        } else {
+            $this->view("client/checkout", [
+                "headTitle" => "Đơn hàng của tôi",
+                'cart' => $_SESSION['cart']
             ]);
         }
     }
@@ -97,13 +143,13 @@ class cart extends ControllerBase
         if ($result) {
             $_SESSION['voucher']['percentDiscount'] = $result['percentDiscount'];
             $_SESSION['voucher']['code'] = $result['code'];
-        }else {
+        } else {
             echo '<script>alert("Mã giảm giá không đúng hoặc số lượng đã hết!");window.history.back();</script>';
             die();
         }
         $this->redirect("cart", "checkout");
     }
-    
+
     public function voucher()
     {
         $voucher = $this->model("voucherModel");
@@ -111,7 +157,7 @@ class cart extends ControllerBase
         if ($result) {
             $_SESSION['voucher']['percentDiscount'] = $result['percentDiscount'];
             $_SESSION['voucher']['code'] = $result['code'];
-        }else {
+        } else {
             echo '<script>alert("Mã giảm giá không đúng hoặc số lượng đã hết!");window.history.back();</script>';
             die();
         }

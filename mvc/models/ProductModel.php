@@ -68,7 +68,15 @@ class productModel
     public function getFeaturedproducts()
     {
         $db = DB::getInstance();
-        $sql = "SELECT p.id, p.name, p.image, p.originalPrice, p.promotionPrice, p.qty as qty, p.soldCount as soldCount FROM products p JOIN categories c ON p.cateId = c.id WHERE p.status=1 AND c.status = 1 order BY soldCount DESC";
+        $sql = "SELECT p.id, p.name, p.image, p.originalPrice, p.promotionPrice, p.qty as qty, p.soldCount as soldCount FROM products p JOIN categories c ON p.cateId = c.id WHERE p.status=1 AND c.status = 1 AND soldCount > 0 order BY soldCount DESC LIMIT 4";
+        $result = mysqli_query($db->con, $sql);
+        return $result;
+    }
+
+    public function getNewproducts()
+    {
+        $db = DB::getInstance();
+        $sql = "SELECT p.id, p.name, p.image, p.originalPrice, p.promotionPrice, p.qty as qty, p.soldCount as soldCount FROM products p JOIN categories c ON p.cateId = c.id WHERE p.status=1 AND c.status = 1 order BY id DESC LIMIT 4";
         $result = mysqli_query($db->con, $sql);
         return $result;
     }

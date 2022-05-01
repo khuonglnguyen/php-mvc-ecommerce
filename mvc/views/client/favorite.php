@@ -3,7 +3,11 @@
 <body>
   <?php
   $cart = new cart();
-  $total = (isset($cart->getTotalQuantitycart()['total']) ? $cart->getTotalQuantitycart()['total'] : 0);
+  if (!isset($_SESSION['cart'])) {
+    $total = (isset($cart->getTotalQuantitycart()['total']) ? $cart->getTotalQuantitycart()['total'] : 0);
+  } else {
+    $total = $cart->getTotal();
+  }
 
   $category = $this->model("categoryModel");
   $result = $category->getAllClient();
@@ -35,7 +39,7 @@
 
         <?php
         if (isset($_SESSION['user_id'])) { ?>
-          <li class="cate menu-active">
+          <li class="cate">
             <a href="#"><?= $_SESSION['user_name'] ?> <i class="fa fa-user-circle"></i></a>
             <ul class="sub-menu">
               <li><a href="<?= URL_ROOT . "/user/info" ?>">Thông tin tài khoản <i class="fa fa-user"></i></a></li>
@@ -57,25 +61,48 @@
   <div class="banner">
 
   </div>
-  <div class="login">
-    <div class="login-triangle"></div>
-    <h2 class="login-header">Đổi mật khẩu</h2>
-    <form action="<?= URL_ROOT ?>/user/resetPassword" class="login-container" method="post">
-      <p><input type="password" id="password" placeholder="Mật khẩu hiện tại" name="password" required></p>
-      <p class="error"><?= isset($data['messagePassword']) ? $data['messagePassword'] : "" ?></p>
-      <p><input type="password" id="newPassword" placeholder="Mật khẩu mới" name="newPassword" required></p>
-      <p><input type="password" placeholder="Nhập lại mật khẩu mới" name="reNewPassword" required oninput="check(this)"></p>
-      <p><input type="submit" value="Đổi mật khẩu"></p>
-    </form>
+  <div class="title">Sản phẩm yêu thích</div>
+  <div class="content">
+    <?php
+    if (count($data['productList']) > 0) {
+      foreach ($data['productList'] as $key) { ?>
+        <div class="card">
+          <?php
+          if ($key['promotionPrice'] < $key['originalPrice']) { ?>
+            <div class="discount">
+              -<?= ceil((($key['originalPrice'] / $key['promotionPrice']) * 100) - 100) ?>%
+            </div>
+          <?php }
+          ?>
+          <div class="card-img">
+            <a href="<?= URL_ROOT . '/product/single/' . $key['id'] ?>"><img src="<?= URL_ROOT ?>/public/images/<?= $key['image'] ?>" class="product-image" alt=""></a>
+          </div>
+          <a href="<?= URL_ROOT . '/product/single/' . $key['id'] ?>">
+            <h1><?= $key['name'] ?></h1>
+          </a>
+          <?php
+          if ($key['promotionPrice'] < $key['originalPrice']) { ?>
+            <p class="promotion-price"><del><?= number_format($key['originalPrice'], 0, '', ',') ?>₫</del></p>
+          <?php }
+          ?>
+          <p class="original-price"><?= number_format($key['promotionPrice'], 0, '', ',') ?>₫</p>
+          <p class="qty-card">Kho: <?= $key['qty'] ?></p>
+          <p class="sold-count">Đã bán: <?= $key['soldCount'] ?></p>
+          <p><a href="<?= URL_ROOT . '/cart/addItemcart/' . $key['id'] ?>"><button>Thêm vào giỏ</button></a></p>
+        </div>
+      <?php }
+    } else { ?>
+      <h3>Không tìm thấy sản phẩm...</h3>
+    <?php }
+    ?>
   </div>
+  <?php
+  if (count($data['productList']) > 0) { ?>
+    <a href="<?= URL_ROOT ?>/product/removeFavorite">Xóa</a>
+  <?php }
+  ?>
+  <?php require APP_ROOT . '/views/client/inc/chatbox.php'; ?>
   <?php require APP_ROOT . '/views/client/inc/footer.php'; ?>
-  <script language='javascript' type='text/javascript'>
-    function check(input) {
-      if (input.value != document.getElementById('newPassword').value) {
-        input.setCustomValidity('Nhập lại mật khẩu mới không trùng khớp.');
-      } else {
-        input.setCustomValidity('');
-      }
-    }
-  </script>
 </body>
+
+</html>

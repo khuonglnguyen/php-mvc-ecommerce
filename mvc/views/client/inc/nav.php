@@ -8,6 +8,12 @@
       ?>
       <nav class="navbar">
         <div class="logo">HUYPHAM STORE</div>
+    <div class="search-container">
+      <form action="<?= URL_ROOT ?>/product/search" method="get">
+        <input type="text" class="search" placeholder="Tìm kiếm.." name="keyword">
+        <button type="submit"><i class="fa fa-search"></i></button>
+      </form>
+    </div>
         <ul class="nav-links">
           <input type="checkbox" id="checkbox_toggle" />
           <label for="checkbox_toggle" class="hamburger">&#9776;</label>
@@ -23,7 +29,7 @@
                 ?>
               </ul>
             </li>
-            <li><a href="#">Giới thiệu <i class="fa fa-info-circle"></i></a></li>
+            
             <?php
             if (isset($_SESSION['user_id'])) { ?>
               <li class="cate">
