@@ -95,6 +95,40 @@
       </div>
     </div>
   </main>
+  <div class="title2">Đánh giá</div>
+  <div class="rating">
+    <?php
+    if (count($data['productRatingContent']) > 0) {
+      foreach ($data['productRatingContent'] as $key => $value) { ?>
+        <div class="rate">
+          <div class="user-name">
+            Khách hàng <b><?= $value['fullName'] ?> </b> (<?= $value['time'] ?>)
+          </div>
+          <div class="user-star">
+            <?php
+            for ($i = 0; $i < $value['star']; $i++) { ?>
+              <i class="fa fa-star" style="color: orange;"></i>
+            <?php }
+            ?>
+          </div>
+          <div class="user-content">
+            <?= $value['content'] ?>
+          </div>
+          <div class="reply">
+            <div class="user-name">
+              <i class="fa fa-reply" aria-hidden="true"></i>
+              Phản hồi từ <b>Nguyễn Văn A </b>(Quản trị viên) 1/1/2022
+            </div>
+            <div class="user-content">
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eveniet aut maxime autem dignissimos voluptate necessitatibus laborum aliquam eligendi reiciendis quisquam, quam illum sit adipisci obcaecati sint ullam earum quo delectus?
+            </div>
+          </div>
+        </div>
+      <?php }
+    } else { ?>
+      Chưa có đánh giá
+    <?php } ?>
+  </div>
   <div class="title2">Sản phẩm cùng loại</div>
   <div class="content">
     <?php

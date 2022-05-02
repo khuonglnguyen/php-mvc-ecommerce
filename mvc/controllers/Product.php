@@ -72,22 +72,27 @@ class product extends ControllerBase
         $_SESSION['viewed'] = $this->bubble_sort($_SESSION['viewed']);
 
         //productfavorite
-        $productFavorite = $this->model('productFavoriteModel');
-        $checkByUserId = $productFavorite->checkByUserId($Id);
         $loved = false;
-        if ($checkByUserId) {
-            $loved = true;
+        if (isset($_SESSION['usser_id'])) {
+            $productFavorite = $this->model('productFavoriteModel');
+            $checkByUserId = $productFavorite->checkByUserId($Id);
+            if ($checkByUserId) {
+                $loved = true;
+            }
         }
 
+        // Rating
         $productRating = $this->model("productRatingModel");
         $productRatingResult = $productRating->getStarByProductId($Id);
+        $productRatingContent = $productRating->getByProductId($Id);
 
         $this->view("client/single", [
             "headTitle" => $p['name'],
             "product" => $p,
             "productByCate" => $list,
             "loved" => $loved,
-            "star" => $productRatingResult
+            "star" => $productRatingResult,
+            "productRatingContent" => $productRatingContent
         ]);
     }
 

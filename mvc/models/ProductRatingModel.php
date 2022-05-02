@@ -40,6 +40,17 @@ class ProductRatingModel
         return $result;
     }
 
+    public function getByProductId($productId)
+    {
+        $db = DB::getInstance();
+        $sql = "SELECT * FROM `productrating` p JOIN users u ON p.userId = u.id WHERE productId=$productId";
+        $result = mysqli_query($db->con, $sql);
+        if (mysqli_num_rows($result) > 0) {
+            return $result->fetch_all(MYSQLI_ASSOC);
+        }
+        return [];
+    }
+
     public function add($productId, $content, $star, $userId)
     {
         $db = DB::getInstance();

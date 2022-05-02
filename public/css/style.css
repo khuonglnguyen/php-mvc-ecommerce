@@ -1216,3 +1216,23 @@ background-color: #ddd;
 border-radius: 5px;
 }
 /*END PAGINGNATION*/
+/*START RATING*/
+.rating{
+  margin-bottom: 20px;
+}
+.rate{
+  margin: 10px 115px;
+  border: 1px solid rgb(214, 162, 166);
+  padding: 10px;
+  border-radius: 10px;
+}
+.reply{
+  width: 90%;
+  padding: 10px;
+  position: relative;
+  background-color: rgb(255, 240, 241);;
+  left: 3%;
+  border-radius: 10px;
+  margin: 5px 0;
+}
+/*END RATING*/
