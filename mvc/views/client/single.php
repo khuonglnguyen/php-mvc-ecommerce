@@ -69,14 +69,25 @@
     <div class="right-column">
       <div class="product-description">
         <h1><?= $data['product']['name'] ?></h1>
+        Đánh giá:
         <?php
-        if ($data['loved']) { ?>
-          <a href="#">Đã thêm vào DS yêu thích <i class="fa fa-heart"></i></a>
-        <?php } else { ?>
-          <a href="<?= URL_ROOT . '/product/addFavorite/' .  $data['product']['id']  ?>">Thêm vào DS yêu thích <i class="fa fa-heart"></i></a>
-        <?php }
-        ?>
-        <p><?= $data['product']['des'] ?></p>
+        if ($data['star'] > 0) {
+          for ($i = 0; $i < $data['star']; $i++) { ?>
+            <i class="fa fa-star" style="color: orange;"></i>
+            <?php }
+          echo $data['star'];
+            ?>/5
+          <?php } else { ?>
+            Chưa có đánh giá
+          <?php } ?> <br>
+          <?php
+          if ($data['loved']) { ?>
+            <a href="#">Đã thêm vào DS yêu thích <i class="fa fa-heart"></i></a>
+          <?php } else { ?>
+            <a href="<?= URL_ROOT . '/product/addFavorite/' .  $data['product']['id']  ?>">Thêm vào DS yêu thích <i class="fa fa-heart"></i></a>
+          <?php }
+          ?>
+          <p><?= $data['product']['des'] ?></p>
       </div>
       <div class="product-price">
         <span><?= number_format($data['product']['promotionPrice'], 0, '', ',')  ?>₫</span>

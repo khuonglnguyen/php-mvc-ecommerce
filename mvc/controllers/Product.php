@@ -79,11 +79,15 @@ class product extends ControllerBase
             $loved = true;
         }
 
+        $productRating = $this->model("productRatingModel");
+        $productRatingResult = $productRating->getStarByProductId($Id);
+
         $this->view("client/single", [
             "headTitle" => $p['name'],
             "product" => $p,
             "productByCate" => $list,
-            "loved" => $loved
+            "loved" => $loved,
+            "star" => $productRatingResult
         ]);
     }
 
@@ -148,6 +152,40 @@ class product extends ControllerBase
             }
         } else {
             $this->redirect("user", "login");
+        }
+    }
+
+    public function rating($id)
+    {
+        $product = $this->model("productModel");
+        $productRating = $this->model("productRatingModel");
+        $check = $productRating->getByProductIdUserId($id, $_SESSION['user_id']);
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $result = $productRating->add($_POST['productId'], $_POST['content'], $_POST['star'], $_SESSION['user_id']);
+            if ($result) {
+                $this->redirect("product", "rating", [
+                    "id" => $_POST['productId']
+                ]);
+            } else {
+                $result = $product->getById($_POST['productId'])->fetch_assoc();
+                $this->view("client/rating", [
+                    "headTitle" => "Đánh giá", "message" => "Lỗi khi thực hiện đánh giá, vui lòng thử lại sau!",
+                    "product" => $result
+                ]);
+            }
+        } else {
+            $status = false;
+            if (mysqli_num_rows($check) > 0) {
+                $p = $productRating->getByProductIdUserId($id, $_SESSION['user_id']);
+                $status = true;
+            }
+            $result = $product->getById($id)->fetch_assoc();
+            $this->view("client/rating", [
+                "headTitle" => "Đánh giá",
+                "product" => $result,
+                "status" => $status,
+                "productRating" => (isset($p) > 0 ? $p : [])
+            ]);
         }
     }
 }

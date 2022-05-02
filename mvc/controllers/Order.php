@@ -54,13 +54,21 @@ class order extends ControllerBase
     {
         $orderDetail = $this->model("orderDetailModel");
         $result = $orderDetail->getByorderId($orderId);
+
+        $order = $this->model("orderModel");
+        $resultOrder = $order->getById($orderId)->fetch_assoc();
+        $status = false;
+        if ($resultOrder['status'] == "received") {
+            $status = true;
+        }
         // Fetch
         $orderDetailList = $result->fetch_all(MYSQLI_ASSOC);
 
         $this->view("client/orderDetail", [
             "headTitle" => "Chi tiết đơn hàng: " . $orderId,
             "orderId" => $orderId,
-            "orderDetailList" => $orderDetailList
+            "orderDetailList" => $orderDetailList,
+            "status" => $status
         ]);
     }
 

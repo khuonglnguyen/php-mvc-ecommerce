@@ -39,7 +39,7 @@
 
         <?php
         if (isset($_SESSION['user_id'])) { ?>
-          <li class="cate menu-active">
+          <li class="cate">
             <a href="#"><?= $_SESSION['user_name'] ?> <i class="fa fa-user-circle"></i></a>
             <ul class="sub-menu">
               <li><a href="<?= URL_ROOT . "/user/info" ?>">Thông tin tài khoản <i class="fa fa-user"></i></a></li>
@@ -51,7 +51,7 @@
           </li>
         <?php  } else { ?>
           <li><a href="<?= URL_ROOT . "/user/register" ?>">Đăng ký <i class="fa fa-pencil-square"></i></a></li>
-          <li><a href="<?= URL_ROOT . "/user/login" ?>">Đăng nhập <i class="fa fa-sign-in"></i></a></li>
+          <li class="menu-active"><a href="<?= URL_ROOT . "/user/login" ?>">Đăng nhập <i class="fa fa-sign-in"></i></a></li>
         <?php  }
         ?>
         <li><a href="<?= URL_ROOT . "/cart/checkout" ?>" id="bag">Giỏ hàng <i class="fa fa-shopping-bag"></i> (<?= is_null($total) ? 0 : $total ?>)</a></li>
@@ -61,44 +61,52 @@
   <div class="banner">
 
   </div>
-  <div class="title">Đơn đặt hàng: <?= $data['orderId'] ?></div>
-  <table id="table">
-    <?php
-    $count = 0;
-    if (count($data['orderDetailList']) > 0) { ?>
+  <?php
+  if ($data['status']) { ?>
+    <table id="table">
+      <?php
+      $count = 0; ?>
       <tr>
         <th>STT</th>
         <th>Tên sản phẩm</th>
         <th>Hình ảnh</th>
-        <th>Số lượng</th>
-        <th>Đơn giá</th>
-        <?php
-        if ($data['status']) { ?>
-          <th>Đánh giá</th>
-        <?php }
-        ?>
+        <th>Số sao</th>
+        <th>Nội dung</th>
       </tr>
-      <?php foreach ($data['orderDetailList'] as $key => $value) {
-        $total += $value['productPrice'] * $value['qty'];
+      <?php foreach ($data['productRating'] as $key => $value) {
       ?>
         <tr>
           <td><?= ++$count ?></td>
-          <td><?= $value['productName'] ?></td>
-          <td><img class="img-table" src="<?= URL_ROOT . '/public/images/' . $value['productImage'] ?>" alt=""></td>
-          <td><?= $value['qty'] ?></td>
-          <td><?= number_format($value['productPrice'], 0, '', ',') ?>₫</td>
-          <?php
-          if ($data['status']) { ?>
-            <td><a href="<?= URL_ROOT ?>/product/rating/<?= $value['productId'] ?>">Xem/Thêm đánh giá</a></td>
-          <?php }
-          ?>
+          <td><?= $value['name'] ?></td>
+          <td><img class="img-table" src="<?= URL_ROOT . '/public/images/' . $value['image'] ?>" alt=""></td>
+          <td><?= $value['star'] ?></td>
+          <td><?= $value['content'] ?></td>
         </tr>
       <?php }
       ?>
-    <?php } else {  ?>
-      <h3>Chưa có đơn đặt hàng...</h3>
-    <?php }  ?>
-  </table>
+    </table>
+  <?php } else { ?>
+    <div class="login">
+      <div class="login-triangle"></div>
+      <h2 class="login-header">Thêm Đánh giá</h2>
+      <form action="<?= URL_ROOT ?>/product/rating" class="login-container" method="post">
+        <input type="hidden" name="productId" value="<?= $data['product']['id'] ?>">
+        <p><input type="text" value="<?= $data['product']['name'] ?>" required disabled></p>
+        <p><img src="<?= URL_ROOT ?>/public/images/<?= $data['product']['image'] ?>"></p>
+        <p>Số sao:<select name="star">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select></p>
+        <p><textarea type="text" placeholder="Nội dung" name="content" required></textarea></p>
+        <p class="error"><?= isset($data['message']) ? $data['message'] : "" ?></p>
+        <p><input type="submit" value="Đánh giá ngay"></p>
+      </form>
+    </div>
+  <?php }
+  ?>
   <?php require APP_ROOT . '/views/client/inc/footer.php'; ?>
 </body>
 
