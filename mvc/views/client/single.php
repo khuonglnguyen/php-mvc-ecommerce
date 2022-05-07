@@ -64,7 +64,12 @@
   <div class="title">Sản phẩm</div>
   <main class="container">
     <div class="left-column">
-      <img src="<?= URL_ROOT ?>/public/images/<?= $data['product']['image'] ?>" alt="">
+      <img id="img1" class="image-product show" src="<?= URL_ROOT ?>/public/images/<?= $data['product']['image'] ?>" alt="">
+      <img id="img2" class="image-product" src="<?= URL_ROOT ?>/public/images/<?= $data['product']['image'] ?>" alt="">
+      <img id="img3" class="image-product" src="<?= URL_ROOT ?>/public/images/<?= $data['product']['image'] ?>" alt="">
+      <button id="a" class="btn-show show-image">1</button>
+      <button id="b" class="btn-show">2</button>
+      <button id="c" class="btn-show">3</button>
     </div>
     <div class="right-column">
       <div class="product-description">
@@ -117,10 +122,10 @@
           <div class="reply">
             <div class="user-name">
               <i class="fa fa-reply" aria-hidden="true"></i>
-              Phản hồi từ <b>Nguyễn Văn A </b>(Quản trị viên) 1/1/2022
+              Phản hồi từ <b>Quản trị viên</b> (<?= $value['repliedDate'] ?>)
             </div>
             <div class="user-content">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eveniet aut maxime autem dignissimos voluptate necessitatibus laborum aliquam eligendi reiciendis quisquam, quam illum sit adipisci obcaecati sint ullam earum quo delectus?
+              <?= $value['reply'] ?>
             </div>
           </div>
         </div>
@@ -165,6 +170,42 @@
     ?>
   </div>
   <?php require APP_ROOT . '/views/client/inc/footer.php'; ?>
+  <script>
+    var btns = document.getElementsByClassName("btn-show");
+    for (var i = 0; i < btns.length; i++) {
+      (function(index) {
+        btns[index].addEventListener("click", function() {
+          var btnRemove = document.getElementsByClassName("btn-show");
+          for (var i = 0; i < btnRemove.length; i++) {
+            (function(index) {
+              btnRemove[index].classList.remove("show-image");
+            })(i);
+          }
+          if (index == 0) {
+            document.getElementById("a").classList.add("show-image");
+          } else if (index == 1) {
+            document.getElementById("b").classList.add("show-image");
+          } else {
+            document.getElementById("c").classList.add("show-image");
+          }
+
+          var images = document.getElementsByClassName("image-product");
+          for (var i = 0; i < images.length; i++) {
+            (function(index) {
+              images[index].classList.remove("show");
+            })(i);
+          }
+          if (index == 0) {
+            document.getElementById("img1").classList.add("show");
+          } else if (index == 1) {
+            document.getElementById("img2").classList.add("show");
+          } else {
+            document.getElementById("img3").classList.add("show");
+          }
+        })
+      })(i);
+    }
+  </script>
 </body>
 
 </html>
