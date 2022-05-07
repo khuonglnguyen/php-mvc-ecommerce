@@ -41,6 +41,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="<?= URL_ROOT . '/ratingManage?page=1' ?>">
+                        <span class="ti-comments"></span>
+                        <span>Phản hồi đánh giá</span>
+                    </a>
+                </li>
+                <li>
                     <a href="<?= URL_ROOT . '/voucherManage' ?>">
                         <span class="ti-ticket"></span>
                         <span>Quản lý voucher</span>

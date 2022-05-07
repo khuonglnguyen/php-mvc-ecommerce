@@ -121,7 +121,7 @@
   ?>
   <div class="payment">
     <?php
-    if (isset($_SESSION['user_id'])) {
+    if (isset($_SESSION['user_id']) && count($data['cart']) > 0) {
       if (isset($_SESSION['voucher'])) { ?>
         <a href="<?= URL_ROOT . '/order/add/' . ($total - ($total / 100 * $_SESSION['voucher']['percentDiscount'])) ?>" class="cart-btn">Đặt hàng</a>
       <?php } else if (isset($_SESSION['cart'])) { ?>

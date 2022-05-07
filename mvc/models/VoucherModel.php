@@ -55,15 +55,22 @@ class voucherModel
         $result = mysqli_query($db->con, $sql);
         return $result;
     }
-	
-	public function check($code)
+
+    public function check($code)
     {
         $voucher = $this->getByCode($code)->fetch_assoc();
         if ($voucher) {
             if (intval($voucher['usedCount']) == intval($voucher['quantity'])) {
                 return false;
             } else {
-                return $voucher;
+                $db = DB::getInstance();
+                $sql = "SELECT * FROM user_voucher WHERE userId=" . $_SESSION['user_id'] . " AND voucherId=" . $voucher['id'];
+                $result = mysqli_query($db->con, $sql);
+                if (mysqli_num_rows($result) > 0) {
+                    return false;
+                } else {
+                    return $voucher;
+                }
             }
         }
         return false;
@@ -78,6 +85,10 @@ class voucherModel
         $db = DB::getInstance();
         $sql = "UPDATE vouchers SET usedCount = usedCount + 1 WHERE code='$code'";
         if (mysqli_query($db->con, $sql)) {
+
+            $sqlInsert = "INSERT INTO `user_voucher`(`id`, `userId`, `voucherId`) VALUES (NULL," . $_SESSION['user_id'] . "," . $voucher['id'] . ")";
+            mysqli_query($db->con, $sqlInsert);
+
             return $voucher;
         }
         return false;

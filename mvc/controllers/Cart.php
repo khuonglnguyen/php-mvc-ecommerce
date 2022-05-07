@@ -9,7 +9,7 @@ class cart extends ControllerBase
         // Save in DB
         if (isset($_SESSION['user_id'])) {
             $cart = $this->model("cartModel");
-            $cartUser = ($cart->getByUserId($_SESSION['user_id']))->fetch_all(MYSQLI_ASSOC)[0];
+            $cartUser = ($cart->getByUserId($_SESSION['user_id']));
             if ($cart->check($_SESSION['user_id'], $productId)) {
                 $check = $product->checkQuantity($productId, $cartUser['quantity']);
                 if ($check) {
@@ -95,7 +95,6 @@ class cart extends ControllerBase
         if (isset($_SESSION['user_id'])) {
             $cart = $this->model("cartModel");
             if ($cart->remove($_SESSION['user_id'], $productId)) {
-                // 
             } else {
                 echo 'lỗi';
                 die();
@@ -123,7 +122,7 @@ class cart extends ControllerBase
     {
         if (isset($_SESSION['user_id'])) {
             $cart = $this->model("cartModel");
-            $result = ($cart->getByUserId($_SESSION['user_id']))->fetch_all(MYSQLI_ASSOC);
+            $result = ($cart->getByUserId($_SESSION['user_id']));
             if (count($result) > 0) {
                 $_SESSION['cart'] = $result;
                 $this->view("client/checkout", [
@@ -139,7 +138,7 @@ class cart extends ControllerBase
         } else {
             $this->view("client/checkout", [
                 "headTitle" => "Đơn hàng của tôi",
-                'cart' => $_SESSION['cart']
+                'cart' => isset($_SESSION['cart']) ? $_SESSION['cart'] : []
             ]);
         }
     }
@@ -152,7 +151,7 @@ class cart extends ControllerBase
             $_SESSION['voucher']['percentDiscount'] = $result['percentDiscount'];
             $_SESSION['voucher']['code'] = $result['code'];
         } else {
-            echo '<script>alert("Mã giảm giá không đúng hoặc số lượng đã hết!");window.history.back();</script>';
+            echo '<script>alert("Mã giảm giá không đúng, đã sử dụng hoặc số lượng đã hết!");window.history.back();</script>';
             die();
         }
         $this->redirect("cart", "checkout");
@@ -166,7 +165,7 @@ class cart extends ControllerBase
             $_SESSION['voucher']['percentDiscount'] = $result['percentDiscount'];
             $_SESSION['voucher']['code'] = $result['code'];
         } else {
-            echo '<script>alert("Mã giảm giá không đúng hoặc số lượng đã hết!");window.history.back();</script>';
+            echo '<script>alert("Mã giảm giá không đúng, đã sử dụng hoặc số lượng đã hết!");window.history.back();</script>';
             die();
         }
         $this->redirect("cart", "checkout");

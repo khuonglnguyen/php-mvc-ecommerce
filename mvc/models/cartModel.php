@@ -21,7 +21,21 @@ class cartModel
         $db = DB::getInstance();
         $sql = "SELECT c.productId, c.productName, c.productPrice, c.quantity, p.image FROM cart c JOIN products p ON c.productId = p.id WHERE userId='$userId'";
         $result = mysqli_query($db->con, $sql);
-        return $result;
+        if ($result) {
+            $data = $result->fetch_all(MYSQLI_ASSOC);
+            $cartArray = [];
+            foreach ($data as $key => $value) {
+                $cartArray[$value['productId']] = array(
+                    "productId" => $value['productId'],
+                    "productName" => $value['productName'],
+                    "image" => $value['image'],
+                    "quantity" => 1,
+                    "productPrice" => $value['productPrice']
+                );
+            }
+        }
+
+        return $cartArray;
     }
 
     public function check($userId, $productId)

@@ -21,12 +21,17 @@ class user extends ControllerBase
                 // cart
 
                 $cart = $this->model("cartModel");
-                $listCart = ($cart->getByUserId($_SESSION['user_id']))->fetch_all(MYSQLI_ASSOC);
+                $listCart = ($cart->getByUserId($_SESSION['user_id']));
+                
                 if (count($listCart) > 0) {
                     $_SESSION['cart'] = $listCart;
                 }
 
-                $this->redirect("home");
+                if ($u['RoleName'] == "Admin") {
+                    $this->redirect("admin");
+                }else {
+                    $this->redirect("home");
+                }
             } else {
                 $this->view("client/login", [
                     "headTitle" => "Đăng nhập", "message" => "Tài khoản hoặc mật khẩu không đúng!"

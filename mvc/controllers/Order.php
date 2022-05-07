@@ -4,7 +4,7 @@ class order extends ControllerBase
 {
     public function add()
     {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        // if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $order = $this->model("orderModel");
             if (isset($_SESSION['voucher'])) {
                 $voucher = $this->model("voucherModel");
@@ -34,7 +34,7 @@ class order extends ControllerBase
                     "message" => "fail"
                 ]);
             }
-        }
+        // }
     }
 
     public function checkout()
