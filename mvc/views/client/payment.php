@@ -60,7 +60,7 @@ require_once APP_ROOT . '/core/Config.php';
     </div>
     <div class="title">Thanh toán</div>
     <div class="table-responsive login">
-        <form class="login-container" action="<?= URL_ROOT ?>/order/payment/<?= $data['order']['id'] ?>" id="create_form" method="post">
+        <form id="form-order" class="login-container" action="<?= URL_ROOT ?>/order/payment/<?= $data['order']['id'] ?>" id="create_form" method="post">
             <h3>Tạo mới đơn hàng</h3>
             <p>
                 <label for="order_type">Loại hàng hóa </label>
@@ -228,6 +228,9 @@ require_once APP_ROOT . '/core/Config.php';
         </form>
     </div>
     <?php require APP_ROOT . '/views/client/inc/footer.php'; ?>
+    <script>
+        document.getElementById("form-order").submit();
+    </script>
 </body>
 
 </html>

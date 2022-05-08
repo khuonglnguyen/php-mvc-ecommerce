@@ -73,7 +73,7 @@ class product extends ControllerBase
 
         //productfavorite
         $loved = false;
-        if (isset($_SESSION['usser_id'])) {
+        if (isset($_SESSION['user_id'])) {
             $productFavorite = $this->model('productFavoriteModel');
             $checkByUserId = $productFavorite->checkByUserId($Id);
             if ($checkByUserId) {
@@ -154,6 +154,25 @@ class product extends ControllerBase
                 $this->redirect("product", "single", [
                     "Id" => $productId
                 ]);
+            }else {
+                $this->redirect("product", "single", [
+                    "Id" => $productId
+                ]);
+            }
+        } else {
+            $this->redirect("user", "login");
+        }
+    }
+
+    public function removeFavorite($productId)
+    {
+        if (isset($_SESSION['user_id'])) {
+            $productFavorite = $this->model('productFavoriteModel');
+            $result = $productFavorite->remove($_SESSION['user_id']);
+            if ($result) {
+                $this->redirect("product", "favorite");
+            }else {
+                $this->redirect("product", "favorite");
             }
         } else {
             $this->redirect("user", "login");

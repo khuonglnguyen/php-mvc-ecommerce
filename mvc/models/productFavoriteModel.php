@@ -49,4 +49,15 @@ class productFavoriteModel
         }
         return false;
     }
+
+    public function remove($userId)
+    {
+        $db = DB::getInstance();
+        $sql = "DELETE FROM productfavorite WHERE userId=" . $userId;
+        $result = mysqli_query($db->con, $sql);
+        if (mysqli_num_rows($result) > 0) {
+            return true;
+        }
+        return false;
+    }
 }

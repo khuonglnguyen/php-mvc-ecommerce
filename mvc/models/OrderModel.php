@@ -100,7 +100,7 @@ class orderModel
                 $resultUpdateSold = mysqli_query($db->con, $sqlUpdateSold);
             }
         }
-        return $resultUpdateSold;
+        return true;
     }
 
     public function payment($orderId)
