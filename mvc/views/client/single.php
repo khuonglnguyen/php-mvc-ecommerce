@@ -65,8 +65,8 @@
   <main class="container">
     <div class="left-column">
       <img id="img1" class="image-product show" src="<?= URL_ROOT ?>/public/images/<?= $data['product']['image'] ?>" alt="">
-      <img id="img2" class="image-product" src="<?= URL_ROOT ?>/public/images/<?= $data['product']['image'] ?>" alt="">
-      <img id="img3" class="image-product" src="<?= URL_ROOT ?>/public/images/<?= $data['product']['image'] ?>" alt="">
+      <img id="img2" class="image-product" src="<?= URL_ROOT ?>/public/images/<?= $data['product']['image2'] ?>" alt="">
+      <img id="img3" class="image-product" src="<?= URL_ROOT ?>/public/images/<?= $data['product']['image3'] ?>" alt="">
       <button id="a" class="btn-show show-image">1</button>
       <button id="b" class="btn-show">2</button>
       <button id="c" class="btn-show">3</button>
@@ -95,7 +95,15 @@
           <p><?= $data['product']['des'] ?></p>
       </div>
       <div class="product-price">
-        <span><?= number_format($data['product']['promotionPrice'], 0, '', ',')  ?>₫</span>
+        <?php 
+        if ($data['product']['promotionPrice'] < $data['product']['originalPrice']) { ?>
+          <span><?= number_format($data['product']['originalPrice'], 0, '', ',')  ?>₫</span>
+          <del><?= number_format($data['product']['promotionPrice'], 0, '', ',')  ?>₫</del>
+        <p class="error"> -<?= ceil(100-(($data['product']['promotionPrice']/$data['product']['originalPrice']*100))) ?>%</p>
+          <?php  } else { ?>
+         <span><?= number_format($data['product']['originalPrice'], 0, '', ',')  ?>₫</span>
+            <?php }
+        ?>
         <a href="<?= URL_ROOT . '/cart/addItemcart/' .  $data['product']['id']  ?>" class="cart-btn">Thêm vào giỏ</a>
       </div>
     </div>
@@ -143,7 +151,7 @@
           <?php
           if ($key['promotionPrice'] < $key['originalPrice']) { ?>
             <div class="discount">
-              -<?= ceil((($key['originalPrice'] / $key['promotionPrice']) * 100) - 100) ?>%
+              -<?= 100-(($key['originalPrice']/$key['promotionPrice']*100)) ?>%
             </div>
           <?php }
           ?>

@@ -41,12 +41,24 @@
                                     <?php }
                                     ?>
                                 </select>
-                                <label for="image">Hình ảnh</label>
+                                <label for="image">Hình ảnh 1</label>
                                 <p>
-                                    <img src="<?= URL_ROOT . '/public/images/' . $data['product']['image'] ?>" alt="">
+                                    <img style="height: 300px;" src="<?= URL_ROOT . '/public/images/' . $data['product']['image'] ?>" alt="">
                                 </p>
-                                <label for="image">Chọn hình ảnh mới</label>
+                                <label for="image">Hình ảnh 2</label>
+                                <p>
+                                    <img style="height: 300px;" src="<?= URL_ROOT . '/public/images/' . $data['product']['image2'] ?>" alt="">
+                                </p>
+                                <label for="image">Hình ảnh 3</label>
+                                <p>
+                                    <img style="height: 300px;" src="<?= URL_ROOT . '/public/images/' . $data['product']['image3'] ?>" alt="">
+                                </p>
+                                <label for="image">Chọn hình ảnh mới 1</label>
                                 <input type="file" id="image" name="image">
+                                <label for="image">Chọn hình ảnh mới 2</label>
+                                <input type="file" id="image2" name="image2">
+                                <label for="image">Chọn hình ảnh mới 3</label>
+                                <input type="file" id="image3" name="image3">
                                 <label for="originalPrice">Giá gốc</label>
                                 <input type="number" id="originalPrice" name="originalPrice" required value="<?= $data['product']['originalPrice'] ?>">
                                 <label for="promotionPrice">Giá khuyến mãi</label>

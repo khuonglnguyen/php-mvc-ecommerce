@@ -192,10 +192,10 @@ class user extends ControllerBase
             $user = $this->model('userModel');
             $result = $user->checkCurrentPassword($_SESSION['user_id'], $_POST['password']);
             if ($result) {
-                $r = $user->updatePassword($_SESSION['user_id'], $_POST['password']);
+                $r = $user->updatePassword($_SESSION['user_id'], $_POST['newPassword']);
                 if ($r) {
                     $this->redirect("user", "info", [
-                        "message" => "Cập nhật thành công!"
+                        "message" => "Đổi mật khẩu thành công!"
                     ]);
                 } else {
                     $this->redirect("user", "info", [

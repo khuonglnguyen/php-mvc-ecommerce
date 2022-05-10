@@ -69,7 +69,7 @@
                     <?php
                     if ($key['promotionPrice'] < $key['originalPrice']) { ?>
                         <div class="discount">
-                            -<?= ceil((($key['originalPrice'] / $key['promotionPrice']) * 100) - 100) ?>%
+                            -<?=ceil(100-(($key['promotionPrice']/$key['originalPrice']*100))) ?>%
                         </div>
                     <?php }
                     ?>

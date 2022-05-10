@@ -192,7 +192,7 @@ class userModel
         $db = DB::getInstance();
         // Mã hóa password
         $md5Password = md5($password);
-        $sql = "UPDATE `users` SET `password`='" . $md5Password . "' WHERE id=" . $userId;
+        $sql = "UPDATE `users` SET `password`='" . $md5Password . "' WHERE id=" . $userId;  
         $result = mysqli_query($db->con, $sql);
         return $result;
     }

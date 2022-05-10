@@ -142,28 +142,60 @@ class productModel
 
     public function update($product)
     {
-        $db = DB::getInstance();
-        if (isset($product['image'])) {
-
-            // Check image and move to upload folder
+        // Check image and move to upload folder
+        if (!empty($_FILES['image']['name'])) {
             $file_name = $_FILES['image']['name'];
             $file_temp = $_FILES['image']['tmp_name'];
 
             $div = explode('.', $file_name);
             $file_ext = strtolower(end($div));
-            $unique_image = substr(md5(time()), 0, 10) . '.' . $file_ext;
+            $unique_image = substr(md5(time().'1'), 0, 10) . '.' . $file_ext;
             $uploaded_image = APP_ROOT . "../../public/images/" . $unique_image;
 
             move_uploaded_file($file_temp, $uploaded_image);
-
-            $sql = "UPDATE `products` SET name = '" . $_POST['name'] . "', `originalPrice` = " . $_POST['originalPrice'] . ", `promotionPrice` = " . $_POST['promotionPrice'] . ", `image` = '" . $unique_image . "', `cateId` = " . $_POST['cateId'] . ", `des` = '" . $_POST['des'] . "', `weight` = " . $_POST['weight'] . " WHERE id = " . $_POST['id'] . "";
-            $result = mysqli_query($db->con, $sql);
-            return $result;
-        } else {
-            $sql = "UPDATE `products` SET name = '" . $_POST['name'] . "', `originalPrice` = " . $_POST['originalPrice'] . ", `promotionPrice` = " . $_POST['promotionPrice'] . ", `cateId` = " . $_POST['cateId'] . ", `des` = '" . $_POST['des'] . "', `weight` = " . $_POST['weight'] . " WHERE id = " . $_POST['id'] . "";
-            $result = mysqli_query($db->con, $sql);
-            return $result;
         }
+
+
+        // Check image and move to upload folder
+        if (!empty($_FILES['image2']['name'])) {
+            $file_name = $_FILES['image2']['name'];
+            $file_temp = $_FILES['image2']['tmp_name'];
+
+            $div = explode('.', $file_name);
+            $file_ext = strtolower(end($div));
+            $unique_image2 = substr(md5(time().'2'), 0, 10) . '.' . $file_ext;
+            $uploaded_image2 = APP_ROOT . "../../public/images/" . $unique_image2;
+
+            move_uploaded_file($file_temp, $uploaded_image2);
+        }
+
+        // Check image and move to upload folder
+        if (!empty($_FILES['image3']['name'])) {
+            $file_name = $_FILES['image3']['name'];
+            $file_temp = $_FILES['image3']['tmp_name'];
+
+            $div = explode('.', $file_name);
+            $file_ext = strtolower(end($div));
+            $unique_image3 = substr(md5(time().'3'), 0, 10) . '.' . $file_ext;
+            $uploaded_image3 = APP_ROOT . "../../public/images/" . $unique_image3;
+
+            move_uploaded_file($file_temp, $uploaded_image3);
+        }
+
+        $db = DB::getInstance();
+        $sql = "UPDATE `products` SET name = '" . $_POST['name'] . "', `originalPrice` = " . $_POST['originalPrice'] . ", `promotionPrice` = " . $_POST['promotionPrice'];
+        if (!empty($_FILES['image']['name'])) {
+            $sql .=  ", `image` = '" . $unique_image . "'";
+        }
+        if (!empty($_FILES['image2']['name'])) {
+            $sql .=  ", `image2` = '" . $unique_image2 . "'";
+        }
+        if (!empty($_FILES['image3']['name'])) {
+            $sql .=  ", `image3` = '" . $unique_image3 . "'";
+        }
+        $sql .= ", `cateId` = " . $_POST['cateId'] . ", `des` = '" . $_POST['des'] . "', `weight` = " . $_POST['weight'] . " WHERE id = " . $_POST['id'] . "";
+        $result = mysqli_query($db->con, $sql);
+        return $result;
     }
 
     public function getCountPaging($row = 8)
