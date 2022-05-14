@@ -18,15 +18,11 @@ class productModel
 
     public function search($keyword)
     {
-        $db = DB::getInstance();
-        $sql = "";
-        if (count(explode(" ", $keyword)) > 1) {
-            $sql = "SELECT p.id, p.name, p.image, p.qty, p.soldCount, p.originalPrice, p.promotionPrice FROM products p JOIN categories c ON p.cateId = c.id WHERE MATCH(p.name,p.des) AGAINST ('$keyword' WITH QUERY EXPANSION) AND p.status=1 AND c.status=1";
-        } else {
-            $sql = "SELECT p.id, p.name, p.image, p.qty, p.soldCount, p.originalPrice, p.promotionPrice FROM products p JOIN categories c ON p.cateId = c.id WHERE p.name LIKE '%" . $keyword . "%' OR c.name LIKE '%" . $keyword . "%' AND p.status=1 AND c.status=1";
-        }
-        $result = mysqli_query($db->con, $sql);
-        return $result;
+        $newKeyword = str_replace(" ", "%20", $keyword);
+        $contents = file_get_contents("http://localhost:8983/solr/products/select?q=name:%20(" . $newKeyword . ")%0Ades:%20(" . $newKeyword . ")&wt=php");
+        $result = 0;
+        eval("\$result = " . $contents . ";");
+        return $result['response']['docs'];
     }
 
     public function getById($Id)
@@ -77,6 +73,14 @@ class productModel
     {
         $db = DB::getInstance();
         $sql = "SELECT p.id, p.name, p.image, p.originalPrice, p.promotionPrice, p.qty as qty, p.soldCount as soldCount FROM products p JOIN categories c ON p.cateId = c.id WHERE p.status=1 AND c.status = 1 order BY id DESC LIMIT 4";
+        $result = mysqli_query($db->con, $sql);
+        return $result;
+    }
+
+    public function getDiscountproducts()
+    {
+        $db = DB::getInstance();
+        $sql = "SELECT p.id, p.name, p.image, p.originalPrice, p.promotionPrice, p.qty as qty, p.soldCount as soldCount FROM products p JOIN categories c ON p.cateId = c.id WHERE p.status=1 AND c.status = 1 AND p.promotionPrice < p.originalPrice LIMIT 4";
         $result = mysqli_query($db->con, $sql);
         return $result;
     }
@@ -149,7 +153,7 @@ class productModel
 
             $div = explode('.', $file_name);
             $file_ext = strtolower(end($div));
-            $unique_image = substr(md5(time().'1'), 0, 10) . '.' . $file_ext;
+            $unique_image = substr(md5(time() . '1'), 0, 10) . '.' . $file_ext;
             $uploaded_image = APP_ROOT . "../../public/images/" . $unique_image;
 
             move_uploaded_file($file_temp, $uploaded_image);
@@ -163,7 +167,7 @@ class productModel
 
             $div = explode('.', $file_name);
             $file_ext = strtolower(end($div));
-            $unique_image2 = substr(md5(time().'2'), 0, 10) . '.' . $file_ext;
+            $unique_image2 = substr(md5(time() . '2'), 0, 10) . '.' . $file_ext;
             $uploaded_image2 = APP_ROOT . "../../public/images/" . $unique_image2;
 
             move_uploaded_file($file_temp, $uploaded_image2);
@@ -176,7 +180,7 @@ class productModel
 
             $div = explode('.', $file_name);
             $file_ext = strtolower(end($div));
-            $unique_image3 = substr(md5(time().'3'), 0, 10) . '.' . $file_ext;
+            $unique_image3 = substr(md5(time() . '3'), 0, 10) . '.' . $file_ext;
             $uploaded_image3 = APP_ROOT . "../../public/images/" . $unique_image3;
 
             move_uploaded_file($file_temp, $uploaded_image3);

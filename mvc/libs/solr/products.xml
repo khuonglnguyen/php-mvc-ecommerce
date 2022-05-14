@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<add>
+        <doc name="products">
+            <field name="id">21</field>
+            <field name="name">Bút kẻ mắt Maybelline1</field>
+            <field name="originalPrice">114000</field>
+            <field name="promotionPrice">114000</field>
+            <field name="image">but-ke-mat-nuoc.jpg</field>
+            <field name="createdBy">59</field>
+            <field name="createdDate">2022-03-08</field>
+            <field name="cateId">8</field>
+            <field name="qty">8</field>
+            <field name="des">Một đôi mắt đẹp, sắc sảo thì không thể thiếu viền kẻ mắt, không những  đem lại ánh nhìn mê hoặc mà đây còn là bước không thể thiếu trong việc trang điểm mắt. Bút Kẻ MắtNước Sắc Mảnh Maybelline HyperSharp Liner Màu Đen 0.5g từ thương hiệu mỹ phẩm trang điểm Maybelline New York nổi tiếng của Mỹ với đầu cọ cải tiến chỉ 0.01mm và rất mềm mại, do vậy đường kẻ mắt sẽ cực kì linh hoạt và dễ điều khiển, bạn có thể dễ dàng vẽ mắt từ nét mỏng tự nhiên đến dày cá tính. Cấu trúc ống mực cũng đã được cải tiến so với phiên bản cũ giúp dòng mực chảy từ ống xuống ngòi đều hơn, đậm hơn.</field>
+            <field name="status">1</field>
+            <field name="soldCount">0</field>
+            <field name="weight">100</field>
+            <field name="image2">but-ke-mat-nuoc-sac-manh-maybelline-mau-den-0-5g-2.jpg</field>
+            <field name="image3">but-ke-mat-nuoc-sac-manh-maybelline-mau-den-0-5g-3.jpg</field>
+        </doc>
+        <doc name="products">
+            <field name="id">22</field>
+            <field name="name">Kẻ Mắt Nước Maybelline Sắc Nét</field>
+            <field name="originalPrice">96000</field>
+            <field name="promotionPrice">90000</field>
+            <field name="image">a1957e0341.jpg</field>
+            <field name="createdBy">59</field>
+            <field name="createdDate">2022-03-11</field>
+            <field name="cateId">8</field>
+            <field name="qty">0</field>
+            <field name="des">Bút kẻ mắt dạng nước Hyper Sharp Power đến từ Maybelline sẽ giúp bạn có đôi mắt to tròn và sắc sảo hơn. Nhờ công thức ưu việt chứa những phân tử carbon siêu nhỏ kết hợp cùng công nghệ hút sáng đặc biệt, Hyper Sharp Power tạo ra những nét vẽ có màu mực đen tuyền ấn tượng, không lem, không trôi nhưng lại rất dễ tẩy trang. Hơn nữa, đầu cọ cực nhỏ và sắc mảnh sẽ giúp bạn linh loạt hơn khi kẻ mắt và dễ dàng tạo ra nhiều phong cách khác nhau từ mảnh tự nhiên đến dày ấn tượng. Hiện Hasaki.vn cung cấp bút kẻ mắt nước Hyper Sharp Power với mức giá tốt nhất thị trường.</field>
+            <field name="status">1</field>
+            <field name="soldCount">0</field>
+            <field name="weight">100</field>
+            <field name="image2">c6495f8bd1.jpg</field>
+            <field name="image3">6ce0c1f7b1.jpg</field>
+        </doc>
+        <doc name="products">
+            <field name="id">23</field>
+            <field name="name">Phấn Nước Lemonade</field>
+            <field name="originalPrice">250000</field>
+            <field name="promotionPrice">250000</field>
+            <field name="image">phan-nuoc-lemonade-sieu-kiem.jpg</field>
+            <field name="createdBy">59</field>
+            <field name="createdDate">2022-03-11</field>
+            <field name="cateId">7</field>
+            <field name="qty">0</field>
+            <field name="des">Phấn Nước Lemonade Siêu Kiềm Dầu 15g là sản phẩm cushion đến từ thương hiệu mỹ phẩm Lemonade của Việt Nam, được thiết kế cho làn da dầu, siêu dầu và da dầu mụn nhờ có lớp màng cực kỳ bền vững, kiểm soát dầu thừa hữu hiệu, hạn chế vỡ hay chảy nền do mồ hôi và bã nhờn dư thừa. Từ đó, sản phẩm giúp giữ lớp nền bền chắc, ít xuống màu và lâu trôi.</field>
+            <field name="status">1</field>
+            <field name="soldCount">0</field>
+            <field name="weight">200</field>
+            <field name="image2"></field>
+            <field name="image3"></field>
+        </doc>
+        <doc name="products">
+            <field name="id">24</field>
+            <field name="name">Son Shu Uemura 2022</field>
+            <field name="originalPrice">600000</field>
+            <field name="promotionPrice">600000</field>
+            <field name="image">google-shopping-son-shu-uemura.jpg</field>
+            <field name="createdBy">59</field>
+            <field name="createdDate">2022-03-11</field>
+            <field name="cateId">6</field>
+            <field name="qty">4</field>
+            <field name="des">[Phiên Bản Giới Hạn Tết] Son Nhiều Dưỡng Chất Shu Uemura Iron Reds Rouge Unlimited Central Lipstick là dòng son trang điểm môi cao cấp mới ra mắt từ thương hiệu Shu Uemura, thuộc bộ sưu tập Iron Reds phiên bản giới hạn dành riêng cho dịp Tết 2021. Với kết cấu son satin chứa nhiều chất dưỡng ẩm bao gồm dầu hoa trà quý giá &amp; Ceramide cùng sắc đỏ chủ đạo thời thượng, Rouge Unlimited sẽ mang đến cho bạn đôi môi mềm mại, quyến rũ và màu sắc rạng rỡ suốt nhiều giờ liền.</field>
+            <field name="status">1</field>
+            <field name="soldCount">0</field>
+            <field name="weight">150</field>
+            <field name="image2"></field>
+            <field name="image3"></field>
+        </doc>
+        <doc name="products">
+            <field name="id">25</field>
+            <field name="name">Son Mịn Môi Naris 2022</field>
+            <field name="originalPrice">370000</field>
+            <field name="promotionPrice">10000</field>
+            <field name="image">son-min-moi-naris.jpg</field>
+            <field name="createdBy">59</field>
+            <field name="createdDate">2022-03-11</field>
+            <field name="cateId">6</field>
+            <field name="qty">4</field>
+            <field name="des">Son môi luôn là một món đồ làm đẹp không thể thiếu đối với nhiều cô nàng. Bởi lẽ chỉ cần chút son môi đã tạo vẻ đẹp quyến rũ, đầy sức sống cho khuôn mặt. Tuy nhiên, để chọn được 1 thỏi son chất lượng tốt, màu sắc đẹp và giá cả hợp lý không hề dễ dàng. Hasaki xin giới thiệu đến bạn Son Mịn Môi Naris CNC đến từ thương hiệu mỹ phẩm Nhật Bản, Naris Cosmetic với độ bám cao, dưỡng môi hiệu quả, khả năng giữ màu ổn mang đến cho bạn bờ môi mịn màng, chuẩn màu đầy quyến rũ.</field>
+            <field name="status">1</field>
+            <field name="soldCount">1</field>
+            <field name="weight">200</field>
+            <field name="image2"></field>
+            <field name="image3"></field>
+        </doc>
+        <doc name="products">
+            <field name="id">29</field>
+            <field name="name">Kẻ Mắt Nước SILKYGIRL Không Trôi 2.5ml</field>
+            <field name="originalPrice">158000</field>
+            <field name="promotionPrice">158000</field>
+            <field name="image">723aa980b2.jpg</field>
+            <field name="createdBy">59</field>
+            <field name="createdDate">2006-04-22</field>
+            <field name="cateId">8</field>
+            <field name="qty">98</field>
+            <field name="des">Điều quan trọng không phải là phân vân lựa chọn mua bút kẻ mắt của thương hiệu đắt tiền hay mua bút của thương hiệu bình dân, mà quan trọng là bạn phải chọn loại sản phẩm phù hợp với kiểu kẻ mắt mà bạn yêu thích. Bạn có thể kẻ đuôi mắt vểnh lên một chút giống như một chú mèo hay kẻ đường mỏng tinh tế khiến mắt trông đậm và to hơn…giúp bản thân bạn &quot;biến hóa&quot; bất ngờ. Nếu bạn đang tìm kiếm một loại bút kẻ mắt nước ưng ý thì hãy ghé Hasaki và thử qua Kẻ Mắt Nước Không Trôi đến từ thương hiệu SILKYGIRL, đảm bảo độ mềm và sắc nét của nó sẽ không làm bạn thất vọng.</field>
+            <field name="status">1</field>
+            <field name="soldCount">0</field>
+            <field name="weight">250</field>
+            <field name="image2"></field>
+            <field name="image3"></field>
+        </doc>
+        <doc name="products">
+            <field name="id">30</field>
+            <field name="name">Chì Kẻ Mắt Australis Màu Nâu Huyền 1.15g</field>
+            <field name="originalPrice">123000</field>
+            <field name="promotionPrice">123000</field>
+            <field name="image">e3d2174efc.jpg</field>
+            <field name="createdBy">59</field>
+            <field name="createdDate">2006-04-22</field>
+            <field name="cateId">8</field>
+            <field name="qty">17</field>
+            <field name="des">Trong trang điểm, đường kẻ mắt (Eyeliner) tuy mỏng manh đơn giản nhưng lại là điểm nhấn cho gương mặt bạn thêm phần “hút hồn” người đối diện. Đối với những bạn mới bắt đầu tập tành kẻ mắt, thì chì kẻ mắt chính là sản phẩm dễ sử dụng nhất, thay vì chọn dạng bút nước, gel hay bột. Chì kẻ mắt rất dễ điều chỉnh được độ đậm nhạt, nếu lỡ lem khi kẻ cũng có thể điều chỉnh lại dễ dàng bằng tay, ngoài ra chì kẻ mắt còn thích hợp để kẻ mí trong giúp tạo độ sâu và to tròn cho đôi mắt. Chì kẻ mắt sẽ cho những đường Eyeliner nhẹ nhàng, đẹp tự nhiên, phù hợp với những bạn theo đuổi phong cách makeup “sương sương” của Hàn Quốc. Và để giúp các bạn có thêm sự lựa chọn, Hasaki xin giới thiệu Chì Kẻ Mắt Australis Eyeliner Pencil đến từ thương hiệu mỹ phẩm Australis của Úc, với chất chì mềm, dễ sử dụng, cho bạn những đường kẻ mắt đẹp tự nhiên và chân thật nhất. Đặc biệt sản phẩm không chứa dầu khoáng, an toàn cho da mắt mỏng manh, đồng thời còn chứa chất chống oxy hóa nuôi dưỡng da.</field>
+            <field name="status">1</field>
+            <field name="soldCount">0</field>
+            <field name="weight">120</field>
+            <field name="image2"></field>
+            <field name="image3"></field>
+        </doc>
+        <doc name="products">
+            <field name="id">31</field>
+            <field name="name">Son Kem Lì Gilaa Rich Rosie 08 Take A</field>
+            <field name="originalPrice">209000</field>
+            <field name="promotionPrice">209000</field>
+            <field name="image">ba6720f741.jpg</field>
+            <field name="createdBy">59</field>
+            <field name="createdDate">2006-04-22</field>
+            <field name="cateId">6</field>
+            <field name="qty">27</field>
+            <field name="des">Son Kem Lì Gilaa Long Wear Lip Cream Rich Rosie Collection 5g là sản phẩm son kem lì đến từ thương hiệu mỹ phẩm Gilaa của Hàn Quốc, với bảng màu đa dạng, thời thượng phù hợp cho mọi làn da. Ngoài ra, son chứa nhiều thành phần dưỡng môi như Bisabolol, bơ hạt mỡ, hạt mắc ca giúp cho đôi môi mềm mịn đồng thời hỗ trợ giảm thâm môi hiệu quả, thích hợp cho môi nhiều khuyết điểm.</field>
+            <field name="status">1</field>
+            <field name="soldCount">0</field>
+            <field name="weight">200</field>
+            <field name="image2"></field>
+            <field name="image3"></field>
+        </doc>
+        <doc name="products">
+            <field name="id">32</field>
+            <field name="name">Son Kem Lì Bbia Màu 38 Feign Fine</field>
+            <field name="originalPrice">138000</field>
+            <field name="promotionPrice">138000</field>
+            <field name="image">95de0cd83a.jpg</field>
+            <field name="createdBy">59</field>
+            <field name="createdDate">2006-04-22</field>
+            <field name="cateId">6</field>
+            <field name="qty">21</field>
+            <field name="des">Son Kem Lì Bbia Last Velvet Lip Tint Version 8 5g là son môi đến từ thương hiệu mỹ phẩm Bbia của Hàn Quốc, nổi bật với chất son bám chặt trên môi tạo hiệu ứng mờ lì giúp che đi các khuyết điểm trên môi. Son kem lì Bbia Version 8 được thiết kế vỏ son nắp đen kim loại bóng ma mị đầy cuốn hút nhưng vẫn giữ kiểu dáng như các phiên bản trước đây.</field>
+            <field name="status">1</field>
+            <field name="soldCount">0</field>
+            <field name="weight">200</field>
+            <field name="image2"></field>
+            <field name="image3"></field>
+        </doc>
+        <doc name="products">
+            <field name="id">33</field>
+            <field name="name">Khương Nguyễn</field>
+            <field name="originalPrice">100</field>
+            <field name="promotionPrice">100</field>
+            <field name="image">114a154d3a.jpg</field>
+            <field name="createdBy">59</field>
+            <field name="createdDate">2016-04-22</field>
+            <field name="cateId">6</field>
+            <field name="qty">5</field>
+            <field name="des">
+Mô tả sản phẩm...
+
+abfbdfb
+
+gr	 	 	 	 
+ 	 	 	 	adf
+ 	 	fdb	 	 
+ 	 	 	 	
+ 
+
+ 
+
+</field>
+            <field name="status">1</field>
+            <field name="soldCount">0</field>
+            <field name="weight">5</field>
+            <field name="image2"></field>
+            <field name="image3"></field>
+        </doc>
+</add>

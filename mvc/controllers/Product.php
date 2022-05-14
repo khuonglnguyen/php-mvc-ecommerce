@@ -5,16 +5,11 @@ class product extends ControllerBase
     public function search()
     {
         $product = $this->model("productModel");
-        $result = $product->search($_GET['keyword']);
-        $productList = [];
-        if ($result) {
-            // Fetch
-            $productList = $result->fetch_all(MYSQLI_ASSOC);
-        }
+        $result = $product->search(urlencode($_GET["keyword"]));
         $this->view("client/products", [
             "headTitle" => "Tìm kiếm",
             "title" => "Tìm kiếm với từ khóa: " . $_GET['keyword'],
-            "productList" => $productList
+            "productList" => $result
         ]);
     }
 
@@ -154,7 +149,7 @@ class product extends ControllerBase
                 $this->redirect("product", "single", [
                     "Id" => $productId
                 ]);
-            }else {
+            } else {
                 $this->redirect("product", "single", [
                     "Id" => $productId
                 ]);
@@ -171,7 +166,7 @@ class product extends ControllerBase
             $result = $productFavorite->remove($_SESSION['user_id']);
             if ($result) {
                 $this->redirect("product", "favorite");
-            }else {
+            } else {
                 $this->redirect("product", "favorite");
             }
         } else {

@@ -67,7 +67,7 @@ class ratingModel
     public function delete($id)
     {
         $db = DB::getInstance();
-        $sql = "DELETE FROM `productrating`  WHERE id = " . $id . "";
+        $sql = "UPDATE `productrating` SET reply = NULL, repliedDate = NULL WHERE id = " . $id . "";
         $result = mysqli_query($db->con, $sql);
         return $result;
     }

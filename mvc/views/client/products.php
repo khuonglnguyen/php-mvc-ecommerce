@@ -31,7 +31,7 @@
           <ul class="sub-menu">
             <?php
             foreach ($listCategory as $key) { ?>
-              <li><a href="<?= URL_ROOT . '/product/category/' . $key['id'] ?>?page=1"><?= $key['name'] ?></a></li>
+              <li><a href="<?= URL_ROOT . '/product/category/' . $value['id'] ?>?page=1"><?= $value['name'] ?></a></li>
             <?php }
             ?>
           </ul>
@@ -64,31 +64,31 @@
   <div class="title"><?= $data['title'] ?></div>
   <div class="content">
     <?php
-    if (count($data['productList']) > 0) {
-      foreach ($data['productList'] as $key) { ?>
+    if ($data['productList']) {
+      foreach ($data['productList'] as $key=>$value) {?>
         <div class="card">
           <?php
-          if ($key['promotionPrice'] < $key['originalPrice']) { ?>
+          if ($value['promotionPrice'][0] < $value['originalPrice'][0]) { ?>
             <div class="discount">
-              -<?=ceil(100-(($key['promotionPrice']/$key['originalPrice']*100))) ?>%
+              -<?=ceil(100-(($value['promotionPrice'][0]/$value['originalPrice'][0]*100))) ?>%
             </div>
           <?php }
           ?>
           <div class="card-img">
-            <a href="<?= URL_ROOT . '/product/single/' . $key['id'] ?>"><img src="<?= URL_ROOT ?>/public/images/<?= $key['image'] ?>" class="product-image" alt=""></a>
+            <a href="<?= URL_ROOT . '/product/single/' . $value['id'] ?>"><img src="<?= URL_ROOT ?>/public/images/<?= $value['image'][0] ?>" class="product-image" alt=""></a>
           </div>
-          <a href="<?= URL_ROOT . '/product/single/' . $key['id'] ?>">
-            <h1><?= $key['name'] ?></h1>
+          <a href="<?= URL_ROOT . '/product/single/' . $value['id'] ?>">
+            <h1><?= $value['name'][0] ?></h1>
           </a>
           <?php
-          if ($key['promotionPrice'] < $key['originalPrice']) { ?>
-            <p class="promotion-price"><del><?= number_format($key['originalPrice'], 0, '', ',') ?>₫</del></p>
+          if ($value['promotionPrice'][0] < $value['originalPrice'][0]) { ?>
+            <p class="promotion-price"><del><?= number_format($value['originalPrice'][0], 0, '', ',') ?>₫</del></p>
           <?php }
           ?>
-          <p class="original-price"><?= number_format($key['promotionPrice'], 0, '', ',') ?>₫</p>
-          <p class="qty-card">Kho: <?= $key['qty'] ?></p>
-          <p class="sold-count">Đã bán: <?= $key['soldCount'] ?></p>
-          <p><a href="<?= URL_ROOT . '/cart/addItemcart/' . $key['id'] ?>"><button>Thêm vào giỏ</button></a></p>
+          <p class="original-price"><?= number_format($value['promotionPrice'][0], 0, '', ',') ?>₫</p>
+          <p class="qty-card">Kho: <?= $value['qty'][0] ?></p>
+          <p class="sold-count">Đã bán: <?= $value['soldCount'][0] ?></p>
+          <p><a href="<?= URL_ROOT . '/cart/addItemcart/' . $value['id'] ?>"><button>Thêm vào giỏ</button></a></p>
         </div>
       <?php }
     } else { ?>

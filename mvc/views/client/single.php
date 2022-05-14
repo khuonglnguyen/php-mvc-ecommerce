@@ -97,8 +97,8 @@
       <div class="product-price">
         <?php 
         if ($data['product']['promotionPrice'] < $data['product']['originalPrice']) { ?>
-          <span><?= number_format($data['product']['originalPrice'], 0, '', ',')  ?>₫</span>
-          <del><?= number_format($data['product']['promotionPrice'], 0, '', ',')  ?>₫</del>
+          <span><?= number_format($data['product']['promotionPrice'], 0, '', ',')  ?>₫</span>
+          <del><?= number_format($data['product']['originalPrice'], 0, '', ',')  ?>₫</del>
         <p class="error"> -<?= ceil(100-(($data['product']['promotionPrice']/$data['product']['originalPrice']*100))) ?>%</p>
           <?php  } else { ?>
          <span><?= number_format($data['product']['originalPrice'], 0, '', ',')  ?>₫</span>

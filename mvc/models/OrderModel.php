@@ -38,8 +38,8 @@ class orderModel
         $sql = "INSERT INTO `orders` (`id`, `userId`, `createdDate`, `receivedDate`, `status`, `paymentMethod`, `paymentStatus`, `payDate`, `total`,`discount`) VALUES (NULL, '$userId', '" . date('d/m/y') . "', NULL, 'processing', 'COD',0,NULL,'$total',$percentDiscount)";
         $result = mysqli_query($db->con, $sql);
 
+        $last_id = $db->con->insert_id;
         if ($result) {
-            $last_id = $db->con->insert_id;
             $sqlCart = "SELECT * FROM cart WHERE userId=$userId";
             $resultCart = (mysqli_query($db->con, $sqlCart))->fetch_all(MYSQLI_ASSOC);
             foreach ($resultCart as $key => $value) {
@@ -123,6 +123,14 @@ class orderModel
     {
         $db = DB::getInstance();
         $sql = "SELECT COUNT(*) AS total FROM orders WHERE status = 'received'";
+        $result = mysqli_query($db->con, $sql);
+        return $result;
+    }
+
+    public function getRevenueMonth()
+    {
+        $db = DB::getInstance();
+        $sql = "SELECT SUM(total) AS total,DAY(createdDate) as day FROM `orders` WHERE MONTH(createdDate) = MONTH(NOW()) AND paymentStatus=1 GROUP BY MONTH(createdDate), YEAR(createdDate)";
         $result = mysqli_query($db->con, $sql);
         return $result;
     }

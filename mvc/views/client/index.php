@@ -162,6 +162,41 @@
     <?php }
     ?>
   </div>
+  <div class="title">Đang khuyến mãi</div>
+  <div class="content">
+    <?php
+    if (count($data['DiscountproductsList']) > 0) {
+      foreach ($data['DiscountproductsList'] as $key) { ?>
+        <div class="card">
+          <?php
+          if ($key['promotionPrice'] < $key['originalPrice']) { ?>
+            <div class="discount">
+              -<?=ceil(100-(($key['promotionPrice']/$key['originalPrice']*100))) ?>%
+            </div>
+          <?php }
+          ?>
+          <div class="card-img">
+            <a href="<?= URL_ROOT . '/product/single/' . $key['id'] ?>"><img src="<?= URL_ROOT ?>/public/images/<?= $key['image'] ?>" class="product-image" alt=""></a>
+          </div>
+          <a href="<?= URL_ROOT . '/product/single/' . $key['id'] ?>">
+            <h1><?= $key['name'] ?></h1>
+          </a>
+          <?php
+          if ($key['promotionPrice'] < $key['originalPrice']) { ?>
+            <p class="promotion-price"><del><?= number_format($key['originalPrice'], 0, '', ',') ?>₫</del></p>
+          <?php }
+          ?>
+          <p class="original-price"><?= number_format($key['promotionPrice'], 0, '', ',') ?>₫</p>
+          <p class="qty-card">Kho: <?= $key['qty'] ?></p>
+          <p class="sold-count">Đã bán: <?= $key['soldCount'] ?></p>
+          <p><a href="<?= URL_ROOT . '/cart/addItemcart/' . $key['id'] ?>"><button>Thêm vào giỏ</button></a></p>
+        </div>
+      <?php }
+    } else { ?>
+      <h3>Không tìm thấy sản phẩm...</h3>
+    <?php }
+    ?>
+  </div>
   <script>
     let slideIndex = 1;
     showSlides(slideIndex);

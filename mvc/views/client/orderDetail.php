@@ -83,7 +83,7 @@
       ?>
         <tr>
           <td><?= ++$count ?></td>
-          <td><?= $value['productName'] ?></td>
+          <td><a href="<?= URL_ROOT ?>/product/single/<?= $value['productId'] ?>"><?= $value['productName'] ?></a></td>
           <td><img class="img-table" src="<?= URL_ROOT . '/public/images/' . $value['productImage'] ?>" alt=""></td>
           <td><?= $value['qty'] ?></td>
           <td><?= number_format($value['productPrice'], 0, '', ',') ?>₫</td>

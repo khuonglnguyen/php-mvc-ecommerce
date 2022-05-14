@@ -1,19 +1,19 @@
       <?php
       $cart = new cart();
       $total = (isset($cart->getTotalQuantitycart()['total']) ? $cart->getTotalQuantitycart()['total'] : 0);
-
+      
       $category = $this->model("categoryModel");
       $result = $category->getAllClient();
       $listCategory = $result->fetch_all(MYSQLI_ASSOC);
       ?>
       <nav class="navbar">
         <div class="logo">HUYPHAM STORE</div>
-    <div class="search-container">
-      <form action="<?= URL_ROOT ?>/product/search" method="get">
-        <input type="text" class="search" placeholder="Tìm kiếm.." name="keyword">
-        <button type="submit"><i class="fa fa-search"></i></button>
-      </form>
-    </div>
+        <div class="search-container">
+          <form action="<?= URL_ROOT ?>/product/search" method="get">
+            <input type="text" class="search" placeholder="Tìm kiếm.." name="keyword">
+            <button type="submit"><i class="fa fa-search"></i></button>
+          </form>
+        </div>
         <ul class="nav-links">
           <input type="checkbox" id="checkbox_toggle" />
           <label for="checkbox_toggle" class="hamburger">&#9776;</label>
@@ -29,7 +29,7 @@
                 ?>
               </ul>
             </li>
-            
+
             <?php
             if (isset($_SESSION['user_id'])) { ?>
               <li class="cate">

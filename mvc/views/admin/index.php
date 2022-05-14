@@ -1,4 +1,6 @@
 <?php require APP_ROOT . '/views/admin/inc/head.php'; ?>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+</script>
 
 <body>
     <?php require APP_ROOT . '/views/admin/inc/sidebar.php'; ?>
@@ -56,6 +58,22 @@
             <section class="recent">
                 <div class="activity-grid">
                     <div class="activity-card">
+                        <h3>Doanh thu tháng này</h3>
+                        <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+                    </div>
+                </div>
+            </section>
+            <section class="recent">
+                <div class="activity-grid">
+                    <div class="activity-card">
+                        <h3>Sản phẩm bán chạy trong tháng</h3>
+                        <canvas id="myChart2" style="width:100%;max-width:700px"></canvas>
+                    </div>
+                </div>
+            </section>
+            <section class="recent">
+                <div class="activity-grid">
+                    <div class="activity-card">
                         <h3>Đơn hàng mới</h3>
                         <div class="table-responsive">
                             <table>
@@ -76,7 +94,7 @@
                                     foreach ($data['orderList'] as $key => $value) {
                                     ?>
                                         <tr>
-                                        <td><?= ++$count ?></td>
+                                            <td><?= ++$count ?></td>
                                             <td><?= $value['id'] ?></td>
                                             <td><?= $value['createdDate'] ?></td>
                                             <?php
@@ -86,7 +104,7 @@
                                                 <td><span class="blue">Đã xác nhận</span></td>
                                             <?php } else if ($value['status'] == "delivery") { ?>
                                                 <td><span class="yellow">Đang giao hàng</span></td>
-                                            <?php }else{ ?>
+                                            <?php } else { ?>
                                                 <td><span class="active">Hoàn thành</span></td>
                                             <?php }
                                             ?>
@@ -112,6 +130,103 @@
         </main>
 
     </div>
+    <script>
+        var xValues = <?php echo "[";
+                        for ($i = 0; $i < count($data['days']); $i++) {
+                            if ($i + 1 < count($data['days'])) {
+                                echo "'ngày " . $data['days'][$i] . "',";
+                            } else {
+                                echo "'ngày " . $data['days'][$i] . "'";
+                            }
+                        }
+                        echo "]" ?>;
+        var yValues = <?php echo "[";
+                        for ($i = 0; $i < count($data['totals']); $i++) {
+                            if ($i + 1 < count($data['totals'])) {
+                                echo $data['totals'][$i] . ",";
+                            } else {
+                                echo $data['totals'][$i];
+                            }
+                        }
+                        echo "]" ?>;
+        var barColors = <?php echo "[";
+                        for ($i = 0; $i < count($data['totals']); $i++) {
+                            if ($i + 1 < count($data['totals'])) {
+                                echo "'rgba(" . rand(100, 250) . "," . rand(100, 250) . "," . rand(100, 250) . ")', ";
+                            } else {
+                                echo "'rgba(" . rand(100, 250) . "," . rand(100, 250) . "," . rand(100, 250) . ")'";
+                            }
+                        }
+                        echo "]" ?>;
+
+        new Chart("myChart", {
+            type: "bar",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                    data: yValues
+                }]
+            },
+            options: {
+                legend: {
+                    display: false
+                },
+                title: {
+                    display: true,
+                    text: "Biểu đồ doanh thu tháng này"
+                }
+            }
+        });
+
+        var xValues = <?php echo "[";
+                        for ($i = 0; $i < count($data['days']); $i++) {
+                            if ($i + 1 < count($data['days'])) {
+                                echo "'ngày " . $data['days'][$i] . "',";
+                            } else {
+                                echo "'ngày " . $data['days'][$i] . "'";
+                            }
+                        }
+                        echo "]" ?>;
+        var yValues = <?php echo "[";
+                        for ($i = 0; $i < count($data['totals']); $i++) {
+                            if ($i + 1 < count($data['totals'])) {
+                                echo $data['totals'][$i] . ",";
+                            } else {
+                                echo $data['totals'][$i];
+                            }
+                        }
+                        echo "]" ?>;
+        var barColors = <?php echo "[";
+                        for ($i = 0; $i < count($data['totals']); $i++) {
+                            if ($i + 1 < count($data['totals'])) {
+                                echo "'rgba(" . rand(100, 250) . "," . rand(100, 250) . "," . rand(100, 250) . ")', ";
+                            } else {
+                                echo "'rgba(" . rand(100, 250) . "," . rand(100, 250) . "," . rand(100, 250) . ")'";
+                            }
+                        }
+                        echo "]" ?>;
+
+        new Chart("myChart2", {
+            type: "pie",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                    data: yValues
+                }]
+            },
+            options: {
+                legend: {
+                    display: false
+                },
+                title: {
+                    display: true,
+                    text: "Biểu đồ sản phẩm bán chạy trong tháng"
+                }
+            }
+        });
+    </script>
 </body>
 
 </html>
