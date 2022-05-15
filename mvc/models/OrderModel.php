@@ -35,7 +35,7 @@ class orderModel
     public function add($userId, $total, $percentDiscount = 0)
     {
         $db = DB::getInstance();
-        $sql = "INSERT INTO `orders` (`id`, `userId`, `createdDate`, `receivedDate`, `status`, `paymentMethod`, `paymentStatus`, `payDate`, `total`,`discount`) VALUES (NULL, '$userId', '" . date('d/m/y') . "', NULL, 'processing', 'COD',0,NULL,'$total',$percentDiscount)";
+        $sql = "INSERT INTO `orders` (`id`, `userId`, `createdDate`, `receivedDate`, `status`, `paymentMethod`, `paymentStatus`, `payDate`, `total`,`discount`) VALUES (NULL, '$userId', '" . date("y-m-d H:i:s") . "', NULL, 'processing', 'COD',0,NULL,'$total',$percentDiscount)";
         $result = mysqli_query($db->con, $sql);
 
         $last_id = $db->con->insert_id;
@@ -72,7 +72,7 @@ class orderModel
     public function processed($Id)
     {
         $db = DB::getInstance();
-        $sql = "UPDATE orders SET status = 'processed', receivedDate = '" . Date('d/m/y', strtotime('+3 days')) . "' WHERE id = $Id";
+        $sql = "UPDATE orders SET status = 'processed', receivedDate = '" . date('y-m-d', strtotime('+3 days')) . "' WHERE id = $Id";
         $result = mysqli_query($db->con, $sql);
         return $result;
     }
@@ -88,7 +88,7 @@ class orderModel
     public function received($Id)
     {
         $db = DB::getInstance();
-        $sql = "UPDATE orders SET status = 'received', receivedDate = '" . Date('d/m/y') . "', paymentStatus = 1, payDate = '" . Date('d/m/y') . "' WHERE id = $Id";
+        $sql = "UPDATE orders SET status = 'received', receivedDate = '" . date("y-m-d H:i:s") . "', paymentStatus = 1, payDate = '" . date("y-m-d H:i:s") . "' WHERE id = $Id";
         $result = mysqli_query($db->con, $sql);
         if ($result) {
             $sqlOrderDetail = "SELECT * FROM `order_details` WHERE orderId = $Id";
@@ -106,7 +106,7 @@ class orderModel
     public function payment($orderId)
     {
         $db = DB::getInstance();
-        $sql = "UPDATE orders SET paymentStatus = 1, paymentMethod = 'VNPay', payDate = '" . Date('d/m/y') . "' WHERE id = $orderId";
+        $sql = "UPDATE orders SET paymentStatus = 1, paymentMethod = 'VNPay', payDate = '" . date("y-m-d H:i:s") . "' WHERE id = $orderId";
         $result = mysqli_query($db->con, $sql);
         return $result;
     }

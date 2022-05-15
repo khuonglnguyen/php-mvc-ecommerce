@@ -73,7 +73,7 @@ require_once APP_ROOT . '/core/Config.php';
             </p>
             <p>
                 <label for="order_id">Mã hóa đơn</label>
-                <input type="text" id="order_id" name="order_id" placeholder="Mã hóa đơn" readonly value="<?php echo date("YmdHis") ?>" required>
+                <input type="text" id="order_id" name="order_id" placeholder="Mã hóa đơn" readonly value="<?= $data['order']['id'] ?>" required>
             </p>
             <p>
                 <label for="amount">Số tiền</label>

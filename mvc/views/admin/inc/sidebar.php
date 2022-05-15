@@ -52,6 +52,12 @@
                         <span>Quản lý voucher</span>
                     </a>
                 </li>
+                <li>
+                    <a href="<?= URL_ROOT . '/statisticManage' ?>">
+                        <span class="ti-ticket"></span>
+                        <span>Thống kê</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
