@@ -96,7 +96,7 @@
                                         <tr>
                                             <td><?= ++$count ?></td>
                                             <td><?= $value['id'] ?></td>
-                                            <td><?= $value['createdDate'] ?></td>
+                                            <td><?= date("d/m/Y", strtotime($value['createdDate'])) ?></td>
                                             <?php
                                             if ($value['status'] == "processing") { ?>
                                                 <td><span class="gray">Chưa xác nhận</span></td>
@@ -131,6 +131,7 @@
 
     </div>
     <script>
+        const d = new Date();
         var xValues = <?php echo "[";
                         for ($i = 0; $i < count($data['days']); $i++) {
                             if ($i + 1 < count($data['days'])) {
@@ -174,32 +175,32 @@
                 },
                 title: {
                     display: true,
-                    text: "Biểu đồ doanh thu tháng này"
+                    text: "Biểu đồ doanh thu tháng "+d.getMonth()
                 }
             }
         });
 
         var xValues = <?php echo "[";
-                        for ($i = 0; $i < count($data['days']); $i++) {
-                            if ($i + 1 < count($data['days'])) {
-                                echo "'ngày " . $data['days'][$i] . "',";
+                        for ($i = 0; $i < count($data['names']); $i++) {
+                            if ($i + 1 < count($data['names'])) {
+                                echo "'" . $data['names'][$i] . "',";
                             } else {
-                                echo "'ngày " . $data['days'][$i] . "'";
+                                echo "'" . $data['names'][$i] . "'";
                             }
                         }
                         echo "]" ?>;
         var yValues = <?php echo "[";
-                        for ($i = 0; $i < count($data['totals']); $i++) {
-                            if ($i + 1 < count($data['totals'])) {
-                                echo $data['totals'][$i] . ",";
+                        for ($i = 0; $i < count($data['totalsoldCount']); $i++) {
+                            if ($i + 1 < count($data['totalsoldCount'])) {
+                                echo $data['totalsoldCount'][$i] . " ,";
                             } else {
-                                echo $data['totals'][$i];
+                                echo $data['totalsoldCount'][$i];
                             }
                         }
                         echo "]" ?>;
         var barColors = <?php echo "[";
-                        for ($i = 0; $i < count($data['totals']); $i++) {
-                            if ($i + 1 < count($data['totals'])) {
+                        for ($i = 0; $i < count($data['totalsoldCount']); $i++) {
+                            if ($i + 1 < count($data['totalsoldCount'])) {
                                 echo "'rgba(" . rand(100, 250) . "," . rand(100, 250) . "," . rand(100, 250) . ")', ";
                             } else {
                                 echo "'rgba(" . rand(100, 250) . "," . rand(100, 250) . "," . rand(100, 250) . ")'";
@@ -222,7 +223,7 @@
                 },
                 title: {
                     display: true,
-                    text: "Biểu đồ sản phẩm bán chạy trong tháng"
+                    text: "Biểu đồ sản phẩm bán chạy trong tháng "+d.getMonth()
                 }
             }
         });

@@ -225,4 +225,11 @@ class productModel
         }
         return false;
     }
+
+    public function getSoldCountMonth(){
+        $db = DB::getInstance();
+        $sql = "SELECT SUM(p.soldCount) AS total, p.name FROM `orders` o JOIN order_details od ON o.id  JOIN products p ON od.productId = p.id WHERE MONTH(o.createdDate) = MONTH(NOW()) AND o.paymentStatus=1 GROUP BY p.id, MONTH(o.createdDate), YEAR(o.createdDate)";
+        $result = mysqli_query($db->con, $sql);
+        return $result;
+    }
 }

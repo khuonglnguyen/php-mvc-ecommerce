@@ -98,7 +98,7 @@
   </div>
   <?php
   if (count($data['productList']) > 0) { ?>
-    <a href="<?= URL_ROOT ?>/product/removeFavorite">Xóa</a>
+    <a href="<?= URL_ROOT ?>/product/removeFavorite" class="cart-btn remove">Xóa</a>
   <?php }
   ?>
   <?php require APP_ROOT . '/views/client/inc/chatbox.php'; ?>

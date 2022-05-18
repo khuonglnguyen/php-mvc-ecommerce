@@ -28,7 +28,7 @@ class App
             if (method_exists($this->controller, $arr[1])) {
                 $this->action = $arr[1];
             }
-            unset($arr[1]);
+            unset($arr[1]); 
         }
 
         // Params

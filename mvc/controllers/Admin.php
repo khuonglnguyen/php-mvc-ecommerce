@@ -10,6 +10,7 @@ class Admin extends ControllerBase
 
         $user = $this->model("userModel");
         $order = $this->model("orderModel");
+        $product = $this->model("productModel");
         $result = $order->getAll($_SESSION['user_id']);
         // Fetch
         $orderList = $result->fetch_all(MYSQLI_ASSOC);
@@ -28,6 +29,19 @@ class Admin extends ControllerBase
             $days[$i] = $revenueMonth[$i]['day'];
         }
 
+        ///////////////////////////////////////////////
+        $soldCountMonth = $product->getSoldCountMonth()->fetch_all(MYSQLI_ASSOC);
+
+        $totalsoldCount = [];
+        for ($i = 0; $i < count($soldCountMonth); $i++) {
+            $totalsoldCount[$i] = $soldCountMonth[$i]['total'];
+        }
+
+        $names = [];
+        for ($i = 0; $i < count($soldCountMonth); $i++) {
+            $names[$i] = $soldCountMonth[$i]['name'];
+        }
+
         $this->view("admin/index", [
             "headTitle" => "Trang quản trị",
             "orderList" => $orderList,
@@ -35,7 +49,9 @@ class Admin extends ControllerBase
             "totalClient" => $totalClient->fetch_assoc(),
             "totalOrderCompleted" => $totalOrderCompleted->fetch_assoc(),
             "totals" => $totals,
-            "days" => $days
+            "days" => $days,
+            "totalsoldCount" => $totalsoldCount,
+            "names" => $names
         ]);
     }
 }

@@ -96,7 +96,7 @@ class orderModel
             $listOrderDetail = $resultOrderDetail->fetch_all(MYSQLI_ASSOC);
 
             foreach ($listOrderDetail as $key => $value) {
-                $sqlUpdateSold = "UPDATE products SET soldCount = soldCount + " . $value['qty'] . " WHERE productId = " . $value['productId'] . "";
+                $sqlUpdateSold = "UPDATE products SET soldCount = soldCount + " . $value['qty'] . " WHERE id = " . $value['productId'] . "";
                 $resultUpdateSold = mysqli_query($db->con, $sqlUpdateSold);
             }
         }
@@ -130,7 +130,7 @@ class orderModel
     public function getRevenueMonth()
     {
         $db = DB::getInstance();
-        $sql = "SELECT SUM(total) AS total,DAY(createdDate) as day FROM `orders` WHERE MONTH(createdDate) = MONTH(NOW()) AND paymentStatus=1 GROUP BY MONTH(createdDate), YEAR(createdDate)";
+        $sql = "SELECT SUM(total) AS total,DAY(createdDate) as day FROM `orders` WHERE MONTH(createdDate) = MONTH(NOW()) AND paymentStatus=1 GROUP BY DAY(createdDate), MONTH(createdDate), YEAR(createdDate)";
         $result = mysqli_query($db->con, $sql);
         return $result;
     }

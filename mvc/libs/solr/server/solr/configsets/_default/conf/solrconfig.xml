@@ -20,7 +20,6 @@
      For more details about configurations options that may appear in
      this file, see http://wiki.apache.org/solr/SolrConfigXml.
 -->
-<config>
   <!-- In all configuration below, a prefix of "solr." for class names
        is an alias that causes solr to search appropriate packages,
        including org.apache.solr.(search|update|request|core|analysis)
@@ -36,7 +35,8 @@
        affect both how text is indexed and queried.
   -->
   <luceneMatchVersion>8.11.1</luceneMatchVersion>
-
+<lib dir="${solr.install.dir:../../../..}/contrib/dataimporthandler/lib" regex=".*\.jar" />
+<lib dir="${solr.install.dir:../../../..}/dist/" regex="solr-dataimporthandler-.*\.jar" />
   <!-- <lib/> directives can be used to instruct Solr to load any Jars
        identified and use them to resolve any "plugins" specified in
        your solrconfig.xml or schema.xml (ie: Analyzers, Request
@@ -764,6 +764,12 @@
        of SearchComponents (see below) and supports distributed
        queries across multiple shards
     -->
+	<requestHandler name="/dataimport" class="org.apache.solr.handler.dataimport.DataImportHandler">
+<lst name="defaults">
+<str name="config">solr-data-config.xml</str>
+</lst>
+</requestHandler>
+  
   <requestHandler name="/select" class="solr.SearchHandler">
     <!-- default values for query parameters can be specified, these
          will be overridden by parameters in the request

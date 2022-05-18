@@ -3,7 +3,7 @@ class home extends ControllerBase
 {
     public function Index()
     {
-        if (isset($_SESSION['role']) && isset($_SESSION['role']) == "admin") {
+        if (isset($_SESSION['role']) && $_SESSION['role'] == "admin") {
             $this->redirect("Admin");
         }
         $product = $this->model("productModel");
