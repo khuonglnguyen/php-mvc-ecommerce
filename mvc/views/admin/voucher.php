@@ -48,7 +48,7 @@
                                             <td>-<?= $value['percentDiscount'] ?>%</td>
                                             <td><?= $value['quantity'] ?></td>
                                             <td><?= $value['usedCount'] ?></td>
-                                            <td><?= $value['expirationDate'] ?></td>
+                                            <td><?= date("d/m/Y", strtotime($value['expirationDate'])) ?></td>
                                             <?php
                                             if ($value['status']) { ?>
                                                 <td><span class="active">Kích hoạt</span></td>

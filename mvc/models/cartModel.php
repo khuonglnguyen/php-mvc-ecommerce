@@ -29,7 +29,7 @@ class cartModel
                     "productId" => $value['productId'],
                     "productName" => $value['productName'],
                     "image" => $value['image'],
-                    "quantity" => 1,
+                    "quantity" => $value['quantity'],
                     "productPrice" => $value['productPrice']
                 );
             }

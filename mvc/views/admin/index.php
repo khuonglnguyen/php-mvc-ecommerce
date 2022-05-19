@@ -96,7 +96,7 @@
                                         <tr>
                                             <td><?= ++$count ?></td>
                                             <td><?= $value['id'] ?></td>
-                                            <td><?= date("d/m/Y", strtotime(date("d/m/Y", strtotime($value['createdDate'])))) ?></td>
+                                            <td><?= date("d/m/Y", strtotime($value['createdDate'])) ?></td>
                                             <?php
                                             if ($value['status'] == "processing") { ?>
                                                 <td><span class="gray">Chưa xác nhận</span></td>

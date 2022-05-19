@@ -83,7 +83,7 @@
           <td><?= ++$count ?></td>
           <td><?= $value['productName'] ?></td>
           <td><img class="img-table" src="<?= URL_ROOT . '/public/images/' . $value['image'] ?>" alt=""></td>
-          <td><input type="number" class="qty" name="" id="<?= $value['productId'] ?>" value="<?= $value['quantity'] ?>" onchange="update(this)"></td>
+          <td><input type="number" min="1" class="qty" name="" id="<?= $value['productId'] ?>" value="<?= $value['quantity'] ?>" onchange="update(this)"></td>
           <td><?= number_format($value['productPrice'], 0, '', ',') ?>₫</td>
           <td><a href="<?= URL_ROOT . '/cart/removeItemcart/' . $value['productId'] ?>" class="rm-item-cart"><i class="fa fa-trash"></i></a></td>
         </tr>
