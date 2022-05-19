@@ -47,6 +47,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="<?= URL_ROOT . '/questionManage?page=1' ?>">
+                        <span class="ti-comment-alt"></span>
+                        <span>Hỏi đáp</span>
+                    </a>
+                </li>
+                <li>
                     <a href="<?= URL_ROOT . '/voucherManage' ?>">
                         <span class="ti-ticket"></span>
                         <span>Quản lý voucher</span>
@@ -54,7 +60,7 @@
                 </li>
                 <li>
                     <a href="<?= URL_ROOT . '/statisticManage' ?>">
-                        <span class="ti-ticket"></span>
+                        <span class="ti-bar-chart"></span>
                         <span>Thống kê</span>
                     </a>
                 </li>

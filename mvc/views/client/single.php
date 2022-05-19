@@ -151,11 +151,14 @@
   <div class="title2">Hỏi đáp</div>
   <div class="rating">
     <div class="rate">
-      <form action="<?= URL_ROOT ?>/product/addQuestion" method="post">
-        <input type="hidden" name="productId" value="<?= $data['product']['id'] ?>">
-        <input type="text" placeholder="Nhập vào câu hỏi..." name="content">
-        <input type="submit" value="Gửi">
-      </form>
+        <b>Gửi câu hỏi</b>
+      <div class="search-container">
+        <form action="<?= URL_ROOT ?>/product/addQuestion" method="post">
+          <input type="hidden" name="productId" value="<?= $data['product']['id'] ?>">
+          <input type="text" class="search" placeholder="Nhập vào câu hỏi..." name="content">
+          <button type="submit">Gửi</button>
+        </form>
+      </div>
     </div>
     <?php
     if (count($data['questionContent']) > 0) {
@@ -197,7 +200,7 @@
           <?php
           if ($key['promotionPrice'] < $key['originalPrice']) { ?>
             <div class="discount">
-            -<?= ceil(100-(($key['promotionPrice']/$key['originalPrice']*100))) ?>%
+              -<?= ceil(100 - (($key['promotionPrice'] / $key['originalPrice'] * 100))) ?>%
             </div>
           <?php }
           ?>
