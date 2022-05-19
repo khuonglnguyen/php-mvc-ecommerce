@@ -87,7 +87,7 @@
           <?php } ?> <br>
           <?php
           if ($data['loved']) { ?>
-            <a href="#">Đã thêm vào DS yêu thích <i class="fa fa-heart"></i></a>
+            <a href="#">Đã thích <i class="fa fa-heart"></i></a>
           <?php } else { ?>
             <a href="<?= URL_ROOT . '/product/addFavorite/' .  $data['product']['id']  ?>">Thêm vào DS yêu thích <i class="fa fa-heart"></i></a>
           <?php }
@@ -95,14 +95,14 @@
           <p><?= $data['product']['des'] ?></p>
       </div>
       <div class="product-price">
-        <?php 
+        <?php
         if ($data['product']['promotionPrice'] < $data['product']['originalPrice']) { ?>
           <span><?= number_format($data['product']['promotionPrice'], 0, '', ',')  ?>₫</span>
           <del><?= number_format($data['product']['originalPrice'], 0, '', ',')  ?>₫</del>
-        <p class="error"> -<?= ceil(100-(($data['product']['promotionPrice']/$data['product']['originalPrice']*100))) ?>%</p>
-          <?php  } else { ?>
-         <span><?= number_format($data['product']['originalPrice'], 0, '', ',')  ?>₫</span>
-            <?php }
+          <p class="error"> -<?= ceil(100 - (($data['product']['promotionPrice'] / $data['product']['originalPrice'] * 100))) ?>%</p>
+        <?php  } else { ?>
+          <span><?= number_format($data['product']['originalPrice'], 0, '', ',')  ?>₫</span>
+        <?php }
         ?>
         <a href="<?= URL_ROOT . '/cart/addItemcart/' .  $data['product']['id']  ?>" class="cart-btn">Thêm vào giỏ</a>
       </div>
@@ -115,7 +115,7 @@
       foreach ($data['productRatingContent'] as $key => $value) { ?>
         <div class="rate">
           <div class="user-name">
-            Khách hàng <b><?= $value['fullName'] ?> </b> (<?= $value['time'] ?>)
+            Khách hàng <b><?= $value['fullName'] ?> </b> (<?= date("d/m/Y", strtotime($value['createdDate'])) ?>)
           </div>
           <div class="user-star">
             <?php
@@ -127,19 +127,65 @@
           <div class="user-content">
             <?= $value['content'] ?>
           </div>
-          <div class="reply">
-            <div class="user-name">
-              <i class="fa fa-reply" aria-hidden="true"></i>
-              Phản hồi từ <b>Quản trị viên</b> (<?= $value['repliedDate'] ?>)
+          <?php
+          if ($value['repliedDate']) { ?>
+            <div class="reply">
+              <div class="user-name">
+                <i class="fa fa-reply" aria-hidden="true"></i>
+                Phản hồi từ <b>Quản trị viên</b> (<?= date("d/m/Y", strtotime($value['repliedDate'])) ?>)
+              </div>
+              <div class="user-content">
+                <?= $value['reply'] ?>
+              </div>
             </div>
-            <div class="user-content">
-              <?= $value['reply'] ?>
-            </div>
-          </div>
+          <?php }
+          ?>
         </div>
       <?php }
     } else { ?>
-      Chưa có đánh giá
+      <div class="rate">
+        Chưa có đánh giá
+      </div>
+    <?php } ?>
+  </div>
+  <div class="title2">Hỏi đáp</div>
+  <div class="rating">
+    <div class="rate">
+      <form action="<?= URL_ROOT ?>/product/addQuestion" method="post">
+        <input type="hidden" name="productId" value="<?= $data['product']['id'] ?>">
+        <input type="text" placeholder="Nhập vào câu hỏi..." name="content">
+        <input type="submit" value="Gửi">
+      </form>
+    </div>
+    <?php
+    if (count($data['questionContent']) > 0) {
+      foreach ($data['questionContent'] as $key => $value) { ?>
+        <div class="rate">
+          <div class="user-name">
+            Khách hàng <b><?= $value['fullName'] ?> </b> (<?= date("d/m/Y", strtotime($value['createdDate'])) ?>)
+          </div>
+          <div class="user-content">
+            <?= $value['content'] ?>
+          </div>
+          <?php
+          if ($value['repliedDate']) { ?>
+            <div class="reply">
+              <div class="user-name">
+                <i class="fa fa-reply" aria-hidden="true"></i>
+                Phản hồi từ <b>Quản trị viên</b> (<?= date("d/m/Y", strtotime($value['repliedDate'])) ?>)
+              </div>
+              <div class="user-content">
+                <?= $value['reply'] ?>
+              </div>
+            </div>
+          <?php  }
+          ?>
+        </div>
+      <?php }
+    } else { ?>
+      <div class="rate">
+        Chưa có hỏi đáp
+      </div>
     <?php } ?>
   </div>
   <div class="title2">Sản phẩm cùng loại</div>
@@ -151,7 +197,7 @@
           <?php
           if ($key['promotionPrice'] < $key['originalPrice']) { ?>
             <div class="discount">
-              -<?= 100-(($key['originalPrice']/$key['promotionPrice']*100)) ?>%
+            -<?= ceil(100-(($key['promotionPrice']/$key['originalPrice']*100))) ?>%
             </div>
           <?php }
           ?>

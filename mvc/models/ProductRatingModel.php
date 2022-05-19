@@ -54,7 +54,7 @@ class ProductRatingModel
     public function add($productId, $content, $star, $userId)
     {
         $db = DB::getInstance();
-        $sql = "INSERT INTO `productrating`(`id`, `productId`, `userId`, `star`, `content`) VALUES (NULL," . $productId . "," . $userId . "," . $star . ",'" . $content . "')";
+        $sql = "INSERT INTO `productrating`(`id`, `productId`, `userId`, `star`, `content`,`createdDate`) VALUES (NULL," . $productId . "," . $userId . "," . $star . ",'" . $content . "','" . date("y-m-d H:i:s") . "')";
         $result = mysqli_query($db->con, $sql);
         return $result;
     }

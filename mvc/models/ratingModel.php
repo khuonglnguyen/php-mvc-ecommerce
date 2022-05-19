@@ -47,7 +47,7 @@ class ratingModel
     public function reply($reply, $id)
     {
         $db = DB::getInstance();
-        $sql = "UPDATE `productrating` SET reply = '" . $reply . "', repliedDate = CURRENT_TIME() WHERE id = " . $id . "";
+        $sql = "UPDATE `productrating` SET reply = '" . $reply . "', repliedDate = '". date("y-m-d H:i:s")."' WHERE id = " . $id . "";
         $result = mysqli_query($db->con, $sql);
         return $result;
     }

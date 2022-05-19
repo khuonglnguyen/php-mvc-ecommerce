@@ -83,7 +83,7 @@
         <tr>
           <td><?= ++$count ?></td>
           <td><?= $value['id'] ?></td>
-          <td><?= date("d/m/Y", strtotime($value['createdDate'])) ?></td>
+          <td><?= date("d/m/Y", strtotime(date("d/m/Y", strtotime($value['createdDate'])))) ?></td>
           <?php
           if (date("d/m/Y", strtotime($value['receivedDate']))) { ?>
             <?php if ($value['status'] == "received") { ?>

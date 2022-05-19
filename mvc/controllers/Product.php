@@ -35,6 +35,7 @@ class product extends ControllerBase
 
     public function single($Id)
     {
+        $question = $this->model("questionModel");
         $product = $this->model("productModel");
         $result = $product->getById($Id);
         // Fetch
@@ -81,13 +82,17 @@ class product extends ControllerBase
         $productRatingResult = $productRating->getStarByProductId($Id);
         $productRatingContent = $productRating->getByProductId($Id);
 
+        // Question
+        $questionContent = $question->getByProductId($Id);
+
         $this->view("client/single", [
             "headTitle" => $p['name'],
             "product" => $p,
             "productByCate" => $list,
             "loved" => $loved,
             "star" => $productRatingResult,
-            "productRatingContent" => $productRatingContent
+            "productRatingContent" => $productRatingContent,
+            "questionContent" => $questionContent
         ]);
     }
 
@@ -205,6 +210,17 @@ class product extends ControllerBase
                 "status" => $status,
                 "productRating" => (isset($p) > 0 ? $p : [])
             ]);
+        }
+    }
+
+    public function addQuestion()
+    {
+        $question = $this->model("questionModel");
+        $result = $question->add($_POST['productId'], $_POST['content'], $_SESSION['user_id']);
+        if ($result) {
+            echo '<script>alert("Gửi thành công!");window.history.back();</script>';
+        } else {
+            echo '<script>alert("Lỗi!");window.history.back();</script>';
         }
     }
 }
