@@ -59,6 +59,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="<?= URL_ROOT . '/blogManage' ?>">
+                        <span class="ti-file"></span>
+                        <span>Quản lý Blog</span>
+                    </a>
+                </li>
+                <li>
                     <a href="<?= URL_ROOT . '/statisticManage' ?>">
                         <span class="ti-bar-chart"></span>
                         <span>Thống kê</span>

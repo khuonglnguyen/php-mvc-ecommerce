@@ -318,8 +318,8 @@ input[type=checkbox] {
 }
 
 .discount {
-  height: 34px;
-  width: 34px;
+  height: 38px;
+  width: 38px;
   position: absolute;
   top: 2px;
   right: 2px;
@@ -328,7 +328,7 @@ input[type=checkbox] {
   background-color: rgb(240, 3, 3);
   border-radius: 50%;
   text-align: center;
-  line-height: 34px;
+  line-height: 38px;
 }
 
 .original-price {

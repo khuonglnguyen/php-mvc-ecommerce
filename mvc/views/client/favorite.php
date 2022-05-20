@@ -36,6 +36,7 @@
             ?>
           </ul>
         </li>
+          <li><a href="<?= URL_ROOT . "/blog" ?>">Blog <i class="fa fa-book"></i></a></li>
 
         <?php
         if (isset($_SESSION['user_id'])) { ?>

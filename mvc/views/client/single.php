@@ -36,6 +36,7 @@
             ?>
           </ul>
         </li>
+          <li><a href="<?= URL_ROOT . "/blog" ?>">Blog <i class="fa fa-book"></i></a></li>
 
         <?php
         if (isset($_SESSION['user_id'])) { ?>
@@ -150,16 +151,24 @@
   </div>
   <div class="title2">Hỏi đáp</div>
   <div class="rating">
-    <div class="rate">
+    <?php
+    if (isset($_SESSION['user_id'])) { ?>
+      <div class="rate">
         <b>Gửi câu hỏi</b>
-      <div class="search-container">
-        <form action="<?= URL_ROOT ?>/product/addQuestion" method="post">
-          <input type="hidden" name="productId" value="<?= $data['product']['id'] ?>">
-          <input type="text" class="search" placeholder="Nhập vào câu hỏi..." name="content">
-          <button type="submit">Gửi</button>
-        </form>
+        <div class="search-container">
+          <form action="<?= URL_ROOT ?>/product/addQuestion" method="post">
+            <input type="hidden" name="productId" value="<?= $data['product']['id'] ?>">
+            <input type="text" class="search" placeholder="Nhập vào câu hỏi..." name="content">
+            <button type="submit">Gửi</button>
+          </form>
+        </div>
       </div>
-    </div>
+    <?php } else { ?>
+      <div class="rate">
+        <a href="<?= URL_ROOT ?>/user/login">Đăng nhập để gửi câu hỏi</a>
+      </div>
+    <?php }
+    ?>
     <?php
     if (count($data['questionContent']) > 0) {
       foreach ($data['questionContent'] as $key => $value) { ?>
