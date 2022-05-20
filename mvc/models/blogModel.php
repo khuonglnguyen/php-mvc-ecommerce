@@ -16,6 +16,14 @@ class blogModel
         return self::$instance;
     }
 
+    public function search($keyword)
+    {
+        $db = DB::getInstance();
+        $sql = "SELECT b.id, b.title, b.content, b.image, b.createdDate, u.fullName as author, MATCH (title,content) AGAINST ('" . $keyword . "') as score FROM blog b JOIN users u ON b.userId = u.id WHERE MATCH(b.title,b.content) AGAINST ('$keyword') > 0.5 ORDER BY score DESC";
+        $result = mysqli_query($db->con, $sql);
+        return $result;
+    }
+
     public function getById($id)
     {
         $db = DB::getInstance();

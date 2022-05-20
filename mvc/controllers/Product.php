@@ -37,6 +37,7 @@ class product extends ControllerBase
     {
         $question = $this->model("questionModel");
         $product = $this->model("productModel");
+        $blog = $this->model("blogModel");
         $result = $product->getById($Id);
         // Fetch
         $p = $result->fetch_assoc();
@@ -85,6 +86,9 @@ class product extends ControllerBase
         // Question
         $questionContent = $question->getByProductId($Id);
 
+        //Blog
+        $blogList = $blog->search($p['name'])->fetch_all(MYSQLI_ASSOC);
+
         $this->view("client/single", [
             "headTitle" => $p['name'],
             "product" => $p,
@@ -92,7 +96,8 @@ class product extends ControllerBase
             "loved" => $loved,
             "star" => $productRatingResult,
             "productRatingContent" => $productRatingContent,
-            "questionContent" => $questionContent
+            "questionContent" => $questionContent,
+            "blogList" => $blogList
         ]);
     }
 

@@ -36,7 +36,7 @@
             ?>
           </ul>
         </li>
-          <li><a href="<?= URL_ROOT . "/blog" ?>">Blog <i class="fa fa-book"></i></a></li>
+        <li><a href="<?= URL_ROOT . "/blog" ?>">Blog <i class="fa fa-book"></i></a></li>
 
         <?php
         if (isset($_SESSION['user_id'])) { ?>
@@ -232,6 +232,20 @@
       <?php }
     } else { ?>
       <h3>Không tìm thấy sản phẩm...</h3>
+    <?php }
+    ?>
+  </div>
+  <div class="title2">Bài viết liên quan</div>
+  <div class="content">
+    <?php
+    if (count($data['blogList']) > 0) {
+      foreach ($data['blogList'] as $key) { ?>
+        <a href="<?= URL_ROOT . '/blog/detail/' . $key['id'] ?>">
+          <h3><?= $key['title'] ?></h3>
+        </a>
+      <?php }
+    } else { ?>
+      <h3>Không có bài viết...</h3>
     <?php }
     ?>
   </div>
