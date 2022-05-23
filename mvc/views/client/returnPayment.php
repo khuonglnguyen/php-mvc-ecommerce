@@ -66,7 +66,7 @@
   <div class="title">Thông báo</div>
   <?php
 
-  $vnp_HashSecret = "KNKLFACPFSTUTFQQVEHVXIZSKDWYBCLV"; //Secret key
+  $vnp_HashSecret = "MYRDNFUFAHKUUEYOHYFODMTSVZQNLEFN"; //Secret key
   $vnp_SecureHash = $_GET['vnp_SecureHash'];
   $inputData = array();
   foreach ($_GET as $key => $value) {

@@ -12,7 +12,7 @@
     background: white;
   }
 
-  .row{
+  .row {
     margin: 0 100px;
   }
 
@@ -32,7 +32,7 @@
 
   /* Fake image */
   .fakeimg {
-    background-color: #aaa;
+    background-color: lightpink;
     width: 100%;
     padding: 20px;
   }
@@ -62,10 +62,10 @@
     }
   }
 
-img{
-  width: 100%;
-  height: 100% !important;
-}
+  img {
+    width: 100%;
+    height: 100% !important;
+  }
 </style>
 
 <body>
@@ -149,10 +149,12 @@ img{
     </div>
     <div class="rightcolumn">
       <div class="card-blog">
-        <h3>Popular Post</h3>
-        <div class="fakeimg">Image</div><br>
-        <div class="fakeimg">Image</div><br>
-        <div class="fakeimg">Image</div>
+        <h3>Blog phổ biến</h3>
+        <?php
+        foreach ($data['blogListPopular'] as $key => $value) { ?>
+          <div class="fakeimg"><a href="<?= URL_ROOT ?>/blog/detail/<?= $value['id'] ?>"><?= $value['title'] ?> (<?= $value['views'] ?> lượt xem)</a></div><br>
+        <?php }
+        ?>
       </div>
     </div>
   </div>

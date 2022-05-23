@@ -41,8 +41,7 @@ class product extends ControllerBase
         $result = $product->getById($Id);
         // Fetch
         $p = $result->fetch_assoc();
-        $c = $product->getByCateIdSinglePage($p['cateId'], $Id);
-        $list = $c->fetch_all(MYSQLI_ASSOC);
+        $list = $product->getProductSuggest(urlencode($p['name']),$p['id']);
 
         if (!isset($_SESSION['viewed'])) {
             $_SESSION['viewed'] = [];
@@ -92,7 +91,7 @@ class product extends ControllerBase
         $this->view("client/single", [
             "headTitle" => $p['name'],
             "product" => $p,
-            "productByCate" => $list,
+            "productSuggest" => $list,
             "loved" => $loved,
             "star" => $productRatingResult,
             "productRatingContent" => $productRatingContent,
@@ -223,7 +222,7 @@ class product extends ControllerBase
         $question = $this->model("questionModel");
         $result = $question->add($_POST['productId'], $_POST['content'], $_SESSION['user_id']);
         if ($result) {
-            echo '<script>alert("Gửi thành công!");window.history.back();</script>';
+            echo '<script>window.history.back();</script>';
         } else {
             echo '<script>alert("Lỗi!");window.history.back();</script>';
         }

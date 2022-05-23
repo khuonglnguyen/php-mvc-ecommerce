@@ -112,8 +112,8 @@ class order extends ControllerBase
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            $vnp_TmnCode = "92CYC38S"; //Website ID in VNPAY System
-            $vnp_HashSecret = "KNKLFACPFSTUTFQQVEHVXIZSKDWYBCLV"; //Secret key
+            $vnp_TmnCode = "YRJHXDMJ"; //Website ID in VNPAY System
+            $vnp_HashSecret = "MYRDNFUFAHKUUEYOHYFODMTSVZQNLEFN"; //Secret key
             $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
             $vnp_Returnurl = URL_ROOT . "/order/returnPayment/?orderId=" . $o['id'] . "&&";
             $vnp_apiUrl = "http://sandbox.vnpayment.vn/merchant_webapi/merchant.html";

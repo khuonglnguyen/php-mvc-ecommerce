@@ -18,8 +18,15 @@ class productModel
 
     public function search($keyword)
     {
-        $newKeyword = str_replace(" ", "%20", $keyword);
-        $contents = file_get_contents("http://localhost:8983/solr/products/select?q=name:%20(" . $newKeyword . ")%0Ades:%20(" . $newKeyword . ")&wt=php");
+        $contents = file_get_contents("http://localhost:8983/solr/products2/select?q=name:%20(" . $keyword . ")%0Ades:%20(" . $keyword . ")&wt=php");
+        $result = 0;
+        eval("\$result = " . $contents . ";");
+        return $result['response']['docs'];
+    }
+
+    public function getProductSuggest($keyword,$id)
+    {
+        $contents = file_get_contents("http://localhost:8983/solr/products2/select?q=-id:%20".$id."%0Aname:%20(" . $keyword . ")&wt=php&rows=4");
         $result = 0;
         eval("\$result = " . $contents . ";");
         return $result['response']['docs'];

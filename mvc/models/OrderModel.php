@@ -36,7 +36,6 @@ class orderModel
     {
         $db = DB::getInstance();
         $sql = "INSERT INTO `orders` (`id`, `userId`, `createdDate`, `receivedDate`, `status`, `paymentMethod`, `paymentStatus`, `payDate`, `total`,`discount`) VALUES (NULL, '$userId', '" . date("y-m-d H:i:s") . "', NULL, 'processing', 'COD',0,NULL,'$total',$percentDiscount)";
-        var_dump($sql);die();
         $result = mysqli_query($db->con, $sql);
 
         $last_id = $db->con->insert_id;

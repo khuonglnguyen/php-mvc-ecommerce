@@ -17,7 +17,6 @@ class user extends ControllerBase
                 $_SESSION['user_id'] = $u['id'];
                 $_SESSION['user_name'] = $u['fullName'];
                 $_SESSION['role'] = $u['RoleName'];
-
                 // cart
 
                 $cart = $this->model("cartModel");

@@ -80,7 +80,7 @@
     function send() {
         var queries = document.getElementById('btn-input').value;
         document.getElementById('chat-body').innerHTML += '<div class="chatbox__body__message chatbox__body__message--right">' +
-            '<img src="' + window.location + 'public/images/user.png" alt="Picture">' +
+            '<img src="http://localhost/luanvan/public/images/user.png" alt="Picture">' +
             '<div class="clearfix"></div>' +
             ' <div class="ul_section_full">' +
             ' <ul class="ul_msg">' +
@@ -102,7 +102,7 @@
                     var res = JSON.parse(this.responseText);
                     console.log(res);
                     document.getElementById('chat-body').innerHTML += '<div class="chatbox__body__message chatbox__body__message--left">' +
-                        '<img src="' + window.location + 'public/images/admin.png" alt="Picture">' +
+                        '<img src="http://localhost/luanvan/public/images/admin.png" alt="Picture">' +
                         '<div class="clearfix"></div>' +
                         ' <div class="ul_section_full">' +
                         ' <ul class="ul_msg">' +
@@ -115,7 +115,7 @@
 
                 } else {
                     document.getElementById('chat-body').innerHTML += '<div class="chatbox__body__message chatbox__body__message--left">' +
-                        '<img src="' + window.location + 'public/images/cry-sad.gif" alt="Picture">' +
+                        '<img src="http://localhost/luanvan/public/images/cry-sad.gif" alt="Picture">' +
                         '<div class="clearfix"></div>' +
                         ' <div class="ul_section_full">' +
                         ' <ul class="ul_msg">' +
@@ -154,7 +154,7 @@
                         for (let index = 0; index < res.length; index++) {
                             if (res[index].fromUserId == userId) {
                                 document.getElementById('chat-body').innerHTML += '<div class="chatbox__body__message chatbox__body__message--right">' +
-                                    '<img src="' + window.location + 'public/images/user.png" alt="Picture">' +
+                                    '<img src="http://localhost/luanvan/public/images/user.png" alt="Picture">' +
                                     '<div class="clearfix"></div>' +
                                     ' <div class="ul_section_full">' +
                                     ' <ul class="ul_msg">' +
@@ -166,7 +166,7 @@
                                     '</div>';
                             } else {
                                 document.getElementById('chat-body').innerHTML += '<div class="chatbox__body__message chatbox__body__message--left">' +
-                                    '<img src="' + window.location + 'public/images/admin.png" alt="Picture">' +
+                                    '<img src="http://localhost/luanvan/public/images/admin.png" alt="Picture">' +
                                     '<div class="clearfix"></div>' +
                                     ' <div class="ul_section_full">' +
                                     ' <ul class="ul_msg">' +
@@ -180,7 +180,7 @@
                         }
                     } else {
                         document.getElementById('chat-body').innerHTML += '<div class="chatbox__body__message chatbox__body__message--left">' +
-                            '<img src="' + window.location + 'public/images/admin.png" alt="Picture">' +
+                            '<img src="http://localhost/luanvan/public/images/admin.png" alt="Picture">' +
                             '<div class="clearfix"></div>' +
                             ' <div class="ul_section_full">' +
                             ' <ul class="ul_msg">' +

@@ -88,9 +88,7 @@ class userModel
         // Mã hóa password
         $md5Password = md5($password);
 
-        $sql = "INSERT INTO users(`id`, `fullName`, `email`, `dob`, `address`, `password`, `roleId`, `status`,`captcha`, `isConfirmed`,`provinceId`,`districtId`,`wardId`) VALUES (NULL,'$fullName','$email','$dob','$address','$md5Password',1,1,'$captcha',0,$provinceId,$districtId,$wardId)";
-        var_dump($sql);
-        die();
+        $sql = "INSERT INTO users(`id`, `fullName`, `email`, `dob`, `address`, `password`, `roleId`, `status`,`captcha`, `isConfirmed`,`provinceId`,`districtId`,`wardId`) VALUES (NULL,'$fullName','$email','$dob','$address','$md5Password',2,1,'$captcha',0,$provinceId,$districtId,$wardId)";
         $result = mysqli_query($db->con, $sql);
         if ($result) {
 

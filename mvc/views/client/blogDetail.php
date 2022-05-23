@@ -141,7 +141,7 @@
   <div class="title">Blog</div>
   <div class="content-blog">
     <h1><a href="<?= URL_ROOT ?>/blog/detail/<?= $data['blog']['id'] ?>"><?= $data['blog']['title'] ?></a></h1>
-    <h4><?= date("d/m/Y H:m", strtotime($data['blog']['createdDate'])) ?> bỏi <b><?= $data['blog']['author'] ?></b></h4>
+    <p>Ngày đăng: <?= date("d/m/Y H:m", strtotime($data['blog']['createdDate'])) ?> bỏi <b><?= $data['blog']['author'] ?></b> <?= $data['blog']['views'] ?> lượt xem</p>
     <a href="<?= URL_ROOT ?>/blog/detail/<?= $data['blog']['id'] ?>"><img src="<?= URL_ROOT ?>/public/images/<?= $data['blog']['image'] ?>"></a>
     <div style="height:200px;">
       <?= $data['blog']['content'] ?>

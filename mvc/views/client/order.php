@@ -36,7 +36,7 @@
             ?>
           </ul>
         </li>
-          <li><a href="<?= URL_ROOT . "/blog" ?>">Blog <i class="fa fa-book"></i></a></li>
+        <li><a href="<?= URL_ROOT . "/blog" ?>">Blog <i class="fa fa-book"></i></a></li>
 
         <?php
         if (isset($_SESSION['user_id'])) { ?>
@@ -89,14 +89,22 @@
           if (date("d/m/Y", strtotime($value['receivedDate']))) { ?>
             <?php if ($value['status'] == "received") { ?>
               <td><?= date("d/m/Y", strtotime($value['receivedDate'])) ?></td>
+            <?php } else if ($value['status'] == "delivery") { ?>
+              <td><?= date("d/m/Y", strtotime($value['receivedDate'] . ' + 3 days')) ?> dự kiến</td>
             <?php } else { ?>
-              <td><?= date("d/m/Y", strtotime($value['receivedDate'])) ?> (dự kiến)</td>
+              <td>Chờ xác nhận...</td>
             <?php } ?>
           <?php } else { ?>
             <td>3 ngày sau khi đơn hàng được xác nhận</td>
           <?php }
           ?>
-          <td>-<?= $value['discount'] ?>%</td>
+          <?php
+          if ($value['discount'] > 0) { ?>
+            <td>-<?= $value['discount'] ?>%</td>
+          <?php   } else { ?>
+            <td>Không có</td>
+          <?php  }
+          ?>
           <td><?= number_format($value['total'], 0, '', ',') ?>₫</td>
           <?php
           if ($value['status'] == "delivery") { ?>

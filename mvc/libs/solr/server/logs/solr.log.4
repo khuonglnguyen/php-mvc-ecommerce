@@ -1,64 +1,100 @@
-2022-05-14 04:06:26.541 INFO  (main) [   ] o.e.j.u.log Logging initialized @2293ms to org.eclipse.jetty.util.log.Slf4jLog
-2022-05-14 04:06:26.807 INFO  (main) [   ] o.e.j.s.Server jetty-9.4.44.v20210927; built: 2021-09-27T23:02:44.612Z; git: 8da83308eeca865e495e53ef315a249d63ba9332; jvm 17.0.3.1+2-LTS-6
-2022-05-14 04:06:26.821 INFO  (main) [   ] o.e.j.d.p.ScanningAppProvider Deployment monitor [file:///C:/xampp/htdocs/luanvan/mvc/libs/solr/server/contexts/] at interval 0
-2022-05-14 04:06:27.489 INFO  (main) [   ] o.e.j.w.StandardDescriptorProcessor NO JSP Support for /solr, did not find org.apache.jasper.servlet.JspServlet
-2022-05-14 04:06:27.499 INFO  (main) [   ] o.e.j.s.session DefaultSessionIdManager workerName=node0
-2022-05-14 04:06:27.499 INFO  (main) [   ] o.e.j.s.session No SessionScavenger set, using defaults
-2022-05-14 04:06:27.501 INFO  (main) [   ] o.e.j.s.session node0 Scavenging every 600000ms
-2022-05-14 04:06:27.558 INFO  (main) [   ] o.a.s.s.SolrDispatchFilter Using logger factory org.apache.logging.slf4j.Log4jLoggerFactory
-2022-05-14 04:06:27.562 INFO  (main) [   ] o.a.s.s.SolrDispatchFilter  ___      _       Welcome to Apache Solr™ version 8.11.1
-2022-05-14 04:06:27.562 INFO  (main) [   ] o.a.s.s.SolrDispatchFilter / __| ___| |_ _   Starting in standalone mode on port 8983
-2022-05-14 04:06:27.562 INFO  (main) [   ] o.a.s.s.SolrDispatchFilter \__ \/ _ \ | '_|  Install dir: C:\xampp\htdocs\luanvan\mvc\libs\solr
-2022-05-14 04:06:27.562 INFO  (main) [   ] o.a.s.s.SolrDispatchFilter |___/\___/_|_|    Start time: 2022-05-14T04:06:27.562459200Z
-2022-05-14 04:06:27.571 INFO  (main) [   ] o.a.s.c.SolrPaths Using system property solr.solr.home: C:\xampp\htdocs\luanvan\mvc\libs\solr\server\solr
-2022-05-14 04:06:27.571 INFO  (main) [   ] o.a.s.c.SolrXmlConfig Loading container configuration from C:\xampp\htdocs\luanvan\mvc\libs\solr\server\solr\solr.xml
-2022-05-14 04:06:27.632 INFO  (main) [   ] o.a.s.c.SolrXmlConfig MBean server found: com.sun.jmx.mbeanserver.JmxMBeanServer@210ab13f, but no JMX reporters were configured - adding default JMX reporter.
-2022-05-14 04:06:28.202 INFO  (main) [   ] o.a.s.h.c.HttpShardHandlerFactory Host whitelist initialized: WhitelistHostChecker [whitelistHosts=null, whitelistHostCheckingEnabled=true]
-2022-05-14 04:06:28.393 WARN  (main) [   ] o.e.j.u.s.S.config Trusting all certificates configured for Client@150ede8b[provider=null,keyStore=null,trustStore=null]
-2022-05-14 04:06:28.394 WARN  (main) [   ] o.e.j.u.s.S.config No Client EndPointIdentificationAlgorithm configured for Client@150ede8b[provider=null,keyStore=null,trustStore=null]
-2022-05-14 04:06:28.545 WARN  (main) [   ] o.e.j.u.s.S.config Trusting all certificates configured for Client@60bbacfc[provider=null,keyStore=null,trustStore=null]
-2022-05-14 04:06:28.545 WARN  (main) [   ] o.e.j.u.s.S.config No Client EndPointIdentificationAlgorithm configured for Client@60bbacfc[provider=null,keyStore=null,trustStore=null]
-2022-05-14 04:06:28.592 WARN  (main) [   ] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
-2022-05-14 04:06:45.237 WARN  (main) [   ] o.a.s.h.a.SystemInfoHandler Resolving canonical hostname for local host took 16.564 seconds, possible DNS misconfiguration. Set the 'solr.dns.prevent.reverse.lookup'  sysprop to true on startup to prevent future lookups if DNS can not be fixed.
-2022-05-14 04:06:45.335 INFO  (main) [   ] o.a.s.c.TransientSolrCoreCacheDefault Allocating transient core cache for max 2147483647 cores with initial capacity of 1024
-2022-05-14 04:06:45.348 INFO  (main) [   ] o.a.s.h.a.MetricsHistoryHandler No .system collection, keeping metrics history in memory.
-2022-05-14 04:06:45.397 INFO  (main) [   ] o.a.s.m.r.SolrJmxReporter JMX monitoring for 'solr.node' (registry 'solr.node') enabled at server: com.sun.jmx.mbeanserver.JmxMBeanServer@210ab13f
-2022-05-14 04:06:45.398 INFO  (main) [   ] o.a.s.m.r.SolrJmxReporter JMX monitoring for 'solr.jvm' (registry 'solr.jvm') enabled at server: com.sun.jmx.mbeanserver.JmxMBeanServer@210ab13f
-2022-05-14 04:06:45.399 INFO  (main) [   ] o.a.s.m.r.SolrJmxReporter JMX monitoring for 'solr.jetty' (registry 'solr.jetty') enabled at server: com.sun.jmx.mbeanserver.JmxMBeanServer@210ab13f
-2022-05-14 04:06:45.432 INFO  (main) [   ] o.a.s.c.CorePropertiesLocator Found 1 core definitions underneath C:\xampp\htdocs\luanvan\mvc\libs\solr\server\solr
-2022-05-14 04:06:45.432 INFO  (main) [   ] o.a.s.c.CorePropertiesLocator Cores are: [products]
-2022-05-14 04:06:45.467 INFO  (coreLoadExecutor-13-thread-1) [   x:products] o.a.s.c.SolrConfig Using Lucene MatchVersion: 8.11.1
-2022-05-14 04:06:45.493 WARN  (coreLoadExecutor-13-thread-1) [   x:products] o.a.s.c.SolrConfig solrconfig.xml: <jmx> is no longer supported, use solr.xml:/metrics/reporter section instead
-2022-05-14 04:06:45.558 INFO  (coreLoadExecutor-13-thread-1) [   x:products] o.a.s.s.IndexSchema Schema name=default-config
-2022-05-14 04:06:45.748 INFO  (main) [   ] o.e.j.s.h.ContextHandler Started o.e.j.w.WebAppContext@4a9f80d3{/solr,file:///C:/xampp/htdocs/luanvan/mvc/libs/solr/server/solr-webapp/webapp/,AVAILABLE}{C:\xampp\htdocs\luanvan\mvc\libs\solr\server/solr-webapp/webapp}
-2022-05-14 04:06:45.765 INFO  (main) [   ] o.e.j.s.AbstractConnector Started ServerConnector@4189d70b{HTTP/1.1, (http/1.1, h2c)}{0.0.0.0:8983}
-2022-05-14 04:06:45.765 INFO  (main) [   ] o.e.j.s.Server Started @21520ms
-2022-05-14 04:06:45.863 WARN  (coreLoadExecutor-13-thread-1) [   x:products] o.a.s.s.AbstractSpatialPrefixTreeFieldType FieldType SpatialRecursivePrefixTreeFieldType does not allow omitNorms to be specified in schema, hardcoded behavior is omitNorms=true
-2022-05-14 04:06:45.863 WARN  (coreLoadExecutor-13-thread-1) [   x:products] o.a.s.s.AbstractSpatialPrefixTreeFieldType FieldType SpatialRecursivePrefixTreeFieldType does not allow omitTermFreqAndPositions to be specified in schema, hardcoded behavior is omitTermFreqAndPositions=true
-2022-05-14 04:06:45.863 WARN  (coreLoadExecutor-13-thread-1) [   x:products] o.a.s.s.AbstractSpatialPrefixTreeFieldType FieldType SpatialRecursivePrefixTreeFieldType does not allow termOffsets to be specified in schema, hardcoded behavior is termOffsets=false
-2022-05-14 04:06:45.863 WARN  (coreLoadExecutor-13-thread-1) [   x:products] o.a.s.s.AbstractSpatialPrefixTreeFieldType FieldType SpatialRecursivePrefixTreeFieldType does not allow termPositions to be specified in schema, hardcoded behavior is termPositions=false
-2022-05-14 04:06:45.863 WARN  (coreLoadExecutor-13-thread-1) [   x:products] o.a.s.s.AbstractSpatialPrefixTreeFieldType FieldType SpatialRecursivePrefixTreeFieldType does not allow omitPositions to be specified in schema, hardcoded behavior is omitPositions=true
-2022-05-14 04:06:46.347 INFO  (coreLoadExecutor-13-thread-1) [   x:products] o.a.s.s.IndexSchema Loaded schema default-config/1.6 with uniqueid field id
-2022-05-14 04:06:46.389 INFO  (coreLoadExecutor-13-thread-1) [   x:products] o.a.s.c.CoreContainer Creating SolrCore 'products' using configuration from instancedir C:\xampp\htdocs\luanvan\mvc\libs\solr\server\solr\products, trusted=true
-2022-05-14 04:06:46.402 INFO  (coreLoadExecutor-13-thread-1) [   x:products] o.a.s.m.r.SolrJmxReporter JMX monitoring for 'solr.core.products' (registry 'solr.core.products') enabled at server: com.sun.jmx.mbeanserver.JmxMBeanServer@210ab13f
-2022-05-14 04:06:46.413 INFO  (coreLoadExecutor-13-thread-1) [   x:products] o.a.s.c.SolrCore [[products] ] Opening new SolrCore at [C:\xampp\htdocs\luanvan\mvc\libs\solr\server\solr\products], dataDir=[C:\xampp\htdocs\luanvan\mvc\libs\solr\server\solr\products\data\]
-2022-05-14 04:06:46.734 INFO  (qtp360936478-22) [   ] o.a.s.s.HttpSolrCall [admin] webapp=null path=/admin/info/system params={wt=json} status=0 QTime=68
-2022-05-14 04:06:51.562 INFO  (coreLoadExecutor-13-thread-1) [   x:products] o.a.s.u.UpdateHandler Using UpdateLog implementation: org.apache.solr.update.UpdateLog
-2022-05-14 04:06:51.562 INFO  (coreLoadExecutor-13-thread-1) [   x:products] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10 numVersionBuckets=65536
-2022-05-14 04:06:51.587 INFO  (coreLoadExecutor-13-thread-1) [   x:products] o.a.s.u.CommitTracker Hard AutoCommit: if uncommitted for 15000ms; 
-2022-05-14 04:06:51.587 INFO  (coreLoadExecutor-13-thread-1) [   x:products] o.a.s.u.CommitTracker Soft AutoCommit: disabled
-2022-05-14 04:06:51.861 INFO  (coreLoadExecutor-13-thread-1) [   x:products] o.a.s.r.ManagedResourceStorage File-based storage initialized to use dir: C:\xampp\htdocs\luanvan\mvc\libs\solr\server\solr\products\conf
-2022-05-14 04:06:51.873 INFO  (coreLoadExecutor-13-thread-1) [   x:products] o.a.s.h.c.SpellCheckComponent Initializing spell checkers
-2022-05-14 04:06:51.881 INFO  (coreLoadExecutor-13-thread-1) [   x:products] o.a.s.s.DirectSolrSpellChecker init: {name=default,field=_text_,classname=solr.DirectSolrSpellChecker,distanceMeasure=internal,accuracy=0.5,maxQueryFrequency=0.01,maxEdits=2,minPrefix=1,maxInspections=5,minQueryLength=4}
-2022-05-14 04:06:51.897 INFO  (coreLoadExecutor-13-thread-1) [   x:products] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
-2022-05-14 04:06:51.916 INFO  (searcherExecutor-15-thread-1-processing-x:products) [   x:products] o.a.s.c.QuerySenderListener QuerySenderListener done.
-2022-05-14 04:06:51.916 INFO  (searcherExecutor-15-thread-1-processing-x:products) [   x:products] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: default
-2022-05-14 04:06:51.922 INFO  (searcherExecutor-15-thread-1-processing-x:products) [   x:products] o.a.s.c.SolrCore [products]  Registered new searcher autowarm time: 0 ms
-2022-05-14 04:06:55.971 INFO  (qtp360936478-20) [   x:products] o.a.s.c.S.Request [products]  webapp=/solr path=/select params={q=name:+(son+ph?n)%0ades:+(son+ph?n)&wt=php} hits=5 status=0 QTime=120
-2022-05-14 04:07:03.161 INFO  (qtp360936478-21) [   x:products] o.a.s.c.S.Request [products]  webapp=/solr path=/select params={q=name:+(kem)%0ades:+(kem)&wt=php} hits=2 status=0 QTime=13
-2022-05-14 04:07:11.772 INFO  (qtp360936478-25) [   x:products] o.a.s.c.S.Request [products]  webapp=/solr path=/select params={q=name:+(kem)%0ades:+(kem)&wt=php} hits=2 status=0 QTime=4
-2022-05-14 04:08:16.334 INFO  (qtp360936478-27) [   x:products] o.a.s.c.S.Request [products]  webapp=/solr path=/select params={q=name:+(son+ph?n)%0ades:+(son+ph?n)&wt=php} hits=5 status=0 QTime=3
-2022-05-14 04:08:33.092 INFO  (qtp360936478-28) [   x:products] o.a.s.c.S.Request [products]  webapp=/solr path=/select params={q=name:+(son+ph?n)%0ades:+(son+ph?n)&wt=php} hits=5 status=0 QTime=3
-2022-05-14 04:09:29.931 INFO  (qtp360936478-26) [   x:products] o.a.s.c.S.Request [products]  webapp=/solr path=/select params={q=name:+(son+ph?n)%0ades:+(son+ph?n)&wt=php} hits=5 status=0 QTime=2
-2022-05-14 04:13:02.928 INFO  (qtp360936478-21) [   x:products] o.a.s.c.S.Request [products]  webapp=/solr path=/select params={q=name:+(chó)%0ades:+(chó)&wt=php} hits=0 status=0 QTime=9
-2022-05-14 04:13:07.430 INFO  (qtp360936478-25) [   x:products] o.a.s.c.S.Request [products]  webapp=/solr path=/select params={q=name:+(son+ph?n)%0ades:+(son+ph?n)&wt=php} hits=5 status=0 QTime=3
+2022-05-16 08:01:10.690 INFO  (main) [   ] o.e.j.u.log Logging initialized @890ms to org.eclipse.jetty.util.log.Slf4jLog
+2022-05-16 08:01:10.845 INFO  (main) [   ] o.e.j.s.Server jetty-9.4.44.v20210927; built: 2021-09-27T23:02:44.612Z; git: 8da83308eeca865e495e53ef315a249d63ba9332; jvm 17.0.3.1+2-LTS-6
+2022-05-16 08:01:10.845 INFO  (main) [   ] o.e.j.d.p.ScanningAppProvider Deployment monitor [file:///C:/xampp/htdocs/luanvan/mvc/libs/solr/server/contexts/] at interval 0
+2022-05-16 08:01:11.204 INFO  (main) [   ] o.e.j.w.StandardDescriptorProcessor NO JSP Support for /solr, did not find org.apache.jasper.servlet.JspServlet
+2022-05-16 08:01:11.220 INFO  (main) [   ] o.e.j.s.session DefaultSessionIdManager workerName=node0
+2022-05-16 08:01:11.220 INFO  (main) [   ] o.e.j.s.session No SessionScavenger set, using defaults
+2022-05-16 08:01:11.220 INFO  (main) [   ] o.e.j.s.session node0 Scavenging every 660000ms
+2022-05-16 08:01:11.251 INFO  (main) [   ] o.a.s.s.SolrDispatchFilter Using logger factory org.apache.logging.slf4j.Log4jLoggerFactory
+2022-05-16 08:01:11.267 INFO  (main) [   ] o.a.s.s.SolrDispatchFilter  ___      _       Welcome to Apache Solr™ version 8.11.1
+2022-05-16 08:01:11.267 INFO  (main) [   ] o.a.s.s.SolrDispatchFilter / __| ___| |_ _   Starting in standalone mode on port 8983
+2022-05-16 08:01:11.267 INFO  (main) [   ] o.a.s.s.SolrDispatchFilter \__ \/ _ \ | '_|  Install dir: C:\xampp\htdocs\luanvan\mvc\libs\solr
+2022-05-16 08:01:11.267 INFO  (main) [   ] o.a.s.s.SolrDispatchFilter |___/\___/_|_|    Start time: 2022-05-16T08:01:11.267112900Z
+2022-05-16 08:01:11.267 INFO  (main) [   ] o.a.s.c.SolrPaths Using system property solr.solr.home: C:\xampp\htdocs\luanvan\mvc\libs\solr\server\solr
+2022-05-16 08:01:11.267 INFO  (main) [   ] o.a.s.c.SolrXmlConfig Loading container configuration from C:\xampp\htdocs\luanvan\mvc\libs\solr\server\solr\solr.xml
+2022-05-16 08:01:11.313 INFO  (main) [   ] o.a.s.c.SolrXmlConfig MBean server found: com.sun.jmx.mbeanserver.JmxMBeanServer@210ab13f, but no JMX reporters were configured - adding default JMX reporter.
+2022-05-16 08:01:11.688 INFO  (main) [   ] o.a.s.h.c.HttpShardHandlerFactory Host whitelist initialized: WhitelistHostChecker [whitelistHosts=null, whitelistHostCheckingEnabled=true]
+2022-05-16 08:01:11.828 WARN  (main) [   ] o.e.j.u.s.S.config Trusting all certificates configured for Client@150ede8b[provider=null,keyStore=null,trustStore=null]
+2022-05-16 08:01:11.828 WARN  (main) [   ] o.e.j.u.s.S.config No Client EndPointIdentificationAlgorithm configured for Client@150ede8b[provider=null,keyStore=null,trustStore=null]
+2022-05-16 08:01:11.938 WARN  (main) [   ] o.e.j.u.s.S.config Trusting all certificates configured for Client@60bbacfc[provider=null,keyStore=null,trustStore=null]
+2022-05-16 08:01:11.938 WARN  (main) [   ] o.e.j.u.s.S.config No Client EndPointIdentificationAlgorithm configured for Client@60bbacfc[provider=null,keyStore=null,trustStore=null]
+2022-05-16 08:01:11.969 WARN  (main) [   ] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+2022-05-16 08:01:12.047 INFO  (main) [   ] o.a.s.c.TransientSolrCoreCacheDefault Allocating transient core cache for max 2147483647 cores with initial capacity of 1024
+2022-05-16 08:01:12.047 INFO  (main) [   ] o.a.s.h.a.MetricsHistoryHandler No .system collection, keeping metrics history in memory.
+2022-05-16 08:01:12.094 INFO  (main) [   ] o.a.s.m.r.SolrJmxReporter JMX monitoring for 'solr.node' (registry 'solr.node') enabled at server: com.sun.jmx.mbeanserver.JmxMBeanServer@210ab13f
+2022-05-16 08:01:12.094 INFO  (main) [   ] o.a.s.m.r.SolrJmxReporter JMX monitoring for 'solr.jvm' (registry 'solr.jvm') enabled at server: com.sun.jmx.mbeanserver.JmxMBeanServer@210ab13f
+2022-05-16 08:01:12.094 INFO  (main) [   ] o.a.s.m.r.SolrJmxReporter JMX monitoring for 'solr.jetty' (registry 'solr.jetty') enabled at server: com.sun.jmx.mbeanserver.JmxMBeanServer@210ab13f
+2022-05-16 08:01:12.109 INFO  (main) [   ] o.a.s.c.CorePropertiesLocator Found 0 core definitions underneath C:\xampp\htdocs\luanvan\mvc\libs\solr\server\solr
+2022-05-16 08:01:12.357 INFO  (main) [   ] o.e.j.s.h.ContextHandler Started o.e.j.w.WebAppContext@4a9f80d3{/solr,file:///C:/xampp/htdocs/luanvan/mvc/libs/solr/server/solr-webapp/webapp/,AVAILABLE}{C:\xampp\htdocs\luanvan\mvc\libs\solr\server/solr-webapp/webapp}
+2022-05-16 08:01:12.369 INFO  (main) [   ] o.e.j.s.AbstractConnector Started ServerConnector@4189d70b{HTTP/1.1, (http/1.1, h2c)}{0.0.0.0:8983}
+2022-05-16 08:01:12.369 INFO  (main) [   ] o.e.j.s.Server Started @2559ms
+2022-05-16 08:01:15.799 INFO  (qtp360936478-27) [   ] o.a.s.s.HttpSolrCall [admin] webapp=null path=/admin/info/system params={wt=json} status=0 QTime=39
+2022-05-16 08:04:35.372 INFO  (qtp360936478-22) [   ] o.a.s.s.HttpSolrCall [admin] webapp=null path=/admin/info/system params={wt=json} status=0 QTime=27
+2022-05-16 08:04:35.389 INFO  (qtp360936478-23) [   x:products] o.a.s.s.HttpSolrCall [admin] webapp=null path=/admin/cores params={core=products&action=STATUS&wt=json} status=0 QTime=0
+2022-05-16 08:04:35.523 INFO  (qtp360936478-21) [   x:products] o.a.s.h.a.CoreAdminOperation core create command name=products&action=CREATE&instanceDir=products&wt=json
+2022-05-16 08:04:35.545 INFO  (qtp360936478-21) [   x:products] o.a.s.c.SolrConfig Using Lucene MatchVersion: 8.11.1
+2022-05-16 08:04:35.562 WARN  (qtp360936478-21) [   x:products] o.a.s.c.SolrConfig solrconfig.xml: <jmx> is no longer supported, use solr.xml:/metrics/reporter section instead
+2022-05-16 08:04:35.598 INFO  (qtp360936478-21) [   x:products] o.a.s.s.IndexSchema Schema name=default-config
+2022-05-16 08:04:35.919 INFO  (qtp360936478-21) [   x:products] o.a.s.s.IndexSchema Loaded schema default-config/1.6 with uniqueid field id
+2022-05-16 08:04:35.948 INFO  (qtp360936478-21) [   x:products] o.a.s.c.CoreContainer Creating SolrCore 'products' using configuration from instancedir C:\xampp\htdocs\luanvan\mvc\libs\solr\server\solr\products, trusted=true
+2022-05-16 08:04:35.956 INFO  (qtp360936478-21) [   x:products] o.a.s.m.r.SolrJmxReporter JMX monitoring for 'solr.core.products' (registry 'solr.core.products') enabled at server: com.sun.jmx.mbeanserver.JmxMBeanServer@210ab13f
+2022-05-16 08:04:35.967 INFO  (qtp360936478-21) [   x:products] o.a.s.c.SolrCore [[products] ] Opening new SolrCore at [C:\xampp\htdocs\luanvan\mvc\libs\solr\server\solr\products], dataDir=[C:\xampp\htdocs\luanvan\mvc\libs\solr\server\solr\products\data\]
+2022-05-16 08:04:36.398 INFO  (qtp360936478-21) [   x:products] o.a.s.u.UpdateHandler Using UpdateLog implementation: org.apache.solr.update.UpdateLog
+2022-05-16 08:04:36.398 INFO  (qtp360936478-21) [   x:products] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10 numVersionBuckets=65536
+2022-05-16 08:04:36.405 INFO  (qtp360936478-21) [   x:products] o.a.s.u.CommitTracker Hard AutoCommit: if uncommitted for 15000ms; 
+2022-05-16 08:04:36.405 INFO  (qtp360936478-21) [   x:products] o.a.s.u.CommitTracker Soft AutoCommit: disabled
+2022-05-16 08:04:36.445 INFO  (qtp360936478-21) [   x:products] o.a.s.r.ManagedResourceStorage File-based storage initialized to use dir: C:\xampp\htdocs\luanvan\mvc\libs\solr\server\solr\products\conf
+2022-05-16 08:04:36.455 INFO  (qtp360936478-21) [   x:products] o.a.s.h.c.SpellCheckComponent Initializing spell checkers
+2022-05-16 08:04:36.461 INFO  (qtp360936478-21) [   x:products] o.a.s.s.DirectSolrSpellChecker init: {name=default,field=_text_,classname=solr.DirectSolrSpellChecker,distanceMeasure=internal,accuracy=0.5,maxQueryFrequency=0.01,maxEdits=2,minPrefix=1,maxInspections=5,minQueryLength=4}
+2022-05-16 08:04:36.471 INFO  (qtp360936478-21) [   x:products] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+2022-05-16 08:04:36.474 INFO  (qtp360936478-21) [   x:products] o.a.s.u.UpdateLog Could not find max version in index or recent updates, using new clock 1732969262192001024
+2022-05-16 08:04:36.477 INFO  (searcherExecutor-15-thread-1-processing-x:products) [   x:products] o.a.s.c.QuerySenderListener QuerySenderListener done.
+2022-05-16 08:04:36.477 INFO  (searcherExecutor-15-thread-1-processing-x:products) [   x:products] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: default
+2022-05-16 08:04:36.478 INFO  (qtp360936478-21) [   ] o.a.s.s.HttpSolrCall [admin] webapp=null path=/admin/cores params={name=products&action=CREATE&instanceDir=products&wt=json} status=0 QTime=955
+2022-05-16 08:04:36.483 INFO  (searcherExecutor-15-thread-1-processing-x:products) [   x:products] o.a.s.c.SolrCore [products]  Registered new searcher autowarm time: 0 ms
+2022-05-16 08:04:43.586 INFO  (qtp360936478-23) [   ] o.a.s.s.HttpSolrCall [admin] webapp=null path=/admin/cores params={indexInfo=false&wt=json&_=1652688283543} status=0 QTime=0
+2022-05-16 08:04:43.629 INFO  (qtp360936478-27) [   ] o.a.s.s.HttpSolrCall [admin] webapp=null path=/admin/info/system params={wt=json&_=1652688283544} status=0 QTime=43
+2022-05-16 08:04:43.668 INFO  (qtp360936478-23) [   ] o.a.s.s.HttpSolrCall [admin] webapp=null path=/admin/info/system params={wt=json&_=1652688283544} status=0 QTime=36
+2022-05-16 08:04:45.852 INFO  (qtp360936478-23) [   ] o.a.s.s.HttpSolrCall [admin] webapp=null path=/admin/cores params={indexInfo=false&wt=json&_=1652688283543} status=0 QTime=0
+2022-05-16 08:04:45.858 INFO  (qtp360936478-20) [   x:products] o.a.s.c.S.Request [products]  webapp=/solr path=/replication params={wt=json&command=details&_=1652688285847} status=0 QTime=4
+2022-05-16 08:04:45.858 INFO  (qtp360936478-26) [   x:products] o.a.s.c.S.Request [products]  webapp=/solr path=/admin/ping params={action=status&wt=json&_=1652688283544&ts=1652688283544} status=503 QTime=0
+2022-05-16 08:04:45.862 INFO  (qtp360936478-22) [   x:products] o.a.s.c.S.Request [products]  webapp=/solr path=/admin/luke params={numTerms=0&show=index&wt=json&_=1652688285847} status=0 QTime=8
+2022-05-16 08:04:45.920 INFO  (qtp360936478-28) [   ] o.a.s.s.HttpSolrCall [admin] webapp=null path=/admin/info/system params={wt=json&_=1652688283544} status=0 QTime=68
+2022-05-16 08:04:45.924 INFO  (qtp360936478-27) [   x:products] o.a.s.c.S.Request [products]  webapp=/solr path=/admin/system params={wt=json&_=1652688285847} status=0 QTime=68
+2022-05-16 08:06:46.349 WARN  (qtp360936478-44) [   x:products] o.a.s.h.l.XMLLoader XML element <doc> has invalid XML attr: name
+2022-05-16 08:06:46.505 INFO  (qtp360936478-44) [   x:products] o.a.s.s.ManagedIndexSchema Upgraded to managed schema at C:\xampp\htdocs\luanvan\mvc\libs\solr\server\solr\products\conf\managed-schema
+2022-05-16 08:06:46.552 WARN  (qtp360936478-44) [   x:products] o.a.s.h.l.XMLLoader XML element <doc> has invalid XML attr: name
+2022-05-16 08:06:46.568 WARN  (qtp360936478-44) [   x:products] o.a.s.h.l.XMLLoader XML element <doc> has invalid XML attr: name
+2022-05-16 08:06:46.568 WARN  (qtp360936478-44) [   x:products] o.a.s.h.l.XMLLoader XML element <doc> has invalid XML attr: name
+2022-05-16 08:06:46.568 WARN  (qtp360936478-44) [   x:products] o.a.s.h.l.XMLLoader XML element <doc> has invalid XML attr: name
+2022-05-16 08:06:46.568 WARN  (qtp360936478-44) [   x:products] o.a.s.h.l.XMLLoader XML element <doc> has invalid XML attr: name
+2022-05-16 08:06:46.568 WARN  (qtp360936478-44) [   x:products] o.a.s.h.l.XMLLoader XML element <doc> has invalid XML attr: name
+2022-05-16 08:06:46.568 WARN  (qtp360936478-44) [   x:products] o.a.s.h.l.XMLLoader XML element <doc> has invalid XML attr: name
+2022-05-16 08:06:46.568 WARN  (qtp360936478-44) [   x:products] o.a.s.h.l.XMLLoader XML element <doc> has invalid XML attr: name
+2022-05-16 08:06:46.568 WARN  (qtp360936478-44) [   x:products] o.a.s.h.l.XMLLoader XML element <doc> has invalid XML attr: name
+2022-05-16 08:06:46.568 INFO  (qtp360936478-44) [   x:products] o.a.s.u.p.LogUpdateProcessorFactory [products]  webapp=/solr path=/update params={}{add=[21 (1732969398539386880), 22 (1732969398588669952), 23 (1732969398605447168), 24 (1732969398605447169), 25 (1732969398605447170), 29 (1732969398605447171), 30 (1732969398605447172), 31 (1732969398605447173), 32 (1732969398605447174), 33 (1732969398605447175)]} 0 257
+2022-05-16 08:06:46.740 INFO  (searcherExecutor-15-thread-1-processing-x:products) [   x:products] o.a.s.c.QuerySenderListener QuerySenderListener done.
+2022-05-16 08:06:46.755 INFO  (searcherExecutor-15-thread-1-processing-x:products) [   x:products] o.a.s.c.SolrCore [products]  Registered new searcher autowarm time: 3 ms
+2022-05-16 08:06:46.755 INFO  (qtp360936478-29) [   x:products] o.a.s.u.p.LogUpdateProcessorFactory [products]  webapp=/solr path=/update params={commit=true}{commit=} 0 175
+2022-05-16 08:06:52.629 INFO  (qtp360936478-46) [   ] o.a.s.s.HttpSolrCall [admin] webapp=null path=/admin/cores params={indexInfo=false&wt=json&_=1652688412584} status=0 QTime=0
+2022-05-16 08:06:52.633 INFO  (qtp360936478-26) [   x:products] o.a.s.c.S.Request [products]  webapp=/solr path=/admin/luke params={numTerms=0&show=index&wt=json&_=1652688412620} status=0 QTime=2
+2022-05-16 08:06:52.638 INFO  (qtp360936478-28) [   x:products] o.a.s.c.S.Request [products]  webapp=/solr path=/admin/ping params={action=status&wt=json&_=1652688412584&ts=1652688412584} status=503 QTime=0
+2022-05-16 08:06:52.640 INFO  (qtp360936478-27) [   x:products] o.a.s.c.S.Request [products]  webapp=/solr path=/replication params={wt=json&command=details&_=1652688412621} status=0 QTime=3
+2022-05-16 08:06:52.706 INFO  (qtp360936478-22) [   ] o.a.s.s.HttpSolrCall [admin] webapp=null path=/admin/info/system params={wt=json&_=1652688412584} status=0 QTime=77
+2022-05-16 08:06:52.710 INFO  (qtp360936478-25) [   x:products] o.a.s.c.S.Request [products]  webapp=/solr path=/admin/system params={wt=json&_=1652688412620} status=0 QTime=73
+2022-05-16 08:07:00.200 INFO  (qtp360936478-25) [   ] o.a.s.s.HttpSolrCall [admin] webapp=null path=/admin/cores params={indexInfo=false&wt=json&_=1652688412584} status=0 QTime=0
+2022-05-16 08:07:00.236 INFO  (qtp360936478-29) [   ] o.a.s.s.HttpSolrCall [admin] webapp=null path=/admin/info/system params={wt=json&_=1652688412584} status=0 QTime=35
+2022-05-16 08:07:03.101 INFO  (qtp360936478-28) [   x:products] o.a.s.c.S.Request [products]  webapp=/solr path=/select params={q=*:*&indent=true&q.op=OR&_=1652688420186} hits=10 status=0 QTime=24
+2022-05-16 08:07:03.153 INFO  (qtp360936478-29) [   ] o.a.s.s.HttpSolrCall [admin] webapp=null path=/admin/cores params={indexInfo=false&wt=json&_=1652688412584} status=0 QTime=0
+2022-05-16 08:07:03.155 INFO  (qtp360936478-28) [   x:products] o.a.s.c.S.Request [products]  webapp=/solr path=/select params={q=*:*&indent=true&q.op=OR&_=1652688420186} hits=10 status=0 QTime=1
+2022-05-16 08:07:03.189 INFO  (qtp360936478-25) [   ] o.a.s.s.HttpSolrCall [admin] webapp=null path=/admin/info/system params={wt=json&_=1652688412584} status=0 QTime=36
+2022-05-16 08:07:17.907 INFO  (qtp360936478-46) [   x:products] o.a.s.c.S.Request [products]  webapp=/solr path=/select params={q=name:+k?&indent=true&q.op=OR&_=1652688420186} hits=4 status=0 QTime=7
+2022-05-16 08:07:17.938 INFO  (qtp360936478-25) [   ] o.a.s.s.HttpSolrCall [admin] webapp=null path=/admin/cores params={indexInfo=false&wt=json&_=1652688412584} status=0 QTime=0
+2022-05-16 08:07:17.939 INFO  (qtp360936478-22) [   x:products] o.a.s.c.S.Request [products]  webapp=/solr path=/select params={q=name:+k?&indent=true&q.op=OR&_=1652688420186} hits=4 status=0 QTime=0
+2022-05-16 08:07:17.988 INFO  (qtp360936478-28) [   ] o.a.s.s.HttpSolrCall [admin] webapp=null path=/admin/info/system params={wt=json&_=1652688412584} status=0 QTime=50
+2022-05-16 08:07:24.610 INFO  (qtp360936478-29) [   x:products] o.a.s.c.S.Request [products]  webapp=/solr path=/select params={q=name:+son&indent=true&q.op=OR&_=1652688420186} hits=4 status=0 QTime=0
+2022-05-16 08:07:24.637 INFO  (qtp360936478-28) [   ] o.a.s.s.HttpSolrCall [admin] webapp=null path=/admin/cores params={indexInfo=false&wt=json&_=1652688412584} status=0 QTime=0
+2022-05-16 08:07:24.638 INFO  (qtp360936478-46) [   x:products] o.a.s.c.S.Request [products]  webapp=/solr path=/select params={q=name:+son&indent=true&q.op=OR&_=1652688420186} hits=4 status=0 QTime=0
+2022-05-16 08:07:24.676 INFO  (qtp360936478-29) [   ] o.a.s.s.HttpSolrCall [admin] webapp=null path=/admin/info/system params={wt=json&_=1652688412584} status=0 QTime=39
+2022-05-16 08:13:34.503 INFO  (qtp360936478-22) [   x:products] o.a.s.c.S.Request [products]  webapp=/solr path=/select params={q=name:+(chó)%0ades:+(chó)&wt=php} hits=0 status=0 QTime=6
+2022-05-16 08:13:41.469 INFO  (qtp360936478-25) [   x:products] o.a.s.c.S.Request [products]  webapp=/solr path=/select params={q=name:+(son+ph?n+k?)%0ades:+(son+ph?n+k?)&wt=php} hits=9 status=0 QTime=5

@@ -19,7 +19,7 @@ class blogModel
     public function search($keyword)
     {
         $db = DB::getInstance();
-        $sql = "SELECT b.id, b.title, b.content, b.image, b.createdDate, u.fullName as author, MATCH (title,content) AGAINST ('" . $keyword . "') as score FROM blog b JOIN users u ON b.userId = u.id WHERE MATCH(b.title,b.content) AGAINST ('$keyword') > 0.5 ORDER BY score DESC";
+        $sql = "SELECT b.id, b.title, b.content, b.image, b.createdDate, u.fullName as author, MATCH (b.title) AGAINST ('" . $keyword . "') as score FROM blog b JOIN users u ON b.userId = u.id WHERE MATCH(b.title) AGAINST ('$keyword') > 0.2 ORDER BY score DESC";
         $result = mysqli_query($db->con, $sql);
         return $result;
     }
@@ -27,7 +27,7 @@ class blogModel
     public function getById($id)
     {
         $db = DB::getInstance();
-        $sql = "SELECT b.id, b.title, b.content, b.image, b.createdDate, u.fullName as author FROM blog b JOIN users u ON b.userId = u.id WHERE b.id = " . $id . "";
+        $sql = "SELECT b.id, b.title, b.content, b.image, b.createdDate, u.fullName as author, b.views FROM blog b JOIN users u ON b.userId = u.id WHERE b.id = " . $id . "";
         $result = mysqli_query($db->con, $sql)->fetch_assoc();
         return $result;
     }
@@ -39,7 +39,15 @@ class blogModel
         }
         $tmp = ($page - 1) * $total;
         $db = DB::getInstance();
-        $sql = "SELECT b.id, b.title, b.content, b.image, b.createdDate, u.fullName as author FROM blog b JOIN users u ON b.userId = u.id LIMIT $tmp,$total";
+        $sql = "SELECT b.id, b.title, b.content, b.image, b.createdDate, u.fullName as author, b.views FROM blog b JOIN users u ON b.userId = u.id LIMIT $tmp,$total";
+        $result = mysqli_query($db->con, $sql);
+        return $result;
+    }
+
+    public function getPopular()
+    {
+        $db = DB::getInstance();
+        $sql = "SELECT b.id, b.title, b.content, b.image, b.createdDate, u.fullName as author, b.views FROM blog b JOIN users u ON b.userId = u.id WHERE b.views > 0 ORDER BY b.views DESC LIMIT 5";
         $result = mysqli_query($db->con, $sql);
         return $result;
     }
