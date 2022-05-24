@@ -24,9 +24,9 @@ class productModel
         return $result['response']['docs'];
     }
 
-    public function getProductSuggest($keyword,$id)
+    public function getProductSuggest($keyword, $id)
     {
-        $contents = file_get_contents("http://localhost:8983/solr/products2/select?q=-id:%20".$id."%0Aname:%20(" . $keyword . ")&wt=php&rows=4");
+        $contents = file_get_contents("http://localhost:8983/solr/products2/select?q=-id:%20" . $id . "%0Aname:%20(" . $keyword . ")&wt=php&rows=4");
         $result = 0;
         eval("\$result = " . $contents . ";");
         return $result['response']['docs'];
@@ -143,10 +143,28 @@ class productModel
         $file_ext = strtolower(end($div));
         $unique_image = substr(md5(time()), 0, 10) . '.' . $file_ext;
         $uploaded_image = APP_ROOT . "../../public/images/" . $unique_image;
-
         move_uploaded_file($file_temp, $uploaded_image);
 
-        $sql = "INSERT INTO `products` (`id`, `name`, `originalPrice`, `promotionPrice`, `image`, `createdBy`, `createdDate`, `cateId`, `qty`, `des`, `status`, `soldCount`,`weight`) VALUES (NULL, '" . $product['name'] . "', " . $product['originalPrice'] . ", " . $product['promotionPrice'] . ", '" . $unique_image . "', " . $_SESSION['user_id'] . ", '" . date("y-m-d H:i:s") . "', " . $product['cateId'] . ", " . $product['qty'] . ", '" . $product['des'] . "', 1, 0, " . $product['weight'] . ")";
+        $file_name2 = $_FILES['image2']['name'];
+        $file_temp2 = $_FILES['image2']['tmp_name'];
+
+        $div2 = explode('.', $file_name2);
+        $file_ext2 = strtolower(end($div2));
+        $unique_image2 = substr(md5(time() . '2'), 0, 10) . '.' . $file_ext2;
+        $uploaded_image2 = APP_ROOT . "../../public/images/" . $unique_image2;
+        move_uploaded_file($file_temp2, $uploaded_image2);
+
+        $file_name3 = $_FILES['image3']['name'];
+        $file_temp3 = $_FILES['image3']['tmp_name'];
+
+        $div3 = explode('.', $file_name3);
+        $file_ext3 = strtolower(end($div3));
+        $unique_image3 = substr(md5(time() . '3'), 0, 10) . '.' . $file_ext3;
+        $uploaded_image3 = APP_ROOT . "../../public/images/" . $unique_image3;
+        move_uploaded_file($file_temp3, $uploaded_image3);
+
+
+        $sql = "INSERT INTO `products` (`id`, `name`, `originalPrice`, `promotionPrice`, `image`,`image2`,`image3`, `createdBy`, `createdDate`, `cateId`, `qty`, `des`, `status`, `soldCount`,`weight`) VALUES (NULL, '" . $product['name'] . "', " . $product['originalPrice'] . ", " . $product['promotionPrice'] . ", '" . $unique_image . "', '" . $unique_image2 . "', '" . $unique_image3 . "', " . $_SESSION['user_id'] . ", '" . date("y-m-d H:i:s") . "', " . $product['cateId'] . ", " . $product['qty'] . ", '" . $product['des'] . "', 1, 0, " . $product['weight'] . ")";
         $result = mysqli_query($db->con, $sql);
         return $result;
     }
@@ -233,7 +251,8 @@ class productModel
         return false;
     }
 
-    public function getSoldCountMonth(){
+    public function getSoldCountMonth()
+    {
         $db = DB::getInstance();
         $sql = "SELECT SUM(p.soldCount) AS total, p.name FROM `orders` o JOIN order_details od ON o.id  JOIN products p ON od.productId = p.id WHERE MONTH(o.createdDate) = MONTH(NOW()) AND o.paymentStatus=1 GROUP BY p.id, MONTH(o.createdDate), YEAR(o.createdDate)";
         $result = mysqli_query($db->con, $sql);
