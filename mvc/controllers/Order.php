@@ -5,35 +5,35 @@ class order extends ControllerBase
     public function add()
     {
         // if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $order = $this->model("orderModel");
-            if (isset($_SESSION['voucher'])) {
-                $voucher = $this->model("voucherModel");
-                $check = $voucher->used($_SESSION['voucher']['code']);
-                if ($check) {
-                    $result = $order->add($_SESSION['user_id'], $_POST['total'], $_SESSION['voucher']['percentDiscount']);
-                } else {
-                    echo '<script>alert("Mã giảm giá không đúng hoặc số lượng đã hết!");window.history.back();</script>';
-                    die();
-                }
+        $order = $this->model("orderModel");
+        if (isset($_SESSION['voucher'])) {
+            $voucher = $this->model("voucherModel");
+            $check = $voucher->used($_SESSION['voucher']['code']);
+            if ($check) {
+                $result = $order->add($_SESSION['user_id'], $_POST['total'], $_SESSION['voucher']['percentDiscount']);
             } else {
-                $result = $order->add($_SESSION['user_id'], $_POST['total']);
+                echo '<script>alert("Mã giảm giá không đúng hoặc số lượng đã hết!");window.history.back();</script>';
+                die();
             }
+        } else {
+            $result = $order->add($_SESSION['user_id'], $_POST['total']);
+        }
 
-            if ($result) {
-                if ($_POST['paymentMethod'] == "vnpay") {
-                    $this->redirect("order", "payment", [
-                        "orderId" => $result
-                    ]);
-                } else {
-                    $this->redirect("order", "message", [
-                        "message" => "success"
-                    ]);
-                }
+        if ($result) {
+            if ($_POST['paymentMethod'] == "vnpay") {
+                $this->redirect("order", "payment", [
+                    "orderId" => $result
+                ]);
             } else {
                 $this->redirect("order", "message", [
-                    "message" => "fail"
+                    "message" => "success"
                 ]);
             }
+        } else {
+            $this->redirect("order", "message", [
+                "message" => "fail"
+            ]);
+        }
         // }
     }
 
@@ -131,12 +131,10 @@ class order extends ControllerBase
              *
              * @author xonv
              */
-            require_once APP_ROOT . '/core/Config.php';
-
 
             $vnp_TxnRef = $_POST['order_id']; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
-            $vnp_orderInfo = $_POST['order_desc'];
-            $vnp_orderType = $_POST['order_type'];
+            $vnp_OrderInfo = $_POST['order_desc'];
+            $vnp_OrderType = $_POST['order_type'];
             $vnp_Amount = $_POST['amount'] * 100;
             $vnp_Locale = $_POST['language'];
             $vnp_BankCode = $_POST['bank_code'];
@@ -173,8 +171,8 @@ class order extends ControllerBase
                 "vnp_CurrCode" => "VND",
                 "vnp_IpAddr" => $vnp_IpAddr,
                 "vnp_Locale" => $vnp_Locale,
-                "vnp_orderInfo" => $vnp_orderInfo,
-                "vnp_orderType" => $vnp_orderType,
+                "vnp_OrderInfo" => $vnp_OrderInfo,
+                "vnp_OrderType" => $vnp_OrderType,
                 "vnp_ReturnUrl" => $vnp_Returnurl,
                 "vnp_TxnRef" => $vnp_TxnRef,
                 "vnp_ExpireDate" => $vnp_ExpireDate,
@@ -193,7 +191,6 @@ class order extends ControllerBase
                 "vnp_Inv_Taxcode" => $vnp_Inv_Taxcode,
                 "vnp_Inv_Type" => $vnp_Inv_Type
             );
-
 
             if (isset($vnp_BankCode) && $vnp_BankCode != "") {
                 $inputData['vnp_BankCode'] = $vnp_BankCode;
@@ -225,10 +222,6 @@ class order extends ControllerBase
             $returnData = array(
                 'code' => '00', 'message' => 'success', 'data' => $vnp_Url
             );
-            if (isset($_POST['redirect'])) {
-                header('Location: ' . $vnp_Url);
-                die();
-            }
             header('Location: ' . $vnp_Url);
         } else {
             $this->view("client/payment", [
