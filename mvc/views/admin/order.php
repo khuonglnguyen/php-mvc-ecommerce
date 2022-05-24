@@ -28,6 +28,7 @@
                                     <tr>
                                         <th>STT</th>
                                         <th>Mã HD</th>
+                                        <th>Tên khách hàng</th>
                                         <th>Ngày đặt</th>
                                         <th>Tình trạng</th>
                                         <th>Phương thức thanh toán</th>
@@ -43,6 +44,7 @@
                                         <tr>
                                             <td><?= ++$count ?></td>
                                             <td><?= $value['id'] ?></td>
+                                            <td><?= $value['fullName'] ?></td>
                                             <td><?= date("d/m/Y", strtotime($value['createdDate'])) ?></td>
                                             <?php
                                             if ($value['status'] == "processing") { ?>
@@ -51,7 +53,7 @@
                                                 <td><span class="blue">Đã xác nhận</span></td>
                                             <?php } else if ($value['status'] == "delivery") { ?>
                                                 <td><span class="yellow">Đang giao hàng</span></td>
-                                            <?php }else{ ?>
+                                            <?php } else { ?>
                                                 <td><span class="active">Hoàn thành</span></td>
                                             <?php }
                                             ?>

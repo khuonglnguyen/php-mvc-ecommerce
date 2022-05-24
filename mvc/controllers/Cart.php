@@ -95,6 +95,9 @@ class cart extends ControllerBase
         if (isset($_SESSION['user_id'])) {
             $cart = $this->model("cartModel");
             if ($cart->remove($_SESSION['user_id'], $productId)) {
+                if ($_SESSION['cart'] == null) {
+                    $this->cancelVoucher();
+                }
             } else {
                 echo 'lỗi';
                 die();
