@@ -125,7 +125,7 @@
             <td>Đã thanh toán</td>
           <?php } else { ?>
             <td>Chưa thanh toán
-              <a href="<?= URL_ROOT . '/order/payment/' . $value['id'] ?>">(Thanh toán ngay)</a>
+              <a href="<?= URL_ROOT . '/order/detail/' . $value['id'] ?>">(Thanh toán ngay)</a>
             </td>
           <?php }
           ?>

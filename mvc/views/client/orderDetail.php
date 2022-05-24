@@ -36,7 +36,7 @@
             ?>
           </ul>
         </li>
-          <li><a href="<?= URL_ROOT . "/blog" ?>">Blog <i class="fa fa-book"></i></a></li>
+        <li><a href="<?= URL_ROOT . "/blog" ?>">Blog <i class="fa fa-book"></i></a></li>
 
         <?php
         if (isset($_SESSION['user_id'])) { ?>
@@ -100,6 +100,26 @@
       <h3>Chưa có đơn đặt hàng...</h3>
     <?php }  ?>
   </table>
+  <?php
+  if ($data['paymentStatus'] == "0" && $data['deliveryStatus'] == "processing") { ?>
+    <div class="payment">
+      <div class="login">
+        <h3>Phương thức thanh toán Online</h3>
+        <form action="<?= URL_ROOT ?>/order/payment" method="post">
+          <input type="hidden" name="total" value="<?= $total ?>">
+          <input type="hidden" name="orderId" value="<?= $data['orderId'] ?>">
+          <label for="vnpay">Ví điện tử VNPay</label>
+          <input type="radio" id="vnpay" id="vnpay" name="paymentMethod" value="vnpay" checked>
+          <img style="height: 50px;" src="<?= URL_ROOT ?>/public/images/vnpay.png" alt="" srcset=""><br>
+          <label for="momo">Ví điện tử MOMO</label>
+          <input type="radio" id="momo" name="paymentMethod" value="momo">
+          <img style="height: 50px;" id="momo" src="<?= URL_ROOT ?>/public/images/momo.png" alt="" srcset=""> <br>
+          <button type="submit" class="cart-btn">Thanh toán ngay</button>
+        </form>
+      </div>
+    </div>
+  <?php  }
+  ?>
   <?php require APP_ROOT . '/views/client/inc/footer.php'; ?>
 </body>
 

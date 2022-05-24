@@ -775,6 +775,7 @@ textarea {
   text-decoration: none;
   padding: 12px 30px;
   transition: all .5s;
+  margin-top: 10px;
 }
 
 .cart-btn:hover {

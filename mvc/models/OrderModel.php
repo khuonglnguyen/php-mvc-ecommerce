@@ -103,10 +103,10 @@ class orderModel
         return true;
     }
 
-    public function payment($orderId)
+    public function payment($orderId, $paymentMethod)
     {
         $db = DB::getInstance();
-        $sql = "UPDATE orders SET paymentStatus = 1, paymentMethod = 'VNPay', payDate = '" . date("y-m-d H:i:s") . "' WHERE id = $orderId";
+        $sql = "UPDATE orders SET paymentStatus = 1, paymentMethod = '" . $paymentMethod . "', payDate = '" . date("y-m-d H:i:s") . "' WHERE id = $orderId";
         $result = mysqli_query($db->con, $sql);
         return $result;
     }

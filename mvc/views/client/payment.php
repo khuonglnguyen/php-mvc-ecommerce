@@ -229,7 +229,7 @@ require_once APP_ROOT . '/core/Config.php';
     </div>
     <?php require APP_ROOT . '/views/client/inc/footer.php'; ?>
     <script>
-        document.getElementById("form-order").submit();
+        // document.getElementById("form-order").submit();
     </script>
 </body>
 

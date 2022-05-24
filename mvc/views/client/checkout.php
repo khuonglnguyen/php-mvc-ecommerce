@@ -36,7 +36,7 @@
             ?>
           </ul>
         </li>
-          <li><a href="<?= URL_ROOT . "/blog" ?>">Blog <i class="fa fa-book"></i></a></li>
+        <li><a href="<?= URL_ROOT . "/blog" ?>">Blog <i class="fa fa-book"></i></a></li>
 
         <?php
         if (isset($_SESSION['user_id'])) { ?>
@@ -113,7 +113,7 @@
   if (!isset($_SESSION['voucher']) && isset($_SESSION['user_id']) && count($data['cart']) > 0) { ?>
     <div class="login">
       <form action="<?= URL_ROOT ?>/cart/check" class="login-container" method="post">
-        <p><input type="text" placeholder="Mã giảm giá" name="code" required></p>
+        <p><input type="text" placeholder="Mã giảm giá (nếu có)" name="code" required></p>
         <p class="<?= isset($data['cssClass']) ? $data['cssClass'] : "" ?>"><?= isset($data['message']) ? $data['message'] : "" ?></p>
         <p><input type="submit" value="Áp dụng"></p>
       </form>
@@ -125,38 +125,53 @@
     if (isset($_SESSION['user_id']) && count($data['cart']) > 0) {
       if (isset($_SESSION['voucher'])) { ?>
         <div class="login">
-          Chọn hình thức thanh toán
+          <h3>Phương thức thanh toán</h3>
           <form action="<?= URL_ROOT ?>/order/add" method="post">
-            <input type="hidden" name="total" value="<?= ($total - ($total / 100 * $_SESSION['voucher']['percentDiscount'])) ?>">
-            <select name="paymentMethod">
-              <option value="cod">COD</option>
-              <option value="vnpay">VNPay</option>
-            </select>
-            <button type="submit" class="cart-btn">Đặt hàng</button>
+            <input type="hidden" name="total" value="<?= $total ?>">
+            <label for="cod">Thanh toán tiền mặt khi nhận hàng (COD)</label>
+            <input type="radio" id="cod" id="cod" name="paymentMethod" value="cod" checked>
+            <img style="height: 50px;" src="<?= URL_ROOT ?>/public/images/wallet.jpg" alt="" srcset=""><br>
+            <label for="vnpay">Ví điện tử VNPay</label>
+            <input type="radio" id="vnpay" id="vnpay" name="paymentMethod" value="vnpay">
+            <img style="height: 50px;" src="<?= URL_ROOT ?>/public/images/vnpay.png" alt="" srcset=""><br>
+            <label for="momo">Ví điện tử MOMO</label>
+            <input type="radio" id="momo" name="paymentMethod" value="momo">
+            <img style="height: 50px;" id="momo" src="<?= URL_ROOT ?>/public/images/momo.png" alt="" srcset=""> <br>
+            <button type="submit" class="cart-btn">Đặt hàng ngay</button>
           </form>
         </div>
       <?php } else if (isset($_SESSION['cart'])) { ?>
         <div class="login">
-          Chọn hình thức thanh toán
+          <h3>Phương thức thanh toán</h3>
           <form action="<?= URL_ROOT ?>/order/add" method="post">
             <input type="hidden" name="total" value="<?= $total ?>">
-            <select name="paymentMethod">
-              <option value="cod">COD</option>
-              <option value="vnpay">VNPay</option>
-            </select>
-            <button type="submit" class="cart-btn">Đặt hàng</button>
+            <label for="cod">Thanh toán tiền mặt khi nhận hàng (COD)</label>
+            <input type="radio" id="cod" id="cod" name="paymentMethod" value="cod" checked>
+            <img style="height: 50px;" src="<?= URL_ROOT ?>/public/images/wallet.jpg" alt="" srcset=""><br>
+            <label for="vnpay">Ví điện tử VNPay</label>
+            <input type="radio" id="vnpay" id="vnpay" name="paymentMethod" value="vnpay">
+            <img style="height: 50px;" src="<?= URL_ROOT ?>/public/images/vnpay.png" alt="" srcset=""><br>
+            <label for="momo">Ví điện tử MOMO</label>
+            <input type="radio" id="momo" name="paymentMethod" value="momo">
+            <img style="height: 50px;" id="momo" src="<?= URL_ROOT ?>/public/images/momo.png" alt="" srcset=""> <br>
+            <button type="submit" class="cart-btn">Đặt hàng ngay</button>
           </form>
         </div>
       <?php } else { ?>
         <div class="login">
-          Chọn hình thức thanh toán
+          <h3>Phương thức thanh toán</h3>
           <form action="<?= URL_ROOT ?>/order/add" method="post">
             <input type="hidden" name="total" value="<?= $total ?>">
-            <select name="paymentMethod">
-              <option value="cod">COD</option>
-              <option value="vnpay">VNPay</option>
-            </select>
-            <button type="submit" class="cart-btn">Đặt hàng</button>
+            <label for="cod">Thanh toán tiền mặt khi nhận hàng (COD)</label>
+            <input type="radio" id="cod" id="cod" name="paymentMethod" value="cod" checked>
+            <img style="height: 50px;" src="<?= URL_ROOT ?>/public/images/wallet.jpg" alt="" srcset=""><br>
+            <label for="vnpay">Ví điện tử VNPay</label>
+            <input type="radio" id="vnpay" id="vnpay" name="paymentMethod" value="vnpay">
+            <img style="height: 50px;" src="<?= URL_ROOT ?>/public/images/vnpay.png" alt="" srcset=""><br>
+            <label for="momo">Ví điện tử MOMO</label>
+            <input type="radio" id="momo" name="paymentMethod" value="momo">
+            <img style="height: 50px;" id="momo" src="<?= URL_ROOT ?>/public/images/momo.png" alt="" srcset=""> <br>
+            <button type="submit" class="cart-btn">Đặt hàng ngay</button>
           </form>
         </div>
       <?php } ?>
