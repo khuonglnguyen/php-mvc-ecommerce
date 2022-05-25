@@ -320,4 +320,13 @@ class order extends ControllerBase
             $this->redirect("order", "checkout");
         }
     }
+
+    public function cancel($orderId)
+    {
+        $order = $this->model("orderModel");
+        $result = $order->cancel($orderId);
+        if ($result) {
+            $this->redirect("order", "checkout");
+        }
+    }
 }

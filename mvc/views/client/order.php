@@ -115,21 +115,32 @@
             <td>Chưa xác nhận</td>
           <?php } else if ($value['status'] == "processed") { ?>
             <td>Đã xác nhận</td>
-          <?php } else { ?>
+          <?php } else if ($value['status'] == "received") { ?>
             <td>Hoàn thành</td>
+          <?php } else if ($value['status'] == "cancel") { ?>
+            <td>Đã hủy</td>
           <?php }
           ?>
           <td><?= $value['paymentMethod'] ?></td>
           <?php
           if ($value['paymentStatus']) { ?>
             <td>Đã thanh toán</td>
-          <?php } else { ?>
+          <?php } else if ($value['status'] != "cancel") { ?>
             <td>Chưa thanh toán
               <a href="<?= URL_ROOT . '/order/detail/' . $value['id'] ?>">(Thanh toán ngay)</a>
             </td>
+          <?php } else { ?>
+            <td>Không thể thanh toán</td>
           <?php }
           ?>
-          <td><a href="<?= URL_ROOT . '/order/detail/' . $value['id'] ?>">Chi tiết</a></td>
+          <td>
+            <a href="<?= URL_ROOT . '/order/detail/' . $value['id'] ?>">Chi tiết</a>
+            <?php
+            if ($value['paymentMethod'] == "COD" && $value['status'] != "cancel") { ?>
+              <a href="<?= URL_ROOT . '/order/cancel/' . $value['id'] ?>">Hủy đơn</a>
+            <?php  }
+            ?>
+          </td>
         </tr>
       <?php }
       ?>

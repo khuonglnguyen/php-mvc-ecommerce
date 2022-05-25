@@ -111,6 +111,14 @@ class orderModel
         return $result;
     }
 
+    public function cancel($orderId)
+    {
+        $db = DB::getInstance();
+        $sql = "UPDATE orders SET status = 'cancel' WHERE id = $orderId";
+        $result = mysqli_query($db->con, $sql);
+        return $result;
+    }
+
     public function getTotalRevenue()
     {
         $db = DB::getInstance();
