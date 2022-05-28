@@ -127,7 +127,6 @@
             <td>Đã thanh toán</td>
           <?php } else if ($value['status'] != "cancel") { ?>
             <td>Chưa thanh toán
-              <a href="<?= URL_ROOT . '/order/detail/' . $value['id'] ?>">(Thanh toán ngay)</a>
             </td>
           <?php } else { ?>
             <td>Không thể thanh toán</td>

@@ -73,10 +73,10 @@ class cartModel
         return $result;
     }
 
-    public function updateQuanity($userId, $item)
+    public function updateQuanity($userId, $item, $productId)
     {
         $db = DB::getInstance();
-        $sql = "UPDATE `cart` SET `quantity`= quantity + 1 WHERE productId='" . $item['productId'] . "' AND userId=$userId";
+        $sql = "UPDATE `cart` SET `quantity`= quantity + 1 WHERE productId='" . $item[$productId]['productId'] . "' AND userId=$userId";
         $result = mysqli_query($db->con, $sql);
         return $result;
     }
@@ -95,5 +95,12 @@ class cartModel
         $sql = "DELETE FROM `cart` WHERE productId=$productId AND userId=$userId";
         $result = mysqli_query($db->con, $sql);
         return $result;
+    }
+
+    public function deleteCart()
+    {
+        $db = DB::getInstance();
+        $sqlDeleteCart = "DELETE FROM `cart` WHERE userId='" . $_SESSION['user_id'] . "'";
+        mysqli_query($db->con, $sqlDeleteCart);
     }
 }

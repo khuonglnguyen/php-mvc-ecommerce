@@ -73,16 +73,26 @@
         <label>
           <?php
           if (isset($_GET['vnp_ResponseCode']) && $_GET['vnp_ResponseCode'] == '00') {
+            unset($_SESSION['cart']);
+            unset($_SESSION['voucher']);
+            $cart = new cart();
+            $cart->deleteCart();
             echo "<h2 style='color:green'>Thanh toán thành công qua VNPay</h2>"; ?>
             <a href="<?= URL_ROOT . '/order/detail/' . $_GET['orderId'] ?>">Xem đơn hàng</a>
           <?php
           } else if (isset($_GET['resultCode']) && $_GET['resultCode'] == "0") {
+            unset($_SESSION['cart']);
+            unset($_SESSION['voucher']);
+            $cart = new cart();
+            $cart->deleteCart();
             echo "<h2 style='color:green'>Thanh toán thành công qua Momo</h2>"; ?>
             <a href="<?= URL_ROOT . '/order/detail/' . $_GET['orderId'] ?>">Xem đơn hàng</a>
           <?php
           } else {
+            $order = new Order();
+            $order->delete($_GET['orderId']);
             echo "<h2 style='color:red'>Thanh toán thất bại</h2>"; ?>
-            <a href="<?= URL_ROOT . '/order/detail/' . $_GET['orderId'] ?>">Thanh toán lại</a>
+            <a href="<?= URL_ROOT . '/cart/checkout' ?>">Đặt hàng lại</a>
           <?php
           }
           ?>

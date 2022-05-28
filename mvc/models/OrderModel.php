@@ -42,10 +42,15 @@ class orderModel
         if ($result) {
             $sqlCart = "SELECT * FROM cart WHERE userId=$userId";
             $resultCart = (mysqli_query($db->con, $sqlCart))->fetch_all(MYSQLI_ASSOC);
+            if (!$resultCart) {
+                echo 'lỗi resultCart';die();
+            }
             foreach ($resultCart as $key => $value) {
                 $s = "INSERT INTO `order_details` (`id`, `orderId`, `productId`, `qty`, `productPrice`, `productName`) VALUES (NULL," . $last_id . ", '" . $value['productId'] . "', '" . $value['quantity'] . "', " . $value['productPrice'] . ", '" . $value['productName'] . "')";
                 $result = mysqli_query($db->con, $s);
-
+                if (mysqli_num_rows($result) == 0) {
+                    echo 'lỗi order_details';die();
+                }
                 // Update qty
                 $sqlUpdateQty = "UPDATE products SET qty = qty - " . $value['quantity'] . " WHERE id = " . $value['productId'] . "";
                 $r = mysqli_query($db->con, $sqlUpdateQty);
@@ -54,10 +59,6 @@ class orderModel
             return false;
         }
 
-        $sqlDeleteCart = "DELETE FROM `cart` WHERE userId='" . $_SESSION['user_id'] . "'";
-        mysqli_query($db->con, $sqlDeleteCart);
-        unset($_SESSION['cart']);
-        unset($_SESSION['voucher']);
         return $last_id;
     }
 
@@ -81,6 +82,17 @@ class orderModel
     {
         $db = DB::getInstance();
         $sql = "UPDATE orders SET status = 'delivery' WHERE id = $Id";
+        $result = mysqli_query($db->con, $sql);
+        return $result;
+    }
+
+    public function delete($Id)
+    {
+        $db = DB::getInstance();
+        $sql_order_details = "DELETE FROM order_details WHERE orderId = $Id";
+        $result = mysqli_query($db->con, $sql_order_details);
+        
+        $sql = "DELETE FROM orders WHERE id = $Id";
         $result = mysqli_query($db->con, $sql);
         return $result;
     }

@@ -23,6 +23,10 @@ class order extends ControllerBase
             if ($_POST['paymentMethod'] != "cod") {
                 $this->payment($result, $_POST['total'], $_POST['paymentMethod']);
             } else {
+                $cart = $this->model("cartModel");
+                $cart->deleteCart();
+                unset($_SESSION['cart']);
+                unset($_SESSION['voucher']);
                 $this->redirect("order", "message", [
                     "message" => "success"
                 ]);
@@ -319,6 +323,12 @@ class order extends ControllerBase
         if ($result) {
             $this->redirect("order", "checkout");
         }
+    }
+
+    public function delete($orderId)
+    {
+        $order = $this->model("orderModel");
+        $result = $order->delete($orderId);
     }
 
     public function cancel($orderId)

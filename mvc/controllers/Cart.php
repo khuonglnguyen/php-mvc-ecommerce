@@ -11,9 +11,9 @@ class cart extends ControllerBase
             $cart = $this->model("cartModel");
             $cartUser = ($cart->getByUserId($_SESSION['user_id']));
             if ($cart->check($_SESSION['user_id'], $productId)) {
-                $check = $product->checkQuantity($productId, $cartUser['quantity']);
+                $check = $product->checkQuantity($productId, $cartUser[$productId]['quantity']);
                 if ($check) {
-                    if (!$cart->updateQuanity($_SESSION['user_id'], $cartUser)) {
+                    if (!$cart->updateQuanity($_SESSION['user_id'], $cartUser, $productId)) {
                         echo 'lỗi';
                         die();
                     }
@@ -132,7 +132,7 @@ class cart extends ControllerBase
                     "headTitle" => "Đơn hàng của tôi",
                     'cart' => $result
                 ]);
-            }else {
+            } else {
                 $this->view("client/checkout", [
                     "headTitle" => "Đơn hàng của tôi",
                     'cart' => isset($_SESSION['cart']) ? $_SESSION['cart'] : []
@@ -180,5 +180,11 @@ class cart extends ControllerBase
         $voucher->cancel($_SESSION['voucher']['code']);
         unset($_SESSION['voucher']);
         $this->redirect("cart", "checkout");
+    }
+
+    public function deleteCart()
+    {
+        $cart = $this->model("cartModel");
+        $cart->deleteCart();
     }
 }
