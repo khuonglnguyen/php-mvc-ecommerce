@@ -43,7 +43,7 @@
                                     ?>
                                         <tr>
                                             <td><?= ++$count ?></td>
-                                            <td><?= $value['id'] ?></td>
+                                            <td><?= $value['orderId'] ?></td>
                                             <td><?= $value['fullName'] ?></td>
                                             <td><?= date("d/m/Y", strtotime($value['createdDate'])) ?></td>
                                             <?php
@@ -53,8 +53,12 @@
                                                 <td><span class="blue">Đã xác nhận</span></td>
                                             <?php } else if ($value['status'] == "delivery") { ?>
                                                 <td><span class="yellow">Đang giao hàng</span></td>
-                                            <?php } else { ?>
+                                            <?php } else if ($value['status'] == "cancel"){ ?>
+                                                <td><span class="gray">Đã hủy</span></td>
+                                            <?php } else if ($value['status'] == "received"){ ?>
                                                 <td><span class="active">Hoàn thành</span></td>
+                                            <?php } else{ ?>
+                                                <td><span class="gray">...</span></td>
                                             <?php }
                                             ?>
                                             <td><?= $value['paymentMethod'] ?></td>
@@ -65,7 +69,7 @@
                                                 <td><span class="gray">Chưa thanh toán</span></td>
                                             <?php }
                                             ?>
-                                            <td><a href="<?= URL_ROOT . '/orderManage/detail/' . $value['id'] ?>">Chi tiết</a></td>
+                                            <td><a href="<?= URL_ROOT . '/orderManage/detail/' . $value['orderId'] ?>">Chi tiết</a></td>
                                         </tr>
                                     <?php }
                                     ?>

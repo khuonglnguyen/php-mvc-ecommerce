@@ -65,7 +65,7 @@ class orderModel
     public function getAll()
     {
         $db = DB::getInstance();
-        $sql = "SELECT * FROM orders o JOIN users u ON o.userId = u.id";
+        $sql = "SELECT o.id as orderId, o.createdDate, o.receivedDate, o.status, o.paymentStatus, o.paymentMethod, o.payDate, o.total, o.discount, u.id as userId, u.fullName FROM orders o JOIN users u ON o.userId = u.id";
         $result = mysqli_query($db->con, $sql);
         return $result;
     }
