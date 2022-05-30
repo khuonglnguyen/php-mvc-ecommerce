@@ -66,7 +66,7 @@
   }
 
   .content-blog {
-    width: 70%;
+    width: 50%;
     margin: 20px auto;
   }
 

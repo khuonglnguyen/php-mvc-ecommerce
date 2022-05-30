@@ -31,11 +31,12 @@
           <ul class="sub-menu">
             <?php
             foreach ($listCategory as $key) { ?>
-              <li><a href="<?= URL_ROOT . '/product/category/' . $value['id'] ?>?page=1"><?= $value['name'] ?></a></li>
+              <li><a href="<?= URL_ROOT . '/product/category/' . $key['id'] ?>?page=1"><?= $key['name'] ?></a></li>
             <?php }
             ?>
           </ul>
         </li>
+          <li><a href="<?= URL_ROOT . "/blog" ?>">Blog <i class="fa fa-book"></i></a></li>
 
         <?php
         if (isset($_SESSION['user_id'])) { ?>

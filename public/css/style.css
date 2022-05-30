@@ -159,6 +159,7 @@ li {
 }
 
 .sub-menu {
+  height: 300px;
   width: 200px;
   background-color: rgb(255, 209, 204);
   padding: 7px 0;
@@ -166,6 +167,7 @@ li {
   display: none;
   z-index: 100;
   border: rgb(184, 56, 67) solid 1px;
+  overflow: scroll;
 }
 
 .sub-menu li {
