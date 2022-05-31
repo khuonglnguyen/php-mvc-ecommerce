@@ -278,7 +278,6 @@ class order extends ControllerBase
                 $ipnUrl = URL_ROOT . '/order/returnPayment/';
                 $redirectUrl = URL_ROOT . '/order/returnPayment/';
                 $extraData = "";
-
                 $requestId = time() . "";
                 $requestType = "captureWallet";
                 $extraData = "";
@@ -291,7 +290,7 @@ class order extends ControllerBase
                     "storeId" => "MomoTestStore",
                     'requestId' => $requestId,
                     'amount' => $amount,
-                    'orderId' => $orderId,
+                    'orderId' => $orderId. "",
                     'orderInfo' => $orderInfo,
                     'redirectUrl' => $redirectUrl,
                     'ipnUrl' => $ipnUrl,

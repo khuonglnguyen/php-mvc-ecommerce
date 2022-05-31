@@ -35,22 +35,20 @@ class orderModel
     public function add($userId, $total, $percentDiscount = 0)
     {
         $db = DB::getInstance();
-        $sql = "INSERT INTO `orders` (`id`, `userId`, `createdDate`, `receivedDate`, `status`, `paymentMethod`, `paymentStatus`, `payDate`, `total`,`discount`) VALUES (NULL, '$userId', '" . date("y-m-d H:i:s") . "', NULL, 'processing', 'COD',0,NULL,'$total',$percentDiscount)";
+        $newId = $this->generateRandomString();
+        $sql = "INSERT INTO `orders` (`id`, `userId`, `createdDate`, `receivedDate`, `status`, `paymentMethod`, `paymentStatus`, `payDate`, `total`,`discount`) VALUES ('$newId', " . $_SESSION['user_id'] . ", '" . date("y-m-d H:i:s") . "', NULL, 'processing', 'COD',0,NULL,'$total',$percentDiscount)";
         $result = mysqli_query($db->con, $sql);
 
-        $last_id = $db->con->insert_id;
         if ($result) {
             $sqlCart = "SELECT * FROM cart WHERE userId=$userId";
             $resultCart = (mysqli_query($db->con, $sqlCart))->fetch_all(MYSQLI_ASSOC);
             if (!$resultCart) {
-                echo 'lỗi resultCart';die();
+                echo 'lỗi resultCart';
+                die();
             }
             foreach ($resultCart as $key => $value) {
-                $s = "INSERT INTO `order_details` (`id`, `orderId`, `productId`, `qty`, `productPrice`, `productName`) VALUES (NULL," . $last_id . ", '" . $value['productId'] . "', '" . $value['quantity'] . "', " . $value['productPrice'] . ", '" . $value['productName'] . "')";
+                $s = "INSERT INTO `order_details` (`id`, `orderId`, `productId`, `qty`, `productPrice`, `productName`) VALUES (NULL,'" . $newId . "', '" . $value['productId'] . "', '" . $value['quantity'] . "', " . $value['productPrice'] . ", '" . $value['productName'] . "')";
                 $result = mysqli_query($db->con, $s);
-                if (mysqli_num_rows($result) == 0) {
-                    echo 'lỗi order_details';die();
-                }
                 // Update qty
                 $sqlUpdateQty = "UPDATE products SET qty = qty - " . $value['quantity'] . " WHERE id = " . $value['productId'] . "";
                 $r = mysqli_query($db->con, $sqlUpdateQty);
@@ -59,7 +57,7 @@ class orderModel
             return false;
         }
 
-        return $last_id;
+        return $newId;
     }
 
     public function getAll()
@@ -91,7 +89,7 @@ class orderModel
         $db = DB::getInstance();
         $sql_order_details = "DELETE FROM order_details WHERE orderId = $Id";
         $result = mysqli_query($db->con, $sql_order_details);
-        
+
         $sql = "DELETE FROM orders WHERE id = $Id";
         $result = mysqli_query($db->con, $sql);
         return $result;
@@ -153,5 +151,16 @@ class orderModel
         $sql = "SELECT SUM(total) AS total,DAY(createdDate) as day FROM `orders` WHERE MONTH(createdDate) = MONTH(NOW()) AND paymentStatus=1 GROUP BY DAY(createdDate), MONTH(createdDate), YEAR(createdDate)";
         $result = mysqli_query($db->con, $sql);
         return $result;
+    }
+
+    function generateRandomString($length = 10)
+    {
+        $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return 'DH-' . $randomString;
     }
 }

@@ -13,6 +13,10 @@ class statisticManage extends ControllerBase
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 if ($_POST['type'] == "revenue") {
                     $this->redirect("statisticManage", "revenue");
+                }else if ($_POST['type'] == "stock") {
+                    $this->redirect("statisticManage", "stock");
+                }else if ($_POST['type'] == "products") {
+                    $this->redirect("statisticManage", "products");
                 }
             }
         }
@@ -69,6 +73,34 @@ class statisticManage extends ControllerBase
         ]);
     }
 
+    public function stock()
+    {
+        $statistic = $this->model("statisticModel");
+        $result = $statistic->getStock();
+        if ($result) {
+            $stockList = $result->fetch_all(MYSQLI_ASSOC);
+        }
+
+        $this->view("admin/stockStatistic", [
+            "headTitle" => "Thống kê",
+            "stockList" => $stockList
+        ]);
+    }
+
+    public function products()
+    {
+        $statistic = $this->model("statisticModel");
+        $result = $statistic->getProducts();
+        if ($result) {
+            $productList = $result->fetch_all(MYSQLI_ASSOC);
+        }
+
+        $this->view("admin/productStatistic", [
+            "headTitle" => "Thống kê",
+            "productList" => $productList
+        ]);
+    }
+
     public function revenueToExcel($from, $to)
     {
         $statistic = $this->model("statisticModel");
@@ -89,7 +121,63 @@ class statisticManage extends ControllerBase
                 $setData .= trim($rowData) . "\n";
             }
             header("Content-type: application/octet-stream");
-            header("Content-Disposition: attachment; filename=doanh-thu(".$from." den ".$to.").xls");
+            header("Content-Disposition: attachment; filename=doanh-thu(" . $from . " den " . $to . ").xls");
+            header("Pragma: no-cache");
+            header("Expires: 0");
+
+            echo ucwords($columnHeader) . "\n" . $setData . "\n";
+        }
+    }
+
+    public function stockToExcel()
+    {
+        $statistic = $this->model("statisticModel");
+        $result = $statistic->getStock();
+        if ($result) {
+            $stockList = $result->fetch_all(MYSQLI_ASSOC);
+
+            $columnHeader = '';
+            $columnHeader = "STT" . "\t" . "Tên sản phẩm" . "\t" . "Tồn" . "\t";
+            $setData = '';
+            $count = 1;
+            foreach ($stockList as $key => $value) {
+                $rowData = $count . "\t";
+                foreach ($value as $v) {
+                    $v = '"' . $v . '"' . "\t";
+                    $rowData .= $v;
+                }
+                $setData .= trim($rowData) . "\n";
+            }
+            header("Content-type: application/octet-stream");
+            header("Content-Disposition: attachment; filename=ton-kho.xls");
+            header("Pragma: no-cache");
+            header("Expires: 0");
+
+            echo ucwords($columnHeader) . "\n" . $setData . "\n";
+        }
+    }
+
+    public function productToExcel()
+    {
+        $statistic = $this->model("statisticModel");
+        $result = $statistic->getProducts();
+        if ($result) {
+            $productList = $result->fetch_all(MYSQLI_ASSOC);
+
+            $columnHeader = '';
+            $columnHeader = "STT" . "\t" . "Tên sản phẩm" . "\t" . "SL đã bán" . "\t";
+            $setData = '';
+            $count = 1;
+            foreach ($productList as $key => $value) {
+                $rowData = $count . "\t";
+                foreach ($value as $v) {
+                    $v = '"' . $v . '"' . "\t";
+                    $rowData .= $v;
+                }
+                $setData .= trim($rowData) . "\n";
+            }
+            header("Content-type: application/octet-stream");
+            header("Content-Disposition: attachment; filename=ton-kho.xls");
             header("Pragma: no-cache");
             header("Expires: 0");
 
