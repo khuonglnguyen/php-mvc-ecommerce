@@ -1,6 +1,6 @@
 <?php
 
-class categoryManage extends ControllerBase
+class categoryManage extends controllerBase
 {
     public function index($page = 1)
     {

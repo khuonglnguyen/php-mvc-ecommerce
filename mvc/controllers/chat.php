@@ -1,20 +1,21 @@
 <?php
 
-class chat extends ControllerBase
+class chat extends controllerBase
 {
     public function send($content)
     {
         header('Content-Type: application/json; charset=utf-8');
         $message = $this->model("messageModel");
         if ($message->insert($_SESSION['user_id'], 59, $content)) {
-            $bot = $this->model("botModel");
-            $result = $bot->getReplies($content);
             http_response_code(200);
-            if ($result) {
-                // Insert DB
-                $message->insert(59, $_SESSION['user_id'], $result['replies']);
-                echo json_encode($result, JSON_UNESCAPED_UNICODE);
-            } 
+            // $bot = $this->model("botModel");
+            // $result = $bot->getReplies($content);
+            // http_response_code(200);
+            // if ($result) {
+            //     // Insert DB
+            //     $message->insert(59, $_SESSION['user_id'], $result['replies']);
+            //     echo json_encode($result, JSON_UNESCAPED_UNICODE);
+            // } 
             // else {
             //     // $message->insert(59, $_SESSION['user_id'], 'Cảm ơn bạn đã nhắn tin, chúng tôi sẽ phản hồi sớm nhất có thể!');
             //     echo json_encode([

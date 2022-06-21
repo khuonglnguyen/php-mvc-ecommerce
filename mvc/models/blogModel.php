@@ -18,7 +18,7 @@ class blogModel
 
     public function search($keyword)
     {
-        $db = DB::getInstance();
+        $db = dB::getInstance();
         $sql = "SELECT b.id, b.title, b.content, b.image, b.createdDate, u.fullName as author, MATCH (b.title) AGAINST ('" . $keyword . "') as score FROM blog b JOIN users u ON b.userId = u.id WHERE MATCH(b.title) AGAINST ('$keyword') > 0.2 ORDER BY score DESC";
         $result = mysqli_query($db->con, $sql);
         return $result;
@@ -26,7 +26,7 @@ class blogModel
 
     public function getById($id)
     {
-        $db = DB::getInstance();
+        $db = dB::getInstance();
         $sql = "SELECT b.id, b.title, b.content, b.image, b.createdDate, u.fullName as author, b.views FROM blog b JOIN users u ON b.userId = u.id WHERE b.id = " . $id . "";
         $result = mysqli_query($db->con, $sql)->fetch_assoc();
         return $result;
@@ -38,7 +38,7 @@ class blogModel
             $page = 1;
         }
         $tmp = ($page - 1) * $total;
-        $db = DB::getInstance();
+        $db = dB::getInstance();
         $sql = "SELECT b.id, b.title, b.content, b.image, b.createdDate, u.fullName as author, b.views FROM blog b JOIN users u ON b.userId = u.id LIMIT $tmp,$total";
         $result = mysqli_query($db->con, $sql);
         return $result;
@@ -46,7 +46,7 @@ class blogModel
 
     public function getPopular()
     {
-        $db = DB::getInstance();
+        $db = dB::getInstance();
         $sql = "SELECT b.id, b.title, b.content, b.image, b.createdDate, u.fullName as author, b.views FROM blog b JOIN users u ON b.userId = u.id WHERE b.views > 0 ORDER BY b.views DESC LIMIT 5";
         $result = mysqli_query($db->con, $sql);
         return $result;
@@ -54,7 +54,7 @@ class blogModel
 
     public function getCountPaging($row = 8)
     {
-        $db = DB::getInstance();
+        $db = dB::getInstance();
         $sql = "SELECT COUNT(*) FROM productrating";
         $result = mysqli_query($db->con, $sql);
         if ($result) {
@@ -66,7 +66,7 @@ class blogModel
 
     public function insert($data)
     {
-        $db = DB::getInstance();
+        $db = dB::getInstance();
         // Check image and move to upload folder
         $file_name = $_FILES['image']['name'];
         $file_temp = $_FILES['image']['tmp_name'];
@@ -98,7 +98,7 @@ class blogModel
             move_uploaded_file($file_temp, $uploaded_image);
         }
 
-        $db = DB::getInstance();
+        $db = dB::getInstance();
         $sql = "UPDATE `blog` SET title = '" . $_POST['title'] . "', `content` = '" . $_POST['content'] . "', `lastUpdated` = '" . date("y-m-d H:i:s") . "'";
         if (!empty($_FILES['image']['name'])) {
             $sql .=  ", `image` = '" . $unique_image . "'";
@@ -110,7 +110,7 @@ class blogModel
 
     public function view($id)
     {
-        $db = DB::getInstance();
+        $db = dB::getInstance();
         $sql = "UPDATE `blog` SET views = views + 1 WHERE id = " . $id . "";
         $result = mysqli_query($db->con, $sql);
         return $result;
@@ -118,7 +118,7 @@ class blogModel
 
     public function delete($id)
     {
-        $db = DB::getInstance();
+        $db = dB::getInstance();
         $sql = "DELETE FROM `blog` WHERE id = " . $id . "";
         $result = mysqli_query($db->con, $sql);
         return $result;

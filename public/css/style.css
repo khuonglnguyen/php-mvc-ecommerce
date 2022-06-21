@@ -279,6 +279,9 @@ input[type=checkbox] {
 }
 
 /*product CARD START*/
+.remove{
+  top: 0;
+}
 .content {
   max-width: 1200px;
   margin-bottom: 50px;
@@ -298,7 +301,7 @@ input[type=checkbox] {
   position: relative;
   box-shadow: 0 4px 8px rgb(0, 0, 0, 0.2);
   max-width: 200px;
-  height: 350px;
+  height: 380px;
   margin: 20px auto;
   overflow: hidden;
   background-color: rgb(245, 222, 222);
@@ -394,9 +397,6 @@ input[type=checkbox] {
 
 /*FOOTER START*/
 footer {
-  position: absolute;
-  left: 0;
-  right: 0;
   background-color: rgb(255, 209, 204);
   color: rgb(27, 26, 26);
   border-bottom: rgb(184, 56, 67) solid 1px;
@@ -775,14 +775,29 @@ textarea {
   font-size: 16px;
   color: #FFFFFF;
   text-decoration: none;
-  padding: 12px 30px;
+  padding: 8px 20px;
   transition: all .5s;
   margin-top: 10px;
+  border-radius: 10px;
 }
 
 .cart-btn:hover {
   color: #43474D;
   background-color: rgb(255, 226, 61);
+}
+
+.right{
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.right a{
+  background-color: rgb(255, 87, 87);
+  border: 2px solid red;
+}
+
+.left{
+ float: left;
 }
 
 /* Responsive */
@@ -832,7 +847,7 @@ textarea {
   padding: 12px;
   font-size: 17px;
   border: solid 1px rgb(184, 56, 67);
-  background-color: rgb(255, 209, 204);
+  background-color: rgb(249, 249, 249);
   color: rgb(184, 56, 67);
   border-radius: 10px;
 }
@@ -1324,6 +1339,13 @@ textarea {
 #btn-chat {
   height: 45px;
   width: 50px;
+}
+
+.cancel{
+  background-color: white;
+  color: red;
+  border: 1px solid red;
+  border-radius: 10px;
 }
 
 /*END CHATBOX*/

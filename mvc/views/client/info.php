@@ -113,6 +113,7 @@
       </div>
       <a href="<?= URL_ROOT . '/user/edit'  ?>" class="cart-btn">Chỉnh sửa thông tin</a>
       <a href="<?= URL_ROOT . '/user/resetPassword'  ?>" class="cart-btn">Đổi mật khẩu</a>
+      <a href="<?= URL_ROOT . '/user/delete'  ?>" class="cart-btn">Xóa tài khoản</a>
     </div>
   </div>
   <?php require APP_ROOT . '/views/client/inc/footer.php'; ?>

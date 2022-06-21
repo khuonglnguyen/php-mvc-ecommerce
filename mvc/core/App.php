@@ -1,5 +1,5 @@
 <?php
-class App
+class app
 {
 
     protected $controller = "home";

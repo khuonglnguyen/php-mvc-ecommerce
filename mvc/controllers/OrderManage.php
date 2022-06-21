@@ -1,6 +1,6 @@
 <?php
 
-class orderManage extends ControllerBase
+class orderManage extends controllerBase
 {
     public function Index()
     {

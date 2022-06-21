@@ -18,7 +18,7 @@ class productFavoriteModel
 
     public function getByUserId($userId)
     {
-        $db = DB::getInstance();
+        $db = dB::getInstance();
         $sql = "SELECT p.promotionPrice, p.originalPrice, p.image, p.soldCount, p.id, p.qty, p.name FROM productfavorite a JOIN products p ON a.productId=p.id WHERE userId='$userId'";
         $result = mysqli_query($db->con, $sql);
         return $result;
@@ -26,7 +26,7 @@ class productFavoriteModel
 
     public function add($productId)
     {
-        $db = DB::getInstance();
+        $db = dB::getInstance();
         //Check exstis
         $sqlCheck = "SELECT * FROM productfavorite WHERE userId='" . $_SESSION['user_id'] . "' AND productId=" . $productId;
         $resultCheck = mysqli_query($db->con, $sqlCheck);
@@ -41,7 +41,7 @@ class productFavoriteModel
 
     public function checkByUserId($productId)
     {
-        $db = DB::getInstance();
+        $db = dB::getInstance();
         $sql = "SELECT * FROM productfavorite WHERE userId='" . $_SESSION['user_id'] . "' AND productId=" . $productId;
         $result = mysqli_query($db->con, $sql);
         if (mysqli_num_rows($result) > 0) {
@@ -52,7 +52,7 @@ class productFavoriteModel
 
     public function remove($userId)
     {
-        $db = DB::getInstance();
+        $db = dB::getInstance();
         $sql = "DELETE FROM productfavorite WHERE userId=" . $userId;
         $result = mysqli_query($db->con, $sql);
         if (mysqli_num_rows($result) > 0) {

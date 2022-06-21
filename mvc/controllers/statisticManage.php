@@ -1,5 +1,5 @@
 <?php
-class statisticManage extends ControllerBase
+class statisticManage extends controllerBase
 {
     public function index()
     {

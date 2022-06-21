@@ -4,18 +4,6 @@
     <?php require APP_ROOT . '/views/admin/inc/sidebar.php'; ?>
 
     <div class="main-content">
-        <header>
-            <div class="search-wrapper">
-                <span class="ti-search"></span>
-                <input type="search" placeholder="Search">
-            </div>
-
-            <div class="social-icons">
-                <span class="ti-bell"></span>
-                <span class="ti-comment"></span>
-                <div></div>
-            </div>
-        </header>
         <main>
             <section class="recent">
                 <div class="activity-grid">
@@ -62,7 +50,7 @@
                                 <label for="originalPrice">Giá gốc</label>
                                 <input type="number" id="originalPrice" name="originalPrice" required value="<?= $data['product']['originalPrice'] ?>">
                                 <label for="promotionPrice">Giá khuyến mãi</label>
-                                <input type="number" id="promotionPrice" name="promotionPrice" required oninput="check(this)" value="<?= $data['product']['promotionPrice'] ?>">
+                                <input type="number" id="promotionPrice" name="promotionPrice" required onchange="check(this)" value="<?= $data['product']['promotionPrice'] ?>">
                                 <label for="qty">Số lượng</label>
                                 <input type="number" id="qty" name="qty" required value="<?= $data['product']['qty'] ?>">
                                 <label for="weight">Trọng lượng (g):</label>
@@ -81,6 +69,7 @@
     </div>
     <script language='javascript' type='text/javascript'>
     function check(input) {
+        input.setCustomValidity('');
       if (input.value > document.getElementById('originalPrice').value) {
         input.setCustomValidity('Giá khuyến mãi không được lớn hơn giá gốc!');
       } else {

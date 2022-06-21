@@ -1,8 +1,8 @@
 <?php
 
-class productManage extends ControllerBase
+class productManage extends controllerBase
 {
-    public function index($page = 1)
+    public function index()
     {
         if (isset($_SESSION['role']) && $_SESSION['role'] != 'Admin') {
             $this->redirect("home");
@@ -11,14 +11,26 @@ class productManage extends ControllerBase
         // khởi tạo model
         $product = $this->model("productModel");
         // Gọi hàm addAllAdmin
-        $productList = ($product->getAllAdmin($page['page']))->fetch_all(MYSQLI_ASSOC);
-        $countPaging = $product->getCountPaging(8);
+        if (isset($_GET['keyword'])) {
+            $result = $product->searchAdmin($_GET["keyword"]);
+             $productList=[];
+            if ($result) {
+               $productList = $result->fetch_all(MYSQLI_ASSOC);
+            }
+            $this->view("admin/product", [
+                "headTitle" => "Quản lý sản phẩm",
+                "productList" => $productList
+            ]);
+        }else {
+            $productList = ($product->getAllAdmin($_GET['page']))->fetch_all(MYSQLI_ASSOC);
+            $countPaging = $product->getCountPaging(8);
+            $this->view("admin/product", [
+                "headTitle" => "Quản lý sản phẩm",
+                "productList" => $productList,
+                "countPaging" => $countPaging
+            ]);
+        }
 
-        $this->view("admin/product", [
-            "headTitle" => "Quản lý sản phẩm",
-            "productList" => $productList,
-            "countPaging" => $countPaging
-        ]);
     }
 
     public function add()
@@ -29,7 +41,7 @@ class productManage extends ControllerBase
 
 
         $category = $this->model("categoryModel");
-        $result = $category->getAllAdmin();
+        $result = $category->getAllClient();
         $categoryList = $result->fetch_all(MYSQLI_ASSOC);
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -71,7 +83,6 @@ class productManage extends ControllerBase
         $categoryList = $result->fetch_all(MYSQLI_ASSOC);
 
         $product = $this->model("productModel");
-        $p = $product->getByIdAdmin($id);
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $r = $product->update($_POST);
@@ -94,6 +105,7 @@ class productManage extends ControllerBase
                 ]);
             }
         } else {
+            $p = $product->getByIdAdmin($id);
             $this->view("admin/editProduct", [
                 "headTitle" => "Xem/Cập nhật sản phẩm",
                 "cssClass" => "none",

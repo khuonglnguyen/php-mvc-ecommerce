@@ -59,7 +59,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="<?= URL_ROOT . '/blogManage' ?>">
+                    <a href="<?= URL_ROOT . '/blogManage?page=1' ?>">
                         <span class="ti-file"></span>
                         <span>Quản lý Blog</span>
                     </a>

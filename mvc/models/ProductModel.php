@@ -18,7 +18,7 @@ class productModel
 
     public function search($keyword)
     {
-        $contents = file_get_contents("http://localhost:8983/solr/products/select?q=name:%20(" . $keyword . ")%0Ades:%20(" . $keyword . ")&wt=php");
+        $contents = file_get_contents("http://localhost:8983/solr/products/select?q=name:%20(" . $keyword . ")%0Ades:%20(" . $keyword . ")&wt=php&rows=9999999999");
         $result = 0;
         eval("\$result = " . $contents . ";");
         return $result['response']['docs'];
@@ -34,7 +34,7 @@ class productModel
 
     public function getById($Id)
     {
-        $db = DB::getInstance();
+        $db = dB::getInstance();
         $sql = "SELECT * FROM products WHERE Id='$Id' AND status=1";
         $result = mysqli_query($db->con, $sql);
         return $result;
@@ -42,7 +42,7 @@ class productModel
 
     public function getByIdAdmin($Id)
     {
-        $db = DB::getInstance();
+        $db = dB::getInstance();
         $sql = "SELECT * FROM products WHERE Id='$Id'";
         $result = mysqli_query($db->con, $sql);
         return $result;
@@ -54,7 +54,7 @@ class productModel
             $page = 1;
         }
         $tmp = ($page - 1) * $total;
-        $db = DB::getInstance();
+        $db = dB::getInstance();
         $sql = "SELECT * FROM products WHERE cateId='$CateId' AND status=1 LIMIT $tmp,$total";
         $result = mysqli_query($db->con, $sql);
         return $result;
@@ -62,7 +62,7 @@ class productModel
 
     public function getByCateIdSinglePage($CateId, $Id)
     {
-        $db = DB::getInstance();
+        $db = dB::getInstance();
         $sql = "SELECT * FROM products WHERE cateId='$CateId' AND status=1 AND id != $Id ORDER BY soldCount DESC LIMIT 4";
         $result = mysqli_query($db->con, $sql);
         return $result;
@@ -70,7 +70,7 @@ class productModel
 
     public function getFeaturedproducts()
     {
-        $db = DB::getInstance();
+        $db = dB::getInstance();
         $sql = "SELECT p.id, p.name, p.image, p.originalPrice, p.promotionPrice, p.qty as qty, p.soldCount as soldCount FROM products p JOIN categories c ON p.cateId = c.id WHERE p.status=1 AND c.status = 1 AND soldCount > 0 order BY soldCount DESC LIMIT 4";
         $result = mysqli_query($db->con, $sql);
         return $result;
@@ -78,7 +78,7 @@ class productModel
 
     public function getNewproducts()
     {
-        $db = DB::getInstance();
+        $db = dB::getInstance();
         $sql = "SELECT p.id, p.name, p.image, p.originalPrice, p.promotionPrice, p.qty as qty, p.soldCount as soldCount FROM products p JOIN categories c ON p.cateId = c.id WHERE p.status=1 AND c.status = 1 order BY id DESC LIMIT 4";
         $result = mysqli_query($db->con, $sql);
         return $result;
@@ -86,7 +86,7 @@ class productModel
 
     public function getDiscountproducts()
     {
-        $db = DB::getInstance();
+        $db = dB::getInstance();
         $sql = "SELECT p.id, p.name, p.image, p.originalPrice, p.promotionPrice, p.qty as qty, p.soldCount as soldCount FROM products p JOIN categories c ON p.cateId = c.id WHERE p.status=1 AND c.status = 1 AND p.promotionPrice < p.originalPrice LIMIT 4";
         $result = mysqli_query($db->con, $sql);
         return $result;
@@ -98,15 +98,26 @@ class productModel
             $page = 1;
         }
         $tmp = ($page - 1) * $total;
-        $db = DB::getInstance();
+        $db = dB::getInstance();
         $sql = "SELECT * FROM products LIMIT $tmp,$total";
         $result = mysqli_query($db->con, $sql);
         return $result;
     }
 
+    public function searchAdmin($keyword)
+    {
+        $db = dB::getInstance();
+        $sql = "SELECT * FROM products WHERE name LIKE '%$keyword%'";
+        $result = mysqli_query($db->con, $sql);
+        if (mysqli_num_rows($result)) {
+            return $result;
+        }
+        return false;
+    }
+
     public function checkQuantity($Id, $qty)
     {
-        $db = DB::getInstance();
+        $db = dB::getInstance();
         $sql = "SELECT qty FROM products WHERE status=1 AND Id='$Id'";
         $result = mysqli_query($db->con, $sql);
         $product = $result->fetch_assoc();
@@ -118,7 +129,7 @@ class productModel
 
     public function updateQuantity($Id, $qty)
     {
-        $db = DB::getInstance();
+        $db = dB::getInstance();
         $sql = "UPDATE products SET qty = qty - $qty WHERE id = $Id";
         $result = mysqli_query($db->con, $sql);
         return $result;
@@ -126,7 +137,7 @@ class productModel
 
     public function changeStatus($Id)
     {
-        $db = DB::getInstance();
+        $db = dB::getInstance();
         $sql = "UPDATE products SET status = !status WHERE Id='$Id'";
         $result = mysqli_query($db->con, $sql);
         return $result;
@@ -134,7 +145,7 @@ class productModel
 
     public function insert($product)
     {
-        $db = DB::getInstance();
+        $db = dB::getInstance();
         // Check image and move to upload folder
         $file_name = $_FILES['image']['name'];
         $file_temp = $_FILES['image']['tmp_name'];
@@ -166,6 +177,7 @@ class productModel
 
         $sql = "INSERT INTO `products` (`id`, `name`, `originalPrice`, `promotionPrice`, `image`,`image2`,`image3`, `createdBy`, `createdDate`, `cateId`, `qty`, `des`, `status`, `soldCount`,`weight`) VALUES (NULL, '" . $product['name'] . "', " . $product['originalPrice'] . ", " . $product['promotionPrice'] . ", '" . $unique_image . "', '" . $unique_image2 . "', '" . $unique_image3 . "', " . $_SESSION['user_id'] . ", '" . date("y-m-d H:i:s") . "', " . $product['cateId'] . ", " . $product['qty'] . ", '" . $product['des'] . "', 1, 0, " . $product['weight'] . ")";
         $result = mysqli_query($db->con, $sql);
+        file_get_contents("http://localhost:8983/solr/products/dataimport?command=full-import");
         return $result;
     }
 
@@ -211,7 +223,7 @@ class productModel
             move_uploaded_file($file_temp, $uploaded_image3);
         }
 
-        $db = DB::getInstance();
+        $db = dB::getInstance();
         $sql = "UPDATE `products` SET name = '" . $_POST['name'] . "', `originalPrice` = " . $_POST['originalPrice'] . ", `promotionPrice` = " . $_POST['promotionPrice'];
         if (!empty($_FILES['image']['name'])) {
             $sql .=  ", `image` = '" . $unique_image . "'";
@@ -224,12 +236,13 @@ class productModel
         }
         $sql .= ", `cateId` = " . $_POST['cateId'] . ", `des` = '" . $_POST['des'] . "', `weight` = " . $_POST['weight'] . " WHERE id = " . $_POST['id'] . "";
         $result = mysqli_query($db->con, $sql);
+        file_get_contents("http://localhost:8983/solr/products/dataimport?command=full-import");
         return $result;
     }
 
     public function getCountPaging($row = 8)
     {
-        $db = DB::getInstance();
+        $db = dB::getInstance();
         $sql = "SELECT COUNT(*) FROM products";
         $result = mysqli_query($db->con, $sql);
         if ($result) {
@@ -241,7 +254,7 @@ class productModel
 
     public function getCountPagingByClient($cateId, $row = 8)
     {
-        $db = DB::getInstance();
+        $db = dB::getInstance();
         $sql = "SELECT COUNT(*) FROM products WHERE cateId = $cateId AND status=1";
         $result = mysqli_query($db->con, $sql);
         if ($result) {
@@ -253,7 +266,7 @@ class productModel
 
     public function getSoldCountMonth()
     {
-        $db = DB::getInstance();
+        $db = dB::getInstance();
         $sql = "SELECT SUM(p.soldCount) AS total, p.name FROM `orders` o JOIN order_details od ON o.id  JOIN products p ON od.productId = p.id WHERE MONTH(o.createdDate) = MONTH(NOW()) AND o.paymentStatus=1 GROUP BY p.id, MONTH(o.createdDate), YEAR(o.createdDate)";
         $result = mysqli_query($db->con, $sql);
         return $result;

@@ -1,5 +1,5 @@
 <?php
-class ControllerBase{
+class controllerBase{
 
     public function model($model){
         require_once "./mvc/models/".$model.".php";

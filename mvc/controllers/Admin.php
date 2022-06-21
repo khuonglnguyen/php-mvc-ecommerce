@@ -1,10 +1,10 @@
 <?php
 
-class Admin extends ControllerBase
+class admin extends controllerBase
 {
     public function Index()
     {
-        if (isset($_SESSION['role']) && $_SESSION['role'] != 'Admin') {
+        if ((isset($_SESSION['role']) && $_SESSION['role'] != 'Admin') || !isset($_SESSION['user_id'])) {
             $this->redirect("home");
         }
 

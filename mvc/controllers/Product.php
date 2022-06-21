@@ -1,6 +1,6 @@
 <?php
 
-class product extends ControllerBase
+class product extends controllerBase
 {
     public function search()
     {

@@ -1,6 +1,6 @@
 <?php
 
-class order extends ControllerBase
+class order extends controllerBase
 {
     public function add()
     {
@@ -272,13 +272,13 @@ class order extends ControllerBase
                 $partnerCode = 'MOMOSJ8Y20220524';
                 $accessKey = 'kEvIBSNmm93W5rYB';
                 $serectkey = 'Goqq2oEWI7madToNAGUiSCDdy5a6iIMR';
-                $orderId = $orderId; // Mã đơn hàng
                 $orderInfo = "Thanh toán qua MoMo";
                 $amount = $amount;
                 $ipnUrl = URL_ROOT . '/order/returnPayment/';
                 $redirectUrl = URL_ROOT . '/order/returnPayment/';
                 $extraData = "";
-                $requestId = time() . "";
+
+                $requestId = time();
                 $requestType = "captureWallet";
                 $extraData = "";
                 //before sign HMAC SHA256 signature
@@ -290,7 +290,7 @@ class order extends ControllerBase
                     "storeId" => "MomoTestStore",
                     'requestId' => $requestId,
                     'amount' => $amount,
-                    'orderId' => $orderId. "",
+                    'orderId' => $orderId,
                     'orderInfo' => $orderInfo,
                     'redirectUrl' => $redirectUrl,
                     'ipnUrl' => $ipnUrl,

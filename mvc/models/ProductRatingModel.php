@@ -1,5 +1,5 @@
 <?php
-class ProductRatingModel
+class productRatingModel
 {
     private static $instance = null;
 
@@ -10,7 +10,7 @@ class ProductRatingModel
     public static function getInstance()
     {
         if (!self::$instance) {
-            self::$instance = new ProductRatingModel();
+            self::$instance = new productRatingModel();
         }
 
         return self::$instance;
@@ -18,7 +18,7 @@ class ProductRatingModel
 
     public function getStarByProductId($productId)
     {
-        $db = DB::getInstance();
+        $db = dB::getInstance();
         $sql = "SELECT * FROM `productrating` WHERE productId=$productId";
         $result = mysqli_query($db->con, $sql);
         if (mysqli_num_rows($result) > 0) {
@@ -34,7 +34,7 @@ class ProductRatingModel
 
     public function getByProductIdUserId($productId, $userId)
     {
-        $db = DB::getInstance();
+        $db = dB::getInstance();
         $sql = "SELECT b.id, b.image, b.name, a.star, a.content FROM `productrating` a JOIN products b ON a.productId = b.id WHERE userId=$userId AND productId=$productId";
         $result = mysqli_query($db->con, $sql);
         return $result;
@@ -42,7 +42,7 @@ class ProductRatingModel
 
     public function getByProductId($productId)
     {
-        $db = DB::getInstance();
+        $db = dB::getInstance();
         $sql = "SELECT * FROM `productrating` p JOIN users u ON p.userId = u.id WHERE productId=$productId";
         $result = mysqli_query($db->con, $sql);
         if (mysqli_num_rows($result) > 0) {
@@ -53,7 +53,7 @@ class ProductRatingModel
 
     public function add($productId, $content, $star, $userId)
     {
-        $db = DB::getInstance();
+        $db = dB::getInstance();
         $sql = "INSERT INTO `productrating`(`id`, `productId`, `userId`, `star`, `content`,`createdDate`) VALUES (NULL," . $productId . "," . $userId . "," . $star . ",'" . $content . "','" . date("y-m-d H:i:s") . "')";
         $result = mysqli_query($db->con, $sql);
         return $result;

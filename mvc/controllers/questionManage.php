@@ -1,6 +1,6 @@
 <?php
 
-class questionManage extends ControllerBase
+class questionManage extends controllerBase
 {
     public function index($page = 1)
     {
@@ -11,7 +11,7 @@ class questionManage extends ControllerBase
         // khởi tạo model
         $question = $this->model("questionModel");
         // Gọi hàm addAllAdmin
-        $questionList = ($question->getAllAdmin($page['page']))->fetch_all(MYSQLI_ASSOC);
+        $questionList = ($question->getAllAdmin((isset($_GET['page']) ? $_GET['page'] : 1)))->fetch_all(MYSQLI_ASSOC);
         $countPaging = $question->getCountPaging(8);
         $this->view("admin/question", [
             "headTitle" => "Phản hồi đánh giá",

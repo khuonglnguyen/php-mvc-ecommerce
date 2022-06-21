@@ -105,7 +105,14 @@
             <td>Không có</td>
           <?php  }
           ?>
-          <td><?= number_format($value['total'], 0, '', ',') ?>₫</td>
+          <?php
+          if ($value['discount'] > 0) { ?>
+            <td><del> <?= number_format($value['total'], 0, '', ',') ?>₫</del> <?= number_format($value['total']-($value['total']/100*($value['discount'])), 0, '', ',') ?>₫ 
+          <?php   } else { ?>
+          <td><?= number_format($value['total'], 0, '', ',') ?>₫ 
+          <?php  }
+          ?>
+        </td>
           <?php
           if ($value['status'] == "delivery") { ?>
             <td>Đang giao
@@ -133,11 +140,13 @@
           <?php }
           ?>
           <td>
-            <a href="<?= URL_ROOT . '/order/detail/' . $value['id'] ?>">Chi tiết</a>
-            <?php
-            if ($value['paymentMethod'] == "COD" && $value['status'] != "cancel") { ?>
-              <a href="<?= URL_ROOT . '/order/cancel/' . $value['id'] ?>">Hủy đơn</a>
-            <?php  }
+            <a href="<?= URL_ROOT . '/order/detail/' . $value['id'] ?>" class="cart-btn">Chi tiết</a>
+          <?php
+            if ($value['paymentMethod'] == "COD" && $value['status'] == "processing") { ?>
+              <a href="<?= URL_ROOT . '/order/cancel/' . $value['id'] ?>" class="cart-btn cancel">Hủy đơn</a>
+            <?php  }else { ?>
+             Không thể hủy
+             <?php }
             ?>
           </td>
         </tr>

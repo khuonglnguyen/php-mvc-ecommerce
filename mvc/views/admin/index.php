@@ -7,18 +7,6 @@
 
     <div class="main-content">
 
-        <header>
-            <div class="search-wrapper">
-                <span class="ti-search"></span>
-                <input type="search" placeholder="Search">
-            </div>
-
-            <div class="social-icons">
-                <span class="ti-bell"></span>
-                <span class="ti-comment"></span>
-                <div></div>
-            </div>
-        </header>
 
         <main>
 
@@ -68,61 +56,6 @@
                     <div class="activity-card">
                         <h3>Sản phẩm bán chạy trong tháng</h3>
                         <canvas id="myChart2" style="width:100%;max-width:700px"></canvas>
-                    </div>
-                </div>
-            </section>
-            <section class="recent">
-                <div class="activity-grid">
-                    <div class="activity-card">
-                        <h3>Đơn hàng mới</h3>
-                        <div class="table-responsive">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>STT</th>
-                                        <th>Mã HD</th>
-                                        <th>Ngày đặt</th>
-                                        <th>Tình trạng</th>
-                                        <th>Phương thức thanh toán</th>
-                                        <th>Trạng thái</th>
-                                        <th>Thao tác</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    $count = 0;
-                                    foreach ($data['orderList'] as $key => $value) {
-                                    ?>
-                                        <tr>
-                                            <td><?= ++$count ?></td>
-                                            <td><?= $value['id'] ?></td>
-                                            <td><?= date("d/m/Y", strtotime($value['createdDate'])) ?></td>
-                                            <?php
-                                            if ($value['status'] == "processing") { ?>
-                                                <td><span class="gray">Chưa xác nhận</span></td>
-                                            <?php  } else if ($value['status'] == "processed") { ?>
-                                                <td><span class="blue">Đã xác nhận</span></td>
-                                            <?php } else if ($value['status'] == "delivery") { ?>
-                                                <td><span class="yellow">Đang giao hàng</span></td>
-                                            <?php } else { ?>
-                                                <td><span class="active">Hoàn thành</span></td>
-                                            <?php }
-                                            ?>
-                                            <td><?= $value['paymentMethod'] ?></td>
-                                            <?php
-                                            if ($value['paymentStatus']) { ?>
-                                                <td><span class="active">Đã thanh toán</span></td>
-                                            <?php } else { ?>
-                                                <td><span class="gray">Chưa thanh toán</span></td>
-                                            <?php }
-                                            ?>
-                                            <td><a href="<?= URL_ROOT . '/orderManage/detail/' . $value['id'] ?>">Chi tiết</a></td>
-                                        </tr>
-                                    <?php }
-                                    ?>
-                                </tbody>
-                            </table>
-                        </div>
                     </div>
                 </div>
             </section>

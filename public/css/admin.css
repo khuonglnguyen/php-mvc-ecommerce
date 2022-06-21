@@ -99,16 +99,26 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid #ccc;
     transition: left 500ms;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .search-wrapper {
+  margin: 0 2%;
+  border: 1px solid gray;
+  border-radius: 10px;
+  width: 100%;
     display: flex;
     align-items: center;
 }
 
+.search-wrapper form{
+  width: 100%;
+}
+
 .search-wrapper input {
+  width: 100%;
     border: 0;
     outline: 0;
     padding: 1rem;

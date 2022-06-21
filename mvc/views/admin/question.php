@@ -4,18 +4,6 @@
     <?php require APP_ROOT . '/views/admin/inc/sidebar.php'; ?>
 
     <div class="main-content">
-        <header>
-            <div class="search-wrapper">
-                <span class="ti-search"></span>
-                <input type="search" placeholder="Search">
-            </div>
-
-            <div class="social-icons">
-                <span class="ti-bell"></span>
-                <span class="ti-comment"></span>
-                <div></div>
-            </div>
-        </header>
 
         <main>
             <section class="recent">
@@ -27,6 +15,7 @@
                                 <thead>
                                     <tr>
                                         <th>STT</th>
+                                        <th>Tên sản phẩm</th>
                                         <th>Tên khách hàng</th>
                                         <th>nội dung</th>
                                         <th>Phản hồi</th>
@@ -40,6 +29,7 @@
                                     ?>
                                         <tr>
                                             <td><?= ++$count ?></td>
+                                            <td><?= $value['productName'] ?></td>
                                             <td><?= $value['fullName'] ?></td>
                                             <td><?= $value['content'] ?></td>
                                             <?php
@@ -66,25 +56,25 @@
                             </table>
                         </div>
                         <div class="pagination">
-                            <a href="<?= URL_ROOT ?>/categoryManage?page=<?= (isset($_GET['page'])) ? (($_GET['page'] <= 1) ? 1 : $_GET['page'] - 1) : 1 ?>">&laquo;</a>
+                            <a href="<?= URL_ROOT ?>/questionManage?page=<?= (isset($_GET['page'])) ? (($_GET['page'] <= 1) ? 1 : $_GET['page'] - 1) : 1 ?>">&laquo;</a>
                             <?php
                             for ($i = 1; $i <= $data['countPaging']; $i++) {
                                 if (isset($_GET['page'])) {
                                     if ($i == $_GET['page']) { ?>
-                                        <a class="active" href="<?= URL_ROOT ?>/categoryManage?page=<?= $i ?>"><?= $i ?></a>
+                                        <a class="active" href="<?= URL_ROOT ?>/questionManage?page=<?= $i ?>"><?= $i ?></a>
                                     <?php } else { ?>
-                                        <a href="<?= URL_ROOT ?>/categoryManage?page=<?= $i ?>"><?= $i ?></a>
+                                        <a href="<?= URL_ROOT ?>/questionManage?page=<?= $i ?>"><?= $i ?></a>
                                     <?php  }
                                 } else {
                                     if ($i == 1) { ?>
-                                        <a class="active" href="<?= URL_ROOT ?>/categoryManage?page=<?= $i ?>"><?= $i ?></a>
+                                        <a class="active" href="<?= URL_ROOT ?>/questionManage?page=<?= $i ?>"><?= $i ?></a>
                                     <?php  } else { ?>
-                                        <a href="<?= URL_ROOT ?>/categoryManage?page=<?= $i ?>"><?= $i ?></a>
+                                        <a href="<?= URL_ROOT ?>/questionManage?page=<?= $i ?>"><?= $i ?></a>
                                     <?php   } ?>
                                 <?php  } ?>
                             <?php }
                             ?>
-                            <a href="<?= URL_ROOT ?>/categoryManage?page=<?= (isset($_GET['page'])) ? ($_GET['page'] == $data['countPaging'] ? $_GET['page'] : $_GET['page'] + 1) : 2 ?>">&raquo;</a>
+                            <a href="<?= URL_ROOT ?>/questionManage?page=<?= (isset($_GET['page'])) ? ($_GET['page'] == $data['countPaging'] ? $_GET['page'] : $_GET['page'] + 1) : 2 ?>">&raquo;</a>
                         </div>
                     </div>
                 </div>

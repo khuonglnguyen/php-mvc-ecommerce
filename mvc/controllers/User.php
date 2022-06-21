@@ -1,6 +1,6 @@
 <?php
 
-class user extends ControllerBase
+class user extends controllerBase
 {
     public function login()
     {
@@ -167,6 +167,7 @@ class user extends ControllerBase
             } else {
                 $r = $user->update($_POST);
                 if ($r) {
+                    $_SESSION['user_name'] = $_POST['fullName'];
                     $this->redirect("user", "info", [
                         "message" => "Cập nhật thành công!"
                     ]);
@@ -209,6 +210,35 @@ class user extends ControllerBase
             }
         } else {
             $this->view('client/resetPassword', [
+                "headTitle" => "Đổi mật khẩu"
+            ]);
+        }
+    }
+
+    public function delete()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // Khởi tạo model
+            $user = $this->model('userModel');
+            $result = $user->checkCurrentPassword($_SESSION['user_id'], $_POST['password']);
+            if ($result) {
+                $r = $user->delete($_SESSION['user_id']);
+                if ($r) {
+                    $this->redirect("user", "logout");
+                } else {
+                    $this->view('client/delete', [
+                        "headTitle" => "Xóa tài khoản",
+                        "messagePassword" => "Lỗi!"
+                    ]);
+                }
+            } else {
+                $this->view('client/delete', [
+                    "headTitle" => "Xóa tài khoản",
+                    "messagePassword" => "Mật khẩu hiện tại không đúng!"
+                ]);
+            }
+        } else {
+            $this->view('client/delete', [
                 "headTitle" => "Đổi mật khẩu"
             ]);
         }
