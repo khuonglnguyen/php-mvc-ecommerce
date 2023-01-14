@@ -18,7 +18,7 @@ class orderModel
 
     public function getByuserId($userId)
     {
-        $db = dB::getInstance();
+        $db = DB::getInstance();
         $sql = "SELECT * FROM orders WHERE userId='$userId' ORDER BY createdDate DESC";
         $result = mysqli_query($db->con, $sql);
         return $result;
@@ -26,7 +26,7 @@ class orderModel
 
     public function getById($id)
     {
-        $db = dB::getInstance();
+        $db = DB::getInstance();
         $sql = "SELECT * FROM orders WHERE id='$id'";
         $result = mysqli_query($db->con, $sql);
         return $result;
@@ -34,7 +34,7 @@ class orderModel
 
     public function add($userId, $total, $percentDiscount = 0)
     {
-        $db = dB::getInstance();
+        $db = DB::getInstance();
         $newId = $this->generateRandomString();
         $sql = "INSERT INTO `orders` (`id`, `userId`, `createdDate`, `receivedDate`, `status`, `paymentMethod`, `paymentStatus`, `payDate`, `total`,`discount`) VALUES ('$newId', " . $_SESSION['user_id'] . ", '" . date("y-m-d H:i:s") . "', NULL, 'processing', 'COD',0,NULL,'$total',$percentDiscount)";
         $result = mysqli_query($db->con, $sql);
@@ -43,8 +43,7 @@ class orderModel
             $sqlCart = "SELECT * FROM cart WHERE userId=$userId";
             $resultCart = (mysqli_query($db->con, $sqlCart))->fetch_all(MYSQLI_ASSOC);
             if (!$resultCart) {
-                echo 'lỗi resultCart';
-                die();
+                $resultCart = $_SESSION['cart'];
             }
             foreach ($resultCart as $key => $value) {
                 $s = "INSERT INTO `order_details` (`id`, `orderId`, `productId`, `qty`, `productPrice`, `productName`) VALUES (NULL,'" . $newId . "', '" . $value['productId'] . "', '" . $value['quantity'] . "', " . $value['productPrice'] . ", '" . $value['productName'] . "')";
@@ -62,7 +61,7 @@ class orderModel
 
     public function getAll()
     {
-        $db = dB::getInstance();
+        $db = DB::getInstance();
         $sql = "SELECT o.id as orderId, o.createdDate, o.receivedDate, o.status, o.paymentStatus, o.paymentMethod, o.payDate, o.total, o.discount, u.id as userId, u.fullName FROM orders o JOIN users u ON o.userId = u.id ORDER BY o.createdDate DESC";
         $result = mysqli_query($db->con, $sql);
         return $result;
@@ -70,7 +69,7 @@ class orderModel
 
     public function processed($Id)
     {
-        $db = dB::getInstance();
+        $db = DB::getInstance();
         $sql = "UPDATE orders SET status = 'processed', receivedDate = '" . date('y-m-d', strtotime('+3 days')) . "' WHERE id = '$Id'";
         $result = mysqli_query($db->con, $sql);
         return $result;
@@ -78,7 +77,7 @@ class orderModel
 
     public function delivery($Id)
     {
-        $db = dB::getInstance();
+        $db = DB::getInstance();
         $sql = "UPDATE orders SET status = 'delivery' WHERE id = '$Id'";
         $result = mysqli_query($db->con, $sql);
         return $result;
@@ -86,7 +85,7 @@ class orderModel
 
     public function delete($Id)
     {
-        $db = dB::getInstance();
+        $db = DB::getInstance();
         $sql_order_details = "DELETE FROM order_details WHERE orderId = '$Id'";
         $result = mysqli_query($db->con, $sql_order_details);
 
@@ -97,7 +96,7 @@ class orderModel
 
     public function received($Id)
     {
-        $db = dB::getInstance();
+        $db = DB::getInstance();
         $sql = "UPDATE orders SET status = 'received', receivedDate = '" . date("y-m-d H:i:s") . "', paymentStatus = 1, payDate = '" . date("y-m-d H:i:s") . "' WHERE id = '$Id'";
         $result = mysqli_query($db->con, $sql);
         if ($result) {
@@ -115,7 +114,7 @@ class orderModel
 
     public function payment($orderId, $paymentMethod)
     {
-        $db = dB::getInstance();
+        $db = DB::getInstance();
         $sql = "UPDATE orders SET paymentStatus = 1, paymentMethod = '" . $paymentMethod . "', payDate = '" . date("y-m-d H:i:s") . "' WHERE id = '$orderId'";
         $result = mysqli_query($db->con, $sql);
         return $result;
@@ -123,7 +122,7 @@ class orderModel
 
     public function cancel($orderId)
     {
-        $db = dB::getInstance();
+        $db = DB::getInstance();
         $sql = "UPDATE orders SET status = 'cancel' WHERE id = '$orderId'";
         $result = mysqli_query($db->con, $sql);
         return $result;
@@ -131,7 +130,7 @@ class orderModel
 
     public function getTotalRevenue()
     {
-        $db = dB::getInstance();
+        $db = DB::getInstance();
         $sql = "SELECT SUM(total) AS total FROM orders";
         $result = mysqli_query($db->con, $sql);
         return $result;
@@ -139,7 +138,7 @@ class orderModel
 
     public function getTotalOrderCompleted()
     {
-        $db = dB::getInstance();
+        $db = DB::getInstance();
         $sql = "SELECT COUNT(*) AS total FROM orders WHERE status = 'received'";
         $result = mysqli_query($db->con, $sql);
         return $result;
@@ -147,7 +146,7 @@ class orderModel
 
     public function getRevenueMonth()
     {
-        $db = dB::getInstance();
+        $db = DB::getInstance();
         $sql = "SELECT SUM(total) AS total,DAY(createdDate) as day FROM `orders` WHERE MONTH(createdDate) = MONTH(NOW()) AND paymentStatus=1 GROUP BY DAY(createdDate), MONTH(createdDate), YEAR(createdDate)";
         $result = mysqli_query($db->con, $sql);
         return $result;

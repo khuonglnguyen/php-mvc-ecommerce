@@ -1,6 +1,6 @@
 <?php
 
-class chat extends controllerBase
+class chat extends ControllerBase
 {
     public function send($content)
     {

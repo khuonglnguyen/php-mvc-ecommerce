@@ -69,26 +69,26 @@
       foreach ($data['productList'] as $key=>$value) {?>
         <div class="card">
           <?php
-          if ($value['promotionPrice'][0] < $value['originalPrice'][0]) { ?>
+          if ($value['promotionPrice'] < $value['originalPrice']) { ?>
             <div class="discount">
-              -<?=ceil(100-(($value['promotionPrice'][0]/$value['originalPrice'][0]*100))) ?>%
+              -<?=ceil(100-(($value['promotionPrice']/$value['originalPrice']*100))) ?>%
             </div>
           <?php }
           ?>
           <div class="card-img">
-            <a href="<?= URL_ROOT . '/product/single/' . $value['id'] ?>"><img src="<?= URL_ROOT ?>/public/images/<?= $value['image'][0] ?>" class="product-image" alt=""></a>
+            <a href="<?= URL_ROOT . '/product/single/' . $value['id'] ?>"><img src="<?= URL_ROOT ?>/public/images/<?= $value['image'] ?>" class="product-image" alt=""></a>
           </div>
           <a href="<?= URL_ROOT . '/product/single/' . $value['id'] ?>">
-            <h1><?= $value['name'][0] ?></h1>
+            <h1><?= $value['name'] ?></h1>
           </a>
           <?php
-          if ($value['promotionPrice'][0] < $value['originalPrice'][0]) { ?>
-            <p class="promotion-price"><del><?= number_format($value['originalPrice'][0], 0, '', ',') ?>₫</del></p>
+          if ($value['promotionPrice'] < $value['originalPrice']) { ?>
+            <p class="promotion-price"><del><?= number_format($value['originalPrice'], 0, '', ',') ?>₫</del></p>
           <?php }
           ?>
-          <p class="original-price"><?= number_format($value['promotionPrice'][0], 0, '', ',') ?>₫</p>
-          <p class="qty-card">Kho: <?= $value['qty'][0] ?></p>
-          <p class="sold-count">Đã bán: <?= $value['soldCount'][0] ?></p>
+          <p class="original-price"><?= number_format($value['promotionPrice'], 0, '', ',') ?>₫</p>
+          <p class="qty-card">Kho: <?= $value['qty'] ?></p>
+          <p class="sold-count">Đã bán: <?= $value['soldCount'] ?></p>
           <p><a href="<?= URL_ROOT . '/cart/addItemcart/' . $value['id'] ?>"><button>Thêm vào giỏ</button></a></p>
         </div>
       <?php }

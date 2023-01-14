@@ -18,7 +18,7 @@ class voucherModel
 
     public function getAll()
     {
-        $db = dB::getInstance();
+        $db = DB::getInstance();
         $sql = "SELECT * FROM vouchers";
         $result = mysqli_query($db->con, $sql);
         return $result;
@@ -26,7 +26,7 @@ class voucherModel
 
     public function getByCode($code)
     {
-        $db = dB::getInstance();
+        $db = DB::getInstance();
         $sql = "SELECT * FROM vouchers WHERE code='$code' AND status=1";
         $result = mysqli_query($db->con, $sql);
         return $result;
@@ -34,7 +34,7 @@ class voucherModel
 
     public function getByIdAdmin($Id)
     {
-        $db = dB::getInstance();
+        $db = DB::getInstance();
         $sql = "SELECT * FROM vouchers WHERE Id='$Id'";
         $result = mysqli_query($db->con, $sql);
         return $result;
@@ -42,7 +42,7 @@ class voucherModel
 
     public function changeStatus($Id)
     {
-        $db = dB::getInstance();
+        $db = DB::getInstance();
         $sql = "UPDATE vouchers SET status = !status WHERE Id='$Id'";
         $result = mysqli_query($db->con, $sql);
         return $result;
@@ -50,7 +50,7 @@ class voucherModel
 
     public function insert($data)
     {
-        $db = dB::getInstance();
+        $db = DB::getInstance();
         $sql = "INSERT INTO vouchers VALUES (NULL, $data[percentDiscount], $data[quantity], '$data[code]', '$data[expirationDate]',1,0)";
         $result = mysqli_query($db->con, $sql);
         return $result;
@@ -63,7 +63,7 @@ class voucherModel
             if (intval($voucher['usedCount']) == intval($voucher['quantity'])) {
                 return false;
             } else {
-                $db = dB::getInstance();
+                $db = DB::getInstance();
                 $sql = "SELECT * FROM user_voucher WHERE userId=" . $_SESSION['user_id'] . " AND voucherId=" . $voucher['id'];
                 $result = mysqli_query($db->con, $sql);
                 if (mysqli_num_rows($result) > 0) {
@@ -82,7 +82,7 @@ class voucherModel
         if (intval($voucher['usedCount']) == intval($voucher['quantity'])) {
             return false;
         }
-        $db = dB::getInstance();
+        $db = DB::getInstance();
         $sql = "UPDATE vouchers SET usedCount = usedCount + 1 WHERE code='$code'";
         if (mysqli_query($db->con, $sql)) {
 
@@ -96,7 +96,7 @@ class voucherModel
 
     public function cancel($code)
     {
-        $db = dB::getInstance();
+        $db = DB::getInstance();
         $sql = "UPDATE vouchers SET usedCount = usedCount - 1 WHERE code='$code'";
         if (mysqli_query($db->con, $sql)) {
             return true;

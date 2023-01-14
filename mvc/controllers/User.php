@@ -1,6 +1,6 @@
 <?php
 
-class user extends controllerBase
+class user extends ControllerBase
 {
     public function login()
     {

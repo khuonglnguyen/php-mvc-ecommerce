@@ -1,6 +1,6 @@
 <?php
 
-class voucherManage extends controllerBase
+class voucherManage extends ControllerBase
 {
     public function index()
     {

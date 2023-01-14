@@ -1,6 +1,6 @@
 <?php
 
-class questionManage extends controllerBase
+class questionManage extends ControllerBase
 {
     public function index($page = 1)
     {

@@ -1,6 +1,6 @@
 <?php
 
-class admin extends controllerBase
+class Admin extends ControllerBase
 {
     public function Index()
     {

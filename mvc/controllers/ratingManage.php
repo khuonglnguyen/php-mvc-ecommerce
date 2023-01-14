@@ -1,6 +1,6 @@
 <?php
 
-class ratingManage extends controllerBase
+class ratingManage extends ControllerBase
 {
     public function index($page = 1)
     {
@@ -11,7 +11,7 @@ class ratingManage extends controllerBase
         // khởi tạo model
         $rating = $this->model("ratingModel");
         // Gọi hàm addAllAdmin
-        $ratingList = ($rating->getAllAdmin($page['page']))->fetch_all(MYSQLI_ASSOC);
+        $ratingList = ($rating->getAllAdmin(isset($_GET['page']) ? $_GET['page'] : 1))->fetch_all(MYSQLI_ASSOC);
         $countPaging = $rating->getCountPaging(8);
         $this->view("admin/rating", [
             "headTitle" => "Phản hồi đánh giá",

@@ -23,9 +23,9 @@
                                 <thead>
                                     <tr>
                                         <th>STT</th>
-                                        <th>Mã</th>
                                         <th>Tên sản phẩm</th>
                                         <th>Hình ảnh</th>
+                                        <th>Ngày tạo</th>
                                         <th>Trạng thái</th>
                                         <th>Thao tác</th>
                                     </tr>
@@ -37,9 +37,9 @@
                                     ?>
                                         <tr>
                                             <td><?= ++$count ?></td>
-                                            <td><?= $value['id'] ?></td>
                                             <td><?= $value['name'] ?></td>
                                             <td><img class="img" src="<?= URL_ROOT . '/public/images/' . $value['image'] ?>" alt=""></td>
+                                            <td><?= date("d/m/Y", strtotime($value['createdDate'])) ?></td>
                                             <?php
                                             if ($value['status']) { ?>
                                                 <td><span class="active">Kích hoạt</span></td>

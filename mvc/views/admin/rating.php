@@ -18,6 +18,7 @@
                                         <th>Tên khách hàng</th>
                                         <th>Số sao</th>
                                         <th>nội dung</th>
+                                        <th>ngày</th>
                                         <th>Phản hồi</th>
                                         <th>Thao tác</th>
                                     </tr>
@@ -32,6 +33,7 @@
                                             <td><?= $value['fullName'] ?></td>
                                             <td><?= $value['star'] ?></td>
                                             <td><?= $value['content'] ?></td>
+                                            <td><?= date("d/m/Y", strtotime($value['createdDate'])) ?></td>
                                             <?php
                                             if ($value['reply']) { ?>
                                                 <td><span class="active"><?= $value['reply'] ?></span></td>
