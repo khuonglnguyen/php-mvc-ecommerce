@@ -18,7 +18,7 @@ class botModel
 
     public function getReplies($queries)
     {
-        $db = dB::getInstance();
+        $db = DB::getInstance();
         $sql = "";
         if (count(explode(" ", $queries)) > 1) {
             $sql = "SELECT replies FROM bot WHERE MATCH(queries,replies) AGAINST ('$queries' IN NATURAL LANGUAGE MODE)";

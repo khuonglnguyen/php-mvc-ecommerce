@@ -18,7 +18,7 @@ class categoryModel
 
     public function getAllClient()
     {
-        $db = dB::getInstance();
+        $db = DB::getInstance();
         $sql = "SELECT * FROM categories WHERE status=1";
         $result = mysqli_query($db->con, $sql);
         return $result;
@@ -30,7 +30,7 @@ class categoryModel
             $page = 1;
         }
         $tmp = ($page - 1) * $total;
-        $db = dB::getInstance();
+        $db = DB::getInstance();
         $sql = "SELECT * FROM categories LIMIT $tmp,$total";
         $result = mysqli_query($db->con, $sql);
         return $result;
@@ -38,7 +38,7 @@ class categoryModel
 
     public function getById($Id)
     {
-        $db = dB::getInstance();
+        $db = DB::getInstance();
         $sql = "SELECT * FROM categories WHERE Id='$Id' AND status=1";
         $result = mysqli_query($db->con, $sql);
         return $result;
@@ -46,7 +46,7 @@ class categoryModel
 
     public function getByIdAdmin($Id)
     {
-        $db = dB::getInstance();
+        $db = DB::getInstance();
         $sql = "SELECT * FROM categories WHERE Id='$Id'";
         $result = mysqli_query($db->con, $sql);
         return $result;
@@ -54,7 +54,7 @@ class categoryModel
 
     public function changeStatus($Id)
     {
-        $db = dB::getInstance();
+        $db = DB::getInstance();
         $sql = "UPDATE categories SET status = !status WHERE Id='$Id'";
         $result = mysqli_query($db->con, $sql);
         return $result;
@@ -62,7 +62,7 @@ class categoryModel
 
     public function insert($name)
     {
-        $db = dB::getInstance();
+        $db = DB::getInstance();
         $sql = "INSERT INTO categories VALUES (NULL, '$name',1)";
         $result = mysqli_query($db->con, $sql);
         return $result;
@@ -70,7 +70,7 @@ class categoryModel
 
     public function update($id, $name)
     {
-        $db = dB::getInstance();
+        $db = DB::getInstance();
         $sql = "UPDATE categories SET name = '" . $name . "' WHERE id=" . $id;
         $result = mysqli_query($db->con, $sql);
         return $result;
@@ -78,7 +78,7 @@ class categoryModel
 
     public function getCountPaging($row = 8)
     {
-        $db = dB::getInstance();
+        $db = DB::getInstance();
         $sql = "SELECT COUNT(*) FROM categories";
         $result = mysqli_query($db->con, $sql);
         if ($result) {

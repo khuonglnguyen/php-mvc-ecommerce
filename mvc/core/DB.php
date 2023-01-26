@@ -1,6 +1,6 @@
 <?php
 
-class dB{
+class DB{
     private static $instance = null;
 
     public $con;

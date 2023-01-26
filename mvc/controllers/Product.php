@@ -1,15 +1,16 @@
 <?php
 
-class product extends controllerBase
+class product extends ControllerBase
 {
     public function search()
     {
         $product = $this->model("productModel");
-        $result = $product->search(urlencode($_GET["keyword"]));
+        $result = $product->search($_GET["keyword"]);
+        // $result = $product->search(urlencode($_GET["keyword"]));
         $this->view("client/products", [
             "headTitle" => "Tìm kiếm",
             "title" => "Tìm kiếm với từ khóa: " . $_GET['keyword'],
-            "productList" => $result
+            "productList" => $result->fetch_all(MYSQLI_ASSOC)
         ]);
     }
 
@@ -41,7 +42,7 @@ class product extends controllerBase
         $result = $product->getById($Id);
         // Fetch
         $p = $result->fetch_assoc();
-        $list = $product->getProductSuggest(urlencode($p['name']),$p['id']);
+        $list = $product->getProductSuggest($p['name'],$p['id']);
 
         if (!isset($_SESSION['viewed'])) {
             $_SESSION['viewed'] = [];
@@ -91,7 +92,7 @@ class product extends controllerBase
         $this->view("client/single", [
             "headTitle" => $p['name'],
             "product" => $p,
-            "productSuggest" => $list,
+            "productSuggest" => $list->fetch_all(MYSQLI_ASSOC),
             "loved" => $loved,
             "star" => $productRatingResult,
             "productRatingContent" => $productRatingContent,

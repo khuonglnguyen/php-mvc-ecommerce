@@ -77,7 +77,7 @@
                 '</div>';
 
             var xhr = new XMLHttpRequest();
-            xhr.open("GET", "http://localhost/luanvan/chat/sendAdmin/" + queries, true);
+            xhr.open("GET", "http://localhost:"+location.port+"/luanvan/chat/sendAdmin/" + queries, true);
             xhr.onload = function() {
                 if (xhr.readyState === 4) {
                     var status = xhr.status;
@@ -109,7 +109,7 @@
         function loadData(e) {
             document.getElementById('chat-body').innerHTML = "";
             var xhr = new XMLHttpRequest();
-            xhr.open("GET", "http://localhost/luanvan/chat/chating/" + e, true);
+            xhr.open("GET", "http://localhost:"+location.port+"/luanvan/chat/chating/" + e, true);
             xhr.onload = function() {
                 if (xhr.readyState === 4) {
                     document.getElementById('chat-body').innerHTML = "";

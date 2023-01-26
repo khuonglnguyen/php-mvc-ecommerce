@@ -1,6 +1,6 @@
 <?php
 
-class order extends controllerBase
+class order extends ControllerBase
 {
     public function add()
     {

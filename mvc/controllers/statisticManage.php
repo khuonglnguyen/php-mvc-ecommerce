@@ -1,5 +1,5 @@
 <?php
-class statisticManage extends controllerBase
+class statisticManage extends ControllerBase
 {
     public function index()
     {
@@ -57,6 +57,7 @@ class statisticManage extends controllerBase
         if (isset($_GET['from']) && isset($_GET['to'])) {
             $statistic = $this->model("statisticModel");
             $result = $statistic->getRevenue($_GET['from'], $_GET['to']);
+            $revenueList=[];
             if ($result) {
                 $revenueList = $result->fetch_all(MYSQLI_ASSOC);
             }

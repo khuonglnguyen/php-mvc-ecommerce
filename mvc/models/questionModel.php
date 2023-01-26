@@ -18,7 +18,7 @@ class questionModel
 
     public function getById($id)
     {
-        $db = dB::getInstance();
+        $db = DB::getInstance();
         $sql = "SELECT p.id, p.reply, p.content, p.userId FROM question p WHERE p.id='$id'";
         $result = mysqli_query($db->con, $sql)->fetch_assoc();
         return $result;
@@ -30,15 +30,15 @@ class questionModel
             $page = 1;
         }
         $tmp = ($page - 1) * $total;
-        $db = dB::getInstance();
-        $sql = "SELECT p.id, p.content, p.reply, u.id as userId, u.fullName, c.name as productName, c.name as productName FROM question p JOIN users u ON p.userId = u.id JOIN products c ON p.productId = c.id LIMIT $tmp,$total";
+        $db = DB::getInstance();
+        $sql = "SELECT p.id, p.content, p.reply, p.createdDate, u.id as userId, u.fullName, c.name as productName, c.name as productName FROM question p JOIN users u ON p.userId = u.id JOIN products c ON p.productId = c.id ORDER BY p.createdDate DESC LIMIT $tmp,$total";
         $result = mysqli_query($db->con, $sql);
         return $result;
     }
 
     public function getCountPaging($row = 8)
     {
-        $db = dB::getInstance();
+        $db = DB::getInstance();
         $sql = "SELECT COUNT(*) FROM question";
         $result = mysqli_query($db->con, $sql);
         if ($result) {
@@ -50,7 +50,7 @@ class questionModel
 
     public function delete($id)
     {
-        $db = dB::getInstance();
+        $db = DB::getInstance();
         $sql = "UPDATE `question` SET reply = NULL, repliedDate = NULL WHERE id = " . $id . "";
         $result = mysqli_query($db->con, $sql);
         return $result;
@@ -58,7 +58,7 @@ class questionModel
 
     public function getByProductId($productId)
     {
-        $db = dB::getInstance();
+        $db = DB::getInstance();
         $sql = "SELECT * FROM `question` p JOIN users u ON p.userId = u.id WHERE productId=$productId ORDER BY p.id DESC";
         $result = mysqli_query($db->con, $sql);
         if (mysqli_num_rows($result) > 0) {
@@ -69,7 +69,7 @@ class questionModel
 
     public function add($productId, $content, $userId)
     {
-        $db = dB::getInstance();
+        $db = DB::getInstance();
         $sql = "INSERT INTO `question`(`id`, `productId`, `userId`, `content`,`createdDate`) VALUES (NULL," . $productId . "," . $userId . ",'" . $content . "','" . date("y-m-d H:i:s") . "')";
         $result = mysqli_query($db->con, $sql);
         return $result;
@@ -77,7 +77,7 @@ class questionModel
 
     public function reply($reply, $id)
     {
-        $db = dB::getInstance();
+        $db = DB::getInstance();
         $sql = "UPDATE `question` SET reply = '" . $reply . "', repliedDate = '". date("y-m-d H:i:s")."' WHERE id = " . $id . "";
         $result = mysqli_query($db->con, $sql);
         return $result;

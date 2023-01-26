@@ -1,6 +1,6 @@
 <?php
 
-class cart extends controllerBase
+class cart extends ControllerBase
 {
     public function addItemcart($productId)
     {

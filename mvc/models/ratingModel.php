@@ -18,7 +18,7 @@ class ratingModel
 
     public function getById($id)
     {
-        $db = dB::getInstance();
+        $db = DB::getInstance();
         $sql = "SELECT p.id, c.name as productName, p.reply, p.content, p.star, c.image as productImage, p.userId FROM productrating p JOIN products c ON p.productId = c.id WHERE p.id='$id'";
         $result = mysqli_query($db->con, $sql)->fetch_assoc();
         return $result;
@@ -26,7 +26,7 @@ class ratingModel
 
     public function getByIdAdmin($Id)
     {
-        $db = dB::getInstance();
+        $db = DB::getInstance();
         $sql = "SELECT * FROM products WHERE Id='$Id'";
         $result = mysqli_query($db->con, $sql);
         return $result;
@@ -38,15 +38,15 @@ class ratingModel
             $page = 1;
         }
         $tmp = ($page - 1) * $total;
-        $db = dB::getInstance();
-        $sql = "SELECT p.id, p.star, p.content, p.reply, u.id as userId, u.fullName, c.name as productName FROM productrating p JOIN users u ON p.userId = u.id JOIN products c ON p.productId = c.id LIMIT $tmp,$total";
+        $db = DB::getInstance();
+        $sql = "SELECT p.id, p.star, p.createdDate, p.content, p.reply, u.id as userId, u.fullName, c.name as productName FROM productrating p JOIN users u ON p.userId = u.id JOIN products c ON p.productId = c.id ORDER BY p.createdDate DESC LIMIT $tmp,$total";
         $result = mysqli_query($db->con, $sql);
         return $result;
     }
 
     public function reply($reply, $id)
     {
-        $db = dB::getInstance();
+        $db = DB::getInstance();
         $sql = "UPDATE `productrating` SET reply = '" . $reply . "', repliedDate = '". date("y-m-d H:i:s")."' WHERE id = " . $id . "";
         $result = mysqli_query($db->con, $sql);
         return $result;
@@ -54,7 +54,7 @@ class ratingModel
 
     public function getCountPaging($row = 8)
     {
-        $db = dB::getInstance();
+        $db = DB::getInstance();
         $sql = "SELECT COUNT(*) FROM productrating";
         $result = mysqli_query($db->con, $sql);
         if ($result) {
@@ -66,7 +66,7 @@ class ratingModel
 
     public function delete($id)
     {
-        $db = dB::getInstance();
+        $db = DB::getInstance();
         $sql = "UPDATE `productrating` SET reply = NULL, repliedDate = NULL WHERE id = " . $id . "";
         $result = mysqli_query($db->con, $sql);
         return $result;

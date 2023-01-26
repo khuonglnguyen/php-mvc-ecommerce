@@ -184,7 +184,7 @@
   <script>
     function update(e) {
       var xhr = new XMLHttpRequest();
-      xhr.open("GET", "http://localhost/luanvan/cart/updateItemcart/" + e.id + "/" + e.value, true);
+      xhr.open("GET", "http://localhost:"+location.port+"/luanvan/cart/updateItemcart/" + e.id + "/" + e.value, true);
       xhr.onload = function() {
         if (xhr.readyState === 4) {
           if (xhr.readyState === 4) {
@@ -192,7 +192,7 @@
             if (status === 200) {
               setTimeout(function() {
                 window.location.reload();
-              }, 1000);
+              }, 500);
 
             } else if (status === 501) {
               alert('Số lượng sản phẩm không đủ để thêm vào giỏ hàng!');

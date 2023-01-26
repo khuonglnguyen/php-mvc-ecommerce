@@ -18,7 +18,7 @@ class cartModel
 
     public function getByUserId($userId)
     {
-        $db = dB::getInstance();
+        $db = DB::getInstance();
         $sql = "SELECT c.productId, c.productName, c.productPrice, c.quantity, p.image FROM cart c JOIN products p ON c.productId = p.id WHERE userId='$userId'";
         $result = mysqli_query($db->con, $sql);
         if ($result) {
@@ -40,7 +40,7 @@ class cartModel
 
     public function check($userId, $productId)
     {
-        $db = dB::getInstance();
+        $db = DB::getInstance();
         $sql = "SELECT * FROM cart WHERE userId='$userId' AND productId='$productId'";
         $result = mysqli_query($db->con, $sql);
         if (mysqli_num_rows($result) > 0) {
@@ -51,7 +51,7 @@ class cartModel
 
     public function getTotalQuantitycart($userId)
     {
-        $db = dB::getInstance();
+        $db = DB::getInstance();
         $sql = "SELECT SUM(quantity) as total FROM cart WHERE userId='$userId'";
         $result = mysqli_query($db->con, $sql);
         return $result;
@@ -59,7 +59,7 @@ class cartModel
 
     public function getTotalPrice($userId)
     {
-        $db = dB::getInstance();
+        $db = DB::getInstance();
         $sql = "SELECT SUM(quantity * productPrice) as total FROM cart WHERE userId='$userId'";
         $result = mysqli_query($db->con, $sql);
         return $result;
@@ -67,7 +67,7 @@ class cartModel
 
     public function add($userId, $item)
     {
-        $db = dB::getInstance();
+        $db = DB::getInstance();
         $sql = "INSERT INTO `cart`(`id`, `productId`, `productName`, `productPrice`, `quantity`, `userId`) VALUES (NULL,'" . $item['id'] . "','" . $item['name'] . "','" . $item['promotionPrice'] . "',1,'" . $userId . "')";
         $result = mysqli_query($db->con, $sql);
         return $result;
@@ -75,7 +75,7 @@ class cartModel
 
     public function updateQuanity($userId, $item, $productId)
     {
-        $db = dB::getInstance();
+        $db = DB::getInstance();
         $sql = "UPDATE `cart` SET `quantity`= quantity + 1 WHERE productId='" . $item[$productId]['productId'] . "' AND userId=$userId";
         $result = mysqli_query($db->con, $sql);
         return $result;
@@ -83,7 +83,7 @@ class cartModel
 
     public function editQuanity($userId, $productId, $qty)
     {
-        $db = dB::getInstance();
+        $db = DB::getInstance();
         $sql = "UPDATE `cart` SET `quantity`= '" . $qty . "' WHERE productId='" . $productId . "' AND userId=$userId";
         $result = mysqli_query($db->con, $sql);
         return $result;
@@ -91,7 +91,7 @@ class cartModel
 
     public function remove($userId, $productId)
     {
-        $db = dB::getInstance();
+        $db = DB::getInstance();
         $sql = "DELETE FROM `cart` WHERE productId=$productId AND userId=$userId";
         $result = mysqli_query($db->con, $sql);
         return $result;
@@ -99,7 +99,7 @@ class cartModel
 
     public function deleteCart()
     {
-        $db = dB::getInstance();
+        $db = DB::getInstance();
         $sqlDeleteCart = "DELETE FROM `cart` WHERE userId='" . $_SESSION['user_id'] . "'";
         mysqli_query($db->con, $sqlDeleteCart);
     }

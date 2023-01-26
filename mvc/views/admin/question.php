@@ -18,6 +18,7 @@
                                         <th>Tên sản phẩm</th>
                                         <th>Tên khách hàng</th>
                                         <th>nội dung</th>
+                                        <th>ngày</th>
                                         <th>Phản hồi</th>
                                         <th>Thao tác</th>
                                     </tr>
@@ -32,6 +33,7 @@
                                             <td><?= $value['productName'] ?></td>
                                             <td><?= $value['fullName'] ?></td>
                                             <td><?= $value['content'] ?></td>
+                                            <td><?= date("d/m/Y", strtotime($value['createdDate'])) ?></td>
                                             <?php
                                             if ($value['reply']) { ?>
                                                 <td><span class="active"><?= $value['reply'] ?></span></td>

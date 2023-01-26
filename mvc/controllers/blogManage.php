@@ -1,6 +1,6 @@
 <?php
 
-class blogManage extends controllerBase
+class blogManage extends ControllerBase
 {
     public function index($page = 1)
     {
