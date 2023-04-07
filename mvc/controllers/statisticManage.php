@@ -178,7 +178,7 @@ class statisticManage extends ControllerBase
                 $setData .= trim($rowData) . "\n";
             }
             header("Content-type: application/octet-stream");
-            header("Content-Disposition: attachment; filename=ton-kho.xls");
+            header("Content-Disposition: attachment; filename=san-pham-ban-chay.xls");
             header("Pragma: no-cache");
             header("Expires: 0");
 
