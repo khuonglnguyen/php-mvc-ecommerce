@@ -38,7 +38,7 @@
                                 </table>
                                 <?php
                                 if (count($data['productList']) > 0) { ?>
-                                    <a href="<?= URL_ROOT . '/statisticManage/revenueToExcel/' ?>" class="button right">Xuất EXCEL</a>
+                                    <a href="<?= URL_ROOT . '/statisticManage/productToExcel/' ?>" class="button right">Xuất EXCEL</a>
                                 <?php  }
                                 ?>
                             </div>

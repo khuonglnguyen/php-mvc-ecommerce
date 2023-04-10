@@ -128,8 +128,8 @@ class order extends ControllerBase
 
             if ($paymentMethod == "vnpay") {
 
-                $vnp_TmnCode = "3304R5EJ"; //Website ID in VNPAY System
-                $vnp_HashSecret = "OOSMDHRGUXTNDDQGJTPWOLYDPFXHQMYE"; //Secret key
+                $vnp_TmnCode = "NPEUYR27"; //Website ID in VNPAY System
+                $vnp_HashSecret = "LNYZIFSIUOSDQGOTQPPSHLPYHYKXTJOV"; //Secret key
                 $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
                 $vnp_Returnurl = URL_ROOT . "/order/returnPayment/?orderId=" . $o['id'] . "&&";
                 $vnp_apiUrl = "http://sandbox.vnpayment.vn/merchant_webapi/merchant.html";
@@ -269,9 +269,9 @@ class order extends ControllerBase
 
                 $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
 
-                $partnerCode = 'MOMOSJ8Y20220524';
-                $accessKey = 'kEvIBSNmm93W5rYB';
-                $serectkey = 'Goqq2oEWI7madToNAGUiSCDdy5a6iIMR';
+                $partnerCode = 'MOMOPTSL20211228';
+                $accessKey = 'DClbzD3PwrAKjqww';
+                $serectkey = 'xYX5Ccf9WjLAVzTZzVj9Y3tQV4eLrD4x';
                 $orderInfo = "Thanh toán qua MoMo";
                 $amount = $amount;
                 $ipnUrl = URL_ROOT . '/order/returnPayment/';
