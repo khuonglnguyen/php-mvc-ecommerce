@@ -156,7 +156,7 @@ class productModel
         $db = DB::getInstance();
         $sql = "UPDATE products SET status = !status WHERE Id='$Id'";
         $result = mysqli_query($db->con, $sql);
-        file_get_contents("http://localhost:8983/solr/products/dataimport?command=full-import");
+        // file_get_contents("http://localhost:8983/solr/products/dataimport?command=full-import");
         return $result;
     }
 
@@ -194,7 +194,7 @@ class productModel
 
         $sql = "INSERT INTO `products` (`id`, `name`, `originalPrice`, `promotionPrice`, `image`,`image2`,`image3`, `createdBy`, `createdDate`, `cateId`, `qty`, `des`, `status`, `soldCount`,`weight`) VALUES (NULL, '" . $product['name'] . "', " . $product['originalPrice'] . ", " . $product['promotionPrice'] . ", '" . $unique_image . "', '" . $unique_image2 . "', '" . $unique_image3 . "', " . $_SESSION['user_id'] . ", '" . date("y-m-d H:i:s") . "', " . $product['cateId'] . ", " . $product['qty'] . ", '" . $product['des'] . "', 1, 0, " . $product['weight'] . ")";
         $result = mysqli_query($db->con, $sql);
-        file_get_contents("http://localhost:8983/solr/products/dataimport?command=full-import");
+        // file_get_contents("http://localhost:8983/solr/products/dataimport?command=full-import");
         return $result;
     }
 
@@ -253,7 +253,7 @@ class productModel
         }
         $sql .= ", `cateId` = " . $_POST['cateId'] . ", `des` = '" . $_POST['des'] . "', `weight` = " . $_POST['weight'] . " WHERE id = " . $_POST['id'] . "";
         $result = mysqli_query($db->con, $sql);
-        file_get_contents("http://localhost:8983/solr/products/dataimport?command=full-import");
+        // file_get_contents("http://localhost:8983/solr/products/dataimport?command=full-import");
         return $result;
     }
 
