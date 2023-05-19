@@ -22,6 +22,7 @@
             <label for="checkbox_toggle" class="hamburger">&#9776;</label>
             <div class="menu">
                 <li><a href="<?= URL_ROOT ?>">Trang chủ <i class="fa fa-home"></i></a></li>
+            <li><a href="<?= URL_ROOT ?>/home/about">Giới thiệu <i class="fa fa-info"></i></a></li>
                 <li class="cate">
                     <a href="#">Danh mục <i class="fa fa-list-ul"></i></a>
                     <ul class="sub-menu">

@@ -21,4 +21,11 @@ class home extends ControllerBase
             "DiscountproductsList" => $DiscountproductsList
         ]);
     }
+
+    public function About()
+    {
+        $this->view("client/about", [
+            "headTitle" => "Giới thiệu",
+        ]);
+    }
 }
